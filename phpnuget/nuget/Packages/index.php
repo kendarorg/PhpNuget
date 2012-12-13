@@ -3,6 +3,8 @@ require_once("../../inc/virtualdirectory.php");
 var $virtualDirectory = new VirtualDirectory();
 var $baseUrl = $virtualDirectory->baseurl;
 $baseUrl = $virtualDirectory->upFromLevel($baseUrl,2);
+
+
 header("Content-Type: text/xml");
 ?>
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
