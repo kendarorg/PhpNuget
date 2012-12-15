@@ -19,8 +19,8 @@ if($result["hasError"]==true){
 }else{
     $message = "Uploaded ".$result["name"]." on ".dirname($result["destination"]);
     
-    $nugetReader = new NugetPackageReader();
-    $nuspecContent = $nugetReader->RetrieveNuspec($result["destination"]);
+    $nugetReader = new NugetManager();
+    $nuspecContent = $nugetReader->LoadNuspecData($result["destination"]);
     echo $nuspecContent;die();
     //$resultList = $zipmanager->GenerateInfos();
     //print_r($resultList);die();

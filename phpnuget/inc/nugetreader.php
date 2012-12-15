@@ -2,9 +2,11 @@
 define('__ROOT__',dirname( dirname(__FILE__)));
 require_once(__ROOT__."/inc/nugetentity.php");
 require_once(__ROOT__."/inc/zipmanager.php");
+require_once(__ROOT__."/inc/nugetdb.php");
+define('__TEMPLATE_FILE__',__ROOT__."/inc/nugetTemplate.xml");
 
 //http://net.tutsplus.com/articles/news/how-to-open-zip-files-with-php/
-class NugetPackageReader
+class NugetManager
 {
     /*var $packageOnServer;
     var $nugetRootUrl;
@@ -25,45 +27,28 @@ class NugetPackageReader
         $this->nugetRootUrl = $nugetRootUrl;
     }*/
    
-    public function RetrieveNuspec($nupkgFile)
+    public function LoadNuspecData($nupkgFile)
     {
         $zipmanager = new ZipManager($nupkgFile);
         $nuspecContent = $zipmanager->LoadFile("Microsoft.Web.Infrastructure.nuspec");
         return $nuspecContent;
     }
     
-    private function retrieveData($root)
+    public function LoadAllPackagesEntry()
     {
-        $toret = array();
-        if ($handle = opendir($root)) {
-            while (false !== ($entry = readdir($handle))) {
-                $toret[] = $root."/".$entry;
-            }        
-            closedir($handle);
-        }
-        return $toret;
-    }
-    
-    private function loadAllPackagesContent()
-    {
-        $toret = array();
-        $packagesList = $this->retrieveNugetPackages($this->packageOnServer);
-        for($i=0;$i<sizeof($packagesList);$i++){
-            $packagePath =  $packagesList[$i];
-            $toret[] = $this->loadPackageMetadata($packagePath);
-        }
-        return $toret;
-    }
-    
-    private function loadPackageMetadata($packagePath)
-    {
-        $zipArchive = new ZipArchive(); 
-        $zipArchive->open('theZip.zip'); 
+        $toretContent = "";
+        $handle = fopen(__TEMPLATE_FILE__, "rt");
+        $templateContent = fread($handle, filesize($filename));
+        fclose($handle);
+
+        $nugetDb = new NuGetDb();
         
-        for( $i = 0; $i < $zipArchive->numFiles; $i++ ){ 
-            $stat = $zipArchive->statIndex( $i ); 
-            print_r( basename( $stat['name'] ) . PHP_EOL ); 
+        $rows = $nugetDb->GetAllRows();
+        $cols = $nugetDb->GetAllColumns();
+        for($i=0;$i<sizeof($rows);$i++){
+            $packageMetadata = $cols[$rows];
         }
+        return $$toretContent;
     }
 }
 ?>
