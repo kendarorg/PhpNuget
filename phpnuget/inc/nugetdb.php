@@ -6,8 +6,8 @@ require_once(__ROOT__.'/settings.php');
 define('__MYTXTDB__',__ROOT__."/db/nugetdb.txt");
 define('__MYTXTDBROWS__',
       "Version:|:Title:|:IconUrl:|:LicenseUrl:|:ProjectUrl:|:DownloadCount:|:".
-      "RequireLicenseAcceptance:|:Description:|:ReleaseNotes:|:Published:|:Dependencies:|:"
-      "PackageHash:|:PackageHashAlgorithm:|:PackageSize:|:Copyright:|:Tags:|:IsAbsoluteLatestVersion:|:"
+      "RequireLicenseAcceptance:|:Description:|:ReleaseNotes:|:Published:|:Dependencies:|:".
+      "PackageHash:|:PackageHashAlgorithm:|:PackageSize:|:Copyright:|:Tags:|:IsAbsoluteLatestVersion:|:".
       "IsLatestVersion:|:Listed:|:VersionDownloadCount");
 
 class NuGetDb
@@ -36,10 +36,12 @@ class NuGetDb
     {
         $dbInstance =  new MyTXT(__MYTXTDB__);
         $toInsert = array();
-        $vars = split(":|:",__MYTXTDBROWS__);
+        $vars = explode(":|:",__MYTXTDBROWS__);
+        //print_r($vars);
         foreach ($vars as $column) {
             $toInsert[] = $nugetEntity->$column;
         }
+        //print_r($toInsert);die();
         $dbInstance->add_row($toInsert);
         $dbInstance->save(__MYTXTDB__);
         $dbInstance->close();

@@ -1,0 +1,1 @@
+Version:|:Title:|:IconUrl:|:LicenseUrl:|:ProjectUrl:|:DownloadCount:|:RequireLicenseAcceptance:|:Description:|:ReleaseNotes:|:Published:|:Dependencies:|:PackageHash:|:PackageHashAlgorithm:|:PackageSize:|:Copyright:|:Tags:|:IsAbsoluteLatestVersion:|:IsLatestVersion:|:Listed:|:VersionDownloadCount

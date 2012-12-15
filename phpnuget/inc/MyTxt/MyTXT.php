@@ -28,7 +28,9 @@ class MyTXT {
 				}
 			}
 		}
+		
 	}
+	var $indices;
 	function read($readfile="__default__") {
 		// read a new text database into memory
 		
@@ -41,12 +43,15 @@ class MyTXT {
 		clearstatcache();
 		$textdata = fread($fh, filesize($readfile));
 		fclose($fh);
+		
 		$textdata = str_replace("\r", "\n", $textdata);
 		$textdata = str_replace("\n\n", "\n", $textdata);
 		$rowdata = array();
 		$textdata = explode("\n", $textdata);
 		$textdata = array_reverse($textdata);
-		$indices = explode($this->delimiter, array_pop($textdata));
+		$this->indices = explode($this->delimiter, array_pop($textdata));
+		$indices = $this->indices;
+		//print_r($indices);die();
 		$textdata = array_reverse($textdata);
 		$count = 0;
 		foreach ($textdata as $value) {
@@ -60,7 +65,12 @@ class MyTXT {
 			}
 		}
 		// will load memory with contents of text file table
+		
+		array_push ($rowdata,$indices);
+		//print_r($rowdata[0]);die();
 		$this->rows = $rowdata;
+		//
+
 		return True;
 	}
 	function save($savefile="__default__") {
@@ -96,7 +106,10 @@ class MyTXT {
 		// will return array of column names for table
 
 		$columns = array();
-		foreach ($this->rows[0] as $key => $value) {
+		/*foreach ($this->rows[0] as $key => $value) {
+			array_push($columns, $key);
+		}*/
+		foreach ($this->indice as $key => $value) {
 			array_push($columns, $key);
 		}
 		return $columns;
@@ -116,9 +129,8 @@ class MyTXT {
 		return $output;
 	}
 	function add_row($rowdata) {
-
 		if (count($rowdata) != count($this->columns())) {
-			die("Row Add Error: new row size must be same as column number.");
+			die("Row Add Error: new row size must be same as column number.".count($rowdata)."->".count($this->columns()));
 			return False;
 		}
 		$columns = $this->columns();

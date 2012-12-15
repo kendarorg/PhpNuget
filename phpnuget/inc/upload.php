@@ -45,9 +45,10 @@ class Uploader
             $toret["tmpName"] = $_FILES["file"]["tmp_name"];
         
             if (file_exists($this->destinationDir."/" . $toret["name"])){
-                $toret["hasError"] = true;
-                $toret["errorMessage"] =  "'".$toret["name"] . "' already exists. ";
-            } else {
+                unlink ($this->destinationDir."/" . $toret["name"]);
+                /*$toret["hasError"] = true;
+                $toret["errorMessage"] =  "'".$toret["name"] . "' already exists. ";*/
+            } /*else*/ {
                 $toret["destination"]=$this->destinationDir."/" . $toret["name"];
               move_uploaded_file($toret["tmpName"],$toret["destination"]);
             }

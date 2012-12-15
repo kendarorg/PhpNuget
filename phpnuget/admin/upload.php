@@ -21,9 +21,9 @@ if($result["hasError"]==true){
     
     $nugetReader = new NugetManager();
     $nuspecContent = $nugetReader->LoadNuspecData($result["destination"]);
-    echo $nuspecContent;die();
+    //$message = echo $nuspecContent;die();
     //$resultList = $zipmanager->GenerateInfos();
-    //print_r($resultList);die();
+   print_r($nuspecContent);die();
 }
 
 ?>
