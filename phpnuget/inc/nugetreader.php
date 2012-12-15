@@ -1,28 +1,38 @@
 <?php
-require_once("nugetentity.php");
+define('__ROOT__',dirname( dirname(__FILE__)));
+require_once(__ROOT__."/inc/nugetentity.php");
+require_once(__ROOT__."/inc/zipmanager.php");
+
 //http://net.tutsplus.com/articles/news/how-to-open-zip-files-with-php/
 class NugetPackageReader
 {
-    var $packagesOnServer;
-    var $phpNugetUrl;
+    /*var $packageOnServer;
+    var $nugetRootUrl;
     
-    public function __construct($packagesOnServer,$phpNugetUrl) 
+    public function __construct($packageOnServer,$nugetRootUrl) 
     {
-        $this->initialize($packagesOnServer,$phpNugetUrl);
+        $this->initialize($packageOnServer,$nugetRootUrl);
     }
     
-    public function NugetPackageReader($packagesOnServer,$phpNugetUrl)
+    public function NugetPackageReader($packageOnServer,$nugetRootUrl)
     {
-        $this->initialize($packagesOnServer,$phpNugetUrl);
+        $this->initialize($packageOnServer,$nugetRootUrl);
     }
     
-    private function initialize($packagesOnServer,$phpNugetUrl)
+    private function initialize($packageOnServer,$nugetRootUrl)
     {
-        $this->packagesOnServer = $packagesOnServer;
-        $this->phpNugetUrl = $phpNugetUrl;
-    }
+        $this->packageOnServer = $packageOnServer;
+        $this->nugetRootUrl = $nugetRootUrl;
+    }*/
    
-    private function retrieveNugetPackages($root)
+    public function RetrieveNuspec($nupkgFile)
+    {
+        $zipmanager = new ZipManager($nupkgFile);
+        $nuspecContent = $zipmanager->LoadFile("Microsoft.Web.Infrastructure.nuspec");
+        return $nuspecContent;
+    }
+    
+    private function retrieveData($root)
     {
         $toret = array();
         if ($handle = opendir($root)) {
@@ -37,7 +47,7 @@ class NugetPackageReader
     private function loadAllPackagesContent()
     {
         $toret = array();
-        $packagesList = $this->retrieveNugetPackages($this->packagesOnServer);
+        $packagesList = $this->retrieveNugetPackages($this->packageOnServer);
         for($i=0;$i<sizeof($packagesList);$i++){
             $packagePath =  $packagesList[$i];
             $toret[] = $this->loadPackageMetadata($packagePath);
