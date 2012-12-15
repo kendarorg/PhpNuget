@@ -1,13 +1,12 @@
 <?php
-require_once("../../inc/virtualdirectory.php");
-var $virtualDirectory = new VirtualDirectory();
-var $baseUrl = $virtualDirectory->baseurl;
+define('__ROOT__',dirname(dirname( dirname(__FILE__))));
+require_once(__ROOT__.'/inc/virtualdirectory.php'); 
+$virtualDirectory = new VirtualDirectory();
+$baseUrl = $virtualDirectory->baseurl;
 $baseUrl = $virtualDirectory->upFromLevel($baseUrl,2);
-
-
 header("Content-Type: text/xml");
+echo "<?xml version='1.0' encoding='utf-8' standalone='yes'?>";
 ?>
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <feed xml:base="<?php echo $baseUrl;?>/nuget/" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" 
     xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Packages</title>

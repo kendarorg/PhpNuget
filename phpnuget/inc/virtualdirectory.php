@@ -1,4 +1,6 @@
 <?php
+define('__ROOT__', dirname(dirname(__FILE__)));
+require_once(__ROOT__.'/settings.php'); 
 /* From
  * http://stackoverflow.com/questions/189113/how-do-i-get-current-page-full-url-in-php-on-a-windows-iis-server
  */
@@ -13,7 +15,16 @@ class VirtualDirectory
     var $num_of_virtual_directories = array();
     var $baseurl;
     var $thisurl;
-    function VirtualDirectory()
+    public function __construct() 
+    {
+        $this->initialize();
+    }
+    
+    public function VirtualDirectory()
+    {
+        $this->initialize();
+    }
+    function initialize()
     {
         $this->protocol = $_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
         $this->site = $this->protocol . '://' . $_SERVER['HTTP_HOST'];
@@ -28,9 +39,9 @@ class VirtualDirectory
     
     function upFromLevel($source,$upDirs)
     {
-        var $exploded = explode("/",$source);
-        var $sliced = array_slice($exploded,0,sizeof($exploded)-$upDirs-1);
-        return = implode("/",$sliced);
+        $exploded = explode("/",$source);
+        $sliced = array_slice($exploded,0,sizeof($exploded)-$upDirs-1);
+        return implode("/",$sliced);
     }
     
     function cleanUp($array)
