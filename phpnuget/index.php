@@ -1,6 +1,7 @@
 <?php 
 define('__ROOT__', dirname(__FILE__));
 require_once(__ROOT__.'/inc/virtualdirectory.php'); 
+require_once(__ROOT__.'/settings.php'); 
 $virtualDirectory = new VirtualDirectory();
 $baseUrl = $virtualDirectory->baseurl;
 ?>
@@ -16,7 +17,7 @@ $baseUrl = $virtualDirectory->baseurl;
 </head>
 <body>
     <div>
-        <h2>You are running NuGet.PhpServer v0.0.0.0</h2>
+        <h2>You are running NuGet.PhpServer v<?php echo __PHP_NUGET_VERSION__;?></h2>
         <p>
             Click <a href="<?php echo $baseUrl;?>nuget/Packages">here</a> to view your packages.
         </p>
