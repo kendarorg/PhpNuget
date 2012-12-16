@@ -36,43 +36,6 @@ function XML2Array ( $xml , $recursive = false )
 //http://net.tutsplus.com/articles/news/how-to-open-zip-files-with-php/
 class NugetManager
 {
-    /*var $packageOnServer;
-    var $nugetRootUrl;
-    
-    public function __construct($packageOnServer,$nugetRootUrl) 
-    {
-        $this->initialize($packageOnServer,$nugetRootUrl);
-    }
-    
-    public function NugetPackageReader($packageOnServer,$nugetRootUrl)
-    {
-        $this->initialize($packageOnServer,$nugetRootUrl);
-    }
-    
-    private function initialize($packageOnServer,$nugetRootUrl)
-    {
-        $this->packageOnServer = $packageOnServer;
-        $this->nugetRootUrl = $nugetRootUrl;
-    }*/
-   /*
-   SimpleXMLElement Object
-(
-    [metadata] => SimpleXMLElement Object
-        (
-            [id] => Microsoft.Web.Infrastructure
-            [version] => 1.0.0.0
-            [title] => Microsoft.Web.Infrastructure
-            [authors] => Microsoft
-            [owners] => Microsoft
-            [licenseUrl] => http://go.microsoft.com/fwlink/?LinkID=214339
-            [projectUrl] => http://www.asp.net
-            [requireLicenseAcceptance] => false
-            [description] => This package contains the Microsoft.Web.Infrastructure assembly that lets you dynamically register HTTP modules at run time.
-            [language] => en-US
-            [tags] => ASPNETWEBPAGES
-        )
-
-)*/
     public function LoadNuspecData($nupkgFile)
     {
         $zipmanager = new ZipManager($nupkgFile);

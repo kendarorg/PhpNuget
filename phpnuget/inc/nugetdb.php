@@ -1,6 +1,6 @@
 <?php
 define('__ROOT__',dirname( dirname(__FILE__)));
-require_once(__ROOT__."/inc/MyTXT/MyTXT.php");
+require_once(__ROOT__."/inc/mytxtdb.php");
 require_once(__ROOT__.'/settings.php'); 
 
 define('__MYTXTDB__',__ROOT__."/db/nugetdb.txt");
@@ -24,32 +24,31 @@ class NuGetDb
     
     private function initialize()
     {
-        if(!file_exists(__MYTXTDB__)){
-            $fp = fopen(__MYTXTDB__, 'w+');
-            fwrite($fp, __MYTXTDBROWS__);
-            fclose($fp);
-        }
+        
         
     }
     
     public function AddRow($nugetEntity)
     {
-        $dbInstance =  new MyTXT(__MYTXTDB__);
+        $dbInstance =  new SmallTxtDb(__MYTXTDB__,__MYTXTDBROWS__);
         $toInsert = array();
         $vars = explode(":|:",__MYTXTDBROWS__);
         //print_r($vars);
         foreach ($vars as $column) {
-            $toInsert[] = $nugetEntity->$column;
+            $toInsert[$column] = $nugetEntity->$column;
         }
-        //print_r($toInsert);die();
+        for($i=0;$i<sizeof($dbInstance->rows);$i++){
+            if($dbInstance->rows[$i]["PackageHash"]==$nugetEntity->PackageHash){
+                return;   
+            }
+        }
         $dbInstance->add_row($toInsert);
-        $dbInstance->save(__MYTXTDB__);
-        $dbInstance->close();
+        $dbInstance->save();
     }
     
     public function DeleteRow($nugetEntity)
     {
-        $dbInstance = new MyTXT(__MYTXTDB__);
+        $dbInstance = new SmallTxtDb(__MYTXTDB__,__MYTXTDBROWS__);
         $nameOfCaptain = "";
         $rowNumber = 0;
         foreach ($dbInstance->rows as $row) {
@@ -59,15 +58,13 @@ class NuGetDb
         	}
         	$rowNumber++;
         }
-        $dbInstance->save(__MYTXTDB__);
-        $dbInstance->close();
+        $dbInstance->save();
     }
     
     public function GetAllRows()
     {
-        $dbInstance = new MyTXT(__MYTXTDB__);
-        $rows = $dbInstance->rows;
-        $dbInstance->close();
+        $dbInstance = new SmallTxtDb(__MYTXTDB__,__MYTXTDBROWS__);
+        return $dbInstance->rows;
     }
     
     public function GetAllColumns()

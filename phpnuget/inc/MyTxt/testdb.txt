@@ -1,4 +1,0 @@
-name:|:rank:|:age
-Devin:|:General:|:18
-Andrew:|:Leutenant:|:18
-Jennifer:|:Captain:|:19
