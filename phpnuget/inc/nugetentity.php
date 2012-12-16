@@ -23,5 +23,7 @@ class NugetEntity
     var $IsLatestVersion;
     var $Listed;
     var $VersionDownloadCount;
+    var $Author;
+    var $Identifier;
 }
 ?>

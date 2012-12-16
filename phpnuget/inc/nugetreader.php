@@ -5,6 +5,11 @@ require_once(__ROOT__."/inc/zipmanager.php");
 require_once(__ROOT__."/inc/nugetdb.php");
 define('__TEMPLATE_FILE__',__ROOT__."/inc/nugetTemplate.xml");
 
+function strreplace($what,$with,$source)
+{
+    return str_replace($what,$with,$source);
+}
+
 function XML2Array ( $xml , $recursive = false )
 {
     if ( ! $recursive )
@@ -36,6 +41,7 @@ function XML2Array ( $xml , $recursive = false )
 //http://net.tutsplus.com/articles/news/how-to-open-zip-files-with-php/
 class NugetManager
 {
+    var $template = null;
     public function LoadNuspecData($nupkgFile)
     {
         $zipmanager = new ZipManager($nupkgFile);
@@ -51,13 +57,14 @@ class NugetManager
             $m[strtolower ($ark[$i])]=$mt[$ark[$i]];
         }*/
         $e->Version = $m["version"];
-        $e->Id = $m["id"];
+        $e->Identifier = $m["id"];
         $e->Title = $m["title"];
         $e->LicenseUrl = $m["licenseurl"];
         $e->ProjectUrl = $m["projecturl"];
         $e->RequireLicenseAcceptance = $m["requirelicenseacceptance"];
         $e->Description = $m["description"];
         $e->Tags = $m["tags"];
+        $e->Author = $m["authors"];
         $e->Published = $this->iso8601();
         $e->Copyright = $m["owners"];
         $handle = fopen($nupkgFile, "rb");
@@ -71,7 +78,8 @@ class NugetManager
         $e->Listed = true;
          $nugetDb = new NuGetDb();
          $nugetDb->AddRow($e);
-        return $nuspecContent;
+         
+        return $e; //$this->buildNuspecEntity($e,$template);
     }
     
     private function urlsafe_b64encode($string) 
@@ -87,19 +95,52 @@ class NugetManager
     
     public function LoadAllPackagesEntries()
     {
-        $toretContent = "";
-        $handle = fopen(__TEMPLATE_FILE__, "rt");
-        $templateContent = fread($handle, filesize($filename));
-        fclose($handle);
-
         $nugetDb = new NuGetDb();
+        $toret = $nugetDb->GetAllRows();
+        return $toret;
+    }
+    
+    public function BuildNuspecEntity($baseUrl,$e)
+    {
         
-        $rows = $nugetDb->GetAllRows();
-        $cols = $nugetDb->GetAllColumns();
-        for($i=0;$i<sizeof($rows);$i++){
-            $packageMetadata = $cols[$rows];
+        $t = "";
+        if($this->template==null){
+            $handle = fopen(__TEMPLATE_FILE__, "rb");
+            $this->template = fread($handle, filesize(__TEMPLATE_FILE__));
+            fclose($handle);
         }
-        return $toretContent;
+        $t = $this->template;
+        $t.="  ";
+        $authors = explode(";",$e->Author);
+        $author = "";
+        if(sizeof($authors)>0){
+            $author = "<name>".implode("</name>\n<name>",$authors)."</name>";
+        }
+        //print_r($e);
+        $t= str_replace("\${BASEURL}",$baseUrl,$t);
+        $t= str_replace("\${NUSPEC.ID}",$e->Identifier,$t);
+        
+        //echo $e->Id."CAZZO".$t;die();
+        $t= str_replace("\${NUSPEC.IDLOWER}",strtolower($e->Identifier),$t);
+        $t= str_replace("\${NUSPEC.TITLE}",$e->Title,$t);
+        $t= str_replace("\${NUSPEC.VERSION}",$e->Version,$t);
+        $t= str_replace("\${NUSPEC.LICENSEURL}",$e->LicenseUrl,$t);
+        $t= str_replace("\${NUSPEC.PROJECTURL}",$e->ProjectUrl,$t);
+        $t= str_replace("\${NUSPEC.REQUIRELICENSEACCEPTANCE}",$e->RequireLicenseAcceptance,$t);
+        $t= str_replace("\${NUSPEC.DESCRIPTION}",$e->Description,$t);
+        $t= str_replace("\${NUSPEC.TAGS}",$e->Tags,$t);
+        $t= str_replace("\${NUSPEC.AUTHOR}",$author,$t);
+        $t= str_replace("\${DB.PUBLISHED}",$e->Published,$t);
+        $t= str_replace("\${DB.PACKAGESIZE}",$e->PackageSize,$t);
+        $t= str_replace("\${DB.PACKAGEHASHALGORITHM}",$e->PackageHashAlgorithm,$t);
+        $t= str_replace("\${DB.PACKAGEHASH}",$e->PackageHash,$t);
+        
+        
+        $t= str_replace("\${DB.DOWNLOADCOUNT}",0,$t);
+        $t= str_replace("\${DB.VERSIONDOWNLOADCOUNT}",0,$t);
+        $t= str_replace("\${DB.UPDATED}",$e->Published,$t);
+        //rint_r($e);die();
+        return preg_replace('/<!--(.*)-->/Uis', '', $t);
     }
 }
 ?>

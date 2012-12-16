@@ -5,7 +5,7 @@ require_once(__ROOT__.'/settings.php');
 
 define('__MYTXTDB__',__ROOT__."/db/nugetdb.txt");
 define('__MYTXTDBROWS__',
-      "Version:|:Title:|:IconUrl:|:LicenseUrl:|:ProjectUrl:|:DownloadCount:|:".
+      "Version:|:Title:|:Identifier:|:Author:|:IconUrl:|:LicenseUrl:|:ProjectUrl:|:DownloadCount:|:".
       "RequireLicenseAcceptance:|:Description:|:ReleaseNotes:|:Published:|:Dependencies:|:".
       "PackageHash:|:PackageHashAlgorithm:|:PackageSize:|:Copyright:|:Tags:|:IsAbsoluteLatestVersion:|:".
       "IsLatestVersion:|:Listed:|:VersionDownloadCount");
@@ -63,8 +63,18 @@ class NuGetDb
     
     public function GetAllRows()
     {
+        $this->initialize();
+        $toret = array();
         $dbInstance = new SmallTxtDb(__MYTXTDB__,__MYTXTDBROWS__);
-        return $dbInstance->rows;
+        foreach( $dbInstance->rows as $row){
+            $e = new NugetEntity();
+            foreach ($row as $key=> $value) {
+                $e->$key = $value;
+                
+            }
+            $toret[]=$e;
+        }
+        return $toret;
     }
     
     public function GetAllColumns()

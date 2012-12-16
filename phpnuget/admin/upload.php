@@ -3,6 +3,10 @@ define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__.'/settings.php'); 
 require_once(__ROOT__.'/inc/upload.php'); 
 require_once(__ROOT__.'/inc/nugetreader.php'); 
+require_once(__ROOT__.'/inc/virtualdirectory.php'); 
+
+$virtualDirectory = new VirtualDirectory();
+$baseUrl = $virtualDirectory->baseurl;
 
 $zipmanager = null;
 
@@ -17,13 +21,16 @@ if($result["hasError"]==true){
     }
     $message .= "</p>";
 }else{
-    $message = "Uploaded ".$result["name"]." on ".dirname($result["destination"]);
+    $message = "Uploaded ".$result["name"]." on ".dirname($result["destination"])."</p><p>";
     
     $nugetReader = new NugetManager();
-    $nuspecContent = $nugetReader->LoadNuspecData($result["destination"]);
+    $nuentity =  htmlentities($nugetReader->BuildNuspecEntity($baseUrl,$nugetReader->LoadNuspecData($result["destination"])));
+    $nuentity = str_replace(" ","&nbsp;",$nuentity);
+    $nuentity = str_replace("\n","</br>",$nuentity);
+    $message .= $nuentity;
     //$message = echo $nuspecContent;die();
     //$resultList = $zipmanager->GenerateInfos();
-   print_r($nuspecContent);die();
+   //print_r($nuspecContent);die();
 }
 
 ?>
