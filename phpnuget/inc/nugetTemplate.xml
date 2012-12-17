@@ -8,6 +8,7 @@ ${NUSPEC.REQUIRELICENSEACCEPTANCE}  true
 ${NUSPEC.DESCRIPTION}
 ${NUSPEC.TAGS}
 ${NUSPEC.AUTHOR}  <name>Microsoft</name>
+${NUSPEC.DEPENDENCIES}
 ${DB.DOWNLOADCOUNT}
 ${DB.VERSIONDOWNLOADCOUNT}
 ${DB.PUBLISHED}                     2012-12-13T18:58:34.2410871Z
@@ -50,7 +51,7 @@ Summary??
       <d:Description>${NUSPEC.DESCRIPTION}</d:Description>
       <d:ReleaseNotes m:null="true"></d:ReleaseNotes>
       <d:Published m:type="Edm.DateTime">${DB.PUBLISHED}</d:Published>
-      <d:Dependencies></d:Dependencies>
+      <d:Dependencies>${NUSPEC.DEPENDENCIES}</d:Dependencies>
       <d:PackageHash>${DB.PACKAGEHASH}</d:PackageHash>
       <d:PackageHashAlgorithm>${DB.PACKAGEHASHALGORITHM}</d:PackageHashAlgorithm>
       <d:PackageSize m:type="Edm.Int64">${DB.PACKAGESIZE}</d:PackageSize>

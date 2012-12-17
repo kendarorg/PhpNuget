@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Deltatre.WebPLU.Infrastructure.LoadTest.Engine</id>
+    <version>1.0.0</version>
+    <title />
+    <authors>Deltatre WebPLU</authors>
+    <owners>Deltatre WebPLU</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Load Test Engine</description>
+    <dependencies>
+      <group targetFramework=".NETFramework4.0">
+        <dependency id="log4net" version="[1.2.10]" />
+      </group>
+    </dependencies>
+    <references>
+      <reference file="Deltatre.WebPLU.Infrastructure.LoadTest.Lib.dll" />
+    </references>
+  </metadata>
+</package>
+
+
+
+
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Deltatre.WebPLU.Infrastructure.Quartz</id>
+    <version>1.0.0</version>
+    <title />
+    <authors>Deltatre WebPLU</authors>
+    <owners>Deltatre WebPLU</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Deltatre.WebPLU.Infrastructure.Quartz.dll</description>
+    <dependencies>
+      <group targetFramework=".NETFramework4.0">
+        <dependency id="Castle.Core" version="3.1.0" />
+        <dependency id="Castle.Windsor" version="3.1.0" />
+        <dependency id="Common.Logging" version="2.0.0" />
+        <dependency id="Quartz" version="2.0.1" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
+
+
+
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Deltatre.WebPLU.Infrastructure.Newtonsoft</id>
+    <version>1.0.0</version>
+    <title />
+    <authors>Deltatre WebPLU</authors>
+    <owners>Deltatre WebPLU</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Deltatre.WebPLU.Infrastructure.Newtonsoft.dll</description>
+    <dependencies>
+      <group targetFramework=".NETFramework4.0">
+        <dependency id="JsonValue" version="0.6.0" />
+        <dependency id="Newtonsoft.Json" version="4.5.4" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

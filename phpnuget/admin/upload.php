@@ -36,7 +36,7 @@ if($result["hasError"]==true){
 ?>
 <html>
     <body>
-        <p><?php echo $message; ?></p>
         <a href="index.php">Back to files manager!</a>
+        <p><?php echo $message; ?></p>
     </body>
 </html> 

@@ -8,7 +8,7 @@ define('__MYTXTDBROWS__',
       "Version:|:Title:|:Identifier:|:Author:|:IconUrl:|:LicenseUrl:|:ProjectUrl:|:DownloadCount:|:".
       "RequireLicenseAcceptance:|:Description:|:ReleaseNotes:|:Published:|:Dependencies:|:".
       "PackageHash:|:PackageHashAlgorithm:|:PackageSize:|:Copyright:|:Tags:|:IsAbsoluteLatestVersion:|:".
-      "IsLatestVersion:|:Listed:|:VersionDownloadCount");
+      "IsLatestVersion:|:Listed:|:VersionDownloadCount:|:References");
 
 class NuGetDb
 {
@@ -53,7 +53,7 @@ class NuGetDb
         $rowNumber = 0;
         foreach ($dbInstance->rows as $row) {
         	if ($row['PackageHash'] == $nugetEntity->PackageHash) {
-        		$dbInstance->remove_row($rowNumber);
+        		$dbInstance->delete_row($rowNumber);
         		break;
         	}
         	$rowNumber++;

@@ -56,7 +56,7 @@ class SmallTxtDb
                     $row = array();
                     $vals = explode($this->separator,$splitted[$i]);
                     foreach($this->columns as $key => $value){
-                        $row[$key]=$vals[$value];
+                        $row[$key]=unserialize($vals[$value]);
                     }
                     $this->rows[]=$row;
                 }
@@ -94,7 +94,7 @@ class SmallTxtDb
         foreach($this->rows as $row){
             $towrite = array_fill(0,sizeof( $this->columns),null);
             foreach($this->columns as $key => $value){
-                $towrite[$value]=$row[$key];
+                $towrite[$value]=serialize($row[$key]);
             }
             $rowString = implode($this->separator,$towrite);
             fwrite($fp, $rowString.$this->cr);

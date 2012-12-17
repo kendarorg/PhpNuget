@@ -1,6 +1,20 @@
 <?php
 define('__ROOT__',dirname( dirname(__FILE__)));
 
+class NugetDependency
+{
+    var $IsGroup=false;
+    var $Id;
+    var $Version;
+}
+
+class NugetDependencyGroup
+{
+    var $IsGroup=true;
+    var $TargetFramework;
+    var $Dependencies;
+}
+
 class NugetEntity
 {
     var $Version;
@@ -25,5 +39,6 @@ class NugetEntity
     var $VersionDownloadCount;
     var $Author;
     var $Identifier;
+    var $References;
 }
 ?>
