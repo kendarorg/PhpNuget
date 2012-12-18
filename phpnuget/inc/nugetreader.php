@@ -81,42 +81,28 @@ class NugetManager
         $e->Description = $m["description"];
         $e->Tags = $m["tags"];
         $e->Author = $m["authors"];
-        $e->Published = $this->iso8601();
+        $e->Published = iso8601();
         $e->Copyright = $m["owners"];
         $e->Dependencies = $this->LoadDependencies($m);
         
         
         $e->References = $this->LoadReferences($m);
-       // print_r($e);die();
-        //print_r($e);die();
-        $handle = fopen($nupkgFile, "rb");
-        $contents = fread($handle, filesize($nupkgFile));
-        fclose($handle);
-        //urlsafe_b64encode
-        //base64_encode
-        $e->PackageHash = $this->urlsafe_b64encode(hash('sha512', $contents,true)); //true means raw, fals means in hex
-        $e->PackageHashAlgorithm = "SHA512";
+       
+        $e->PackageHash = base64_encode(hash(strtolower(__PACKAGEHASH__), file_get_contents($nupkgFile),true)); //true means raw, fals means in hex
+        $e->PackageHashAlgorithm = strtoupper(__PACKAGEHASH__);
         $e->PackageSize = filesize($nupkgFile);
         $e->Listed = true;
          $nugetDb = new NuGetDb();
          $nugetDb->AddRow($e);
          $destination = __API_DOWNLOAD_POSITION__."/".strtolower($e->Identifier)."/".$e->Version;
-         mkdir($destination,555,true);
+         if(!is_dir($destination)){
+            mkdir($destination,555,true);
+        }
          $pathInfo = pathinfo($nupkgFile);
          rename($nupkgFile,$destination."/".$pathInfo["basename"]);
          
+         
         return $e; //$this->buildNuspecEntity($e,$template);
-    }
-    
-    private function urlsafe_b64encode($string) 
-    { 
-        $data = base64_encode($string); 
-        $data = str_replace(array('+','/','='),array('-','_',''),$data); 
-        return $data; 
-    }
-    private function iso8601($time=false) {
-        if(!$time) $time=time();
-        return date("Y-m-d", $time) . 'T' . date("H:i:s", $time) .'+00:00';
     }
     
     public function LoadAllPackagesEntries()
@@ -128,7 +114,7 @@ class NugetManager
     
     public function BuildNuspecEntity($baseUrl,$e)
     {
-        
+         
         $t = "";
         if($this->template==null){
             $handle = fopen(__TEMPLATE_FILE__, "rb");
@@ -154,13 +140,17 @@ class NugetManager
         $t= str_replace("\${NUSPEC.PROJECTURL}",$e->ProjectUrl,$t);
         $t= str_replace("\${NUSPEC.REQUIRELICENSEACCEPTANCE}",$e->RequireLicenseAcceptance,$t);
         $t= str_replace("\${NUSPEC.DESCRIPTION}",$e->Description,$t);
-        $t= str_replace("\${NUSPEC.TAGS}",$e->Tags,$t);
+        if($e->Tags!=""){
+            $t= str_replace("\${NUSPEC.TAGS}"," ".$e->Tags." ",$t);
+        }else{
+            $t= str_replace("\${NUSPEC.TAGS}","",$t);
+        }
         $t= str_replace("\${NUSPEC.AUTHOR}",$author,$t);
         $t= str_replace("\${DB.PUBLISHED}",$e->Published,$t);
         $t= str_replace("\${DB.PACKAGESIZE}",$e->PackageSize,$t);
         $t= str_replace("\${DB.PACKAGEHASHALGORITHM}",$e->PackageHashAlgorithm,$t);
         $t= str_replace("\${DB.PACKAGEHASH}",$e->PackageHash,$t);
-        
+       
         if(sizeof($e->Dependencies)==0){
             $t= str_replace("\${NUSPEC.DEPENDENCIES}","",$t);
         }else{

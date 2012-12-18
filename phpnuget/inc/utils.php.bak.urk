@@ -96,15 +96,3 @@ function getGUID(){
         return $uuid;
     }
 }
-
-function urlsafe_b64encode($string) 
-{ 
-    $data = base64_encode($string); 
-    $data = str_replace(array('+','/','='),array('-','_',''),$data); 
-    return $data; 
-}
-function iso8601($time=false) {
-    if(!$time) $time=time();
-    return date("Y-m-d", $time) . 'T' . date("H:i:s", $time) .'.000000Z';
-}
-    

@@ -16,6 +16,7 @@ ${DB.UPDATED}                       2012-12-13T18:58:15Z
 ${DB.PACKAGESIZE}
 ${DB.PACKAGEHASHALGORITHM}          SHA512
 ${DB.PACKAGEHASH}                   FNmvLn5m2LTU/Rs2KWVo0SIIh9Ek+U0ojex7xeDaSHw/zgEP77A8vY5cVWgUtBGS8MJfDGNn8rpXJWEIQaPwTg==
+                                    FFU65IgHsCPpo5tLinEQScHy5MbxdKo6hibFxMgV4RIB7foVQdPOXmUQQIiCVoYGI/WF6gKYppSrQSYxSntwRw==
 
 summary??
 IconUrl??
@@ -28,7 +29,7 @@ IsLatestVersion??
 Listed??
 Summary??
 -->
-<entry>
+  <entry>
     <id>${BASEURL}/nuget/Packages(Id='${NUSPEC.ID}',Version='${NUSPEC.VERSION}')</id>
     <title type="text">${NUSPEC.ID}</title>
     <summary type="text"></summary>
@@ -64,3 +65,4 @@ Summary??
       <d:Summary m:null="true"></d:Summary>
     </m:properties>
   </entry>
+  <!--<link rel="next" href="http://nuget.deltatre.it/nuget/Packages?$skiptoken='Deltatre.FastForward.BrokerService.INotify','2.2.1.0'" />-->
