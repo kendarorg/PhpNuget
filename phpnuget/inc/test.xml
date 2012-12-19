@@ -1,0 +1,1086 @@
+<feed xml:base="http://nuget.deltatre.it/nuget/" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">Search</title>
+  <id>http://nuget.deltatre.it/nuget/Search</id>
+  <updated>2012-12-18T10:30:03Z</updated>
+  <link rel="self" title="Search" href="Search" />
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='Broker.SubscriptionService',Version='2.1.0.0')</id>
+    <title type="text">Broker.SubscriptionService</title>
+    <summary type="text"></summary>
+    <updated>2012-02-28T19:29:43Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.1.0.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.1.0.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/broker.subscriptionservice/2.1.0.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.1.0.0</d:Version>
+      <d:Title>Broker Subscription service WCF client</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>WCF client for BRoker Subscription service service. Contains GetMessage method. Not to be used in case of REST protocoll usage.</d:Description>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-02-22T16:52:14.734432Z</d:Published>
+      <d:Dependencies>Dam.Common:4.0.2.0</d:Dependencies>
+      <d:PackageHash>2872xfgrl9D/djeIU7blthr38w1Ap/fIdEXqjLU2cXclmgzf+KOa4px/UfA0XjekX8pdiVEeH7KQe5xKy0VIbQ==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">8495</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre Broker Subscription GetMessage Message WCF Client FFWD </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='Broker.SubscriptionService',Version='2.1.1.0')</id>
+    <title type="text">Broker.SubscriptionService</title>
+    <summary type="text"></summary>
+    <updated>2012-03-06T13:37:08Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.1.1.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.1.1.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/broker.subscriptionservice/2.1.1.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.1.1.0</d:Version>
+      <d:Title>Broker Subscription service WCF client</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>WCF client for BRoker Subscription service service. Contains GetMessage method. Not to be used in case of REST protocoll usage.</d:Description>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-02-28T19:47:45.234211Z</d:Published>
+      <d:Dependencies>Dam.Common:4.0.2.0</d:Dependencies>
+      <d:PackageHash>wZ0OLns1m62kBADXkOIjxX0JSxb/TZ77XarpDptz+XtgogfKjfnt9GDaNzNhp6cRwrZwU65tXFJawqQ5mgnBfA==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">8486</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre Broker Subscription GetMessage Message WCF Client FFWD </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='Broker.SubscriptionService',Version='2.1.2.0')</id>
+    <title type="text">Broker.SubscriptionService</title>
+    <summary type="text"></summary>
+    <updated>2012-03-07T17:34:37Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.1.2.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.1.2.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/broker.subscriptionservice/2.1.2.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.1.2.0</d:Version>
+      <d:Title>FastForward - Broker Subscription Service WCF Client</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>WCF client (basicHttp/wsHttp binding) for Broker Subscription service service (IBrokerSubscriptionService)[$id]. Contains the GetMessage method. Cannot be used with REST</d:Description>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-03-07T17:34:37.929461Z</d:Published>
+      <d:Dependencies>Dam.Common:4.0.2.0</d:Dependencies>
+      <d:PackageHash>Z0LoKnso1bKy2wdN7A74axprthqTqTOzN3HYZQwG85k/6TJo8QiCsHt9X0v/8j+FpnrLkh2XZgv8EdH3DztHKg==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">8687</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre Broker Subscription GetMessage Message WCF Client FFWD (IBrokerSubscriptionService) </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='Broker.SubscriptionService',Version='2.1.3.0')</id>
+    <title type="text">Broker.SubscriptionService</title>
+    <summary type="text"></summary>
+    <updated>2012-03-07T17:47:11Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.1.3.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.1.3.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/broker.subscriptionservice/2.1.3.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.1.3.0</d:Version>
+      <d:Title>FastForward - Broker Subscription Service WCF Client</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>WCF client (basicHttp/wsHttp binding) for Broker Subscription service service (IBrokerSubscriptionService)[Deltatre.FastForward.WCF.Clients.Broker.SubscriptionService]. Contains the GetMessage method. Cannot be used with REST</d:Description>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-03-07T17:43:12.802625Z</d:Published>
+      <d:Dependencies>Dam.Common:4.1.0.0</d:Dependencies>
+      <d:PackageHash>Fc3QV5vmFI5wNP4wRfLBOntx/dYBBU5GpS2A9OEFl5lHJdGORt5a/qI7fDRgSLcmTVeSPMLI+gYHIotY90Ck8w==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">8766</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre Broker Subscription GetMessage Message WCF Client FFWD (IBrokerSubscriptionService) </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='Broker.SubscriptionService',Version='2.1.4.0')</id>
+    <title type="text">Broker.SubscriptionService</title>
+    <summary type="text"></summary>
+    <updated>2012-03-08T13:08:28Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.1.4.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.1.4.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/broker.subscriptionservice/2.1.4.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.1.4.0</d:Version>
+      <d:Title>FastForward - Broker Subscription Service WCF Client</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>WCF client (basicHttp/wsHttp binding) for Broker Subscription service service (IBrokerSubscriptionService)[Deltatre.FastForward.WCF.Clients.Broker.SubscriptionService]. Contains the GetMessage method. Cannot be used with REST</d:Description>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-03-08T11:32:13.401809Z</d:Published>
+      <d:Dependencies>Dam.Common:4.1.0.0</d:Dependencies>
+      <d:PackageHash>FV1gpAuLWklI/lYhwJdjnHaHsyfBpCJBZwfYS7CDIUzgtvHRGmT0Ua906EKCmmGR7g5MM1Nxmqizr3F+5BcFtQ==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">8765</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre Broker Subscription GetMessage Message WCF Client FFWD (IBrokerSubscriptionService) </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='Broker.SubscriptionService',Version='2.1.5.0')</id>
+    <title type="text">Broker.SubscriptionService</title>
+    <summary type="text"></summary>
+    <updated>2012-03-08T13:12:18Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.1.5.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.1.5.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/broker.subscriptionservice/2.1.5.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.1.5.0</d:Version>
+      <d:Title>FastForward - Broker Subscription Service WCF Client</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>WCF client (basicHttp/wsHttp binding) for Broker Subscription service service (IBrokerSubscriptionService)[Deltatre.FastForward.WCF.Clients.Broker.SubscriptionService]. Contains the GetMessage method. Cannot be used with REST</d:Description>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-03-08T13:09:04.321166Z</d:Published>
+      <d:Dependencies>Dam.Common:4.1.0.0</d:Dependencies>
+      <d:PackageHash>A6BqjQvn3WQn8pg4Adn0hQNA6Ui7c9jnYDuFGNrFTeG7gmJk7dxyXSYO3NvW7AOzy+Z/2d+wIK/Yr5jU7aDsOA==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">8763</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre Broker Subscription GetMessage Message WCF Client FFWD (IBrokerSubscriptionService) </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='Broker.SubscriptionService',Version='2.1.6.0')</id>
+    <title type="text">Broker.SubscriptionService</title>
+    <summary type="text"></summary>
+    <updated>2012-03-13T16:12:58Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.1.6.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.1.6.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/broker.subscriptionservice/2.1.6.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.1.6.0</d:Version>
+      <d:Title>FastForward - Broker Subscription Service WCF Client</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>WCF client (basicHttp/wsHttp binding) for Broker Subscription service service (IBrokerSubscriptionService)[Deltatre.FastForward.WCF.Clients.Broker.SubscriptionService]. Contains the GetMessage method. Cannot be used with REST</d:Description>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-03-13T16:12:58.682231Z</d:Published>
+      <d:Dependencies>Dam.Common:4.1.3.0</d:Dependencies>
+      <d:PackageHash>iEJjwRhvJxzqzAzUFTIpYFs6ppCl+9wT/D8TswxkJsfw+RQW1mj7PnUWUy/9qzCvWLdYtuxxkGlWrJbg73SVAw==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">8765</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre Broker Subscription GetMessage Message WCF Client FFWD (IBrokerSubscriptionService) </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='Broker.SubscriptionService',Version='2.2.0.0')</id>
+    <title type="text">Broker.SubscriptionService</title>
+    <summary type="text"></summary>
+    <updated>2012-03-19T11:35:04Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.2.0.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='2.2.0.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/broker.subscriptionservice/2.2.0.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.2.0.0</d:Version>
+      <d:Title>FastForward - Broker Subscription Service WCF Client</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>WCF client (basicHttp/wsHttp binding) for Broker Subscription service service (IBrokerSubscriptionService)[Deltatre.FastForward.WCF.Clients.Broker.SubscriptionService]. Contains the GetMessage method. Cannot be used with REST</d:Description>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-03-19T11:35:04.008105Z</d:Published>
+      <d:Dependencies>Dam.Common:5.1.2.0</d:Dependencies>
+      <d:PackageHash>QuXhB3DIF8yvZTwTp4ykGYHleHbvFB0DC0rknh6XMP54/XGvCjgdKAA/PpKEVrWF6T4XuHSM4aaSlYF0LP9K8w==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">8754</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre Broker Subscription GetMessage Message WCF Client FFWD (IBrokerSubscriptionService) </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='Broker.SubscriptionService',Version='3.3.0.0')</id>
+    <title type="text">Broker.SubscriptionService</title>
+    <summary type="text"></summary>
+    <updated>2012-04-17T13:36:20Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='3.3.0.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='3.3.0.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/broker.subscriptionservice/3.3.0.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>3.3.0.0</d:Version>
+      <d:Title>FastForward - Broker Subscription Service WCF Client</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>WCF client (basicHttp/wsHttp binding) for Broker Subscription service service (IBrokerSubscriptionService)[Deltatre.FastForward.WCF.Clients.Broker.SubscriptionService]. Contains the GetMessage method. Cannot be used with REST</d:Description>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-04-17T13:36:20.721111Z</d:Published>
+      <d:Dependencies>Dam.Common:5.1.2.0</d:Dependencies>
+      <d:PackageHash>3DMYlPx6ZhMOKp+/tn4sdNqDFt4/CxvNh0IMMlXEa9pfujHkRaGda39hf4CZ2RN5J+pKXr2zkSpiwgJVl39YJQ==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">8717</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre Broker Subscription GetMessage Message WCF Client FFWD (IBrokerSubscriptionService) </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='Broker.SubscriptionService',Version='3.3.2.0')</id>
+    <title type="text">Broker.SubscriptionService</title>
+    <summary type="text"></summary>
+    <updated>2012-04-20T16:56:15Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='3.3.2.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='3.3.2.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/broker.subscriptionservice/3.3.2.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>3.3.2.0</d:Version>
+      <d:Title>FastForward - Broker Subscription Service WCF Client</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>WCF client (basicHttp/wsHttp binding) for Broker Subscription service service (IBrokerSubscriptionService)[Deltatre.FastForward.WCF.Clients.Broker.SubscriptionService]. Contains the GetMessage method. Cannot be used with REST</d:Description>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-04-20T16:56:15.581514Z</d:Published>
+      <d:Dependencies>Dam.Common:6.2.6.0</d:Dependencies>
+      <d:PackageHash>K5co6iEYdGviEX5T/qNdeok/I3uMq58ZLBN6xQ6lis/kDI5rsTTrhnsOR7yzV3ZZXa06eQQ6njYn1njkxPeyTA==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">8717</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre Broker Subscription GetMessage Message WCF Client FFWD (IBrokerSubscriptionService) </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='Broker.SubscriptionService',Version='4.0.0.0')</id>
+    <title type="text">Broker.SubscriptionService</title>
+    <summary type="text"></summary>
+    <updated>2012-05-02T10:26:39Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='4.0.0.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='Broker.SubscriptionService',Version='4.0.0.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/broker.subscriptionservice/4.0.0.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>4.0.0.0</d:Version>
+      <d:Title>FastForward - Broker Subscription Service WCF Client</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>WCF client (basicHttp/wsHttp binding) for Broker Subscription service service (IBrokerSubscriptionService)[Deltatre.FastForward.WCF.Clients.Broker.SubscriptionService]. Contains the GetMessage method. Cannot be used with REST</d:Description>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-05-02T10:26:39.063158Z</d:Published>
+      <d:Dependencies>Dam.Common:6.2.6.0</d:Dependencies>
+      <d:PackageHash>nNHcLr1TKivk6SbRv2GADgCBRFAFL+rxo7RQ84Anhe1goSCXM8LqcEA9vr7Vf9/yZsbLHy/vJUSfWZuy655hrw==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">8708</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre Broker Subscription GetMessage Message WCF Client FFWD (IBrokerSubscriptionService) </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common',Version='2.0.0.0')</id>
+    <title type="text">BrokerCore.Common</title>
+    <summary type="text"></summary>
+    <updated>2012-02-23T11:11:53Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.0.0.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.0.0.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common/2.0.0.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.0.0.0</d:Version>
+      <d:Title>Broker Message Common Library</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Contains classes and interfaces used in Message Broker Component</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-02-23T11:11:53.915447Z</d:Published>
+      <d:Dependencies>Dam.Common:3.3.0|log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>yNCS082TJMjEFxrPDZhE9KwLMAnTlUGh8YTguBNaZDAQtu/8kBAsg9WAZZF48Ry44mcNufuDjO4pa4YgJLyMGA==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">16350</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Common </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common',Version='2.0.1.0')</id>
+    <title type="text">BrokerCore.Common</title>
+    <summary type="text"></summary>
+    <updated>2012-02-28T19:32:06Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.0.1.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.0.1.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common/2.0.1.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.0.1.0</d:Version>
+      <d:Title>Broker Message Common Library</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Contains classes and interfaces used in Message Broker Component</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-02-28T14:37:22.516368Z</d:Published>
+      <d:Dependencies>Dam.Common:4.0.0.0|log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>L3SsVr5RA74ryrCBYjhLpULL1fI+Jr5MP4SZENUCnIFbrxYRjoY1OnKQeg/TIw28z/qWwiIFwYxAez3K6pB8dQ==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">16421</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Common </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common',Version='2.0.2.0')</id>
+    <title type="text">BrokerCore.Common</title>
+    <summary type="text"></summary>
+    <updated>2012-02-28T19:34:34Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.0.2.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.0.2.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common/2.0.2.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.0.2.0</d:Version>
+      <d:Title>Broker Message Common Library</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Contains classes and interfaces used in Message Broker Component</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-02-28T19:32:52.829469Z</d:Published>
+      <d:Dependencies>Dam.Common:4.0.2.0|log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>NxQrPNdytuu+QDjf+qBF8LEa1UAv92esZBXwguY1WSpoiUejgYvly9wFy+tbRQhp0gYfcWZ+SSrZ8Bmz2v1V6w==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">16229</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Common </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common',Version='2.1.3.0')</id>
+    <title type="text">BrokerCore.Common</title>
+    <summary type="text"></summary>
+    <updated>2012-03-06T18:12:16Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.1.3.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.1.3.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common/2.1.3.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.1.3.0</d:Version>
+      <d:Title>Broker Message Common Library</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Contains classes and interfaces used in Message Broker Component</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-03-06T18:12:16.28542Z</d:Published>
+      <d:Dependencies>Dam.Common:4.0.2.0|log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>zszYjHzZxjs5i4Rz/yCYh39AGUQ6Y3VBMn2ykfjCQTQSM62ny9bPcvSMy8uP2zX/58ACeS7KGTz4sglS5F9o7w==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">24579</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Common </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common',Version='2.1.4.0')</id>
+    <title type="text">BrokerCore.Common</title>
+    <summary type="text"></summary>
+    <updated>2012-03-06T18:37:19Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.1.4.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.1.4.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common/2.1.4.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.1.4.0</d:Version>
+      <d:Title>Broker Message Common Library</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Contains classes and interfaces used in Message Broker Component</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-03-06T18:37:19.170742Z</d:Published>
+      <d:Dependencies>Dam.Common:4.0.2.0|log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>kxrbdzLSyMnnk8dPGeBKmAR5czwZDnLng2YqHJwbRdTOsGezsTVMiWTx6RPljOSdM8TQi11ZEPp6HVd4JMO83g==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">24532</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Common </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common',Version='2.1.5.0')</id>
+    <title type="text">BrokerCore.Common</title>
+    <summary type="text"></summary>
+    <updated>2012-03-08T13:12:19Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.1.5.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.1.5.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common/2.1.5.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.1.5.0</d:Version>
+      <d:Title>FastForward - Broker Common Library</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Provide classes and interfaces used in the Message Broker Component [Deltatre.FastForward.Broker.Core.Common]</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-03-08T12:31:48.839906Z</d:Published>
+      <d:Dependencies>Dam.Common:4.1.0.0|log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>Jx+vwUjalv9/Jy+TQb+mOA8XqsEdXZo1NvIAsMuWj2i7l/U2JV5jZR4lfpohuY5MY+3c5jhwehGVDKNP5ouKbg==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">25525</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Common Utilities </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common',Version='2.1.6.0')</id>
+    <title type="text">BrokerCore.Common</title>
+    <summary type="text"></summary>
+    <updated>2012-03-13T16:21:22Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.1.6.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.1.6.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common/2.1.6.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.1.6.0</d:Version>
+      <d:Title>FastForward - Broker Common Library</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Provide classes and interfaces used in the Message Broker Component [Deltatre.FastForward.Broker.Core.Common]</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-03-13T16:21:22.319464Z</d:Published>
+      <d:Dependencies>Dam.Common:4.1.3.0|log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>7d4d+ymzVV7NOVXrBRa+T0jPuOKU9OOgVNZLexrqzJa5hR/u/9vfJiYm3JLJylRrsu13GPyAcBjyYpXOjYdO6g==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">26019</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Common Utilities </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common',Version='2.2.1.0')</id>
+    <title type="text">BrokerCore.Common</title>
+    <summary type="text"></summary>
+    <updated>2012-03-19T11:48:37Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.2.1.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.2.1.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common/2.2.1.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.2.1.0</d:Version>
+      <d:Title>FastForward - Broker Common Library</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Provide classes and interfaces used in the Message Broker Component [Deltatre.FastForward.Broker.Core.Common]</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-03-19T11:48:37.344775Z</d:Published>
+      <d:Dependencies>Dam.Common:5.1.2.0|log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>bC8nB3g3bJ2pWo5vyYbj6Dyh/ftNfV3EcnVja6W1pnKtPCFeIWMkPh/AytniQWHg3bqha61Z2LEFkQ8VIVP6SQ==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">33328</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Common Utilities </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common',Version='2.2.2.0')</id>
+    <title type="text">BrokerCore.Common</title>
+    <summary type="text"></summary>
+    <updated>2012-03-22T13:09:37Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.2.2.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.2.2.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common/2.2.2.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.2.2.0</d:Version>
+      <d:Title>FastForward - Broker Common Library</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Provide classes and interfaces used in the Message Broker Component [Deltatre.FastForward.Broker.Core.Common]</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-03-22T13:09:37.656758Z</d:Published>
+      <d:Dependencies>Dam.Common:5.1.6.0|log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>5SOzK/msF/O3hUmo4qy8WLtxK1WrkI47HDdeU67c9C2evOxsdmf9lZXxapVMoKbZMId+Ft5m4x9GpcTK4wRfIQ==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">34698</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Common Utilities </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common',Version='2.3.2.0')</id>
+    <title type="text">BrokerCore.Common</title>
+    <summary type="text"></summary>
+    <updated>2012-04-02T09:16:31Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.3.2.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common',Version='2.3.2.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common/2.3.2.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.3.2.0</d:Version>
+      <d:Title>FastForward - Broker Common Library</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Provide classes and interfaces used in the Message Broker Component [Deltatre.FastForward.Broker.Core.Common]</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-04-02T09:16:31.083165Z</d:Published>
+      <d:Dependencies>Dam.Common:6.0.1.0|log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>0w7XqbnkkFh2zfFrbxxHvQeAMZkhn3acKEajndG0hR0AnxFwqRpW9GeA254v4SRMSO1KPEirZfMp0gx4NxRjAw==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">45838</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Common Utilities </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common',Version='3.0.0.0')</id>
+    <title type="text">BrokerCore.Common</title>
+    <summary type="text"></summary>
+    <updated>2012-04-12T09:51:53Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common',Version='3.0.0.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common',Version='3.0.0.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common/3.0.0.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>3.0.0.0</d:Version>
+      <d:Title>FastForward - Broker Common Library</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Provide classes and interfaces used in the Message Broker Component [Deltatre.FastForward.Broker.Core.Common]</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-04-04T09:16:56.414617Z</d:Published>
+      <d:Dependencies>Dam.Common:6.1.2.0|log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>gpoq0mE+hoDX2vNAqf6Ts9OW7epwy4QsnXvVEZ9CNapgPclrZjJ6onArs6mX7a6nnNz9PKj1v0aq+feVasTMZg==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">50419</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Common Utilities </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common',Version='3.1.0.0')</id>
+    <title type="text">BrokerCore.Common</title>
+    <summary type="text"></summary>
+    <updated>2012-04-12T10:01:32Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common',Version='3.1.0.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common',Version='3.1.0.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common/3.1.0.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>3.1.0.0</d:Version>
+      <d:Title>FastForward - Broker Common Library</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Provide classes and interfaces used in the Message Broker Component [Deltatre.FastForward.Broker.Core.Common]</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-04-12T10:01:32.312855Z</d:Published>
+      <d:Dependencies>Dam.Common:6.1.2.0|log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>TMSHhnqwBG2MZiucoNV4bGL2u/lQ+hPlTZyxbaBRcIZa1ZWINdsqC5290cbrSUrZkhwVZ5fnxEhpU/6N8bS/JQ==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">47724</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Common Utilities </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common',Version='3.3.0.0')</id>
+    <title type="text">BrokerCore.Common</title>
+    <summary type="text"></summary>
+    <updated>2012-04-16T14:33:45Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common',Version='3.3.0.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common',Version='3.3.0.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common/3.3.0.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>3.3.0.0</d:Version>
+      <d:Title>FastForward - Broker Common Library</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Provide classes and interfaces used in the Message Broker Component [Deltatre.FastForward.Broker.Core.Common]</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-04-16T14:33:45.533725Z</d:Published>
+      <d:Dependencies>Dam.Common:6.2.4.0|log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>m89V5OEHfeaEKL3A013x2zVvO/uf7KSWAdL/6YhdoiluSO4ZTV3gpv9yyTlgnqXavIWelKLO3VI0NahaKiHc7Q==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">63048</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Common Utilities </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common',Version='3.3.2.0')</id>
+    <title type="text">BrokerCore.Common</title>
+    <summary type="text"></summary>
+    <updated>2012-04-20T17:03:33Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common',Version='3.3.2.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common',Version='3.3.2.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common/3.3.2.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>3.3.2.0</d:Version>
+      <d:Title>FastForward - Broker Common Library</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Provide classes and interfaces used in the Message Broker Component [Deltatre.FastForward.Broker.Core.Common]</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-04-20T17:03:33.625605Z</d:Published>
+      <d:Dependencies>Dam.Common:6.2.10.0|log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>E3QqPvw3Xh+pshmw2qEui6mUXz5cqQk+ijP4p0aiw805Fjh2RRmTRJnvKMXRYVwCV+LPSNYGUTGcfG04bniV2A==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">66042</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Common Utilities </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common',Version='4.0.0.0')</id>
+    <title type="text">BrokerCore.Common</title>
+    <summary type="text"></summary>
+    <updated>2012-05-02T10:00:39Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common',Version='4.0.0.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common',Version='4.0.0.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common/4.0.0.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>4.0.0.0</d:Version>
+      <d:Title>FastForward - Broker Common Library</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Provide classes and interfaces used in the Message Broker Component [Deltatre.FastForward.Broker.Core.Common]</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-05-02T10:00:39.93082Z</d:Published>
+      <d:Dependencies>Dam.Common:7.0.0.0|log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>wQI5DvXrBscGXfa1widzhg6QbFDO2WcLMqF1QywezxfU0H6/IFvi9fYdCHkBOv88PaBJCmEgezQR6MJ5ddW8WQ==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">66171</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Common Utilities </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common.Persistence',Version='2.0.0.0')</id>
+    <title type="text">BrokerCore.Common.Persistence</title>
+    <summary type="text"></summary>
+    <updated>2012-02-22T15:42:51Z</updated>
+    <author>
+      <name>DeltaTre</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common.Persistence',Version='2.0.0.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common.Persistence',Version='2.0.0.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common.persistence/2.0.0.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.0.0.0</d:Version>
+      <d:Title>BrokerCore.Common.Persistence</d:Title>
+      <d:IconUrl m:null="true"></d:IconUrl>
+      <d:LicenseUrl m:null="true"></d:LicenseUrl>
+      <d:ProjectUrl m:null="true"></d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Description</d:Description>
+      <d:ReleaseNotes m:null="true"></d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-02-22T15:42:51.718584Z</d:Published>
+      <d:Dependencies>log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>QCKL7hvg+DWqCwwPjyFZ/r+4X5JII4uGSgyoyY0xjyFtHcnsbtBS/TsobuISrdy3e15E5Zatl4sFEanw9kPvhw==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">24128</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags m:null="true"></d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common.Persistence',Version='2.0.1.0')</id>
+    <title type="text">BrokerCore.Common.Persistence</title>
+    <summary type="text"></summary>
+    <updated>2012-02-28T14:37:35Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common.Persistence',Version='2.0.1.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common.Persistence',Version='2.0.1.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common.persistence/2.0.1.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.0.1.0</d:Version>
+      <d:Title>File Persistence Utility</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Use this DLL to persist data on file.</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-02-28T14:37:35.556179Z</d:Published>
+      <d:Dependencies>log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>nRd7hYLu8AXf0n5vmolufbqcEPGv/eVzKW9n2kdz2kFD1W7Oosn7TA50KW5x4w+bbp7xO2vbmjq83lPc3o0Wsw==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">24659</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Persistence Common File </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common.Persistence',Version='2.0.2.0')</id>
+    <title type="text">BrokerCore.Common.Persistence</title>
+    <summary type="text"></summary>
+    <updated>2012-02-28T19:38:05Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common.Persistence',Version='2.0.2.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common.Persistence',Version='2.0.2.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common.persistence/2.0.2.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.0.2.0</d:Version>
+      <d:Title>File Persistence Utility</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Use this DLL to persist data on file.</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-02-28T19:38:05.065701Z</d:Published>
+      <d:Dependencies>log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>cn4onFCm+L/CnxfYEx+Aufbjc5Xg2jH1TDLCpSgy4qykNkzNPvF0pkeEzS3pXXpdl93Rupf1VVXLJJLYUvf1rg==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">24618</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Persistence Common File </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://nuget.deltatre.it/nuget/Packages(Id='BrokerCore.Common.Persistence',Version='2.1.3.0')</id>
+    <title type="text">BrokerCore.Common.Persistence</title>
+    <summary type="text"></summary>
+    <updated>2012-03-06T18:12:21Z</updated>
+    <author>
+      <name>Video PLU</name>
+    </author>
+    <link rel="edit-media" title="Package" href="Packages(Id='BrokerCore.Common.Persistence',Version='2.1.3.0')/$value" />
+    <link rel="edit" title="Package" href="Packages(Id='BrokerCore.Common.Persistence',Version='2.1.3.0')" />
+    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="http://nuget.deltatre.it/api/v2/package/brokercore.common.persistence/2.1.3.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.1.3.0</d:Version>
+      <d:Title>File Persistence Utility</d:Title>
+      <d:IconUrl>https://extranet.deltatre.it/sites/FastForward/Technical Documentation/Images/FFWsuite_onTrasparent_128x128.png</d:IconUrl>
+      <d:LicenseUrl>http://www.deltatre.com/</d:LicenseUrl>
+      <d:ProjectUrl>http://framework.deltatre.it/fastforward/Home.aspx</d:ProjectUrl>
+      <d:DownloadCount m:type="Edm.Int32">0</d:DownloadCount>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:Description>Use this DLL to persist data on file.</d:Description>
+      <d:ReleaseNotes>Current Release</d:ReleaseNotes>
+      <d:Published m:type="Edm.DateTime">2012-03-06T18:12:21.197971Z</d:Published>
+      <d:Dependencies>log4net:2.0.0</d:Dependencies>
+      <d:PackageHash>aVz44oIRbR/z0lN+4Id/M3pszQV+pz9ukVXNTPqCu1pO+TIDIGUrUR/N78yQUDyWVhmKfBF3SWtoK5e28vM3Kw==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">25171</d:PackageSize>
+      <d:Copyright m:null="true"></d:Copyright>
+      <d:Tags xml:space="preserve"> FastForward Deltatre DAM FFWD Broker Persistence Common File </d:Tags>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:VersionDownloadCount m:type="Edm.Int32">0</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+    </m:properties>
+  </entry>
+</feed>
