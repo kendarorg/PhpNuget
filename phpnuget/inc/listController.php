@@ -19,6 +19,7 @@ class ListController
         $baseUrl = $virtualDirectory->baseurl;
         $baseUrl = $virtualDirectory->upFromLevel($baseUrl,2);
         //header("Content-Type: text/xml");
+        header("Content-type: application/xml");
         echo "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n";
         
         /*$req_dump = print_r($_REQUEST, TRUE);

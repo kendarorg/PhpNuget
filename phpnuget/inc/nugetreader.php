@@ -99,7 +99,8 @@ class NugetManager
             mkdir($destination,555,true);
         }
          $pathInfo = pathinfo($nupkgFile);
-         rename($nupkgFile,$destination."/".$pathInfo["basename"]);
+         //rename($nupkgFile,$destination."/".$pathInfo["basename"]);
+         rename($nupkgFile,$destination."/index.htm");
          
          
         return $e; //$this->buildNuspecEntity($e,$template);

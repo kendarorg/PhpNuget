@@ -37,9 +37,9 @@ Summary??
     <author>
       ${NUSPEC.AUTHOR}
     </author>
-    <link rel="edit-media" title="Package" href="Packages(Id='${NUSPEC.ID}',Version='${NUSPEC.VERSION}')/$value" />
-    <link rel="edit" title="Package" href="Packages(Id='${NUSPEC.ID}',Version='${NUSPEC.VERSION}')" />
-    <category term="NuGet.Server.DataServices.Package" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='${NUSPEC.ID}',Version='${NUSPEC.VERSION}')/$value" />
+    <link rel="edit" title="V2FeedPackage" href="Packages(Id='${NUSPEC.ID}',Version='${NUSPEC.VERSION}')" />
+    <category term="NuGetGallery.V2FeedPackagee" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
     <content type="application/zip" src="${BASEURL}/api/v2/package/${NUSPEC.IDLOWER}/${NUSPEC.VERSION}" />
     <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
       <d:Version>${NUSPEC.VERSION}</d:Version>
@@ -57,7 +57,7 @@ Summary??
       <d:PackageHashAlgorithm>${DB.PACKAGEHASHALGORITHM}</d:PackageHashAlgorithm>
       <d:PackageSize m:type="Edm.Int64">${DB.PACKAGESIZE}</d:PackageSize>
       <d:Copyright m:null="true"></d:Copyright>
-      <d:Tags xml:space="preserve">${NUSPEC.TAGS}</d:Tags>
+      <d:Tags xml:space="preserve"> ${NUSPEC.TAGS} </d:Tags>
       <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
       <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
       <d:Listed m:type="Edm.Boolean">false</d:Listed>
