@@ -1,23 +1,27 @@
 <?php
 define('__ROOT__',dirname( dirname(__FILE__)));
-require_once(__ROOT__."/inc/mytxtdb.php");
 require_once(__ROOT__.'/settings.php'); 
+require_once(__ROOT__."/inc/mytxtdb.php");
+require_once(__ROOT__."/inc/userentity.php");
+require_once(__ROOT__.'/inc/utils.php'); 
 
-define('__MYTXTDB_PKG__',__ROOT__."/db/nugetdb_pkg.txt");
-define('__MYTXTDBROWS_PKG__',
-      "Version:|:Title:|:Identifier:|:Author:|:IconUrl:|:LicenseUrl:|:ProjectUrl:|:DownloadCount:|:".
-      "RequireLicenseAcceptance:|:Description:|:ReleaseNotes:|:Published:|:Dependencies:|:".
-      "PackageHash:|:PackageHashAlgorithm:|:PackageSize:|:Copyright:|:Tags:|:IsAbsoluteLatestVersion:|:".
-      "IsLatestVersion:|:Listed:|:VersionDownloadCount:|:References");
+define('__MYTXTDB_USR__',__ROOT__."/db/nugetdb_usrs.txt");
+define('__MYTXTDBROWS_USR__',
+      "UserId:|:Name:|:Company:|:Md5Password:|:Packages:|:Enabled:|:Email:|:Token");
 
-class NuGetDb
+function UserDbSortUserId($a, $b)
+{
+    return strcmp($a->UserId, $b->UserId);
+}
+
+class UserDb
 {
     public function __construct() 
     {
         $this->initialize();
     }
     
-    public function NuGetDb()
+    public function UserDbSortUserId()
     {
         $this->initialize();
     }
@@ -30,35 +34,40 @@ class NuGetDb
     
     public function AddRow($nugetEntity,$update)
     {
-        $dbInstance =  new SmallTxtDb(__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__);
+        $dbInstance =  new SmallTxtDb(__MYTXTDB_USR__,__MYTXTDBROWS_USR__);
         $toInsert = array();
-        $vars = explode(":|:",__MYTXTDBROWS_PKG__);
+        $vars = explode(":|:",__MYTXTDBROWS_USR__);
         //print_r($vars);
         foreach ($vars as $column) {
             $toInsert[$column] = $nugetEntity->$column;
         }
-        
+        $doAdd = true;
         for($i=0;$i<sizeof($dbInstance->rows);$i++){
-            if($dbInstance->rows[$i]["PackageHash"]==$nugetEntity->PackageHash){
-                if($update){
-                    $dbInstance->rows[$i] = $toInsert[$column];
+            if($dbInstance->rows[$i]["UserId"]==$nugetEntity->UserId){
+                 if($update){
+                    $toInsert["Token"]=$dbInstance->rows[$i]["Token"];
+                    $dbInstance->rows[$i] = $toInsert;
                     $doAdd = false;
                  }
             }
         }
-    
-        if($doAdd)$dbInstance->add_row($toInsert);
+        
+        if($doAdd){
+            $toInsert["Token"]=getGUID();
+            $dbInstance->add_row($toInsert);
+        }
         $dbInstance->save();
         return true;
     }
     
+    
     public function DeleteRow($nugetEntity)
     {
-        $dbInstance = new SmallTxtDb(__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__);
+        $dbInstance = new SmallTxtDb(__MYTXTDB_USR__,__MYTXTDBROWS_USR__);
         $nameOfCaptain = "";
         $rowNumber = 0;
         foreach ($dbInstance->rows as $row) {
-        	if ($row['PackageHash'] == $nugetEntity->PackageHash) {
+        	if ($row['UserId'] == $nugetEntity->UserId) {
         		$dbInstance->delete_row($rowNumber);
         		break;
         	}
@@ -71,9 +80,9 @@ class NuGetDb
     {
         $this->initialize();
         $toret = array();
-        $dbInstance = new SmallTxtDb(__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__);
+        $dbInstance = new SmallTxtDb(__MYTXTDB_USR__,__MYTXTDBROWS_USR__);
         foreach( $dbInstance->rows as $row){
-            $e = new NugetEntity();
+            $e = new UserEntity();
             foreach ($row as $key=> $value) {
                 $e->$key = $value;
                 
@@ -85,7 +94,7 @@ class NuGetDb
     
     public function GetAllColumns()
     {
-        return split(":|:",__MYTXTDBROWS_PKG__);
+        return split(":|:",__MYTXTDBROWS_USR__);
     }
 }
 ?>

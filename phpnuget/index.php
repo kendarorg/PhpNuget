@@ -19,7 +19,7 @@ $baseUrl = $virtualDirectory->baseurl;
     <div>
         <h2>You are running NuGet.PhpServer v<?php echo __PHP_NUGET_VERSION__;?></h2>
         <p>
-            Click <a href="<?php echo $baseUrl;?>nuget/Packages">here</a> to view your packages.
+            Click <a href="<?php echo $baseUrl;?>nuget/Packages()">here</a> to view your packages.
         </p>
         <p>
             Click <a href="<?php echo $baseUrl;?>admin">here</a> to add/remove packages.
