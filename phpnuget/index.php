@@ -22,7 +22,7 @@ $baseUrl = $virtualDirectory->baseurl;
             Click <a href="<?php echo $baseUrl;?>nuget/Packages()">here</a> to view your packages.
         </p>
         <p>
-            Click <a href="<?php echo $baseUrl;?>admin">here</a> to add/remove packages.
+            Click <a href="<?php echo $baseUrl;?>admin">here</a> to add/remove packages and users.
         </p>
         <fieldset style="width:800px">
             <legend><strong>Repository URLs</strong></legend>
