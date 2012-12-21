@@ -3,9 +3,18 @@ define('__ROOT__',dirname( dirname(__FILE__)));
 require_once(__ROOT__.'/inc/usersdb.php'); 
 require_once(__ROOT__.'/inc/virtualdirectory.php'); 
 
+
+
 $nugetReader = new UserDb();
 $allEntities = $nugetReader->GetAllRows();
 usort($allEntities, "UserDbSortUserId");
+$entity = null;
+for($i=0;$i<sizeof($allEntities);$i++){
+    if($_REQUEST["identifier"]==$allEntities[$i]->UserId){
+        $entity =$allEntities[$i];
+    }  
+}
+
 $virtualDirectory = new VirtualDirectory();
 $baseUrl = $virtualDirectory->baseurl;
 $baseUrl = $virtualDirectory->upFromLevel($baseUrl,1);
@@ -14,18 +23,20 @@ $baseUrl = $virtualDirectory->upFromLevel($baseUrl,1);
     <body>
         <a href="<?php echo $baseUrl;?>">Back to root</a><br>
         <form action="usr_upload.php" method="post" enctype="multipart/form-data">
-            <label for="UserId">UserId:</label><input type="text" name="UserId" id="UserId"/><br>
-            <label for="Name">Name:</label><input type="text" name="Name" id="Name"/><br>
-            <label for="Company">Company:</label><input type="text" name="Company" id="Company"/><br>
-            <label for="Password">Password:</label><input type="password" name="Password" id="Password"/><br>
-            <label for="PasswordConfirm">Password Confirm:</label><input type="password" name="PasswordConfirm" id="PasswordConfirm"/><br>
-            <label for="Packages">Packages:</label><input type="text" name="Packages" id="Packages"/><br>
-            <label for="Email">Email:</label><input type="text" name="Email" id="Email"/><br>
-        <label for="Enabled">Enabled:</label><input type="text" name="Enabled" id="Enabled" value="true"/><br>
+            <table>
+            <tr><td><label for="UserId">UserId:</label></td><td><input type="text" name="UserId" id="UserId" value="<?php echo $entity==null?"":$entity->UserId;?>"/>                                         </td></tr>
+            <tr><td><label for="Name">Name:</label></td><td><input type="text" name="Name" id="Name" value="<?php echo $entity==null?"":$entity->Name;?>"/>                                                 </td></tr>
+            <tr><td><label for="Company">Company:</label></td><td><input type="text" name="Company" id="Company" value="<?php echo $entity==null?"":$entity->Company;?>"/>                                     </td></tr>
+            <tr><td><label for="Password">Password:</label></td><td><input type="password" name="Password" id="Password" value="" />                             </td></tr>
+            <tr><td><label for="PasswordConfirm">Password Confirm:</label></td><td><input type="password" name="PasswordConfirm" id="PasswordConfirm" value=""/></td></tr>
+            <tr><td><label for="Packages">Packages:</label></td><td><textarea rows="4" cols="50" name="Packages" id="Packages"><?php echo $entity==null?"":$entity->Packages;?></textarea></td></tr>
+            <tr><td><label for="Email">Email:</label></td><td><input type="text" name="Email" id="Email" value="<?php echo $entity==null?"":$entity->Email;?>"/>                       </td></tr>
+            <tr><td><label for="Enabled">Enabled:</label></td><td><input type="text" name="Enabled" id="Enabled" value="true" value="<?php echo $entity==null?"":$entity->Enabled;?>"/>  </td></tr>
+            </table>
             <input type="submit" name="submit" value="Submit">
         </form>
         <table>
-            <tr><td>Name</td><td>UserId</td><td>Token</td></tr>
+            <tr><td>Name</td><td>UserId</td><td>Token</td><td></td><td></td></tr>
         <?php 
             for($i=0;$i<sizeof($allEntities);$i++){
                 $entity = $allEntities[$i];
@@ -33,6 +44,7 @@ $baseUrl = $virtualDirectory->upFromLevel($baseUrl,1);
                 <tr>
                     <td><?php echo $entity->Name;?></td><td><?php echo $entity->UserId;?></td><td><?php echo $entity->Token;?></td>
                     <td><a href="usr_delete.php?identifier=<?php echo strtolower($entity->UserId);?>">Delete</a></td>
+                    <td><a href="usr_index.php?identifier=<?php echo strtolower($entity->UserId);?>">Edit</a></td>
                 </tr>
                 <?php    
             }

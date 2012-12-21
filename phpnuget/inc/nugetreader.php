@@ -93,17 +93,16 @@ class NugetManager
         $e->PackageSize = filesize($nupkgFile);
         $e->Listed = true;
          $nugetDb = new NuGetDb();
-         $nugetDb->AddRow($e);
-         $destination = __API_DOWNLOAD_POSITION__."/".strtolower($e->Identifier)."/".$e->Version;
-         if(!is_dir($destination)){
-            mkdir($destination,555,true);
-        }
-         $pathInfo = pathinfo($nupkgFile);
-         //rename($nupkgFile,$destination."/".$pathInfo["basename"]);
-         rename($nupkgFile,$destination."/index.htm");
-         
-         
-        return $e; //$this->buildNuspecEntity($e,$template);
+         if($nugetDb->AddRow($e,false)){
+             $destination = __API_DOWNLOAD_POSITION__."/".strtolower($e->Identifier)."/".$e->Version;
+             if(!is_dir($destination)){
+                mkdir($destination,555,true);
+            }
+             $pathInfo = pathinfo($nupkgFile);
+             //rename($nupkgFile,$destination."/".$pathInfo["basename"]);
+             rename($nupkgFile,$destination."/index.htm");
+            return $e; //$this->buildNuspecEntity($e,$template);
+         }else{ return null;}
     }
     
     public function LoadAllPackagesEntries()

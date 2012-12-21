@@ -37,7 +37,7 @@ class NuGetDb
         foreach ($vars as $column) {
             $toInsert[$column] = $nugetEntity->$column;
         }
-        
+        $doAdd = true;
         for($i=0;$i<sizeof($dbInstance->rows);$i++){
             if($dbInstance->rows[$i]["PackageHash"]==$nugetEntity->PackageHash){
                 if($update){
