@@ -3,7 +3,10 @@ define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__.'/settings.php'); 
 require_once(__ROOT__.'/inc/upload.php'); 
 require_once(__ROOT__.'/inc/usersdb.php'); 
-require_once(__ROOT__.'/inc/virtualdirectory.php'); 
+require_once(__ROOT__.'/inc/virtualdirectory.php');  
+require_once(__ROOT__.'/inc/login.php'); 
+
+ManageLogin();
 
 $nugetReader = new UserDb();
 $allEntities = $nugetReader->GetAllRows();
@@ -17,6 +20,12 @@ $entity = null;
 for($i=0;$i<sizeof($allEntities);$i++){
     $entity = $allEntities[$i];
     if((strtolower($entity->UserId)==$identifier)){
+        
+        if(!IsAdmin()){
+          if($entity->UserId!=UserName()){
+            ShowErrorLogin();
+          }   
+        }
         $nugetReader->DeleteRow($entity);
         break;
     }

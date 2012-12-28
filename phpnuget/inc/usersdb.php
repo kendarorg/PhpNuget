@@ -7,12 +7,8 @@ require_once(__ROOT__.'/inc/utils.php');
 
 define('__MYTXTDB_USR__',__ROOT__."/db/nugetdb_usrs.txt");
 define('__MYTXTDBROWS_USR__',
-      "UserId:|:Name:|:Company:|:Md5Password:|:Packages:|:Enabled:|:Email:|:Token");
+      "UserId:|:Name:|:Company:|:Md5Password:|:Packages:|:Enabled:|:Email:|:Token:|:Admin");
 
-function UserDbSortUserId($a, $b)
-{
-    return strcmp($a->UserId, $b->UserId);
-}
 
 class UserDb
 {
@@ -46,6 +42,7 @@ class UserDb
             if($dbInstance->rows[$i]["UserId"]==$nugetEntity->UserId){
                  if($update){
                     $toInsert["Token"]=$dbInstance->rows[$i]["Token"];
+                    $toInsert["UserId"]=$dbInstance->rows[$i]["UserId"];
                     $dbInstance->rows[$i] = $toInsert;
                     $doAdd = false;
                  }

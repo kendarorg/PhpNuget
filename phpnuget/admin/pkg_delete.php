@@ -3,7 +3,10 @@ define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__.'/settings.php'); 
 require_once(__ROOT__.'/inc/upload.php'); 
 require_once(__ROOT__.'/inc/nugetreader.php'); 
-require_once(__ROOT__.'/inc/virtualdirectory.php'); 
+require_once(__ROOT__.'/inc/virtualdirectory.php');  
+require_once(__ROOT__.'/inc/login.php'); 
+
+ManageLogin();
 
 $nugetReader = new NugetManager();
 $allEntities = $nugetReader->LoadAllPackagesEntries();

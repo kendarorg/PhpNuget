@@ -1,5 +1,9 @@
 <?php
 
+function build_sorter($key,$asc) {
+    return create_function("\$a,\$b"," return ".($asc?"-":"")."strnatcmp(\$a->".$key.",\$b->".$key.");");
+}
+
 function is_assoc($array) 
 {
     if(!is_array($array))return false;

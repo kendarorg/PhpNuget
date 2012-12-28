@@ -1,7 +1,10 @@
 <?php
 define('__ROOT__',dirname( dirname(__FILE__)));
 require_once(__ROOT__.'/inc/nugetreader.php'); 
-require_once(__ROOT__.'/inc/virtualdirectory.php'); 
+require_once(__ROOT__.'/inc/virtualdirectory.php');  
+require_once(__ROOT__.'/inc/login.php'); 
+
+ManageLogin();
 
 $nugetReader = new NugetManager();
 $allEntities = $nugetReader->LoadAllPackagesEntries();
@@ -12,7 +15,7 @@ $baseUrl = $virtualDirectory->upFromLevel($baseUrl,1);
 
 $entity = null;
 for($i=0;$i<sizeof($allEntities);$i++){
-    echo $allEntities[$i]->Identifier;
+    
     if(strtolower($_REQUEST["identifier"])==strtolower($allEntities[$i]->Identifier)){
         
         if(strtolower($_REQUEST["version"])==strtolower($allEntities[$i]->Version)){

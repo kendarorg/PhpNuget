@@ -3,32 +3,8 @@ define('__ROOT__',dirname(dirname( __FILE__)));
 require_once(__ROOT__.'/inc/upload.php'); 
 require_once(__ROOT__.'/inc/nugetreader.php'); 
 require_once(__ROOT__.'/inc/virtualdirectory.php'); 
+require_once(__ROOT__.'/inc/utils.php'); 
 
-/*
-
-(((Id ne null) and substringof('http',tolower(Id))) or ((Description ne null) and substringof('http',tolower(Description)))) or ((Tags ne null) and substringof(' http ',tolower(Tags)))
-
-(((Id ne null) and substringof('http',tolower(Id))) or ((Description ne null) and substringof('http',tolower(Description)))) or ((Tags ne null) and substringof(' http ',tolower(Tags)))
-
-*/
-
-/*function NugetManagerSortIdVersion($a, $b)
-{
-    $res = strcmp($a->Identifier, $b->Identifier);
-    if($res==0){
-       $aVersion = explode(".",$a->Version);
-       $bVersion = explode(".",$b->Version);
-       for($i=0;$i<sizeof($aVersion) && $i<sizeof($bVersion);$i++){
-            $res = $aVersion[$i]-$bVersion[$i];
-            if($res!=0) return $res; 
-       }
-    }
-    return $res;
-}*/
-
-function build_sorter($key,$asc) {
-    return create_function("\$a,\$b"," return ".($asc?"-":"")."strnatcmp(\$a->".$key.",\$b->".$key.");");
-}
 
 
 class ListController

@@ -4,6 +4,9 @@ require_once(__ROOT__.'/settings.php');
 require_once(__ROOT__.'/inc/upload.php'); 
 require_once(__ROOT__.'/inc/nugetreader.php'); 
 require_once(__ROOT__.'/inc/virtualdirectory.php'); 
+require_once(__ROOT__.'/inc/login.php'); 
+
+ManageLogin();
 
 $virtualDirectory = new VirtualDirectory();
 $baseUrl = $virtualDirectory->baseurl;

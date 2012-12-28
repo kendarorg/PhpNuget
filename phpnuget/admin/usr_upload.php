@@ -2,7 +2,11 @@
 define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__.'/settings.php'); 
 require_once(__ROOT__.'/inc/usersdb.php'); 
-require_once(__ROOT__.'/inc/virtualdirectory.php'); 
+require_once(__ROOT__.'/inc/virtualdirectory.php');  
+require_once(__ROOT__.'/inc/login.php'); 
+
+ManageLogin();
+
 
 $nugetReader = new UserDb();
 $virtualDirectory = new VirtualDirectory();
@@ -14,6 +18,12 @@ foreach($nugetReader->GetAllColumns() as $row)
 {
 //    echo $row."</br>";
     $userEntity->$row = $_REQUEST[$row];
+}
+
+if(!IsAdmin()){
+  if($userEntity->UserId!=UserName()){
+    ShowErrorLogin();
+  }   
 }
 
 $confirmPasssword = $_REQUEST["PasswordConfirm"];
@@ -32,10 +42,10 @@ if($rror==false){
 }
 $message = "";
 if($error==true){
-    $message = "<p>Failed uploading '".$userEntity->UserId."'.</br>";
+    $message = "<p>Failed adding user '".$userEntity->UserId."'.</br>";
     $message .= "</p>";
 }else{
-    $message = "<p>Uploaded ".$userEntity->UserId."</p><p>";
+    $message = "<p>Added user ".$userEntity->UserId."</p><p>";
 }
 
 ?>

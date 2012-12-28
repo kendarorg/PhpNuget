@@ -2,18 +2,33 @@
 define('__ROOT__',dirname( dirname(__FILE__)));
 require_once(__ROOT__.'/inc/usersdb.php'); 
 require_once(__ROOT__.'/inc/virtualdirectory.php'); 
+require_once(__ROOT__.'/inc/utils.php');  
+require_once(__ROOT__.'/inc/login.php'); 
 
-
+ManageLogin();
 
 $nugetReader = new UserDb();
 $allEntities = $nugetReader->GetAllRows();
-usort($allEntities, "UserDbSortUserId");
+
+if(!IsAdmin()){
+   $newEntities = array();
+   for($i=0;$i<sizeof($allEntities);$i++){
+        if(strtolower( UserName())==strtolower($allEntities[$i]->UserId)){
+            $newEntities[] =$allEntities[$i];
+        }  
+    }
+    $allEntities = $newEntities;
+}
+
+usort($allEntities,build_sorter('UserId',true));
 $entity = null;
 for($i=0;$i<sizeof($allEntities);$i++){
     if($_REQUEST["identifier"]==$allEntities[$i]->UserId){
         $entity =$allEntities[$i];
     }  
 }
+
+
 
 $virtualDirectory = new VirtualDirectory();
 $baseUrl = $virtualDirectory->baseurl;
