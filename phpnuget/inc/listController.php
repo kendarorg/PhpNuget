@@ -4,6 +4,32 @@ require_once(__ROOT__.'/inc/upload.php');
 require_once(__ROOT__.'/inc/nugetreader.php'); 
 require_once(__ROOT__.'/inc/virtualdirectory.php'); 
 
+/*
+
+(((Id ne null) and substringof('http',tolower(Id))) or ((Description ne null) and substringof('http',tolower(Description)))) or ((Tags ne null) and substringof(' http ',tolower(Tags)))
+
+(((Id ne null) and substringof('http',tolower(Id))) or ((Description ne null) and substringof('http',tolower(Description)))) or ((Tags ne null) and substringof(' http ',tolower(Tags)))
+
+*/
+
+/*function NugetManagerSortIdVersion($a, $b)
+{
+    $res = strcmp($a->Identifier, $b->Identifier);
+    if($res==0){
+       $aVersion = explode(".",$a->Version);
+       $bVersion = explode(".",$b->Version);
+       for($i=0;$i<sizeof($aVersion) && $i<sizeof($bVersion);$i++){
+            $res = $aVersion[$i]-$bVersion[$i];
+            if($res!=0) return $res; 
+       }
+    }
+    return $res;
+}*/
+
+function build_sorter($key,$asc) {
+    return create_function("\$a,\$b"," return ".($asc?"-":"")."strnatcmp(\$a->".$key.",\$b->".$key.");");
+}
+
 
 class ListController
 {
@@ -13,15 +39,21 @@ class ListController
         $allEntities = $nugetReader->LoadAllPackagesEntries();
         echo sizeof($allEntities);
     }
-    public static function LoadAll()
+    public static function LoadAll($baseUrl)
     {
-        $virtualDirectory = new VirtualDirectory();
-        $baseUrl = $virtualDirectory->baseurl;
-        $baseUrl = $virtualDirectory->upFromLevel($baseUrl,2);
+        /*$file = fopen(__ROOT__."/log.txt","a+");
+        fwrite($file,"Request:\n");
+        foreach($_GET as $key=>$value) {
+            fwrite($file,"\t". $key."=>".$value."\n");
+        }
+        foreach($_POST as $key=>$value) {
+            fwrite($file,"\t". $key."=>".$value."\n");
+        } 
+        fclose($file);*/
+        
         //header("Content-Type: text/xml");
         header("Content-type: application/xml");
         echo "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n";
-        
         /*$req_dump = print_r($_REQUEST, TRUE);
         $fp = fopen('C:\\temp\\request.log', 'a');
         fwrite($fp, $req_dump);
@@ -30,6 +62,60 @@ class ListController
         
         $nugetReader = new NugetManager();
         $allEntities = $nugetReader->LoadAllPackagesEntries();
+        
+        if(strpos($_GET["\$filter"],"IsLatestVersion")!==false){
+            
+            usort($allEntities,build_sorter('Version',true));
+            //print_r($allEntities);die();
+            $listof=array();
+            for($i= (sizeof($allEntities)-1);$i >=0;$i--){
+                $t = $allEntities[$i];
+               
+               if(!array_key_exists($t->Identifier,$allEntities)){
+                $listof[$t->Identifier] = $t;
+               }
+            }
+            $allEntities = array_values($listof);
+        }
+        
+        $filter = str_replace("\\", "", $_GET["\$filter"]);
+        
+        $res= 
+        //preg_match_all('@([\'"]).*[^\\\\]\1@', $filter,$out);
+        preg_match_all('/(["\'])(?:\\\1|.)*?\1/', $filter,$out);
+        //preg_match_all('/(?<=^|[\s,])(?:([\'"]).*?\1|[^\s,\'"]+)(?=[\s,]|$)/',$filter,$out);
+        //preg_match_all("/\\'([\w]+)\\'/",$_GET["\$filter"],$out, PREG_PATTERN_ORDER);
+        //print_r($out);
+        //echo $res;die();
+        //die();
+        if($res>0 && $res!== false){
+            
+            $allEntities = ListController::VerifyAll($out[0],$allEntities);
+        }
+        
+        
+        
+        switch($_GET["\$orderby"]){
+            case("Published desc"):
+                usort($allEntities, build_sorter('Published',false));
+                break;
+            case("Published"):
+                usort($allEntities, build_sorter('Published',true));
+                break;
+            case("DownloadCount desc"):
+                usort($allEntities, build_sorter('VersionDownloadCount',false));
+                break;
+            case("DownloadCount"):
+                usort($allEntities, build_sorter('VersionDownloadCount',true));
+                break;
+            case("concat(Title,Id) desc"):
+                usort($allEntities, build_sorter('Title',false));
+                break;
+            case("concat(Title,Id),Id"):
+                usort($allEntities, build_sorter('Title',true));
+                break;
+            
+        }
         
         if(false){
             $handle = fopen(__ROOT__.'/inc/test.xml', "rb");
@@ -54,6 +140,41 @@ class ListController
         </feed>
      <?php
         }
+    }
+    
+    function VerifyAll($matching,$allEntities)
+    {
+        for($i=0;$i<sizeof($matching);$i++){
+          $matching[$i]=  str_replace("'", "", $matching[$i]);
+        }
+         /*print_r($matching);
+                    die();*/
+        $toret = array();
+        for($i=0;$i<sizeof($allEntities);$i++){
+           if(ListController::VerifySingle($matching,$allEntities[$i])){
+              $toret[]=$allEntities[$i];
+           }
+        }
+        
+        return $toret;
+    }
+    
+    function VerifySingle($matching,$e)
+    {
+        $fields = array("Identifier","Description","Tags");
+        for($i=0;$i<sizeof($matching);$i++){
+            for($a=0;$a<sizeof($fields);$a++){
+                $val = strtolower($e->$fields[$a]);
+                $exp = strtolower($matching[$i]);
+               // echo $exp. " ".$val."\n";
+                if(strpos($val,$exp)!==false){
+                   
+                     return true;  
+                    }
+            }
+        }
+        
+        return false;
     }
 }
 

@@ -1,5 +1,6 @@
 <?php
 define('__ROOT__',dirname( dirname(__FILE__)));
+require_once(__ROOT__."/inc/utils.php");
 
 class Uploader
 {
@@ -19,16 +20,13 @@ class Uploader
         $this->destinationDir = $destinationDir;
     }
     
-    function Upload($allowedExts,$maxSize)
-    {
-        $toret = array();
-        $toret["hasError"] = false;
-        $toret["errorCode"] = null;
-        $toret["errorMessage"] = "";
-        $toret["name"]=$_FILES["file"]["name"];
-        $toret["mime"] = $_FILES["file"]["type"];
-        $toret["sizeBytes"] = $_FILES["file"]["size"];
-        $extension = end(explode(".", $toret["name"]));
+    function Upload($allowedExts,$maxSize) { 
+        $guid = getGUID();
+        $toret = array(); 
+        $toret["hasError"] = false; $toret["errorCode"] = null; 
+        $toret["errorMessage"] = ""; $toret["name"]=$_FILES["file"]["name"]; 
+        $toret["mime"] = $_FILES["file"]["type"]; $toret["sizeBytes"] = 
+        $_FILES["file"]["size"]; $extension = end(explode(".", $toret["name"]));
         
         if ( $toret["sizeBytes"] >= $maxSize){
             $toret["hasError"] = true;
@@ -43,15 +41,12 @@ class Uploader
             $toret["errorCode"]= $_FILES["file"]["error"];
           }else{
             $toret["tmpName"] = $_FILES["file"]["tmp_name"];
-        
-            if (file_exists($this->destinationDir."/" . $toret["name"])){
-                unlink ($this->destinationDir."/" . $toret["name"]);
-                /*$toret["hasError"] = true;
-                $toret["errorMessage"] =  "'".$toret["name"] . "' already exists. ";*/
-            } /*else*/ {
-                $toret["destination"]=$this->destinationDir."/" . $toret["name"];
-              move_uploaded_file($toret["tmpName"],$toret["destination"]);
+            
+            if (file_exists($this->destinationDir."/" . $guid)){
+                unlink ($this->destinationDir."/" . $guid);
             }
+            $toret["destination"]=$this->destinationDir."/" . $guid;
+            move_uploaded_file($toret["tmpName"],$toret["destination"]);
           }
         }
         return $toret;

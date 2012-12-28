@@ -32,14 +32,9 @@ class NugetManager
         $nugetDb = new NuGetDb();
         
         
-        $destination = __API_DOWNLOAD_POSITION__."/".strtolower($e->Identifier)."/".$e->Version;
+        $destination = __UPLOAD_DIR__."/".strtolower($e->Identifier).".".$e->Version.".nupkg";
         
-        
-        DeleteDir(__API_DOWNLOAD_POSITION__."/".strtolower($e->Identifier)."/".$e->Version);
-        $dirs = glob(__API_DOWNLOAD_POSITION__."/".strtolower($e->Identifier).'/*.*'); // get all file names
-        if(sizeof($dirs)==0){
-            rmdir(__API_DOWNLOAD_POSITION__."/".strtolower($e->Identifier));
-        }
+        if(file_exists($destination)) unlink($destination);
         
         $nugetDb->DeleteRow($e);
         
@@ -94,13 +89,11 @@ class NugetManager
         $e->Listed = true;
          $nugetDb = new NuGetDb();
          if($nugetDb->AddRow($e,false)){
-             $destination = __API_DOWNLOAD_POSITION__."/".strtolower($e->Identifier)."/".$e->Version;
-             if(!is_dir($destination)){
-                mkdir($destination,555,true);
+             $destination = __UPLOAD_DIR__."/".strtolower($e->Identifier).".".$e->Version.".nupkg";
+             if(file_exists($destination)){
+                unlink($destination);
             }
-             $pathInfo = pathinfo($nupkgFile);
-             //rename($nupkgFile,$destination."/".$pathInfo["basename"]);
-             rename($nupkgFile,$destination."/index.htm");
+             rename($nupkgFile,$destination);
             return $e; //$this->buildNuspecEntity($e,$template);
          }else{ return null;}
     }

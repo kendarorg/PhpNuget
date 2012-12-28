@@ -40,7 +40,7 @@ Summary??
     <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='${NUSPEC.ID}',Version='${NUSPEC.VERSION}')/$value" />
     <link rel="edit" title="V2FeedPackage" href="Packages(Id='${NUSPEC.ID}',Version='${NUSPEC.VERSION}')" />
     <category term="NuGetGallery.V2FeedPackagee" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
-    <content type="application/zip" src="${BASEURL}/api/v2/package/${NUSPEC.IDLOWER}/${NUSPEC.VERSION}" />
+    <content type="application/zip" src="${BASEURL}/api/v2/package/?package=${NUSPEC.IDLOWER}.${NUSPEC.VERSION}" />
     <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
       <d:Version>${NUSPEC.VERSION}</d:Version>
       <d:Title>${NUSPEC.TITLE}</d:Title>
