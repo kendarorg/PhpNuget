@@ -12,10 +12,11 @@ define('__MYTXTDBROWS_PKG__',
 define('__MYTXTDBROWS_PKG_TYPES__',
       "string:|:string:|:string:|:object:|:string:|:string:|:string:|:number:|:".
       "bool:|:string:|:string:|:date:|:object:|:".
-      "string:|:string:|:number:|:string:|:string:|:object:|:".
+      "string:|:string:|:number:|:string:|:string:|:bool:|:".
       "bool:|:bool:|:number:|:array");      
 define('__MYTXTDBROWS_PKG_EDITABLE__',
-      "Tags:|:IsAbsoluteLatestVersion:|:".
+      "Tags:|:IsAbsoluteLatestVersion:|:Title:|:Title:|:IconUrl:|:LicenseUrl:|:ProjectUrl:|:".
+      "RequireLicenseAcceptance:|:Description:|:ReleaseNotes:|:Copyright:|:".
       "IsLatestVersion:|:Listed");      
 
 class NuGetDb
@@ -27,7 +28,6 @@ class NuGetDb
     
     private function initialize()
     {
-        
         
     }
     
@@ -42,14 +42,15 @@ class NuGetDb
         }
         $doAdd = true;
         for($i=0;$i<sizeof($dbInstance->rows);$i++){
+           
             if($dbInstance->rows[$i]["PackageHash"]==$nugetEntity->PackageHash){
+                 
                 if($update){
-                    $dbInstance->rows[$i] = $toInsert[$column];
+                    $dbInstance->rows[$i] = $toInsert;
                     $doAdd = false;
                  }
             }
         }
-    
         if($doAdd)$dbInstance->add_row($toInsert);
         $dbInstance->save();
         return true;

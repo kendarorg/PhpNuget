@@ -56,11 +56,11 @@ Summary??
       <d:PackageHash>${DB.PACKAGEHASH}</d:PackageHash>
       <d:PackageHashAlgorithm>${DB.PACKAGEHASHALGORITHM}</d:PackageHashAlgorithm>
       <d:PackageSize m:type="Edm.Int64">${DB.PACKAGESIZE}</d:PackageSize>
-      <d:Copyright m:null="true"></d:Copyright>
+      <d:Copyright m:null="true">${DB.COPYRIGHT}</d:Copyright>
       <d:Tags xml:space="preserve"> ${NUSPEC.TAGS} </d:Tags>
-      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
-      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
-      <d:Listed m:type="Edm.Boolean">false</d:Listed>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">${DB.ISABSOLUTELATESTVERSION}</d:IsAbsoluteLatestVersion>
+      <d:IsLatestVersion m:type="Edm.Boolean">${DB.ISLATESTVERSION}</d:IsLatestVersion>
+      <d:Listed m:type="Edm.Boolean">${DB.LISTED}</d:Listed>
       <d:VersionDownloadCount m:type="Edm.Int32">${DB.VERSIONDOWNLOADCOUNT}</d:VersionDownloadCount>
       <d:Summary m:null="true"></d:Summary>
     </m:properties>

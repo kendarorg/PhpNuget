@@ -132,7 +132,7 @@ class NugetManager
         $t= str_replace("\${NUSPEC.VERSION}",$e->Version,$t);
         $t= str_replace("\${NUSPEC.LICENSEURL}",$e->LicenseUrl,$t);
         $t= str_replace("\${NUSPEC.PROJECTURL}",$e->ProjectUrl,$t);
-        $t= str_replace("\${NUSPEC.REQUIRELICENSEACCEPTANCE}",$e->RequireLicenseAcceptance,$t);
+        $t= str_replace("\${NUSPEC.REQUIRELICENSEACCEPTANCE}",$e->RequireLicenseAcceptance?"true":"false",$t);
         $t= str_replace("\${NUSPEC.DESCRIPTION}",$e->Description,$t);
         if($e->Tags!=""){
             $t= str_replace("\${NUSPEC.TAGS}"," ".$e->Tags." ",$t);
@@ -151,9 +151,15 @@ class NugetManager
             $t= str_replace("\${NUSPEC.DEPENDENCIES}",$this->MakeDepString($e->Dependencies),$t);
         }
         
-        $t= str_replace("\${DB.DOWNLOADCOUNT}",0,$t);
-        $t= str_replace("\${DB.VERSIONDOWNLOADCOUNT}",0,$t);
+        $t= str_replace("\${DB.DOWNLOADCOUNT}",$e->DownloadCount,$t);
+        $t= str_replace("\${DB.VERSIONDOWNLOADCOUNT}",$e->VersionDownloadCount,$t);
         $t= str_replace("\${DB.UPDATED}",$e->Published,$t);
+        
+        $t= str_replace("\${DB.ISABSOLUTELATESTVERSION}",$e->IsAbsoluteLatestVersion?"true":"false",$t);
+        $t= str_replace("\${DB.ISLATESTVERSION}",$e->IsLatestVersion?"true":"false",$t);
+        $t= str_replace("\${DB.LISTED}",$e->Listed?"true":"false",$t);
+        
+        $t= str_replace("\${DB.COPYRIGHT}",$e->Copyright,$t);
         //rint_r($e);die();
         return preg_replace('/<!--(.*)-->/Uis', '', $t);
     }
