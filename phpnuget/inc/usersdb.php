@@ -8,10 +8,13 @@ require_once(__ROOT__.'/inc/utils.php');
 define('__MYTXTDB_USR__',__ROOT__."/db/nugetdb_usrs.txt");
 define('__MYTXTDBROWS_USR__',
       "UserId:|:Name:|:Company:|:Md5Password:|:Packages:|:Enabled:|:Email:|:Token:|:Admin");
+define('__MYTXTDBROWS_USR_TYP__',
+      "string:|:string:|:string:|:string:|:string:|:bool:|:string:|:string:|:bool");
 
 
 class UserDb
 {
+    
     public function __construct() 
     {
         $this->initialize();
@@ -30,7 +33,7 @@ class UserDb
     
     public function AddRow($nugetEntity,$update)
     {
-        $dbInstance =  new SmallTxtDb(__MYTXTDB_USR__,__MYTXTDBROWS_USR__);
+        $dbInstance =  new SmallTxtDb(__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
         $toInsert = array();
         $vars = explode(":|:",__MYTXTDBROWS_USR__);
         //print_r($vars);
@@ -60,7 +63,7 @@ class UserDb
     
     public function DeleteRow($nugetEntity)
     {
-        $dbInstance = new SmallTxtDb(__MYTXTDB_USR__,__MYTXTDBROWS_USR__);
+        $dbInstance = new SmallTxtDb(__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
         $nameOfCaptain = "";
         $rowNumber = 0;
         foreach ($dbInstance->rows as $row) {
@@ -77,7 +80,7 @@ class UserDb
     {
         $this->initialize();
         $toret = array();
-        $dbInstance = new SmallTxtDb(__MYTXTDB_USR__,__MYTXTDBROWS_USR__);
+        $dbInstance = new SmallTxtDb(__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
         foreach( $dbInstance->rows as $row){
             $e = new UserEntity();
             foreach ($row as $key=> $value) {

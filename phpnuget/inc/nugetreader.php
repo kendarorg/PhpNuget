@@ -102,6 +102,7 @@ class NugetManager
     {
         $nugetDb = new NuGetDb();
         $toret = $nugetDb->GetAllRows();
+        
         return $toret;
     }
     

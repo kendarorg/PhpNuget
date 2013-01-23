@@ -9,14 +9,17 @@ define('__MYTXTDBROWS_PKG__',
       "RequireLicenseAcceptance:|:Description:|:ReleaseNotes:|:Published:|:Dependencies:|:".
       "PackageHash:|:PackageHashAlgorithm:|:PackageSize:|:Copyright:|:Tags:|:IsAbsoluteLatestVersion:|:".
       "IsLatestVersion:|:Listed:|:VersionDownloadCount:|:References");
+define('__MYTXTDBROWS_PKG_TYPES__',
+      "string:|:string:|:string:|:object:|:string:|:string:|:string:|:number:|:".
+      "bool:|:string:|:string:|:date:|:object:|:".
+      "string:|:string:|:number:|:string:|:string:|:object:|:".
+      "bool:|:bool:|:number:|:array");      
+define('__MYTXTDBROWS_PKG_EDITABLE__',
+      "Tags:|:IsAbsoluteLatestVersion:|:".
+      "IsLatestVersion:|:Listed");      
 
 class NuGetDb
 {
-    public function __construct() 
-    {
-        $this->initialize();
-    }
-    
     public function NuGetDb()
     {
         $this->initialize();
@@ -30,7 +33,7 @@ class NuGetDb
     
     public function AddRow($nugetEntity,$update)
     {
-        $dbInstance =  new SmallTxtDb(__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__);
+        $dbInstance =  new SmallTxtDb(__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__);
         $toInsert = array();
         $vars = explode(":|:",__MYTXTDBROWS_PKG__);
         //print_r($vars);
@@ -54,7 +57,7 @@ class NuGetDb
     
     public function DeleteRow($nugetEntity)
     {
-        $dbInstance = new SmallTxtDb(__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__);
+        $dbInstance = new SmallTxtDb(__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__);
         $nameOfCaptain = "";
         $rowNumber = 0;
         foreach ($dbInstance->rows as $row) {
@@ -71,12 +74,12 @@ class NuGetDb
     {
         $this->initialize();
         $toret = array();
-        $dbInstance = new SmallTxtDb(__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__);
+        $dbInstance = new SmallTxtDb(__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__);
         foreach( $dbInstance->rows as $row){
             $e = new NugetEntity();
             foreach ($row as $key=> $value) {
+                //if(!empty($e->$key))
                 $e->$key = $value;
-                
             }
             $toret[]=$e;
         }

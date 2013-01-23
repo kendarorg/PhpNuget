@@ -8,24 +8,51 @@ class SmallTxtDb
     var $dbRows;
     var $columns;
     var $rows;
+    var $dbTypes;
     
-    public function __construct($dbFile,$dbRows,$loadData = true) 
+    public function FieldNames()
     {
-        $this->initialize($dbFile,$dbRows,$loadData);
+        return $this->dbRows;
     }
     
-    public function SmallTxtDb($dbFile,$dbRows,$loadData = true)
+    public function FieldTypes()
     {
-        $this->initialize($dbFile,$dbRows,$loadData);
+        return $this->dbTypes;
     }
     
-    private function initialize($dbFile,$dbRows,$loadData = true)
+    
+    public function VerifyTypes($row)
+    {
+        $fieldNames = explode(":|:",$this->FieldNames());
+        $fieldTypes = explode(":|:",$this->FieldTypes());
+        
+        for($i=0;$i<sizeof($fieldNames);$i++){
+            $field = $fieldNames[$i];
+            $type = $fieldTypes[$i];
+            $value = $row[$field];
+            $row[$field] = $this->VerifyType($value,$type); 
+        }
+        return $row;   
+    }
+    
+    public function __construct($dbFile,$dbRows,$dbTypes,$loadData = true) 
+    {
+        $this->initialize($dbFile,$dbRows,$dbTypes,$loadData);
+    }
+    
+    public function SmallTxtDb($dbFile,$dbRows,$dbTypes,$loadData = true)
+    {
+        $this->initialize($dbFile,$dbRows,$dbTypes,$loadData);
+    }
+    
+    private function initialize($dbFile,$dbRows,$dbTypes,$loadData = true)
     {
         
         $this->cr="\n";
         $this->separator = ":|:";
         $this->dbFile = $dbFile;
         $this->dbRows = $dbRows;
+        $this->dbTypes = $dbTypes;
         if(!file_exists($this->dbFile)){
             $fp = fopen($this->dbFile, 'w');
             fwrite($fp, $this->dbRows.$this->cr);
@@ -58,7 +85,7 @@ class SmallTxtDb
                     foreach($this->columns as $key => $value){
                         $row[$key]=unserialize($vals[$value]);
                     }
-                    $this->rows[]=$row;
+                    $this->rows[]=$this->VerifyTypes($row);
                 }
             }
         }
@@ -75,7 +102,7 @@ class SmallTxtDb
             }
             $hashRow[$key]=$rowContent;
         }
-        $this->rows[]=$hashRow;
+        $this->rows[]=$this->VerifyTypes($hashRow);
         //print_r($this->columns);
      // print_r($this->rows);die();
     }
@@ -93,6 +120,7 @@ class SmallTxtDb
         fwrite($fp, $this->dbRows.$this->cr);
         foreach($this->rows as $row){
             $towrite = array_fill(0,sizeof( $this->columns),null);
+            $row = $this->VerifyTypes($row);
             foreach($this->columns as $key => $value){
                 $towrite[$value]=serialize($row[$key]);
             }
@@ -102,6 +130,35 @@ class SmallTxtDb
         fclose($fp);
         unlink($this->dbFile);
         rename($this->dbFile.".tmp",$this->dbFile);
+    }
+    
+    public function VerifyType($value,$type)
+    {
+        //echo $value."=".$type."<br>";
+        $type = strtolower($type);
+        switch($type){
+            case("number"):
+                {
+                    if(is_numeric($value)) return $value;  
+                    return (int)$value; 
+                }
+            case("bool"):
+                {
+                    if(is_bool($value))return $value;
+                    if(is_numeric($value)) return $value > 0;
+                    $value = strtolower($value);
+                    if($value=="true" || $value=="false") return $value=="true"?true:false;
+                    if($value=="N" || $value=="Y") return $value=="Y"?true:false;
+                    if($value=="NULL" || is_null($value))return false;
+                    return false;
+                }
+            case("array"):
+            case("date"):
+            case("object"):
+            case("string"):
+            default:
+                return $value;   
+        }
     }
 }
 

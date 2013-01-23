@@ -38,7 +38,7 @@ for($i=0;$i<sizeof($allEntities);$i++){
             EDITING FORM
         <?php } ?>
         <table>
-            <tr><td>Name</td><td>Version</td></tr>
+            <tr><td>Name</td><td>Version</td><td>Delete</td><td>Edit</td></tr>
         <?php 
             for($i=0;$i<sizeof($allEntities);$i++){
                 $entity = $allEntities[$i];
@@ -47,7 +47,7 @@ for($i=0;$i<sizeof($allEntities);$i++){
                     <td><?php echo $entity->Title;?></td><td><?php echo $entity->Version;?></td>
                     <td><a href="<?php echo $baseUtl."/api/v2/package/".strtolower($entity->Identifier)."/".$entity->Version;?>">Download</a></td>
                     <td><a href="pkg_delete.php?identifier=<?php echo strtolower($entity->Identifier);?>&version=<?php echo $entity->Version;?>">Delete</a></td>
-                    <td><a href="pkg_index.php?identifier=<?php echo strtolower($entity->Identifier);?>&version=<?php echo $entity->Version;?>">Edit</a></td>
+                    <td><a href="pkg_edit.php?identifier=<?php echo strtolower($entity->Identifier);?>&version=<?php echo $entity->Version;?>">Edit</a></td>
                 </tr>
                 <?php    
             }
