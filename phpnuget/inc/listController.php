@@ -17,14 +17,14 @@ class ListController
     }
     public static function LoadAll($baseUrl)
     {
-        $file = fopen(__ROOT__."/log.txt","a+");
+        /*$file = fopen(__ROOT__."/log.txt","a+");
         fwrite($file,"Request:\n");
         foreach($_GET as $key=>$value) {
             fwrite($file,"\t". $key."=>".$value."\n");
         }
         foreach($_POST as $key=>$value) {
             fwrite($file,"\t". $key."=>".$value."\n");
-        } 
+        } */
         
         //header("Content-Type: text/xml");
         header("Content-type: application/xml");
@@ -91,8 +91,8 @@ class ListController
                 break;
             
         }
-        fwrite($file,"  SIZE: ".sizeof($allEntities));
-        fclose($file);
+        //fwrite($file,"  SIZE: ".sizeof($allEntities));
+        //fclose($file);
         if(false){
             $handle = fopen(__ROOT__.'/inc/test.xml', "rb");
             echo fread($handle, filesize(__ROOT__.'/inc/test.xml'));
