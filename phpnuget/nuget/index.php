@@ -7,11 +7,14 @@ $baseUrl = $virtualDirectory->upFromLevel($virtualDirectory->baseurl,1);
 header("Content-Type: text/xml");
 echo "<?xml version='1.0' encoding='utf-8' standalone='yes'?>\n";
 
-$file = fopen(__ROOT__."/log.txt","a+");
-		fwrite($file,"\n\t".$_SERVER['REQUEST_URI']."\n");
+$doLog = false;
+if($doLog){
+    $file = fopen(__ROOT__."/log.txt","a+");
+    fwrite($file,"\n____PACKAGEs:\n");
 		fclose($file);
+}    
 ?>
-<service xml:base="<?php echo $baseUrl; ?>/nuget" 
+<service xml:base="<?php echo $baseUrl; ?>/nuget/" 
     xmlns:atom="http://www.w3.org/2005/Atom" 
     xmlns:app="http://www.w3.org/2007/app" 
     xmlns="http://www.w3.org/2007/app">

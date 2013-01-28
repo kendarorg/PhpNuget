@@ -10,3 +10,10 @@ Admin can manage every user.
 Deleting admin user can cause impredictable results.
 The queries made by nuget client are more or less reliable, since
  was not implemented the whole scripting language used by nuget.
+
+Remember to change phpnuget\nuget\.htaccess file modifying the 
+	web/phpnuget
+With your root, for example if your phpnuget is on 
+	http://test.com/sub/level/myphpnuget
+You should change the web/phpnuget with
+	sub/level/myphpnuget

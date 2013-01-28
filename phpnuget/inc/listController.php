@@ -17,17 +17,18 @@ class ListController
     }
     public static function LoadAll($baseUrl)
     {
-        /*$file = fopen(__ROOT__."/log.txt","a+");
-        fwrite($file,"Request:\n");
+        $doLog = false;
+        if($doLog){
+            $file = fopen(__ROOT__."/log.txt","a+");
+            fwrite($file,"\nRequest:\n");
         foreach($_GET as $key=>$value) {
             fwrite($file,"\t". $key."=>".$value."\n");
         }
         foreach($_POST as $key=>$value) {
             fwrite($file,"\t". $key."=>".$value."\n");
         }
+            fwrite($file,"\n\t".$_SERVER['REQUEST_URI']."\n");
         } 
-		fwrite($file,"\n\t".$_SERVER['REQUEST_URI']."\n");
- */
         
         header("Content-type: application/xml");
         echo "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n";
@@ -93,8 +94,10 @@ class ListController
                 break;
             
         }
-        //fwrite($file,"  SIZE: ".sizeof($allEntities));
-        //fclose($file);
+        if($doLog){
+            fwrite($file,"  SIZE: ".sizeof($allEntities));
+            fclose($file);
+        }
         if(false){
             $handle = fopen(__ROOT__.'/inc/test.xml', "rb");
             echo fread($handle, filesize(__ROOT__.'/inc/test.xml'));
@@ -102,8 +105,8 @@ class ListController
         }else{
         ?>
         <feed xml:base="<?php echo $baseUrl;?>/nuget/" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"  xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom">
-          <title type="text">Search</title>
-          <id><?php echo $baseUrl;?>/nuget/Search</id>
+          <title type="text">Packages</title>
+          <id><?php echo $baseUrl;?>/nuget/Packages</id>
           <updated>2012-12-13T19:00:52Z</updated>
           <link rel="self" title="Packages" href="Packages" />
           <?php 
