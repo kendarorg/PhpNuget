@@ -24,9 +24,11 @@ class ListController
         }
         foreach($_POST as $key=>$value) {
             fwrite($file,"\t". $key."=>".$value."\n");
-        } */
+        }
+        } 
+		fwrite($file,"\n\t".$_SERVER['REQUEST_URI']."\n");
+ */
         
-        //header("Content-Type: text/xml");
         header("Content-type: application/xml");
         echo "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n";
         /*$req_dump = print_r($_REQUEST, TRUE);

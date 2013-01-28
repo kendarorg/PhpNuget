@@ -42,9 +42,7 @@ class NuGetDb
         }
         $doAdd = true;
         for($i=0;$i<sizeof($dbInstance->rows);$i++){
-           
             if($dbInstance->rows[$i]["PackageHash"]==$nugetEntity->PackageHash){
-                 
                 if($update){
                     $dbInstance->rows[$i] = $toInsert;
                     $doAdd = false;

@@ -6,6 +6,10 @@ $baseUrl = $virtualDirectory->baseurl;
 $baseUrl = $virtualDirectory->upFromLevel($virtualDirectory->baseurl,1);
 header("Content-Type: text/xml");
 echo "<?xml version='1.0' encoding='utf-8' standalone='yes'?>\n";
+
+$file = fopen(__ROOT__."/log.txt","a+");
+		fwrite($file,"\n\t".$_SERVER['REQUEST_URI']."\n");
+		fclose($file);
 ?>
 <service xml:base="<?php echo $baseUrl; ?>/nuget" 
     xmlns:atom="http://www.w3.org/2005/Atom" 
