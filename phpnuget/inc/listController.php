@@ -5,10 +5,22 @@ require_once(__ROOT__.'/inc/nugetreader.php');
 require_once(__ROOT__.'/inc/virtualdirectory.php'); 
 require_once(__ROOT__.'/inc/utils.php'); 
 
-
+function startsWithEx($h, $n)
+{
+    if(strlen($h)>strlen($n))return false;
+    for($i=0;$i<strlen($h);$i++){
+        if($h[$i]!=$n[$i])return false;
+    }
+    return true;
+}
 
 class ListController
 {
+    public static function isNaN( $var ) 
+    {
+        return ereg ("^[-]?[0-9]+$", $var);
+    }
+    
     public static function CountAll()
     {
         $nugetReader = new NugetManager();
@@ -21,12 +33,12 @@ class ListController
         if($doLog){
             $file = fopen(__ROOT__."/log.txt","a+");
             fwrite($file,"\nRequest:\n");
-        foreach($_GET as $key=>$value) {
-            fwrite($file,"\t". $key."=>".$value."\n");
-        }
-        foreach($_POST as $key=>$value) {
-            fwrite($file,"\t". $key."=>".$value."\n");
-        }
+            foreach($_GET as $key=>$value) {
+                fwrite($file,"\t". $key."=>".$value."\n");
+            }
+            foreach($_POST as $key=>$value) {
+                fwrite($file,"\t". $key."=>".$value."\n");
+            } 
             fwrite($file,"\n\t".$_SERVER['REQUEST_URI']."\n");
         } 
         
@@ -103,6 +115,12 @@ class ListController
             echo fread($handle, filesize(__ROOT__.'/inc/test.xml'));
             fclose($handle);
         }else{
+            $total = sizeof($allEntities);
+            $skip = $_GET["\$skip"];
+            if(!ListController::isNAN($skip))$skip=0;
+            $top = $_GET["\$top"];
+            if(!ListController::isNAN($top))$top=10;
+            $allEntities = array_slice($allEntities, $skip, $top);
         ?>
         <feed xml:base="<?php echo $baseUrl;?>/nuget/" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"  xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom">
           <title type="text">Packages</title>
@@ -116,11 +134,52 @@ class ListController
                 //$nuentity = str_replace("\n","</br>",$nuentity); 
                 echo $nuentity."\n";  
             }
-          
+
+            if($total > $top){
+                if($total > ($skip+$top)){
+                    $nextHref = ListController::BuildLink($total,$skip+$top,$top,ListController::curPageURL());
+                    echo "<link rel='next' href='".$nextHref."'/>";
+                }
+                if($skip > 0){
+                    $prevHref = ListController::BuildLink($total,$skip-$top,$top,ListController::curPageURL());
+                    echo "<link rel='prev' href='".$prevHref."'/>";
+                }
+            }
           ?>
         </feed>
      <?php
         }
+    }
+    
+    public static function BuildLink($total,$skip,$top,$url) 
+    {
+        if($skip > $total) $skip = $total-$skip;
+        if($skip<0) $skip=0;
+        
+        $urlEls = explode('?',$url);
+        $url = $urlEls[0];
+        if(sizeof($urlEls)==2){
+            $query = explode('&',$urlEls[1]);
+            for($i=0;$i< sizeof($query);$i++){
+                $item = $query[$i];
+                if( startsWithEx("\$skip=",$item)){
+                    $query[$i]="\$skip=".$skip;
+                }
+            }
+            $urlEls[1] = implode('&',$query);
+        }
+        return implode('?',$urlEls);
+    }
+    public static function curPageURL() {
+        $pageURL = 'http';
+        if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+        $pageURL .= "://";
+        if ($_SERVER["SERVER_PORT"] != "80") {
+        $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+        } else {
+        $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+        }
+        return $pageURL;
     }
     
     function VerifyAll($matching,$allEntities)
