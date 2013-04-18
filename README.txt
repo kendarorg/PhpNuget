@@ -1,3 +1,7 @@
+The last version can be found on
+
+http://github.kendar.org
+
 Documentation and help can be found on
 
 http://www.kendar.org
