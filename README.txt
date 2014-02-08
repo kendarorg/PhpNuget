@@ -1,22 +1,47 @@
-Documentation and help can be found on
+INSTALLATION
+==============================
+Supposed you install the application into the directory
+    C:\IIS\PhpNuget    
+Reachable with the address
+    http://foo.com/my/phpnuget
+    
+* Create the "C:\IIS\PhpNuget\db" folder assigning write/modify rights to its content.    
+* Create the "C:\IIS\PhpNuget\sources" folder assigning write/modify rights to its content
+* Add, if not present, the upload_tmp_dir in php.ini and set it to the location that 
+  will be used as temporary place for uploads
+* Navigate on 
+    http://foo.com/my/phpnuget/setup.php 
+  and compile at least the password and username fields
+* Delete, or rename the file C:\IIS\PhpNuget\setup.php
+* Apache: If you use an apache web server remember to change the file
+    C:\IIS\PhpNuget\.htaccess 
+  modifying the: "web/phpnuget" with your root. 
+  For our example we will change the "web/phpnuget" in .htaccess with: "my/phpnuget"
+* IIS: If you run it on windows download the windowsextra.zip for the support of UrlRewrite 
+  in windows and change accordingly the web.config
+  
 
-http://www.kendar.org
+Note that the db and source location depends from the C:\IIS\PhpNuget\settings.php file. A good 
+behaviour would be placing these folders -outside- the web-accessible zones!!
 
-For the installation run the setup.php, and delete it (it will be anyway renamed to setup.php.old)
-This will create the administrator user.
-Users can upload/change/delete packages.
-Users can manage themselves.
-Admin can manage every user.
-Deleting admin user can cause impredictable results.
-The queries made by nuget client are more or less reliable, since
- was not implemented the whole scripting language used by nuget.
+RELEASE NOTES
+==============================
 
-Remember to change phpnuget\nuget\.htaccess file modifying the 
-	web/phpnuget
-With your root, for example if your phpnuget is on 
-	http://test.com/sub/level/myphpnuget
-You should change the web/phpnuget with
-	sub/level/myphpnuget
-	
-To install on IIS unzip the IIS.zip files for the webapp!!
-	
+V.2.1
+------------------------------
+* Fixed bug for html characters in nuspec fields
+* Fixed bug for carriage return in nuspec fields
+* Added support for URL http://foo.bar/api/v2/package/?package=puppet returning
+  the most recent version of the package
+* Moved the .htaccess on the root
+
+V.2.0
+------------------------------
+* Fixed error calling http://foo.bar/nuget/FindPackageById()?id='puppet'
+* Some rework on classes structure
+
+TODO
+==============================
+* Support for direct calls:
+    http://foo.bar/api/v2/package/puppet
+    http://foo.bar/api/v2/package/puppet.1.0.0.0
