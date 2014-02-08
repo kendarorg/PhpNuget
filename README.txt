@@ -48,4 +48,4 @@ TODO
 ==============================
 * Support for direct calls:
     http://foo.bar/api/v2/package/puppet
-    http://foo.bar/api/v2/package/puppet.1.0.0.0
+    http://foo.bar/api/v2/package/puppet.1.0.0.0 
