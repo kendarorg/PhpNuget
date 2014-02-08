@@ -1,3 +1,7 @@
+DOWNLOAD
+==============================
+New version on: http://www.kendar.org/?p=/dotnet/phpnuget
+
 INSTALLATION
 ==============================
 Supposed you install the application into the directory
