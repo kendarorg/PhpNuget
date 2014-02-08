@@ -83,7 +83,8 @@ class SmallTxtDb
                     $row = array();
                     $vals = explode($this->separator,$splitted[$i]);
                     foreach($this->columns as $key => $value){
-                        $row[$key]=unserialize($vals[$value]);
+                        $row[$key]=$this->re_cr_lf(unserialize($vals[$value]));
+                        
                     }
                     $this->rows[]=$this->VerifyTypes($row);
                 }
@@ -113,6 +114,18 @@ class SmallTxtDb
         $this->rows= array_values($this->rows);
     }
     
+    function de_cr_lf($value)
+    {
+        $v = str_replace(["\r\n","\r\f","\n","\r","\f"],"@CRLF@",$value);
+        return $v;
+    }
+    
+    function re_cr_lf($value)
+    {
+        $v = str_replace("@CRLF@","\n",$value);
+        return $v;
+    }
+    
     function save()
     { 
        // print_r($this->rows);die();
@@ -122,7 +135,7 @@ class SmallTxtDb
             $towrite = array_fill(0,sizeof( $this->columns),null);
             $row = $this->VerifyTypes($row);
             foreach($this->columns as $key => $value){
-                $towrite[$value]=serialize($row[$key]);
+                $towrite[$value]=serialize($this->de_cr_lf($row[$key]));
             }
             $rowString = implode($this->separator,$towrite);
             fwrite($fp, $rowString.$this->cr);

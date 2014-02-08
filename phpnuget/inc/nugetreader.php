@@ -1,5 +1,7 @@
 <?php
-define('__ROOT__',dirname( dirname(__FILE__)));
+if(!defined('__ROOT__')){
+    define('__ROOT__',dirname( dirname(__FILE__)));
+}
 define('__TEMPLATE_FILE__',__ROOT__."/inc/nugetTemplate.xml");
 
 require_once(__ROOT__."/inc/nugetentity.php");
@@ -7,7 +9,15 @@ require_once(__ROOT__."/inc/zipmanager.php");
 require_once(__ROOT__."/inc/nugetdb.php");
 require_once(__ROOT__."/inc/utils.php");
 require_once(__ROOT__."/settings.php");
+/*
 
+The comparison function must return an integer less than, equal to, or greater than zero if 
+the first argument is considered to be respectively less than, equal to, or greater than the second. 
+
+Sort(a,b) <0   => a<b
+Sort(a,b) >0   => a>b
+Sort(a,b) =0   => a=b
+*/
 function NugetManagerSortIdVersion($a, $b)
 {
     $res = strcmp($a->Identifier, $b->Identifier);
@@ -20,6 +30,23 @@ function NugetManagerSortIdVersion($a, $b)
        }
     }
     return $res;
+}
+
+/*
+Sort(a,b) <0   => a<b
+Sort(a,b) >0   => a>b
+Sort(a,b) =0   => a=b
+*/
+function NugetManagerSortVersion($a, $b)
+{
+    $res = 0;
+    $aVersion = explode(".",$a);
+    $bVersion = explode(".",$b);
+    for($i=0;$i<sizeof($aVersion) && $i<sizeof($bVersion);$i++){
+        $res = $aVersion[$i]-$bVersion[$i];
+        if($res!=0) return $res; 
+    }
+    return $res; 
 }
 
 //http://net.tutsplus.com/articles/news/how-to-open-zip-files-with-php/
@@ -40,6 +67,32 @@ class NugetManager
         
     }
     
+    public function SpecialChars($hasMap)
+    {
+        foreach($hasMap as $key=>$value){
+	       $hasMap[$key]=trim(htmlspecialchars($value));
+	    }
+    }
+	
+	public function LoadXml($e,$m,$xml)
+	{
+	    $this->SpecialChars($m);
+		$e->Version = $m["version"];
+        $e->Identifier = $m["id"];
+        $e->Title = $m["title"];
+        if(sizeof($e->Title)==0 || $e->Title==""){
+            $e->Title = $e->Identifier;   
+        }
+        $e->LicenseUrl = $m["licenseurl"];
+        $e->ProjectUrl = $m["projecturl"];
+        $e->RequireLicenseAcceptance = $m["requirelicenseacceptance"];
+        $e->Description = $m["description"];
+        $e->Tags = $m["tags"];
+        $e->Author = $m["authors"];
+        $e->Published = iso8601();
+        $e->Copyright = $m["owners"];
+	}
+    
     public function LoadNuspecData($nupkgFile)
     {
         $zipmanager = new ZipManager($nupkgFile);
@@ -56,28 +109,16 @@ class NugetManager
         }
         $nuspecContent = $zipmanager->LoadFile($nupckgName);
         
+		
         $xml = XML2Array($nuspecContent);
         $e = new NugetEntity();
         $m=$xml["metadata"];
         
-        
+        $this->LoadXml($e,$m,$xml);
         /*for($i=0;$i<sizeof($ark);$i++){
             $m[strtolower ($ark[$i])]=$mt[$ark[$i]];
         }*/
-        $e->Version = $m["version"];
-        $e->Identifier = $m["id"];
-        $e->Title = $m["title"];
-        if(sizeof($e->Title)==0 || $e->Title==""){
-            $e->Title = $e->Identifier;   
-        }
-        $e->LicenseUrl = $m["licenseurl"];
-        $e->ProjectUrl = $m["projecturl"];
-        $e->RequireLicenseAcceptance = $m["requirelicenseacceptance"];
-        $e->Description = $m["description"];
-        $e->Tags = $m["tags"];
-        $e->Author = $m["authors"];
-        $e->Published = iso8601();
-        $e->Copyright = $m["owners"];
+        
         $e->Dependencies = $this->LoadDependencies($m);
         
         
@@ -150,7 +191,6 @@ class NugetManager
         }else{
             $t= str_replace("\${NUSPEC.DEPENDENCIES}",$this->MakeDepString($e->Dependencies),$t);
         }
-        
         $t= str_replace("\${DB.DOWNLOADCOUNT}",$e->DownloadCount,$t);
         $t= str_replace("\${DB.VERSIONDOWNLOADCOUNT}",$e->VersionDownloadCount,$t);
         $t= str_replace("\${DB.UPDATED}",$e->Published,$t);
@@ -164,6 +204,17 @@ class NugetManager
         return preg_replace('/<!--(.*)-->/Uis', '', $t);
     }
     
+    public function IsValid($e,$c,$isPackagesById)
+    {
+        if($isPackagesById) return $e->Identifier==$c;
+        if(stripos($e->Title,$c)!==false) return true;
+        if(stripos($e->Description,$c)!==false) return true;
+        if(stripos($e->Tag,$c)!==false) return true;
+
+        if(stripos($e->Identifier,$c)!==false) return true;
+        return false;              
+    }  
+  
     private function LoadDependencies($m)
     {
          
@@ -232,7 +283,7 @@ class NugetManager
                     $tora[]=$sdd->Id.":".$sdd->Version.":".$fw;
                 }
             }else{
-                $tora[]=$sd->Id.":".$sd->Version;
+                $tora[]=$sd->Id.":".$sd->Version.":";
             }
         }
         //print_r($tora);die();
@@ -251,5 +302,31 @@ class NugetManager
             default: return "UNKNOWN";
         }
     }
+    
+    public function LoadNextVersions($packages,$versions,$available)
+    {
+        $result = array();
+        for($i=0;$i< sizeof($available);$i++){
+            $sd = $available[$i];
+            $packageFounded =false;
+            for($j=0;$j< sizeof($packages) && $packageFounded==false;$j++){
+                $sp = $packages[$j];
+                $vp = $versions[$j];
+                if($sd->Identifier == $sp){
+                    //echo $sd->Version." XXX ".$vp." res ".NugetManagerSortIdVersion($sd->Version,$vp)."\n";
+                    if(NugetManagerSortVersion($sd->Version,$vp)>0){
+                        $packageFounded=true;
+                    }
+                }
+            }
+            if($packageFounded){
+               $result[]=$sd; 
+            }
+            
+        }
+        //echo "AAAA".sizeof($result); die();
+        return $result;
+    }
+    
 }
 ?>

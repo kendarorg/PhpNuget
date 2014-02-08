@@ -83,6 +83,13 @@ if($entity==null){
                     <?php 
                     if(is_bool($entity->$var)){
                         echo $entity->$var?"Y":"N";   
+                    }else if(is_array($entity->$var)){
+                        $result = array();
+                        foreach($entity->$var as $val)
+                        {
+                            $result[] = $val->Id." ".$val->Version;   
+                        }
+                        echo implode(", ",$result);
                     }else{
                         echo $entity->$var;
                     }

@@ -1,5 +1,8 @@
 <?php 
-define('__ROOT__', dirname(__FILE__));
+if(!defined('__ROOT__')){
+    define('__ROOT__', dirname(__FILE__));
+}
+
 require_once(__ROOT__.'/inc/virtualdirectory.php'); 
 require_once(__ROOT__.'/settings.php'); 
 $virtualDirectory = new VirtualDirectory();

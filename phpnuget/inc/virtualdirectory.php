@@ -1,5 +1,7 @@
 <?php
-define('__ROOT__', dirname(dirname(__FILE__)));
+if(!defined('__ROOT__')){
+    define('__ROOT__', dirname(dirname(__FILE__)));
+}
 require_once(__ROOT__.'/settings.php'); 
 /* From
  * http://stackoverflow.com/questions/189113/how-do-i-get-current-page-full-url-in-php-on-a-windows-iis-server
@@ -26,7 +28,10 @@ class VirtualDirectory
     }
     function initialize()
     {
-        $this->protocol = $_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
+        $this->protocol = "http";
+        if(isset($_SERVER['HTTPS'])){
+            $this->protocol = $_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
+        }
         $this->site = $this->protocol . '://' . $_SERVER['HTTP_HOST'];
         $this->thisfile = basename($_SERVER['SCRIPT_FILENAME']);
         $this->real_directories = $this->cleanUp(explode("/", str_replace($this->thisfile, "", $_SERVER['PHP_SELF'])));
@@ -34,6 +39,7 @@ class VirtualDirectory
         $this->virtual_directories = array_diff($this->cleanUp(explode("/", str_replace($this->thisfile, "", $_SERVER['REQUEST_URI']))),$this->real_directories);
         $this->num_of_virtual_directories = count($this->virtual_directories);
         $this->baseurl = $this->site . "/" . implode("/", $this->real_directories) . "/";
+if($this->baseurl==$this->site."//") $this->baseurl = $this->site."/";
         $this->thisurl = $this->baseurl . implode("/", $this->virtual_directories) . "/";
     }
     

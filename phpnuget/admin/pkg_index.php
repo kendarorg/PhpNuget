@@ -16,13 +16,15 @@ $baseUrl = $virtualDirectory->upFromLevel($baseUrl,1);
 $entity = null;
 for($i=0;$i<sizeof($allEntities);$i++){
     
-    if(strtolower($_REQUEST["identifier"])==strtolower($allEntities[$i]->Identifier)){
-        
-        if(strtolower($_REQUEST["version"])==strtolower($allEntities[$i]->Version)){
-            $entity =$allEntities[$i];
+    if(isset($_REQUEST["identifier"])&& isset($_REQUEST["version"])){
+        if(strtolower($_REQUEST["identifier"])==strtolower($allEntities[$i]->Identifier)){
             
+            if(strtolower($_REQUEST["version"])==strtolower($allEntities[$i]->Version)){
+                $entity =$allEntities[$i];
+                
+            }
         }
-    }  
+    }
 }
 ?> 
 <html>

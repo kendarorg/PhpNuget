@@ -1,7 +1,3 @@
-The last version can be found on
-
-http://github.kendar.org
-
 Documentation and help can be found on
 
 http://www.kendar.org
@@ -21,3 +17,6 @@ With your root, for example if your phpnuget is on
 	http://test.com/sub/level/myphpnuget
 You should change the web/phpnuget with
 	sub/level/myphpnuget
+	
+To install on IIS unzip the IIS.zip files for the webapp!!
+	

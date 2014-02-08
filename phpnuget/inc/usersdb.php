@@ -1,5 +1,5 @@
 <?php
-define('__ROOT__',dirname( dirname(__FILE__)));
+if(!defined('__ROOT__'))define('__ROOT__',dirname( dirname(__FILE__)));
 require_once(__ROOT__.'/settings.php'); 
 require_once(__ROOT__."/inc/mytxtdb.php");
 require_once(__ROOT__."/inc/userentity.php");
@@ -94,7 +94,7 @@ class UserDb
     
     public function GetAllColumns()
     {
-        return split(":|:",__MYTXTDBROWS_USR__);
+        return explode(":|:",__MYTXTDBROWS_USR__);
     }
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-define('__ROOT__',dirname(dirname( __FILE__)));
+if(!defined('__ROOT__'))define('__ROOT__',dirname(dirname( __FILE__)));
 require_once(__ROOT__.'/inc/upload.php'); 
 require_once(__ROOT__.'/inc/nugetreader.php'); 
 require_once(__ROOT__.'/inc/virtualdirectory.php'); 
@@ -49,11 +49,10 @@ class ListController
         fwrite($fp, $req_dump);
         fclose($fp);*/
         
-        
         $nugetReader = new NugetManager();
         $allEntities = $nugetReader->LoadAllPackagesEntries();
         
-        if(strpos($_GET["\$filter"],"IsLatestVersion")!==false){
+        if(isset($_GET["\$filter"]) && strpos($_GET["\$filter"],"IsLatestVersion")!==false){
             
             usort($allEntities,build_sorter('Version',true));
             //print_r($allEntities);die();
@@ -67,43 +66,82 @@ class ListController
             }
             $allEntities = array_values($listof);
         }
-        
-        $filter = str_replace("\\", "", $_GET["\$filter"]);
-        
-        $res= 
-        //preg_match_all('@([\'"]).*[^\\\\]\1@', $filter,$out);
-        preg_match_all('/(["\'])(?:\\\1|.)*?\1/', $filter,$out);
-        //preg_match_all('/(?<=^|[\s,])(?:([\'"]).*?\1|[^\s,\'"]+)(?=[\s,]|$)/',$filter,$out);
-        //preg_match_all("/\\'([\w]+)\\'/",$_GET["\$filter"],$out, PREG_PATTERN_ORDER);
-        //print_r($out);
-        //echo $res;die();
-        //die();
-        if($res>0 && $res!== false){
+        $filter= "";
+        if(isset($_GET["\$filter"])){
+            $filter = str_replace("\\", "", $_GET["\$filter"]);
             
-            $allEntities = ListController::VerifyAll($out[0],$allEntities);
+            $res= preg_match_all('/(["\'])(?:\\\1|.)*?\1/', $filter,$out);
+            if($res>0 && $res!== false){
+                $allEntities = ListController::VerifyAll($out[0],$allEntities);
+            }
+        }
+        $isPackagesById = false;
+        if(isset($_GET["searchTerm"])){
+            $filter = $_GET["searchTerm"];
+            $isPackagesById = stripos($_SERVER['REQUEST_URI'],"FindPackagesById()")!==false;
+    		if(!$isPackagesById){
+    			$isPackagesById = stripos($_SERVER['REQUEST_URI'],"FindPackageById()")!==false;
+    		}
+    		if($isPackagesById){
+                $filter="x".$_GET["id"]."x";      
+            }
         }
         
         
+
+        if(strlen($filter)>=4){
+            $len = strlen($filter)-4;
+            $filter = substr($filter,2,$len);   
+            if($doLog) fwrite($file,"Filter ".$filter."\n");
+            $listOf=array();
+            for($i= (sizeof($allEntities)-1);$i >=0;$i--){
+                $t = $allEntities[$i];
+                if($nugetReader->IsValid($t,$filter,$isPackagesById)){
+                    $listOf[] = $t;
+                }
+            }
+            $allEntities = $listOf;
+        }
         
-        switch($_GET["\$orderby"]){
-            case("Published desc"):
-                usort($allEntities, build_sorter('Published',false));
-                break;
-            case("Published"):
-                usort($allEntities, build_sorter('Published',true));
-                break;
-            case("DownloadCount desc"):
-                usort($allEntities, build_sorter('VersionDownloadCount',false));
-                break;
-            case("DownloadCount"):
-                usort($allEntities, build_sorter('VersionDownloadCount',true));
-                break;
-            case("concat(Title,Id) desc"):
-                usort($allEntities, build_sorter('Title',false));
-                break;
-            case("concat(Title,Id),Id"):
-                usort($allEntities, build_sorter('Title',true));
-                break;
+        if(isset($_GET["\$orderby"])){
+            switch($_GET["\$orderby"]){
+                case("Published desc"):
+                    usort($allEntities, build_sorter('Published',false));
+                    break;
+                case("Published"):
+                    usort($allEntities, build_sorter('Published',true));
+                    break;
+                case("DownloadCount desc"):
+                    usort($allEntities, build_sorter('VersionDownloadCount',false));
+                    break;
+                case("DownloadCount"):
+                    usort($allEntities, build_sorter('VersionDownloadCount',true));
+                    break;
+                case("concat(Title,Id) desc"):
+                    usort($allEntities, build_sorter('Title',false));
+                    break;
+                case("concat(Title,Id),Id"):
+                    usort($allEntities, build_sorter('Title',true));
+                    break;
+                
+            }
+        }
+        
+        
+        if(isset($_GET["packageIds"]) && isset($_GET["versions"]) && strlen($_GET["packageIds"])>0 && strlen($_GET["versions"])>0){
+             
+            $packageIds = $_GET["packageIds"];
+            $len = strlen($packageIds)-4;
+            $packageIds = substr($packageIds,2,$len);  
+            $versions = $_GET["versions"];
+            $len = strlen($versions)-4;
+            $versions = substr($versions,2,$len);  
+            
+            $allEntities = $nugetReader->LoadNextVersions(
+                    explode("|",$packageIds),
+                    explode("|",$versions),
+                    $allEntities
+                );
             
         }
         if($doLog){
@@ -115,14 +153,23 @@ class ListController
             echo fread($handle, filesize(__ROOT__.'/inc/test.xml'));
             fclose($handle);
         }else{
-            $total = sizeof($allEntities);
-            $skip = $_GET["\$skip"];
-            if(!ListController::isNAN($skip))$skip=0;
-            $top = $_GET["\$top"];
-            if(!ListController::isNAN($top))$top=10;
-            $allEntities = array_slice($allEntities, $skip, $top);
+            if(!$isPackagesById){
+                $total = sizeof($allEntities);
+                $skip = 0;
+                if(isset($_GET["\$skip"])){
+                    $skip = $_GET["\$skip"];
+                    if(!ListController::isNAN($skip))$skip=0;
+                }
+                $top = 10;
+                if(isset($_GET["\$top"])){
+                    $top = $_GET["\$top"];
+                    if(!ListController::isNAN($top))$top=10;
+                }
+                $allEntities = array_slice($allEntities, $skip, $top);
+            }
         ?>
-        <feed xml:base="<?php echo $baseUrl;?>/nuget/" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"  xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom">
+        <feed xml:base="<?php echo $baseUrl;?>/nuget/" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"  
+            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom">
           <title type="text">Packages</title>
           <id><?php echo $baseUrl;?>/nuget/Packages</id>
           <updated>2012-12-13T19:00:52Z</updated>
@@ -135,14 +182,14 @@ class ListController
                 echo $nuentity."\n";  
             }
 
-            if($total > $top){
+            if($total > $top && !$isPackagesById ){
                 if($total > ($skip+$top)){
                     $nextHref = ListController::BuildLink($total,$skip+$top,$top,ListController::curPageURL());
-                    echo "<link rel='next' href='".$nextHref."'/>";
+                    echo "<link rel='next' href=\"".$nextHref."\"/>";
                 }
                 if($skip > 0){
                     $prevHref = ListController::BuildLink($total,$skip-$top,$top,ListController::curPageURL());
-                    echo "<link rel='prev' href='".$prevHref."'/>";
+                    echo "<link rel='prev' href=\"".$prevHref."\"/>";
                 }
             }
           ?>

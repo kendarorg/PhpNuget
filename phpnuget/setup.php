@@ -10,7 +10,7 @@ $allEntities = $nugetReader->GetAllRows();
 if(sizeof($allEntities)>0){
    echo "Administrator already added";die();   
 }
-if($_POST["UserId"]!="admin")
+if(!isset($_POST["UserId"]) || $_POST["UserId"]!="admin")
 {
 $entity=null;
 
@@ -37,12 +37,14 @@ $baseUrl = $virtualDirectory->upFromLevel($baseUrl,1);
     </body>
 </html> 
 <?php
-}else if($_POST["UserId"]=="admin"){
+}else if(isset($_POST["UserId"]) && $_POST["UserId"]=="admin"){
  $userEntity = new UserEntity();
     $error = true;
     foreach($nugetReader->GetAllColumns() as $row)
     {
-        $userEntity->$row = $_REQUEST[$row];
+        if(isset($_REQUEST[$row])){
+            $userEntity->$row = $_REQUEST[$row];
+        }
     }
     $userEntity->Admin="true";
     $userEntity->Enabled = "true";
@@ -56,7 +58,7 @@ $baseUrl = $virtualDirectory->upFromLevel($baseUrl,1);
         $error = false;
     }
     
-    if($rror==false){
+    if($error==false){
         $error = !$nugetReader->AddRow($userEntity,true);
     }
     $message = "";

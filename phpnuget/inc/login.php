@@ -1,5 +1,5 @@
 <?php
-define('__ROOT__', dirname(dirname(__FILE__)));
+if(!defined('__ROOT__'))define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__.'/settings.php'); 
 require_once(__ROOT__.'/inc/usersdb.php'); 
 require_once(__ROOT__.'/inc/virtualdirectory.php'); 
@@ -50,9 +50,9 @@ function Login()
     return true;
 }
 
-function IsLoggedIn(){return $_SESSION[__USERNAMEVAR__]!=null && $_SESSION[__USERNAMEVAR__]!='';}
-function IsAdmin(){return $_SESSION[__ISADMINVAR__]!=null && $_SESSION[__ISADMINVAR__]==true;}
-function UserName(){return $_SESSION[__USERNAMEVAR__];}
+function IsLoggedIn(){return isset($_SESSION[__USERNAMEVAR__])  && $_SESSION[__USERNAMEVAR__]!=null && $_SESSION[__USERNAMEVAR__]!='';}
+function IsAdmin(){return isset($_SESSION[__ISADMINVAR__])  && $_SESSION[__ISADMINVAR__]!=null && $_SESSION[__ISADMINVAR__]==true;}
+function UserName(){returnisset($_SESSION[__USERNAMEVAR__])  &&  $_SESSION[__USERNAMEVAR__];}
 
 function ManageLogin($isAdmin=false){
     session_start();

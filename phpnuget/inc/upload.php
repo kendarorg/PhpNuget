@@ -1,5 +1,5 @@
 <?php
-define('__ROOT__',dirname( dirname(__FILE__)));
+if(!defined('__ROOT__')) define('__ROOT__',dirname( dirname(__FILE__)));
 require_once(__ROOT__."/inc/utils.php");
 
 class Uploader
@@ -25,8 +25,10 @@ class Uploader
         $toret = array(); 
         $toret["hasError"] = false; $toret["errorCode"] = null; 
         $toret["errorMessage"] = ""; $toret["name"]=$_FILES["file"]["name"]; 
-        $toret["mime"] = $_FILES["file"]["type"]; $toret["sizeBytes"] = 
-        $_FILES["file"]["size"]; $extension = end(explode(".", $toret["name"]));
+        $toret["mime"] = $_FILES["file"]["type"]; 
+        $toret["sizeBytes"] = $_FILES["file"]["size"]; 
+        $exploded  = explode(".", $toret["name"]);
+        $extension = end($exploded);
         
         if ( $toret["sizeBytes"] >= $maxSize){
             $toret["hasError"] = true;

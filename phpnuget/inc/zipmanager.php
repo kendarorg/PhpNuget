@@ -1,5 +1,7 @@
 <?php
-define('__ROOT__',dirname( dirname(__FILE__)));
+if(!defined('__ROOT__')){
+    define('__ROOT__',dirname( dirname(__FILE__)));
+}
 
 //http://www.innovativephp.com/analyze-zip-file-contents-using-php/
 //http://php.net/manual/en/function.zip-open.php
@@ -68,7 +70,7 @@ class ZipManager
                 $unzipped_size = $unzipped_size + zip_entry_filesize($zip_entry);
             }
         }
-        $zipped_size = $this->get_file_size_unit(filesize($zip_file_name));
+        $zipped_size = $this->get_file_size_unit(filesize($this->zipFile));
         $unzipped_size = $this->get_file_size_unit($unzipped_size);
         $zip_info = array ("folders"=>$folder_count,
                            "files"=>$file_count,
