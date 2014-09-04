@@ -40,5 +40,5 @@ if(!is_dir(Settings::$DataRoot))
 if(!is_dir(Settings::$PackagesRoot))	
 	mkdir(Settings::$PackagesRoot,__RW_ADMIN_R_ALL__);
 
-require_once(__ROOT__."/inc/loginController.php");
+require_once(__ROOT__."/inc/logincontroller.php");
 ?>

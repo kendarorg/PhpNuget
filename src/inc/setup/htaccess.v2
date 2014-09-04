@@ -97,5 +97,5 @@ RewriteRule  .* @ApplicationPath@/api/v2/index.php?action=findpackagesbyd   [QSA
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/package/([^/]+)/([^/]+)  [NC] 
-RewriteRule (.*)api/v2/package/([^/]+)/([^/]+)$  /phpnuget/api/?id=$2&version=$3 [NC,L]
+RewriteCond %{REQUEST_URI}  ^/@ApplicationPath@/api/v2/package/([^/]+)/([^/]+)  [NC] 
+RewriteRule (.*)api/v2/package/([^/]+)/([^/]+)$  /@ApplicationPath@/api/?id=$2&version=$3 [NC,L]

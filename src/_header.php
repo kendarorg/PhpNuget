@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__."/root.php");
-require_once(__ROOT__."/inc/loginController.php");
+require_once(__ROOT__."/inc/logincontroller.php");
 
 $searchQuery = UrlUtils::GetRequestParamOrDefault("searchQuery","");
 

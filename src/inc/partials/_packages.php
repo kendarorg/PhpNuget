@@ -4,10 +4,10 @@ require_once(__ROOT__."/settings.php");
 require_once(__ROOT__."/inc/api_users.php");
 require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/http.php");
-require_once(__ROOT__."/inc/commons/apiBase.php");
-require_once(__ROOT__."/inc/commons/SmallTextDbApiBase.php");
-require_once(__ROOT__."/inc/db_nugetPackages.php");
-require_once(__ROOT__."/inc/phpnugetObjectSearch.php");
+require_once(__ROOT__."/inc/commons/apibase.php");
+require_once(__ROOT__."/inc/commons/smalltextdbapibase.php");
+require_once(__ROOT__."/inc/db_nugetpackages.php");
+require_once(__ROOT__."/inc/phpnugetobjectsearch.php");
 	
 //Author eq 'Microsoft'
 $db = new NuGetDb();

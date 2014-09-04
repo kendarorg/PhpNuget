@@ -6,9 +6,9 @@ require_once(__ROOT__."/inc/db_users.php");
 require_once(__ROOT__."/inc/nugetreader.php");
 require_once(__ROOT__."/inc/commons/http.php");
 require_once(__ROOT__."/inc/commons/url.php");
-require_once(__ROOT__."/inc/commons/UploadUtils.php");
+require_once(__ROOT__."/inc/commons/uploadutils.php");
 
-require_once(__ROOT__."/inc/commons/objectSearch.php");
+require_once(__ROOT__."/inc/commons/objectsearch.php");
 
 $temp_file = tempnam(sys_get_temp_dir(), 'Tux');
 

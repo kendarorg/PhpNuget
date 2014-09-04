@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__."/root.php");
 require_once(__ROOT__."/settings.php");
-require_once(__ROOT__."/inc/commons/uploadUtils.php");
+require_once(__ROOT__."/inc/commons/uploadutils.php");
 require_once(__ROOT__."/inc/nugetreader.php");
 require_once(__ROOT__."/inc/commons/url.php");
 if (!empty($_SERVER['HTTP_X_NUGET_APIKEY'])) {

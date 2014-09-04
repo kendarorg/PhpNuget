@@ -3,8 +3,8 @@ if(!defined('__ROOT__'))define('__ROOT__',dirname( dirname(__FILE__)));
 
 require_once(__ROOT__."/inc/commons/smalltxtdb.php");
 require_once(__ROOT__."/inc/commons/utils.php");
-require_once(__ROOT__."/inc/commons/objectSearch.php");
-require_once(__ROOT__."/inc/db_usersEntity.php");
+require_once(__ROOT__."/inc/commons/objectsearch.php");
+require_once(__ROOT__."/inc/db_usersentity.php");
 
 
 define('__MYTXTDB_USR__',Path::Combine(Settings::$DataRoot,"nugetdb_usrs.txt"));

@@ -5,8 +5,8 @@ require_once(__ROOT__."/settings.php");
 
 require_once(__ROOT__."/inc/commons/smalltxtdb.php");
 require_once(__ROOT__."/inc/commons/url.php");
-require_once(__ROOT__."/inc/commons/objectSearch.php");
-require_once(__ROOT__."/inc/db_nugetPackagesEntity.php");
+require_once(__ROOT__."/inc/commons/objectsearch.php");
+require_once(__ROOT__."/inc/db_nugetpackagesentity.php");
 
 define('__MYTXTDB_PKG__',Path::Combine(Settings::$DataRoot,"nugetdb_pkg.txt"));
 define('__MYTXTDBROWS_PKG__',

@@ -1,11 +1,11 @@
 <?php
 require_once(__DIR__."/../root.php");
 require_once(__ROOT__."/settings.php");
-require_once(__ROOT__."/inc/commons/SmallTextDbApiBase.php");
+require_once(__ROOT__."/inc/commons/smalltextdbapibase.php");
 require_once(__ROOT__."/inc/commons/path.php");
-require_once(__ROOT__."/inc/db_nugetPackages.php");
+require_once(__ROOT__."/inc/db_nugetpackages.php");
 require_once(__ROOT__."/inc/nugetreader.php");
-require_once(__ROOT__."/inc/phpnugetObjectSearch.php");
+require_once(__ROOT__."/inc/phpnugetobjectsearch.php");
 
 class PackageGroup
 {

@@ -2,7 +2,7 @@
 
 require_once(__DIR__."/../root.php");
 require_once(__ROOT__."/settings.php");
-require_once(__ROOT__."/inc/db_nugetPackages.php");
+require_once(__ROOT__."/inc/db_nugetpackages.php");
 require_once(__ROOT__."/inc/commons/url.php");
 
 class GalleryController

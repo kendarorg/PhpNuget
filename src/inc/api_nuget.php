@@ -4,10 +4,10 @@ require_once(__ROOT__."/settings.php");
 require_once(__ROOT__."/inc/api_users.php");
 require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/http.php");
-require_once(__ROOT__."/inc/commons/apiBase.php");
-require_once(__ROOT__."/inc/commons/SmallTextDbApiBase.php");
-require_once(__ROOT__."/inc/db_nugetPackages.php");
-require_once(__ROOT__."/inc/phpnugetObjectSearch.php");
+require_once(__ROOT__."/inc/commons/apibase.php");
+require_once(__ROOT__."/inc/commons/smalltextdbapibase.php");
+require_once(__ROOT__."/inc/db_nugetpackages.php");
+require_once(__ROOT__."/inc/phpnugetobjectsearch.php");
 
 
 class ApiNugetBase
@@ -151,7 +151,7 @@ class ApiNugetBase
 	{
 		$this->_path = $path;
 		$this->_version = $version;
-		$this->_entryTemplate = file_get_contents(Path::Combine($path,"entryTemplate.xml"));
+		$this->_entryTemplate = file_get_contents(Path::Combine($path,"entrytemplate.xml"));
 		$this->_db = new NuGetDb();
 	}
 	
@@ -186,7 +186,7 @@ class ApiNugetBase
 		$r["@NEXTITEM@"]="";
 		
 		echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-		echo Utils::ReplaceInFile(Path::Combine($this->_path,"entryTemplatePre.xml"),$r);
+		echo Utils::ReplaceInFile(Path::Combine($this->_path,"entrytemplatepre.xml"),$r);
 		
 		for($i=0;$i<sizeof($allRows) && $i<$pg->Top;$i++)
 		{
@@ -209,7 +209,7 @@ class ApiNugetBase
 			/*?><link rel="next" href="http://localhost:8020/phpnuget/api/v2/Search?$skip=30&amp;$top=30&amp;searchTerm=''&amp;$filter=IsAbsoluteLatestVersion&amp;$orderby=DownloadCount+desc%2CId"/><?php*/
 		}
 		
-		echo Utils::ReplaceInFile(Path::Combine($this->_path,"entryTemplatePost.xml"),$r);
+		echo Utils::ReplaceInFile(Path::Combine($this->_path,"entrytemplatepost.xml"),$r);
 		
 		die();
 	}

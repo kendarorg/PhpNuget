@@ -1,16 +1,16 @@
 <?php
 require_once(__DIR__."/../root.php");
 require_once(__ROOT__."/settings.php");
-require_once(__ROOT__."/inc/db_nugetPackagesEntity.php");
+require_once(__ROOT__."/inc/db_nugetpackagesentity.php");
 require_once(__ROOT__."/inc/commons/zipmanager.php");
-require_once(__ROOT__."/inc/db_nugetPackages.php");
+require_once(__ROOT__."/inc/db_nugetpackages.php");
 require_once(__ROOT__."/inc/commons/utils.php");
-require_once(__ROOT__."/inc/commons/xmlUtils.php");
+require_once(__ROOT__."/inc/commons/xmlutils.php");
 require_once(__ROOT__."/inc/commons/url.php");
-require_once(__ROOT__."/inc/phpnugetObjectSearch.php");
+require_once(__ROOT__."/inc/phpnugetobjectsearch.php");
 	
 	
-define('__TEMPLATE_FILE__',__ROOT__."/inc/nugetTemplate.xml");
+define('__TEMPLATE_FILE__',__ROOT__."/inc/nugettemplate.xml");
 
 /*
 

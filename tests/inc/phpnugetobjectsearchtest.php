@@ -1,5 +1,5 @@
 <?php
-require_once(__ROOT__."/inc/PhpNugetObjectSearch.php");
+require_once(__ROOT__."/inc/phpnugetobjectsearch.php");
 
 Test::DoTest("PhpNugetObjectSearchTest");
 

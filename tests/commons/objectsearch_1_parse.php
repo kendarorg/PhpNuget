@@ -1,5 +1,5 @@
 <?php
-require_once(__ROOT__."/inc/commons/objectSearch.php");
+require_once(__ROOT__."/inc/commons/objectsearch.php");
 
 Test::DoTest("ObjectSearchTest_1");
 

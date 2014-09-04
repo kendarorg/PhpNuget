@@ -31,9 +31,9 @@
 				$groupBy=" groupBy Id";
 				require_once(__ROOT__."/inc/partials/_packages.php");
 			}else if($specialType == "singlepackage"){
-				require_once(__ROOT__."/inc/partials/_singlePackage.php");
+				require_once(__ROOT__."/inc/partials/_singlepackage.php");
 			}else if($specialType == "singleprofile"){
-				require_once(__ROOT__."/inc/partials/_singleProfile.php");
+				require_once(__ROOT__."/inc/partials/_singleprofile.php");
 			}else if($specialType == "logon"){
 				require_once(__ROOT__."/inc/partials/_logon.php");
 			}else{

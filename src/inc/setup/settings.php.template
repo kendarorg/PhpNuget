@@ -19,5 +19,5 @@ define('__ALLOWUSERADD__',false);
 //or if theyr user id is inside the "owners" field of the package
 define('__LIMITUSERSPACKAGES__',true);
 
-require_once(__ROOT__."/inc/internalSettings.php");
+require_once(__ROOT__."/inc/internalsettings.php");
 ?>
