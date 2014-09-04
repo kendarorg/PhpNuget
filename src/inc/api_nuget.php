@@ -250,9 +250,10 @@ class ApiNugetBase
 					$tt[]=" substringof('".$ti."',TargetFramework) ";
 				}
 			}
-			$x = "(TargetFramework eq '' or (".implode("and",$tt).")";
+			$x = "(TargetFramework eq '' or (".implode("and",$tt)."))";
 			$query = $this->_append($query,$x,"and");
 		}
+		
 		if($includePrerelease==null){
 			$x = "(IsPreRelease eq false)";
 			$query = $this->_append($query,$x,"and");

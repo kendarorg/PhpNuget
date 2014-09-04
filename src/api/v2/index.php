@@ -13,6 +13,9 @@ if(false){
 	if(sizeof($_POST)>0){
 		file_put_contents("v2.log",var_export($_POST,true)."\r\n", FILE_APPEND);
 	}
+	if(sizeof($_GET)>0){
+		file_put_contents("v2.log",var_export($_GET,true)."\r\n", FILE_APPEND);
+	}
 }
 
 $api = new ApiNugetBaseV2();
