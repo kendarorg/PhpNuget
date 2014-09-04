@@ -7,7 +7,6 @@ define('__UPLOAD_DIR__', "data".DIRECTORY_SEPARATOR."packages");
 define('__DATABASE_DIR__', "data".DIRECTORY_SEPARATOR."db");
 define('__SITE_ROOT__', "phpnuget");
 define('__RESULTS_PER_PAGE__', 20);
-define('__API_KEY__',"AEB01344890EABCA001");
 define('__ADMINID__',"admin");
 define('__ADMINPASSWORD__',"password");
 define('__ADMINMAIL__',"nuget@localhost");

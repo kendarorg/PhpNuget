@@ -1,6 +1,6 @@
 
 var app = angular.module('phpNugetApp', 
-	['ui.router','angularUtils.directives.dirPagination']
+	['ui.router']
 );
 
 app.run(function($rootScope) {

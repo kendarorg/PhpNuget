@@ -1,3 +1,3 @@
 @Version:3.0.0.0
 UserId:|:Name:|:Company:|:Md5Password:|:Packages:|:Enabled:|:Email:|:Token:|:Admin:|:Id
-s:5:"admin";:|:s:13:"Administrator";:|:s:0:"";:|:s:32:"5f4dcc3b5aa765d61d8327deb882cf99";:|:s:0:"";:|:s:1:"1";:|:s:15:"nuget@localhost";:|:s:38:"{8D99EAC0-884C-B9E5-AAE7-7A2CDE4B2EE0}";:|:s:1:"1";:|:s:0:"";
+s:5:"admin";:|:s:13:"Administrator";:|:s:0:"";:|:s:32:"5f4dcc3b5aa765d61d8327deb882cf99";:|:s:0:"";:|:s:1:"1";:|:s:15:"nuget@localhost";:|:s:38:"{A2A19A6E-1E37-DBF1-741C-06CEA05F595D}";:|:s:1:"1";:|:s:0:"";
