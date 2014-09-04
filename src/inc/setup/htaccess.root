@@ -1,0 +1,14 @@
+RewriteEngine On
+
+RewriteBase /
+
+
+#API V1
+
+@HtAccess.V1@
+
+#API V2
+
+@HtAccess.V2@
+
+#Commons
