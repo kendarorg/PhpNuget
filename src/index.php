@@ -13,10 +13,9 @@
 		<script src="scripts/angular/angular-ui/ui-bootstrap-tpls.min.js"></script>
 		<script src="scripts/angular/angular-ui/ui-router.min.js"></script>
 		<script src="scripts/angular/angular-ui/ui-utils.js"></script>
-		<script src="scripts/pagination/dirPagination.js"></script>
 		<script src="assets/app.js"></script>
 		<script src="assets/commons/utils.js"></script>
-		<script src="assets/commons/tabController.js"></script>
+		<script src="assets/commons/tabcontroller.js"></script>
 		<script src="assets/initialize.js"></script>
 		<script src="assets/route.js"></script>
 		<script src="assets/views/users/module.js"></script>
