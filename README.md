@@ -8,6 +8,8 @@ This is born to have my personal repository for nuget, on my cheapo PHP hostin
 
 ### Prerequisities For IIS
 
+These steps are NOT needed if your hosting already configured PHP
+
 * Create the website with a standard web.config
 * Install PHP for IIS (see at the end of this document 'Installation of PHP for IIS')
 * Mark the location of *php-cgi.exe*
@@ -19,7 +21,7 @@ This is born to have my personal repository for nuget, on my cheapo PHP hostin
 * Copy the content of the directory "src" in the location you choose for the server. *DO NOT COPY THE WEB.CONFIG IF IN IIS*
 * Verify to have write permissions on the "db" directory.
 * Open the setup page at http://myhost/mynuget/setup.php and follow the wizard
-* If under IIS set the path of 'php-cgi.exe'
+* If under IIS set the path of 'php-cgi.exe' (leave blank if your hosting already configured PHP)
 * Change the password, email and login of the administration without worries.
 * Rename the setup.php to setup.bak
 * Now open http://myhost/mynuget and see the gallery

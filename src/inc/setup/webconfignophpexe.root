@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<configuration>
+    <configSections>
+        <section name="urlrewritingnet"
+            requirePermission ="false"
+        type="UrlRewritingNet.Configuration.UrlRewriteSection, UrlRewritingNet.UrlRewriter"  />
+    </configSections>
+    <urlrewritingnet
+        rewriteOnlyVirtualUrls="true"
+        contextItemsPrefix="QueryString"
+        defaultProvider="RegEx" >
+        <rewrites>
+		<!--API V1-->
+@WebConfig.V1@
+		<!--API V2-->
+@WebConfig.V2@  
+		<!--Commons-->
+        </rewrites>
+    </urlrewritingnet>
+
+    <appSettings/>
+    <system.web>
+        <customErrors mode="Off">
+        </customErrors>
+    </system.web>
+    <system.webServer>
+        <modules>
+            <add name="UrlRewriteModule" type="UrlRewritingNet.Web.UrlRewriteModule, UrlRewritingNet.UrlRewriter"/>
+            <remove name="Session"/>
+            <add name="Session" type="System.Web.SessionState.SessionStateModule"/>
+        </modules>
+        <security>
+            <requestFiltering>
+                <fileExtensions>
+                    <add fileExtension=".txt" allowed="false" />
+                </fileExtensions>
+            </requestFiltering>
+        </security>
+        <defaultDocument>
+            <files>
+                <clear />
+                <add value="index.php" />
+                <add value="Default.htm" />
+                <add value="Default.asp" />
+                <add value="index.htm" />
+                <add value="index.html" />
+                <add value="iisstart.htm" />
+                <add value="default.aspx" />
+            </files>
+        </defaultDocument>
+    </system.webServer>
+</configuration>
