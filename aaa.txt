@@ -1,18 +1,22 @@
-# PhpNuget V. 3.0.0.0
+<!--settings(
+title=Php Nuget Server
+description=Php Nuget Server.
+)-->
+## {Title}
 
-## Purpose
+### Purpose
 
 This is born to have my personal repository for nuget, on my cheapo PHP hostin
 
-## Installation
+### Installation
 
-### Prerequisities For IIS
+#### Prerequisities For IIS
 
 * Create the website with a standard web.config
 * Install PHP for IIS (see at the end of this document 'Installation of PHP for IIS')
 * Mark the location of *php-cgi.exe*
 
-### Common
+#### Common
 
 * Download from [Kendar.org](http://www.kendar.org/?p=/dotnet/phpnuget)
 * Extract somewhere
@@ -25,7 +29,7 @@ This is born to have my personal repository for nuget, on my cheapo PHP hostin
 * Now open http://myhost/mynuget and see the gallery
 * Happy Nugetting!
 
-## Daily usage
+### Daily usage
 
 * Configure your Visual Studio or Chocolatey to use http://myhost/mynuget/api/v2/ as repository
 * To upload packages through command line:
@@ -45,9 +49,9 @@ This is born to have my personal repository for nuget, on my cheapo PHP hostin
 	* eq/neq: Equal/Not Equals
 	* substringof: Check if the first parameter is contained in the second parameter
 
-## Administration
+### Administration
 
-### Simple user
+#### Simple user
 
 * Must be registered to upload/modify packages
 * Can only edit the packages that he uploaded
@@ -56,7 +60,7 @@ This is born to have my personal repository for nuget, on my cheapo PHP hostin
 * The API token can be used with our without the curly braces.
 * The users will see in their list of packages only the packages that they uploaded.
 
-### For the administrators
+#### For the administrators
 
 * They can add/remove/enable users
 * They can add/modify any package. When a package uploaded initially by another user is uploaded by the administrator, the ownership of the package will be kept the same.
@@ -64,7 +68,7 @@ This is born to have my personal repository for nuget, on my cheapo PHP hostin
 * When the database is corrupted it can be regenerated through "Refresh packages db from packages directory." mind that all the packages will become owned by the administrators.
 * It would be possible to upload the packages directly on the 'db/packages' directory and then run the "Refresh packages db from packages directory.". All packages not yet present on the database will be loaded.
 
-## The Api
+### The Api
 
 The nuget API is based more or less on the OData protocol.
 All of the api lsited that returns a collection support the usage of parameters 
@@ -72,7 +76,7 @@ All of the api lsited that returns a collection support the usage of parameters
 * $skip: Optional. The number of items to skip. Default to 0.
 * $top: Optional. The number of items returned. Default to 10.
 
-### Api V1
+#### Api V1
 
 * /api/v1: Retrieves the root for the entities that will be used by the API. No parameters.
 * /api/v1/package/\[package-id\]/\[package-version\]: Download the specified package. No parameters.
@@ -92,7 +96,7 @@ All of the api lsited that returns a collection support the usage of parameters
 * /api/v1/Packages: Same as Search()
 * /api/v1/Packages/$count: Same as Search()/$count
 
-### Api V2
+#### Api V2
 
 All v1 APIs are present, remind to replace the v1 in the previous section with v2!
 
@@ -106,18 +110,18 @@ All v1 APIs are present, remind to replace the v1 in the previous section with v
 	* versionConstraints: Not supported yet
 * /api/v2/GetUpdates()/$count: Count all packages satisfyng the query. Same parameters as 'FindPackagesById()'
 
-### Api V3
+#### Api V3
 
 As soon as the guys from nuget defines it.
 
-### Other entry points
+#### Other entry points
 
 * /packages?q=term1 term2: Given the terms passed in 'q' a search is made checking that the Id or Name of the package corespond to at least one of the term passed as parameter
 * /upload: The access point to upload the packages.
 
-## Installation of PHP for IIS
+### Installation of PHP for IIS
 
-### Installation for IIS 8
+#### Installation for IIS 8
 
 Tested on Windows 8 pro X64 bit and Windows 8.1 pro X64
 
@@ -138,7 +142,7 @@ and open http://localhost/hello.php
 
 now IIS is serving PHP now in next tutorial i will show you how to set up MySQL in windows
 
-### Features of PHP manger
+#### Features of PHP manger
 
 * Register PHP with IIS
 * Validate and properly configure existing PHP installations
@@ -150,9 +154,9 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 * Easily install, configure, manage and troubleshoot one or many PHP versions on the same IIS server.
 
 
-## TODO
+### TODO
 
-### Must
+#### Must
 
 * Add captcha and max retries of password for users
 * Verify that 'GetUpdates' work as nuget expects.
@@ -163,20 +167,20 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 * Support /packages/id/version to select a package on the gallery
 * Support on v1 the alternate address https://www.nuget.org/v1/FeedService.svc/ for https://www.nuget.org/api/v1/
 
-### Should
+#### Should
 
 * Add robots.txt
 * Port to MySQL
 * Import v3.0.0.0 txt database on MySQL
 
-### Would
+#### Would
 
 * Support viewing the profile in gallery, "nuget like" https://www.nuget.org/profiles/kendar.org
 * Add Email token to reset users passwords
 * Upload multiple nupkg
 * Align the Settings::ResultsPerPage in all the views
 
-## Updates
+### Updates
 
 * 3.0.0.0
 	* UI improved with AngularJS
@@ -195,3 +199,22 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Added mod_rewrite support via .htaccess
 	* Simplified the whole structure of the program
 
+### Licensing
+
+This is distributed with NO WARRANTY and under the terms of the GNU GPL and PHP licenses. If you use it a notice or some credit would be nice.
+
+You can get a copy of the GNU GPL at http://www.gnu.org/copyleft/gpl.html
+
+You can get a copy of the PHP License at http://www.php.net/license.html
+
+### Download
+
+See [kendar.org](http://www.kendar.org/ "Kendar.org") for the latest changes.
+
+
+* Download [Version 3.0]({this}phpnuget.3.0.0.0.zip "here")
+* Download [Windows Extra]({this}windowsextra.zip "here")  for version less than 3.0
+* Download [Version 2.1]({this}phpnuget.2.1.0.0.zip "here")
+* Download [Version 2.0]({this}phpnuget.2.0.0.0.zip "here")
+* Download [Version 1.0]({this}phpnuget.1.0.0.0.zip "here")
+* Download [Version 0.0]({this}phpnuget.0.0.0.0.zip "here")
