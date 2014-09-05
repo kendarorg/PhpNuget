@@ -19,11 +19,20 @@ These steps are NOT needed if your hosting already configured PHP
 * Download from [Kendar.org](http://www.kendar.org/?p=/dotnet/phpnuget)
 * Extract somewhere
 * Copy the content of the directory "src" in the location you choose for the server. *DO NOT COPY THE WEB.CONFIG IF IN IIS*
+* Enable write/read/delete access on
+	* db: Directory where all databases and packages are stored
+	* settings.php
+	* Web.Config
+	* .htaccess
 * Verify to have write permissions on the "db" directory.
 * Open the setup page at http://myhost/mynuget/setup.php and follow the wizard
 * If under IIS set the path of 'php-cgi.exe' (leave blank if your hosting already configured PHP)
 * Change the password, email and login of the administration without worries.
 * Rename the setup.php to setup.bak
+* Remove write access on 
+	* settings.php
+	* Web.Config
+	* .htaccess
 * Now open http://myhost/mynuget and see the gallery
 * Happy Nugetting!
 
