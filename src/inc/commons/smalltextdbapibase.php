@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__."/apibase.php");
+require_once(dirname(__FILE__)."/apibase.php");
 
 class SmallTextDbApiBase extends ApiBase
 {

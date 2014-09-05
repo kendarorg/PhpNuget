@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__."/utils.php");
+require_once(dirname(__FILE__)."/utils.php");
 
 function XML2ArrayGetKeyOrArray($xmlArray,$key)
 {

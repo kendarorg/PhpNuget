@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__."/utils.php");
-require_once(__DIR__."/url.php");
+require_once(dirname(__FILE__)."/utils.php");
+require_once(dirname(__FILE__)."/url.php");
 
 class UploadUtils
 {

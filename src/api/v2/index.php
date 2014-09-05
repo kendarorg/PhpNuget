@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__."/../../root.php");
+require_once(dirname(__FILE__)."/../../root.php");
 require_once(__ROOT__."/settings.php");
 require_once(__ROOT__."/inc/api_users.php");
 require_once(__ROOT__."/inc/commons/url.php");
@@ -19,7 +19,7 @@ if(false){
 }
 
 $api = new ApiNugetBaseV2();
-$api->Initialize(__DIR__);
+$api->Initialize(dirname(__FILE__));
 $api->Execute();
 
 

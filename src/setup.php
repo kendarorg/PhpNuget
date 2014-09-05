@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__."/root.php");
+require_once(dirname(__FILE__)."/root.php");
 require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/utils.php");
 require_once(__ROOT__."/inc/commons/path.php");

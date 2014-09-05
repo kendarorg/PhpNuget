@@ -104,7 +104,8 @@ class SmallTxtDb
 		$st = 0;
 		$firstRow = $splitted[$st];
 		if(starts_with($firstRow,"@Version:")){
-			$currentVersion = explode(":",$firstRow)[1];
+			$kk=explode(":",$firstRow);
+			$currentVersion = $kk[1];
 			
 			if($this->_version != $currentVersion){
 				throw new Exception("Founded db version ".$currentVersion." instead of ".$this->_version);
@@ -162,7 +163,7 @@ class SmallTxtDb
     
     function de_cr_lf($value)
     {
-        $v = str_replace(["\r\n","\r\f","\n","\r","\f"],"@CRLF@",$value);
+        $v = str_replace(array("\r\n","\r\f","\n","\r","\f"),"@CRLF@",$value);
         return $v;
     }
     

@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__."/../root.php");
+require_once(dirname(__FILE__)."/../root.php");
 require_once(__ROOT__."/settings.php");
 require_once(__ROOT__."/inc/db_users.php");
 require_once(__ROOT__."/inc/nugetreader.php");

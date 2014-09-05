@@ -1,6 +1,6 @@
 <div class="col-md-12" >
 <?php
-	require_once(__DIR__."../../../root.php");
+	require_once(dirname(__FILE__)."../../../root.php");
 	require_once(__ROOT__."/settings.php");
 	
 	

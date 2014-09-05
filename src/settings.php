@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__."/root.php");
+require_once(dirname(__FILE__)."/root.php");
 
 define('__MAXUPLOAD_BYTES__',10*1024*1024*1024);
 define('__PACKAGEHASH__',"SHA512"); //Or SHA256
