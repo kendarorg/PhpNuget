@@ -53,8 +53,10 @@ if(!defined('__INSETUP__')){
 	echo "<li>Htaccess initialized with path '".$r["@ApplicationPath@"]."'.</li>";
 	
 	//Setup the web.config for api v2 and v1
+	$r["@WebConfig.PHPEXE@"]=UrlUtils::GetRequestParamOrDefault("phpCgi","C:\Program Files (x86)\PHP\v5.3\php-cgi.exe","post");
 	$r["@WebConfig.V1@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/webconfig.v1"),$r);
 	$r["@WebConfig.V2@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/webconfig.v2"),$r);
+	
 	
 	//Write the root web.config
 	Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/webconfig.root",$r),$r,Path::Combine(__ROOT__,"web.config"));

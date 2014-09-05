@@ -17,6 +17,7 @@ if(!defined('__INSETUP__')){
 				<tr><td>Admin Password:</td><td><input type="text" id="password" name="password" value="password"/></td></tr>
 				<tr><td>Admin Email:</td><td><input type="text" id="email" name="email" value="nuget@<?php echo $_SERVER["SERVER_NAME"]; ?>"/></td></tr>
 				<tr><td>Application Path:</td><td><input type="text" id="applicationPath" name="applicationPath" value="<?php echo $applicationPath;?>"/></td></tr>
+				<tr><td>php-cgi.exe (for IIS):</td><td><input type="text" id="phpCgi" name="phpCgi" value="C:\Program Files (x86)\PHP\v5.3\php-cgi.exe"/></td></tr>
 			</table>
 			<input type="submit" value="Install!"></input>
 		</form>

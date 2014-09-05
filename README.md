@@ -6,11 +6,21 @@ This is born to have my personal repository for nuget, on my cheapo PHP hostin
 
 ## Installation
 
+### Prerequisities For IIS
+
+* Create the website with a standard web.config
+* Install PHP for IIS (see at the end of this document 'Installation of PHP for IIS')
+* Mark the location of *php-cgi.exe*
+
+### Common
+
 * Download from [Kendar.org](http://www.kendar.org/?p=/dotnet/phpnuget)
 * Extract somewhere
-* Copy the content of the directory "src" in the location you choose for the server
+* Copy the content of the directory "src" in the location you choose for the server. *DO NOT COPY THE WEB.CONFIG IF IN IIS*
 * Verify to have write permissions on the "db" directory.
-* Open the setup page at http://myhost/mynuget/setup.php and follow the wizard, change the password, email and login of the administration without worries.
+* Open the setup page at http://myhost/mynuget/setup.php and follow the wizard
+* If under IIS set the path of 'php-cgi.exe'
+* Change the password, email and login of the administration without worries.
 * Rename the setup.php to setup.bak
 * Now open http://myhost/mynuget and see the gallery
 * Happy Nugetting!
@@ -104,6 +114,41 @@ As soon as the guys from nuget defines it.
 
 * /packages?q=term1 term2: Given the terms passed in 'q' a search is made checking that the Id or Name of the package corespond to at least one of the term passed as parameter
 * /upload: The access point to upload the packages.
+
+## Installation of PHP for IIS
+
+### Installation for IIS 8
+
+Tested on Windows 8 pro X64 bit and Windows 8.1 pro X64
+
+This guid is adapted from [iis.net](http://www.iis.net/learn/application-frameworks/install-and-configure-php-on-iis/using-php-manager-for-iis-to-setup-and-configure-php)
+
+1. download [php for windows](http://windows.php.net/)
+2. extract downloaded zip ( C:php )
+3. download [php manager[(http://phpmanager.codeplex.com/releases) for IIS ( its an extension  for managing PHP from IIS control panel )
+4. open php manager and click on register new php installation
+5. choose php-cgi.exe and click ok (usually is inside 'C:\Program Files (x86)\PHP\v5.3\php-cgi.exe')
+6. now check phpinfo and choose error reporting
+7. open your favorite code editor and type
+
+<?php echo "Hello World !" ; ?>
+
+and save this as hello.php ( or anything ) on c:inetpubwwwroot
+and open http://localhost/hello.php
+
+now IIS is serving PHP now in next tutorial i will show you how to set up MySQL in windows
+
+### Features of PHP manger
+
+* Register PHP with IIS
+* Validate and properly configure existing PHP installations
+* Run multiple PHP versions side by side on the same server and even within the same web site
+* Check PHP runtime configuration and environment (output of phpinfo() function)
+* Configure various PHP settings
+* Enable or disable PHP extensions
+* Remotely manage PHP configuration in php.ini file.
+* Easily install, configure, manage and troubleshoot one or many PHP versions on the same IIS server.
+
 
 ## TODO
 

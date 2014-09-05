@@ -9,72 +9,72 @@ RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v1/\$metadata  [NC] 
-RewriteRule  .* /phpnuget/api/v1/index.php?action=metadata   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v1/\$metadata  [NC] 
+RewriteRule  .* /api/v1/index.php?action=metadata   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v1/Search\(\)/\$count  [NC] 
-RewriteRule  .* /phpnuget/api/v1/index.php?action=search&count=true   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v1/Search\(\)/\$count  [NC] 
+RewriteRule  .* /api/v1/index.php?action=search&count=true   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v1/Search\(\)  [NC] 
-RewriteRule  .* /phpnuget/api/v1/index.php?action=search   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v1/Search\(\)  [NC] 
+RewriteRule  .* /api/v1/index.php?action=search   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v1/Packages\(\)/\$count  [NC] 
-RewriteRule  .* /phpnuget/api/v1/index.php?action=packages&count=true  [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v1/Packages\(\)/\$count  [NC] 
+RewriteRule  .* /api/v1/index.php?action=packages&count=true  [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v1/Packages/\$count  [NC] 
-RewriteRule  .* /phpnuget/api/v1/index.php?action=packages&count=true   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v1/Packages/\$count  [NC] 
+RewriteRule  .* /api/v1/index.php?action=packages&count=true   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v1/Packages  [NC] 
-RewriteRule  .* /phpnuget/api/v1/index.php?action=packages   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v1/Packages  [NC] 
+RewriteRule  .* /api/v1/index.php?action=packages   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v1/FindPackagesById\(\)/\$count  [NC] 
-RewriteRule  .* /phpnuget/api/v1/index.php?action=findpackagesbyd&count=true  [QSA]
-
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v1/FindPackagesById\(\)  [NC] 
-RewriteRule  .* /phpnuget/api/v1/index.php?action=findpackagesbyd   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v1/FindPackagesById\(\)/\$count  [NC] 
+RewriteRule  .* /api/v1/index.php?action=findpackagesbyd&count=true  [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v1/FindPackagesById  [NC] 
-RewriteRule  .* /phpnuget/api/v1/index.php?action=findpackagesbyd   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v1/FindPackagesById\(\)  [NC] 
+RewriteRule  .* /api/v1/index.php?action=findpackagesbyd   [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v1/FindPackagesById/\$count [NC] 
-RewriteRule  .* /phpnuget/api/v1/index.php?action=findpackagesbyd&count=true  [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v1/FindPackagesById  [NC] 
+RewriteRule  .* /api/v1/index.php?action=findpackagesbyd   [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v1/package/([^/]+)/([^/]+)  [NC] 
-RewriteRule (.*)api/v1/package/([^/]+)/([^/]+)$  /phpnuget/api/?id=$2&version=$3 [NC,L]
+RewriteCond %{REQUEST_URI}  ^/api/v1/FindPackagesById/\$count [NC] 
+RewriteRule  .* /api/v1/index.php?action=findpackagesbyd&count=true  [QSA]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^/api/v1/package/([^/]+)/([^/]+)  [NC] 
+RewriteRule (.*)api/v1/package/([^/]+)/([^/]+)$  /api/?id=$2&version=$3 [NC,L]
 
 #API V2
 
@@ -82,102 +82,102 @@ RewriteRule (.*)api/v1/package/([^/]+)/([^/]+)$  /phpnuget/api/?id=$2&version=$3
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/\$metadata  [NC] 
-RewriteRule  .* /phpnuget/api/v2/index.php?action=metadata   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v2/\$metadata  [NC] 
+RewriteRule  .* /api/v2/index.php?action=metadata   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/Search\(\)/\$count  [NC] 
-RewriteRule  .* /phpnuget/api/v2/index.php?action=search&count=true   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v2/Search\(\)/\$count  [NC] 
+RewriteRule  .* /api/v2/index.php?action=search&count=true   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/Search\(\)  [NC] 
-RewriteRule  .* /phpnuget/api/v2/index.php?action=search   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v2/Search\(\)  [NC] 
+RewriteRule  .* /api/v2/index.php?action=search   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/Packages\(\)/\$count  [NC] 
-RewriteRule  .* /phpnuget/api/v2/index.php?action=packages&count=true  [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v2/Packages\(\)/\$count  [NC] 
+RewriteRule  .* /api/v2/index.php?action=packages&count=true  [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/Packages/\$count  [NC] 
-RewriteRule  .* /phpnuget/api/v2/index.php?action=packages&count=true   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v2/Packages/\$count  [NC] 
+RewriteRule  .* /api/v2/index.php?action=packages&count=true   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/Packages  [NC] 
-RewriteRule  .* /phpnuget/api/v2/index.php?action=packages   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v2/Packages  [NC] 
+RewriteRule  .* /api/v2/index.php?action=packages   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/Packages\(\)  [NC] 
-RewriteRule  .* /phpnuget/api/v2/index.php?action=packages   [QSA]
-
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/GetUpdates\(\)/\$count  [NC] 
-RewriteRule  .* /phpnuget/api/v2/index.php?action=getupdates&count=true  [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v2/Packages\(\)  [NC] 
+RewriteRule  .* /api/v2/index.php?action=packages   [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/GetUpdates\(\)  [NC] 
-RewriteRule  .* /phpnuget/api/v2/index.php?action=getupdates   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v2/GetUpdates\(\)/\$count  [NC] 
+RewriteRule  .* /api/v2/index.php?action=getupdates&count=true  [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/FindPackagesById\(\)/\$count  [NC] 
-RewriteRule  .* /phpnuget/api/v2/index.php?action=findpackagesbyd&count=true  [QSA]
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/FindPackagesById/\$count  [NC] 
-RewriteRule  .* /phpnuget/api/v2/index.php?action=findpackagesbyd&count=true  [QSA]
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/FindPackagesById\(\)  [NC] 
-RewriteRule  .* /phpnuget/api/v2/index.php?action=findpackagesbyd   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v2/GetUpdates\(\)  [NC] 
+RewriteRule  .* /api/v2/index.php?action=getupdates   [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/FindPackagesById  [NC] 
-RewriteRule  .* /phpnuget/api/v2/index.php?action=findpackagesbyd   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v2/FindPackagesById\(\)/\$count  [NC] 
+RewriteRule  .* /api/v2/index.php?action=findpackagesbyd&count=true  [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/FindPackageById\(\)  [NC] 
-RewriteRule  .* /phpnuget/api/v2/index.php?action=findpackagesbyd   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v2/FindPackagesById/\$count  [NC] 
+RewriteRule  .* /api/v2/index.php?action=findpackagesbyd&count=true  [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/FindPackageById  [NC] 
-RewriteRule  .* /phpnuget/api/v2/index.php?action=findpackagesbyd   [QSA]
+RewriteCond %{REQUEST_URI}  ^/api/v2/FindPackagesById\(\)  [NC] 
+RewriteRule  .* /api/v2/index.php?action=findpackagesbyd   [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/package/([^/]+)/([^/]+)  [NC] 
-RewriteRule (.*)api/v2/package/([^/]+)/([^/]+)$  /phpnuget/api/?id=$2&version=$3 [NC,L]
+RewriteCond %{REQUEST_URI}  ^/api/v2/FindPackagesById  [NC] 
+RewriteRule  .* /api/v2/index.php?action=findpackagesbyd   [QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^/api/v2/FindPackageById\(\)  [NC] 
+RewriteRule  .* /api/v2/index.php?action=findpackagesbyd   [QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^/api/v2/FindPackageById  [NC] 
+RewriteRule  .* /api/v2/index.php?action=findpackagesbyd   [QSA]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^/api/v2/package/([^/]+)/([^/]+)  [NC] 
+RewriteRule (.*)api/v2/package/([^/]+)/([^/]+)$  /api/?id=$2&version=$3 [NC,L]
 
 #Commons
