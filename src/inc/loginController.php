@@ -27,7 +27,7 @@ class LoginController
 			$this->Packages = $_SESSION["Packages"];
 		}else if("true"==$doLogin){
 			$this->_login();	
-			$location = UrlUtils::CurrentUrl("/".Settings::$SiteRoot);
+			$location = UrlUtils::CurrentUrl(Settings::$SiteRoot);
 			header("Location: ".$location);
 			die();			
 		}
@@ -41,7 +41,7 @@ class LoginController
 	function RedirectIfNotLoggedIn()
 	{
 		if($this->IsLoggedIn) return;
-		$location = UrlUtils::CurrentUrl("/".Settings::$SiteRoot."/?specialType=logon");
+		$location = UrlUtils::CurrentUrl(Settings::$SiteRoot."?specialType=logon");
 		header("Location: ".$location);
 		die();
 	}

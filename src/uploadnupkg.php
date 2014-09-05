@@ -36,7 +36,7 @@ if(!$loginController->IsLoggedIn){
 		try{
 			$udb = new UserDb();
 			$user = $udb->GetByUserId($loginController->UserId);
-			$baseUrl = UrlUtils::CurrentUrl(Settings::$SiteRoot);
+			
 			$nugetReader = new NugetManager();
 			
 			$parsedNuspec = $nugetReader->LoadNuspecFromFile($result["destination"]);

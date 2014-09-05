@@ -9,10 +9,10 @@ require_once(__ROOT__."/settings.php");
 <div class="panel-body">
 To upload packagase through the command line:<br>
 <pre>
-	nuget push mypackage.nupkg apikey86-cc37-4004-bfdf-c4f3e8ef9b3a <?php echo UrlUtils::CurrentUrl(Settings::$SiteRoot."/upload");?>
+	nuget push mypackage.nupkg apikey86-cc37-4004-bfdf-c4f3e8ef9b3a <?php echo UrlUtils::CurrentUrl(Settings::$SiteRoot."upload");?>
 </pre>
 <br>
-<form method="POST" action="/<?php echo Settings::$SiteRoot;?>/uploadNupkg.php"  enctype="multipart/form-data" target="output_frame">
+<form method="POST" action="<?php echo Settings::$SiteRoot;?>uploadNupkg.php"  enctype="multipart/form-data" target="output_frame">
 	<div class="form-group col-md-12">
 		<div class="col-md-1">
 			<label for="fileName">Filename</label>

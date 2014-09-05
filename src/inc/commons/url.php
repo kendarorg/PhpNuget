@@ -14,7 +14,7 @@ class UrlUtils
 		if($requestUri==""){
 			$requestUri = $_SERVER["REQUEST_URI"];
 		}
-		$requestUri = trim($requestUri,"/");
+		$requestUri = trim($requestUri,"\\/");
         if ($_SERVER["SERVER_PORT"] != "80") {
 			$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"]."/".$requestUri;
         } else {

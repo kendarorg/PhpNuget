@@ -89,6 +89,8 @@ class ApiNugetBase
             $author = "<name>".implode("</name>\n<name>",$authors)."</name>";
         }
         //print_r($e);
+		$baseUrl = trim($baseUrl,"\\/");
+		
         $t= str_replace("\${BASEURL}",$baseUrl,$t);
         $t= str_replace("\${NUSPEC.ID}",$e->Id,$t);
         
@@ -96,8 +98,8 @@ class ApiNugetBase
         $t= str_replace("\${NUSPEC.IDLOWER}",(strtolower($e->Id)),$t);
         $t= str_replace("\${NUSPEC.TITLE}",($e->Title),$t);
         $t= str_replace("\${NUSPEC.VERSION}",($e->Version),$t);
-        $t= str_replace("\${NUSPEC.LICENSEURL}",urlencode($e->LicenseUrl),$t);
-        $t= str_replace("\${NUSPEC.PROJECTURL}",urlencode($e->ProjectUrl),$t);
+        $t= str_replace("\${NUSPEC.LICENSEURL}",($e->LicenseUrl),$t);
+        $t= str_replace("\${NUSPEC.PROJECTURL}",($e->ProjectUrl),$t);
         $t= str_replace("\${NUSPEC.REQUIRELICENSEACCEPTANCE}",$e->RequireLicenseAcceptance?"true":"false",$t);
         $t= str_replace("\${NUSPEC.DESCRIPTION}",($e->Description),$t);
         if($e->Tags!=""){

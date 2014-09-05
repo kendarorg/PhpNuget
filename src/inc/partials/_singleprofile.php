@@ -65,8 +65,8 @@ $count = sizeof($items);
 				$item = $items[$i];
 				?>
 				<li>
-					<b><a href="/<?php echo Settings::$SiteRoot;
-						?>/?specialType=singlePackage<?php
+					<b><a href="<?php echo Settings::$SiteRoot;
+						?>?specialType=singlePackage<?php
 						echo "&id=".urlencode($item->Id);
 						echo "&version=".urlencode($item->Version);
 						?>"><?php echo $item->Title." v.".$item->Version;?></a></b>
@@ -78,8 +78,8 @@ $count = sizeof($items);
 							$v= trim($ath[$k]);
 							if($k>0)echo ",&nbsp;";
 							?>
-							<a href="/<?php echo Settings::$SiteRoot;
-							?>/?specialType=singleProfile<?php
+							<a href="<?php echo Settings::$SiteRoot;
+							?>?specialType=singleProfile<?php
 							echo "&id=".urlencode($v);
 							?>"><?php echo $v;?></a>
 							<?php

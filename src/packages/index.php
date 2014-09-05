@@ -10,7 +10,7 @@ $q = UrlUtils::GetRequestParamOrDefault("q",null);
 
 ?>
 <html><body>
-<form style="visibility: hidden" method="POST" name='frm' action="/<?php echo Settings::$SiteRoot;?>/?specialType=packages"
+<form style="visibility: hidden" method="POST" name='frm' action="<?php echo Settings::$SiteRoot;?>?specialType=packages"
 	enctype="multipart/form-data">
 
 	<input type="text" id="q" name="q" value="<?php echo $q;?>"/>

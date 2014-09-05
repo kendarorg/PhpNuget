@@ -19,7 +19,7 @@ $searchQuery = UrlUtils::GetRequestParamOrDefault("searchQuery","");
 		</div>
 		<div id="navbarCollapse" class="collapse navbar-collapse">
 			<form 
-				method="POST" action="/<?php echo Settings::$SiteRoot;?>/?specialType=packages"
+				method="POST" action="<?php echo Settings::$SiteRoot;?>?specialType=packages"
 				enctype="multipart/form-data" 
 				class="navbar-form navbar-left">
 				<div class="form-group">
@@ -30,13 +30,13 @@ $searchQuery = UrlUtils::GetRequestParamOrDefault("searchQuery","");
 			<ul class="nav navbar-nav navbar-right"><?php
 						if($loginController->IsLoggedIn){
 					?><li>
-	<a href="/<?php echo Settings::$SiteRoot;?>/#/profile/<?php echo $loginController->UserId; ?>/user"><?php echo $loginController->UserId; ?></a>
+	<a href="<?php echo Settings::$SiteRoot;?>#/profile/<?php echo $loginController->UserId; ?>/user"><?php echo $loginController->UserId; ?></a>
 </li>
 <li>
-	<a href="/<?php echo Settings::$SiteRoot;?>/?specialType=logon&DoLogin=false">Sign out</a>
+	<a href="<?php echo Settings::$SiteRoot;?>?specialType=logon&DoLogin=false">Sign out</a>
 </li><?php
 	}else{
-?><li><a href="/<?php echo Settings::$SiteRoot;?>/?specialType=logon">Register/Sign in</a></li><?php
+?><li><a href="<?php echo Settings::$SiteRoot;?>?specialType=logon">Register/Sign in</a></li><?php
 	}
 ?></ul>
 		</div>

@@ -27,7 +27,12 @@ Settings::$DataRoot = Path::Combine(Settings::$SitePath,__DATABASE_DIR__);
 Settings::$PackagesRoot = Path::Combine(Settings::$SitePath,__UPLOAD_DIR__);
 Settings::$PackageHash = __PACKAGEHASH__;
 Settings::$MaxUploadBytes = __MAXUPLOAD_BYTES__;
-Settings::$SiteRoot = __SITE_ROOT__;
+$sr = trim(__SITE_ROOT__,"/\\");
+if($sr!=""){
+	Settings::$SiteRoot = "/".$sr."/";
+}else{
+	Settings::$SiteRoot = "/";
+}
 Settings::$AllowUserAdd = __ALLOWUSERADD__;
 Settings::$AdminId = __ADMINID__;
 Settings::$AdminPassword = __ADMINPASSWORD__;

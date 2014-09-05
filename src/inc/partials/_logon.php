@@ -14,7 +14,7 @@ if($loginController->IsLoggedIn){
 if(Settings::$AllowUserAdd){ ?>
 <div class="col-md-6" >
 	<h3>Register</h3>
-	<form method="POST" action="/<?php echo Settings::$SiteRoot;?>" >
+	<form method="POST" action="<?php echo Settings::$SiteRoot;?>" >
 		<div class="form-group col-md-12">
 			<div class="col-md-4">
 				<label>Username</label>
@@ -46,7 +46,7 @@ if(Settings::$AllowUserAdd){ ?>
 } ?>
 <div class="col-md-6" >
 <h3>Sign in</h3>
-<form method="POST" action="/<?php echo Settings::$SiteRoot;?>/?specialType=logon" >
+<form method="POST" action="<?php echo Settings::$SiteRoot;?>?specialType=logon" >
 	<input type="hidden" id="DoLogin" name="DoLogin" value="true"/>
 	<div class="form-group col-md-12">
 		<div class="col-md-4">

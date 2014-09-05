@@ -1,11 +1,11 @@
 <?php
-require_once(dirname(__FILE__)."/root.php");
+require_once(__DIR__."/root.php");
 
 define('__MAXUPLOAD_BYTES__',10*1024*1024*1024);
 define('__PACKAGEHASH__',"SHA512"); //Or SHA256
 define('__UPLOAD_DIR__', "data".DIRECTORY_SEPARATOR."packages");
 define('__DATABASE_DIR__', "data".DIRECTORY_SEPARATOR."db");
-define('__SITE_ROOT__', "phpnuget");
+define('__SITE_ROOT__', "/phpnuget/");
 define('__RESULTS_PER_PAGE__', 20);
 define('__ADMINID__',"admin");
 define('__ADMINPASSWORD__',"password");
@@ -19,5 +19,5 @@ define('__ALLOWUSERADD__',false);
 //or if theyr user id is inside the "owners" field of the package
 define('__LIMITUSERSPACKAGES__',true);
 
-require_once(__ROOT__."/inc/internalSettings.php");
+require_once(__ROOT__."/inc/internalsettings.php");
 ?>

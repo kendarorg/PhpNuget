@@ -59,7 +59,7 @@ if($searchQuery!=null){
 	$os->Parse("orderby Title asc, Version desc".$groupBy,$db->GetAllColumns());
 }
 
-$next = "/".Settings::$SiteRoot."/?specialType=packages";
+$next = Settings::$SiteRoot."?specialType=packages";
 if($searchQuery!=null){
 	$next.="&searchQuery=".urlencode($searchQuery);
 }
@@ -98,8 +98,8 @@ $items = $db->GetAllRows($pg->Top,$pg->Skip,$os);
 				?>
 				<tr>
 					<td><img withd="25px" height="25px" src="<?php echo $item->IconUrl;?>"/></td>
-					<td><b><a href="/<?php echo Settings::$SiteRoot;
-						?>/?specialType=singlePackage<?php
+					<td><b><a href="<?php echo Settings::$SiteRoot;
+						?>?specialType=singlePackage<?php
 						echo "&id=".urlencode($item->Id);
 						echo "&version=".urlencode($item->Version);
 						?>"><?php echo $item->Title?></a></b><br><?php echo " v.".$item->Version;?>
@@ -112,8 +112,8 @@ $items = $db->GetAllRows($pg->Top,$pg->Skip,$os);
 							$v= trim($ath[$k]);
 							if($k>0)echo ",&nbsp;";
 							?>
-							<a href="/<?php echo Settings::$SiteRoot;
-							?>/?specialType=singleProfile<?php
+							<a href="<?php echo Settings::$SiteRoot;
+							?>?specialType=singleProfile<?php
 							echo "&id=".urlencode($v);
 							?>"><?php echo $v;?></a>
 							<?php

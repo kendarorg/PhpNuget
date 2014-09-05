@@ -27,10 +27,10 @@ if(sizeof($items)==0){
 function buildSimpleDep($d)
 {
 	if(strlen($d->Version)>0){
-		$address= "/".Settings::$SiteRoot."/?specialType=singlePackage&id=".urlencode($d->Id)."&version=".urlencode($d->Version);
+		$address= Settings::$SiteRoot."?specialType=singlePackage&id=".urlencode($d->Id)."&version=".urlencode($d->Version);
 		$name = $d->Id." v ".$d->Version;
 	}else{
-		$address= "/".Settings::$SiteRoot."/?specialType=packages&searchQuery=Id eq '".urlencode($d->Id)."'";
+		$address= Settings::$SiteRoot."?specialType=packages&searchQuery=Id eq '".urlencode($d->Id)."'";
 		$name = $d->Id;
 	}
 	?>
@@ -70,8 +70,8 @@ $item = $items[0];
 							$v= trim($ath[$k]);
 							if($k>0)echo ",&nbsp;";
 							?>
-							<a href="/<?php echo Settings::$SiteRoot;
-							?>/?specialType=singleProfile<?php
+							<a href="<?php echo Settings::$SiteRoot;
+							?>?specialType=singleProfile<?php
 							echo "&id=".urlencode($v);
 							?>"><?php echo $v;?></a>
 							<?php
@@ -116,8 +116,8 @@ $item = $items[0];
 		<?php
 		foreach($items as $item){
 			?>
-			<li>Version: <a href="/<?php echo Settings::$SiteRoot;
-						?>/?specialType=singlePackage<?php
+			<li>Version: <a href="<?php echo Settings::$SiteRoot;
+						?>?specialType=singlePackage<?php
 						echo "&id=".urlencode($item->Id);
 						echo "&version=".urlencode($item->Version);
 						?>"><?php echo $item->Version;?></a></li>

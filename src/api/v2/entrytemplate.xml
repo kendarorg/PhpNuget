@@ -50,6 +50,7 @@ Summary??
       <d:DownloadCount m:type="Edm.Int32">${DB.DOWNLOADCOUNT}</d:DownloadCount>
       <d:ProjectUrl>${NUSPEC.PROJECTURL}</d:ProjectUrl>
       <d:RequireLicenseAcceptance m:type="Edm.Boolean">${NUSPEC.REQUIRELICENSEACCEPTANCE}</d:RequireLicenseAcceptance>
+	  <d:GalleryDetailsUrl>${BASEURL}/?specialType=singlePackage&amp;id=${NUSPEC.ID}&amp;version=${NUSPEC.VERSION}</d:GalleryDetailsUrl>
       <d:Description>${NUSPEC.DESCRIPTION}</d:Description>
       <d:ReleaseNotes m:null="true"></d:ReleaseNotes>
       <d:PackageHash>${DB.PACKAGEHASH}</d:PackageHash>

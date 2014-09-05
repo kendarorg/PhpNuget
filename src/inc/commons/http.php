@@ -66,7 +66,7 @@ class HttpUtils
 				$a_data[$matches[1]] = $matches[2];
 			}
 		}
-		var_dump($a_data);
+		
 		if($onlyFiles) {
 			return $a_data["files"];
 		}

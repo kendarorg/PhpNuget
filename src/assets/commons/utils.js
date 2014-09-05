@@ -20,7 +20,9 @@ app.provider("pathHelper",[function(){
 		this.rootPath ="/"+rootPath.rtrim("/").ltrim("/");
 	}
 	this.buildPath = function(path){
-		return this.rootPath+"/"+path.ltrim("/");
+		//return this.rootPath+"/"+path.ltrim("/");
+		var t= this.rootPath+"/"+path.ltrim("/");
+		return "/"+t.ltrim("/");
 	}
 	this.buildViewsPath = function(path){
 		return this.buildAppPath("views/"+path.ltrim("/"));

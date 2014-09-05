@@ -77,7 +77,7 @@ class UploadUtils
 			}
           }
         }
-		var_dump($toret);
+		
 		if($toret["hasError"]){
 			unlink($toret["tmpName"]);
 		}
