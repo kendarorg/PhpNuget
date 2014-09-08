@@ -62,7 +62,7 @@ class NugetManager
         $nugetDb = new NuGetDb();
         
         
-        $destination = Path::Combine(Settings::$PackagesRoot,"/".strtolower($e->Id).".".$e->Version.".nupkg");
+        $destination = Path::Combine(Settings::$PackagesRoot,"/".strtolower($e->Id).".".strtolower($e->Version).".nupkg");
         
         if(file_exists($destination)) unlink($destination);
         
@@ -171,7 +171,7 @@ class NugetManager
 			$e->UserId = $res[0]->UserId;
 		}
 		if($nugetDb->AddRow($e,false)){
-			$destination =Path::Combine(Settings::$PackagesRoot,strtolower($e->Id).".".$e->Version.".nupkg");
+			$destination =Path::Combine(Settings::$PackagesRoot,strtolower($e->Id).".".strtolower($e->Version).".nupkg");
 			if(strtolower($nupkgFile)!=strtolower($destination)){
 				if(file_exists($destination)){
 					unlink($destination);

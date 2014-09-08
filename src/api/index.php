@@ -15,7 +15,7 @@ if($id == null || $version == null){
 if(strlen($id)==0 || strlen($version)==0){
 	HttpUtils::ApiError(500,"Wrong data. Empty id or version.");
 }
-$file = $id.".".$version.".nupkg";
+$file = strtolower($id.".".$version.".nupkg");
 $path = Path::Combine(Settings::$PackagesRoot,$file);
 if(!file_exists($path)){
 	HttpUtils::ApiError(404,"Not found ".$file);
