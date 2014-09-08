@@ -4,6 +4,14 @@
 
 This is born to have my personal repository for nuget, on my cheapo PHP hostin
 
+Verified on:
+
+* PHP 5.3.17-IIS 7
+* PHP 5.3.21-IIS 7
+* PHP 5.5.8-Apache 2.0 (Windows 8 Pro)
+* PHP 5.6-IIS 8
+* PHP 5.4.2-Apache 2.0 (OpenSuse 13.1)
+
 ## Installation
 
 ### Prerequisities For IIS
@@ -205,4 +213,3 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Added interface to edit packages
 	* Added mod_rewrite support via .htaccess
 	* Simplified the whole structure of the program
-

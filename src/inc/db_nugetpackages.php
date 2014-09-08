@@ -98,8 +98,8 @@ class NuGetDb
 		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
 		$res =  $dbInstance->GetAll($limit,$skip,$objectSearch);
 		foreach($res as $row){
-			if(ends_with(strtolower($row->IconUrl),strtolower("packageDefaultIcon-50x50.png"))){
-				$row->IconUrl = UrlUtils::CurrentUrl(Settings::$SiteRoot."content/packageDefaultIcon-50x50.png");
+			if(ends_with(strtolower($row->IconUrl),strtolower("packagedefaulticon-50x50.png"))){
+				$row->IconUrl = UrlUtils::CurrentUrl(Settings::$SiteRoot."content/packagedefaulticon-50x50.png");
 			}
 		}
 		return $res;

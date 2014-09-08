@@ -102,7 +102,7 @@ class NugetManager
 		$e->Listed = true;
         if(array_key_exists("licenseurl",$m))$e->LicenseUrl = $m["licenseurl"];
 		if(array_key_exists("iconurl",$m))$e->IconUrl = $m["iconurl"];
-		else $e->IconUrl = UrlUtils::CurrentUrl(Settings::$SiteRoot."content/packageDefaultIcon-50x50.png");
+		else $e->IconUrl = UrlUtils::CurrentUrl(Settings::$SiteRoot."content/packagedefaulticon-50x50.png");
         if(array_key_exists("projecturl",$m))$e->ProjectUrl = $m["projecturl"];
         $e->RequireLicenseAcceptance = $m["requirelicenseacceptance"];
         $e->Description = $m["description"];
