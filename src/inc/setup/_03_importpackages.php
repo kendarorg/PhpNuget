@@ -34,7 +34,7 @@ if ($_FILES["file"]["error"] > 0) {
 			<input type="hidden" id="dosetup" name="dosetup" value="finishSetup"/>
 			<!--<table border=0>
 				<tr><td>Admin UserId:</td><td><input type="text" id="login" name="login" value="admin"/></td></tr>
-				<tr><td>Admin Password:</td><td><input type="text" id="password" name="password" value="password"/></td></tr>
+				<tr><td>Admin Password:</td><td><input type="password" id="password" name="password" value="password"/></td></tr>
 				<tr><td>Admin Email:</td><td><input type="text" id="email" name="email" value="nuget@<?php echo $_SERVER["SERVER_NAME"]; ?>"/></td></tr>
 				<tr><td>Application Path:</td><td><input type="text" id="applicationPath" name="applicationPath" value="<?php echo $applicationPath;?>"/></td></tr>
 			</table>-->

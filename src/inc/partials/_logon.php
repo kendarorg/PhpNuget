@@ -36,7 +36,7 @@ if(Settings::$AllowUserAdd){ ?>
 				<label>Password</label>
 			</div>
 			<div class="col-md-8">
-				<input type="text" class="form-control" id="Password" name="Password"/>
+				<input type="password" class="form-control" id="Password" name="Password"/>
 			</div>
 		</div>
 		<input type="submit" value="Register" class="btn btn-default"></input>
@@ -61,7 +61,7 @@ if(Settings::$AllowUserAdd){ ?>
 			<label>Password</label>
 		</div>
 		<div class="col-md-8">
-			<input type="text" class="form-control" id="Password" name="Password"/>
+			<input type="password" class="form-control" id="Password" name="Password"/>
 		</div>
 	</div>
 	
