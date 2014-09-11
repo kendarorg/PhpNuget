@@ -1,15 +1,20 @@
 <?php
 require_once(dirname(__FILE__)."/../../../root.php");
 require_once(__ROOT__."/settings.php");
+
+$udb = new UserDb();
+$user = $udb->GetByUserId($loginController->UserId);
 ?>
 
 <div ng-controller="packagesUploadController">
 <div class="panel panel-default">
 <div class="panel-heading">Upload Package</div>
 <div class="panel-body">
-To upload packagase through the command line:<br>
+To upload packagase through the command line:<br><br>
 <pre>
-	nuget push mypackage.nupkg apikey86-cc37-4004-bfdf-c4f3e8ef9b3a <?php echo UrlUtils::CurrentUrl(Settings::$SiteRoot."upload");?>
+	NuGet SetApiKey <?php echo trim(trim($user->Token,"}"),"{");?> -Source <?php echo trim(UrlUtils::CurrentUrl("/"),"/");?>
+	
+	NuGet Push mypackage.nupkg -Source <?php echo UrlUtils::CurrentUrl(Settings::$SiteRoot."upload");?>
 </pre>
 <br>
 <form method="POST" action="<?php echo Settings::$SiteRoot;?>uploadnupkg.php"  enctype="multipart/form-data" target="output_frame">

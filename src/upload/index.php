@@ -7,11 +7,21 @@ require_once(__ROOT__."/inc/nugetreader.php");
 require_once(__ROOT__."/inc/commons/http.php");
 require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/uploadutils.php");
-
 require_once(__ROOT__."/inc/commons/objectsearch.php");
 
-$temp_file = tempnam(sys_get_temp_dir(), 'Tux');
+if(false){
+	file_put_contents("upload.log","==================================\r\n", FILE_APPEND);
+	file_put_contents("upload.log","request: ".$_SERVER['REQUEST_URI']."\r\n", FILE_APPEND);
+	if(sizeof($_POST)>0){
+		file_put_contents("upload.log",var_export($_POST,true)."\r\n", FILE_APPEND);
+	}
+	if(sizeof($_GET)>0){
+		file_put_contents("upload.log",var_export($_GET,true)."\r\n", FILE_APPEND);
+	}
+}
 
+$temp_file = tempnam(sys_get_temp_dir(), 'Tux');
+$result = array();
 try{
 	
 	if (empty($_SERVER['HTTP_X_NUGET_APIKEY'])) {
@@ -42,14 +52,17 @@ try{
 
 	$nugetReader = new NugetManager();
 	$parsedNuspec = $nugetReader->LoadNuspecFromFile($result["destination"]);
-
 	$parsedNuspec->UserId=$user->Id;
 	$nuspecData = $nugetReader->SaveNuspec($result["destination"],$parsedNuspec);
 		
 	// All done!
 	header('HTTP/1.1 201 Created');
 }catch(Exception $ex){
-	HttpUtils::ApiError('500', $ex->getMessage());
+	if(array_key_exists ("destination",$result)){
+		unlink($result["destination"]);
+	}
 	unlink($temp_file);
+	HttpUtils::ApiError('500', $ex->getMessage());
+	die();
 }
 ?>
