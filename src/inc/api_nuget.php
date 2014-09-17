@@ -295,6 +295,9 @@ class ApiNugetBase
 		$query = "";
 		if($action != "findpackagesbyd") return;
 		$id = UrlUtils::GetRequestParamOrDefault("id",null);
+		if($id!=null){
+			$id = trim($id,"'");
+		}
 		$query = "Id eq '".$id."' orderby Version desc";
 		
 		$this->_query($query);

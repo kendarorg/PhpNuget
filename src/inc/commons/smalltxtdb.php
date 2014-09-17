@@ -107,7 +107,7 @@ class SmallTxtDb
 			$kk=explode(":",$firstRow);
 			$currentVersion = $kk[1];
 			
-			if($this->_version != $currentVersion){
+			if($this->_version != strtolower(trim($currentVersion))){
 				throw new Exception("Founded db version ".$currentVersion." instead of ".$this->_version);
 			}
 			$st=1;
