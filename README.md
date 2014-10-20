@@ -197,6 +197,8 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
+* 3.0.5.0
+	* Fixed bug caused by wrong order of execution of sort, group by, select in Db engine
 * 3.0.0.0
 	* UI improved with AngularJS
 	* Improved the search engine with better OData query support
