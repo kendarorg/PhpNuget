@@ -330,15 +330,18 @@ class ApiNugetBase
 			$tmp = array();
 			for($i=0;$i<sizeof($versions);$i++){
 				
-				$tmp[] = "(Id eq '".$packageIds[$i]."' and Version gt '".$versions[$i]."')";
+				$tmp[] = "(Id eq '".trim($packageIds[$i],"'")."' and Version gt '".trim($versions[$i],"'")."')";
 			}
-			$query.="(".implode(" or ",$tmp).")";
+			if(sizeof($tmp)>1){
+				$query.="(".implode(" or ",$tmp).")";
+			}else{
+				$query.=$tmp[0];
+			}
 		}
 		$query .=" orderby Title asc, Version desc";
 		if($includeAllVersions!="true"){
 			$query .=" groupby Id";
 		}
-		
 		$this->_query($query);
 	}
 	

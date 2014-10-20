@@ -22,19 +22,24 @@ class PhpNugetExternalTypes
 	
 	private function _isVersion($token)
 	{
+		$token = trim($token,"'");
+		if(strlen($token)==0)return false;
 		$result = explode(".",$token);
 		$size = sizeof($result);
-		if($size<=1 && $size >5) return false;
+		if($size<=1 || $size >5) return false;
 		
 		for($i=0;$i<($size-1);$i++){
 			if(!$this->_isInteger($result[$i])){
 				return false;
 			}
 		}
+
 		$last = $result[$size-1];
 		if($size==4 && $this->_isInteger($last)){
+		
 			return true;
 		}else if($size==5){
+		
 			return true;
 		}else if(!$this->_isInteger($last)){
 			return false;
