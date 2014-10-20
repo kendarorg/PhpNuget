@@ -246,8 +246,8 @@ class SmallTxtDb
 			$toSort[] = $item;
 		}
 		if($objectSearch!=null){
-			$toSort = $objectSearch->DoGroupBy($toSort);
 			$toSort = $objectSearch->DoSort($toSort,$rowTypes);
+			$toSort = $objectSearch->DoGroupBy($toSort);
 			
 		}
 		
