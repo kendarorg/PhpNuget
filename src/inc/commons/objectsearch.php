@@ -75,6 +75,7 @@ class ObjectSearch
 	private $groupBy = array("groupby");
 	private $fields = array();
 	private $functions = array("substringof","doAnd","doOr");
+	private $methods = array("tolower");
 	protected $externalTypes = null;
 	protected $parseResult = null;
 	private $_fieldTypes = array();
@@ -126,6 +127,10 @@ class ObjectSearch
 	function _isFunction($operator)
 	{
 		return in_array(strtolower($operator),$this->functions);
+	}
+	function _isMethod($operator)
+	{
+		return in_array(strtolower($operator),$this->methods);
 	}
 	function _isBinary($operator)
 	{
@@ -255,10 +260,15 @@ class ObjectSearch
 				$o->Type = "function";
 				$o->Value = $s;
 				$temp[] = $o;
+			}else if($this->_isMethod($s)){
+				$o = new Operator();
+				$o->Type = "method";
+				$o->Value = $s;
+				$temp[] = $o;
 			}else if($s=="("){
 				$o = new Operator();
 				$i++;
-				if($prev!=null && $prev->Type=="function"){
+				if($prev!=null && ($prev->Type=="function" || $prev->Type=="method")){
 					$o = $prev;
 				}else{
 					$o->Type = "group";
@@ -377,7 +387,7 @@ class ObjectSearch
 		for($i=0;$i<sizeof($identified);$i++){
 			$o = $identified[$i];
 			$t = strtolower($o->Type);
-			if($t=="function"){
+			if($t=="function" || $t=="method"){
 				$o->Children = $this->_reorderLogicalOperators($o->Children);
 			}else if($t=="group"){
 				$temp = $this->_reorderLogicalOperators($o->Children);		
@@ -463,7 +473,17 @@ class ObjectSearch
 			case "boolean":
 				return $parseTreeItem;
 		}
-		if($t == "function"){
+		if($t == "method"){
+			$params = array();
+			for($i=0;$i<sizeof($c);$i++){
+				$params[] = $this->_doExecute($c[$i],$subject);
+			}
+			$fo = new Operator();
+			$fo->Type = "fieldinstance";
+			$fo->Value = $this->_executeFunction($v,$params);
+			$fo->Id = $v;
+			return $fo;
+		}else if($t == "function"){
 			$params = array();
 			for($i=0;$i<sizeof($c);$i++){
 				$params[] = $this->_doExecute($c[$i],$subject);
@@ -520,6 +540,11 @@ class ObjectSearch
 	function substringof($args)
 	{	
 		return contains(strtolower($args[0]->Value),strtolower($args[1]->Value));
+	}
+    
+	function tolower($args)
+	{	
+		return strtolower($args[0]->Value);
 	}
 	
 	function doand($args)
