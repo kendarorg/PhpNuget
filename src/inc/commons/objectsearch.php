@@ -64,13 +64,13 @@ function BuildBool($value)
 class ObjectSearch
 {
 	private $keywords = array(
-		"eq","neq","gt","lt","gte","lte",
+		"eq","neq","ne","gt","lt","gte","lte",
 		"substringof",
 		"orderby","desc","asc",
 		"groupby",
 		"or","and",
-		"true","false");
-	private $binaryOperator = array("eq","neq","gt","lt","gte","lte");
+		"true","false","null");
+	private $binaryOperator = array("eq","neq","ne","gt","lt","gte","lte");
 	private $logicalOperator = array("or","and");
 	private $trueFalse = array("true","false");
 	private $orderBy = array("orderby","desc","asc");
@@ -144,6 +144,10 @@ class ObjectSearch
 	function _isBoolean($operator)
 	{
 		return in_array(strtolower($operator),$this->trueFalse);
+	}
+	function _isNull($operator)
+	{
+		return strtolower($operator)=="null";
 	}
 	function _isOrderBy($operator)
 	{
@@ -233,6 +237,11 @@ class ObjectSearch
 				$o = new Operator();
 				$o->Type = "boolean";
 				$o->Value = $s=="true";
+				$temp[] = $o;
+			}else if($this->_isNull($s)){
+				$o = new Operator();
+				$o->Type = "null";
+				$o->Value = null;
 				$temp[] = $o;
 			}else if($this->_isBinary($s)){
 				$o = new Operator();
@@ -398,6 +407,7 @@ class ObjectSearch
 		}
 		$identified = $this->_subRenderLogicalOperators($result,"eq",2);
 		$identified = $this->_subRenderLogicalOperators($identified,"neq",2);
+		$identified = $this->_subRenderLogicalOperators($identified,"ne",2);
 		$identified = $this->_subRenderLogicalOperators($identified,"gt",2);
 		$identified = $this->_subRenderLogicalOperators($identified,"gte",2);
 		$identified = $this->_subRenderLogicalOperators($identified,"lt",2);
@@ -469,6 +479,7 @@ class ObjectSearch
 			case "string":
 			case "number":
 			case "boolean":
+			case "null":
 				return $parseTreeItem;
 		}
 		if($t == "function"){
@@ -592,6 +603,11 @@ class ObjectSearch
 		$l=$args[0];
 		$r=$args[1];
 		return BuildBool($l->Value != $r->Value);
+	}
+    
+	function done($args)
+	{
+		return $this->doneq($args);
 	}
 	
 	function dogt($args)
@@ -790,6 +806,7 @@ class ObjectSearch
 				return $f>$s;
 			case("string"):
 			case("date"):
+			case("null"):
 				return strcasecmp($f,$s);
 		}
 		
