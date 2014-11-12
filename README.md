@@ -197,6 +197,11 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
+* 3.0.6.0
+	* Added "tolower" function (thanks petero-dk!)
+	* Added "startswith", "endswith" and "toupper"
+	* Fixed issue when calling functions passing a field name as second parameter.
+	* Added tests for substringof and tolower
 * 3.0.5.0
 	* Fixed bug caused by wrong order of execution of sort, group by, select in Db engine
 * 3.0.0.0

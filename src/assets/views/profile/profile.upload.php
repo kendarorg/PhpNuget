@@ -39,7 +39,7 @@ if($loginController->Admin){
 <form novalidate class="simple-form col-md-12">
 	<div class="form-group col-md-12">
 		<div class="col-md-2">
-			<label for="Url">Repository Url</label>
+			<label for="Url">Repository Url Template</label>
 		</div>
 		<div class="col-md-8">
 			<!--https://www.nuget.org/api/v2/package/_Atrico.Lib.CommonAssemblyInfo/1.0.0-->

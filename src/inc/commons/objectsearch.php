@@ -48,6 +48,8 @@ class ParserException extends Exception
 
 }
 
+
+
 function BuildBool($value)
 {
 	$o = new Operator();
@@ -74,8 +76,11 @@ class ObjectSearch
 	private $orderBy = array("orderby","desc","asc");
 	private $groupBy = array("groupby");
 	private $fields = array();
-	private $functions = array("substringof","doAnd","doOr");
-	private $methods = array("tolower");
+	private $functions = array(
+		"tolower","toupper",
+		"startswith","endswith",
+		"substringof",
+		"doAnd","doOr");
 	protected $externalTypes = null;
 	protected $parseResult = null;
 	private $_fieldTypes = array();
@@ -127,10 +132,6 @@ class ObjectSearch
 	function _isFunction($operator)
 	{
 		return in_array(strtolower($operator),$this->functions);
-	}
-	function _isMethod($operator)
-	{
-		return in_array(strtolower($operator),$this->methods);
 	}
 	function _isBinary($operator)
 	{
@@ -260,11 +261,6 @@ class ObjectSearch
 				$o->Type = "function";
 				$o->Value = $s;
 				$temp[] = $o;
-			}else if($this->_isMethod($s)){
-				$o = new Operator();
-				$o->Type = "method";
-				$o->Value = $s;
-				$temp[] = $o;
 			}else if($s=="("){
 				$o = new Operator();
 				$i++;
@@ -387,7 +383,7 @@ class ObjectSearch
 		for($i=0;$i<sizeof($identified);$i++){
 			$o = $identified[$i];
 			$t = strtolower($o->Type);
-			if($t=="function" || $t=="method"){
+			if($t=="function"){
 				$o->Children = $this->_reorderLogicalOperators($o->Children);
 			}else if($t=="group"){
 				$temp = $this->_reorderLogicalOperators($o->Children);		
@@ -447,6 +443,7 @@ class ObjectSearch
 		
 		$this->_storeOrderByClause($notOperatorIdentified);
 		$this->parseResult = $this->_reorderLogicalOperators($operatorIdentified);
+		
 		return $this->parseResult;
 	}
 	
@@ -458,6 +455,7 @@ class ObjectSearch
 		
 		if(!$this->_extraValidation($subject))return false;
 		$parseTreeItem = $this->parseResult[0];
+		
 		$result = $this->_doExecute($parseTreeItem,$subject);
 		return $result->Value;
 	}
@@ -473,21 +471,12 @@ class ObjectSearch
 			case "boolean":
 				return $parseTreeItem;
 		}
-		if($t == "method"){
+		if($t == "function"){
 			$params = array();
 			for($i=0;$i<sizeof($c);$i++){
 				$params[] = $this->_doExecute($c[$i],$subject);
 			}
-			$fo = new Operator();
-			$fo->Type = "fieldinstance";
-			$fo->Value = $this->_executeFunction($v,$params);
-			$fo->Id = $v;
-			return $fo;
-		}else if($t == "function"){
-			$params = array();
-			for($i=0;$i<sizeof($c);$i++){
-				$params[] = $this->_doExecute($c[$i],$subject);
-			}
+			
 			$result = $this->_executeFunction($v,$params);
 		}else if($t == "group"){
 			$params = array();
@@ -507,24 +496,7 @@ class ObjectSearch
 		}else{
 			throw new ParserException("Token '".$t."' not supported");
 		}
-		$o = new Operator();
-		$o->Type = "boolean";
-		$o->Value = true;
-		
-		if(is_object($result)){
-			if(!$result->Value){
-				$o->Value = false;
-			}
-		}else if(is_string($result)){
-			if(strlen($result)==0 || strtolower($result)!="true"){
-				$o->Value = false;
-			}
-		}else if($result==null){
-			$o->Value =false;
-		}else{
-			$o->Value = $result && true;
-		}
-		return $o;
+		return $result;
 	}
 	
 	
@@ -539,12 +511,12 @@ class ObjectSearch
 	
 	function substringof($args)
 	{	
-		return contains(strtolower($args[0]->Value),strtolower($args[1]->Value));
-	}
-    
-	function tolower($args)
-	{	
-		return strtolower($args[0]->Value);
+		$res = BuildBool(contains(strtolower($args[0]->Value),strtolower($args[1]->Value)));
+		/*echo ($args[0]->Value)."\n";
+		echo ($args[1]->Value)."\n";
+		var_dump($res);
+		echo "===============\n";*/
+		return $res;
 	}
 	
 	function doand($args)
@@ -565,6 +537,35 @@ class ObjectSearch
 			}
 		}
 		return BuildBool(false);
+	}
+	
+	function tolower($args)
+	{	
+		return BuildItem(strtolower($args[0]->Value),$args[0]->Type,$args[0]->Id);
+	}
+	
+	function toupper($args)
+	{	
+		return BuildItem(strtoupper($args[0]->Value),$args[0]->Type,$args[0]->Id);
+	}
+	
+	function startsWithInt($haystack, $needle)
+	{
+		return $needle === "" || strpos($haystack, $needle) === 0;
+	}
+	function endsWithInt($haystack, $needle)
+	{
+		return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
+	}
+	
+	function startswith($args)
+	{	
+		return BuildBool($this->startsWithInt($args[0]->Value,$args[1]->Value));
+	}
+	
+	function endswith($args)
+	{	
+		return BuildBool($this->endsWithInt($args[0]->Value,$args[1]->Value));
 	}
 	
 	function dosubstringof($args)
@@ -817,4 +818,12 @@ class ObjectSearch
 	}
 }
 
+function BuildItem($value,$type,$id)
+{
+	$o = new Operator();
+	$o->Type = strtolower($type);
+	$o->Value = $value;
+	$o->Id = $id;
+	return $o;
+}
 ?>

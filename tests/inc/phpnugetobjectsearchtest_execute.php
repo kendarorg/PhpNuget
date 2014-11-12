@@ -74,7 +74,7 @@ class PhpNugetObjectSearchTest_Execute
 		echo Test::PrettyDump($r);
 		$result = $this->target->Execute($o);
 		
-		Assert::IsFalse($result);
+		Assert::IsTrue($result);
 	}
 	
 	public function DoTestField_gt_version_letters_pre_alpha_casing()
@@ -84,7 +84,7 @@ class PhpNugetObjectSearchTest_Execute
 		echo Test::PrettyDump($r);
 		$result = $this->target->Execute($o);
 		
-		Assert::IsFalse($result);
+		Assert::IsTrue($result);
 	}
 }
 
