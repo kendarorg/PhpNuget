@@ -64,13 +64,13 @@ function BuildBool($value)
 class ObjectSearch
 {
 	private $keywords = array(
-		"eq","neq","gt","lt","gte","lte",
+		"eq","neq","ne","gt","lt","gte","lte",
 		"substringof",
 		"orderby","desc","asc",
 		"groupby",
 		"or","and",
 		"true","false");
-	private $binaryOperator = array("eq","neq","gt","lt","gte","lte");
+	private $binaryOperator = array("eq","neq","ne","gt","lt","gte","lte");
 	private $logicalOperator = array("or","and");
 	private $trueFalse = array("true","false");
 	private $orderBy = array("orderby","desc","asc");
@@ -88,7 +88,7 @@ class ObjectSearch
 	private $separators = array("(",")"," ","\t"," ",",");
 	/*
 		Version number are treated with a orderBy comparer starting with "V"
-		eq,neq,gt,lt,gte,lte,substringof
+		eq,neq,ne,gt,lt,gte,lte,substringof
 		eq FieldName 'data'/'DateTime'
 		eq FieldName true/false
 		like FieldName what 
@@ -398,6 +398,7 @@ class ObjectSearch
 		}
 		$identified = $this->_subRenderLogicalOperators($result,"eq",2);
 		$identified = $this->_subRenderLogicalOperators($identified,"neq",2);
+		$identified = $this->_subRenderLogicalOperators($identified,"ne",2);
 		$identified = $this->_subRenderLogicalOperators($identified,"gt",2);
 		$identified = $this->_subRenderLogicalOperators($identified,"gte",2);
 		$identified = $this->_subRenderLogicalOperators($identified,"lt",2);
@@ -588,6 +589,13 @@ class ObjectSearch
 	}
 	
 	function doneq($args)
+	{
+		$l=$args[0];
+		$r=$args[1];
+		return BuildBool($l->Value != $r->Value);
+	}
+	
+	function done($args)
 	{
 		$l=$args[0];
 		$r=$args[1];
