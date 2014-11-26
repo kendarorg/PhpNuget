@@ -231,8 +231,3 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Added interface to edit packages
 	* Added mod_rewrite support via .htaccess
 	* Simplified the whole structure of the program
-
-	
-http://127.0.0.1:8020/phpnuget/api/v2/Packages()?$filter=(((Id ne null) and substringof('Class',tolower(Id))) or ((Description ne null) and substringof('Class',tolower(Description)))) or ((Tags ne null) and substringof(' Class ',tolower(Tags))) 
-http://127.0.0.1:8020/phpnuget/api/v2/Packages()?$filter=((Id ne null) and substringof('Class',tolower(Id)) 	
-http://127.0.0.1:8020/phpnuget/api/v2/Packages()?$filter=((Id ne null) and substringof('class',tolower(Id)) 
