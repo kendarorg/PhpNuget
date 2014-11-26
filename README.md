@@ -197,13 +197,24 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
+* 3.0.7.0
+	* Support for ne/neq (thanks petero!)
+	* Support for null value in OData queries
+	* Aligned to semantic versioning for pre-releases (http://semver.org/)
+	* Fixed a bug for the OData queries not recognizing external types
+	* Uploading a package with "-" into the name will result in a pre-release package
+	* Field "Is Pre Release" is now honoured correctly
+	* Fixed bug for free text fields not correctly shown on packages list when containing html tags
+	
 * 3.0.6.0
 	* Added "tolower" function (thanks petero-dk!)
 	* Added "startswith", "endswith" and "toupper"
 	* Fixed issue when calling functions passing a field name as second parameter.
 	* Added tests for substringof and tolower
+	
 * 3.0.5.0
 	* Fixed bug caused by wrong order of execution of sort, group by, select in Db engine
+	
 * 3.0.0.0
 	* UI improved with AngularJS
 	* Improved the search engine with better OData query support
@@ -220,3 +231,8 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Added interface to edit packages
 	* Added mod_rewrite support via .htaccess
 	* Simplified the whole structure of the program
+
+	
+http://127.0.0.1:8020/phpnuget/api/v2/Packages()?$filter=(((Id ne null) and substringof('Class',tolower(Id))) or ((Description ne null) and substringof('Class',tolower(Description)))) or ((Tags ne null) and substringof(' Class ',tolower(Tags))) 
+http://127.0.0.1:8020/phpnuget/api/v2/Packages()?$filter=((Id ne null) and substringof('Class',tolower(Id)) 	
+http://127.0.0.1:8020/phpnuget/api/v2/Packages()?$filter=((Id ne null) and substringof('class',tolower(Id)) 

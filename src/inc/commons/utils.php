@@ -80,4 +80,15 @@ function ends_with($haystack, $needle)
 
     return (substr($haystack, -$length) === $needle);
 }
+
+// Where,What
+function indexOf($mystring, $findme)
+{
+    $pos = strpos($mystring, $findme);
+	if ($pos === false) {
+		return -1;
+	} else {
+		return $pos;
+	}
+}
 ?>

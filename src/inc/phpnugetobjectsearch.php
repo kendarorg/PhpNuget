@@ -1,6 +1,8 @@
 <?php
 require_once(dirname(__FILE__)."/../root.php");
 require_once(__ROOT__."/inc/commons/objectsearch.php");
+
+
 //http://localhost:8020/phpnuget/api/packages/?Query=substringof%28%27CoroutineCache%27,Dependencies%29
 class PhpNugetExternalTypes
 {
@@ -16,7 +18,6 @@ class PhpNugetExternalTypes
 			$o->Type = "version";
 			$o->Value = trim($token,"'\"");
 		}
-		
 		return $o;
 	}
 	
@@ -24,40 +25,40 @@ class PhpNugetExternalTypes
 	{
 		$token = trim($token,"'");
 		if(strlen($token)==0)return false;
-		$result = explode(".",$token);
+		
+		$la= array();
+		$tmp = indexOf($token,"-");
+		if($tmp>0){
+			$la[] = substr($token,0,$tmp);
+			$la[] = substr($token,$tmp+1);
+		}else{
+			$la[] = $token;
+		}
+		
+		$result = explode(".",$la[0]);
 		$size = sizeof($result);
-		if($size<=1 || $size >5) return false;
+		if($size<=1 || $size >4) return false;
 		
 		for($i=0;$i<($size-1);$i++){
 			if(!$this->_isInteger($result[$i])){
 				return false;
 			}
 		}
-
-		$last = $result[$size-1];
-		if($size==4 && $this->_isInteger($last)){
 		
-			return true;
-		}else if($size==5){
-		
-			return true;
-		}else if(!$this->_isInteger($last)){
-			return false;
-		}
 		return true;
 	}
 	
 	public function CanHandle($name,$params)
 	{
-		
 		if(sizeof($params)!=2) return false;
 		
 		$tl = strtolower($params[0]->Type);
 		$tr = strtolower($params[1]->Type);
 		
 		if($name == "dogt" ||$name == "dogte" ||$name == "dolt" ||$name == "dolte"){
-			if($tl!=$tr) return false;
+			//if($tl!=$tr) return false;
 			if($tl=="version") return true;
+			if($tr=="version") return true;
 		}
 		
 		if($name == "substringof"){
@@ -80,6 +81,34 @@ class PhpNugetExternalTypes
 	// _compare(a,b) =0   => a=b
 	function _compare($l,$r)
 	{
+		$la= array();
+		$tmp = indexOf($l,"-");
+		if($tmp>0){
+			$la[] = substr($l,0,$tmp);
+			$la[] = substr($l,$tmp+1);
+		}else{
+			$la[] = $l;
+		}
+		$ra= array();
+		$tmp = indexOf($r,"-");
+		if($tmp>0){
+			$ra[] = substr($r,0,$tmp);
+			$ra[] = substr($r,$tmp+1);
+		}else{
+			$ra[] = $r;
+		}
+		$numericCompare = $this->_compareNumericVersion($la[0],$ra[0]);
+		
+		if($numericCompare!=0 || sizeof($la)==sizeof($ra)) return $numericCompare;
+		
+		if(sizeof($la)>sizeof($ra)){
+			return -1;
+		}else if(sizeof($la)<sizeof($ra)){
+			return 1;
+		}
+		
+		return strcasecmp ($la[1],$ra[1]);
+		/*
 		$aVersion = explode(".",str_replace("-","",strtolower($l)));
 		$bVersion = explode(".",str_replace("-","",strtolower($r)));
 		for($i=0;$i<sizeof($aVersion) && $i<sizeof($bVersion);$i++){
@@ -93,10 +122,31 @@ class PhpNugetExternalTypes
 			}else if($this->_isInteger($aCur)&&!$this->_isInteger($bCur)){
 				return -1;
 			}else{
-				$aCur = PhpNugetObjectSearch::$letterVersion[$aCur];
-				$bCur = PhpNugetObjectSearch::$letterVersion[$bCur];
-				$res = $aCur -$bCur;
+				//return strcasecmp ($aCur,$bCur);
+				return strcasecmp ($aCur,$bCur);
+				//$aCur = PhpNugetObjectSearch::$letterVersion[$aCur];
+				//$bCur = PhpNugetObjectSearch::$letterVersion[$bCur];
+				//$res = $aCur -$bCur;
+				//if($res!=0) return $res; 
+			}
+		}
+		return 0;*/
+	}
+	
+	function _compareNumericVersion($l,$r)
+	{
+		$aVersion = explode(".",strtolower($l));
+		$bVersion = explode(".",strtolower($r));
+		for($i=0;$i<sizeof($aVersion) && $i<sizeof($bVersion);$i++){
+			$aCur = $aVersion[$i];
+			$bCur = $bVersion[$i];
+			if($this->_isInteger($aCur)&&$this->_isInteger($bCur)){
+				$res = $aVersion[$i]-$bVersion[$i];
 				if($res!=0) return $res; 
+			}else if(!$this->_isInteger($aCur)&&$this->_isInteger($bCur)){
+				return 1;
+			}else if($this->_isInteger($aCur)&&!$this->_isInteger($bCur)){
+				return -1;
 			}
 		}
 		return 0;
@@ -172,12 +222,9 @@ class PhpNugetObjectSearch extends ObjectSearch
 	public static function IsPreRelease($version)
 	{
 		$version = strtolower($version);
-		foreach(PhpNugetObjectSearch::$letterVersion as $key){
-			if(ends_with($version,$key)){
-				return true;
-			}
-		}
-		return false;
+		$la= [];
+		$tmp = indexOf($version,"-");
+		return $tmp>0;
 	}
 	public function Parse($queryString,$fieldNames,$externalTypes = null)
 	{

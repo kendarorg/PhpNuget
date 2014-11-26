@@ -69,7 +69,8 @@ class ObjectSearch
 		"orderby","desc","asc",
 		"groupby",
 		"or","and",
-		"true","false");
+		"true","false",
+		"null");
 	private $binaryOperator = array("eq","neq","ne","gt","lt","gte","lte");
 	private $logicalOperator = array("or","and");
 	private $trueFalse = array("true","false");
@@ -290,6 +291,11 @@ class ObjectSearch
 					throw new ParserException("Token '".$s."' not supported by external provider");
 				}
 				$temp[] = $o;
+			}else if(strtolower($s)=="null"){
+				$o = new Operator();
+				$o->Type = "string";
+				$o->Value = "";
+				$temp[] = $o;
 			}else{
 				throw new ParserException("Token '".$s."' not supported");
 			}
@@ -504,7 +510,6 @@ class ObjectSearch
 	function _executeFunction($name,$params)
 	{
 		if($this->externalTypes!=null && $this->externalTypes->CanHandle($name,$params)){
-			
 			return $this->externalTypes->$name($params);
 		}
 		return $this->$name($params);
