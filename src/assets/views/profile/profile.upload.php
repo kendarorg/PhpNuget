@@ -12,7 +12,7 @@ $user = $udb->GetByUserId($loginController->UserId);
 <div class="panel-body">
 To upload packagase through the command line:<br><br>
 <pre>
-	NuGet SetApiKey <?php echo trim(trim($user->Token,"}"),"{");?> -Source <?php echo trim(UrlUtils::CurrentUrl("/"),"/");?>
+	NuGet SetApiKey <?php echo trim(trim($user->Token,"}"),"{");?> -Source <?php echo UrlUtils::CurrentUrl(Settings::$SiteRoot."upload");?>
 	
 	NuGet Push mypackage.nupkg -Source <?php echo UrlUtils::CurrentUrl(Settings::$SiteRoot."upload");?>
 </pre>

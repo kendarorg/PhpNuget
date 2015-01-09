@@ -197,6 +197,10 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
+* 3.0.8.0
+	* Modified the hint to register Api Key
+	* Added download link while browsing packages
+	
 * 3.0.7.0
 	* Support for ne/neq (thanks petero!)
 	* Support for null value in OData queries

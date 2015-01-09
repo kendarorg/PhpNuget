@@ -80,6 +80,7 @@ $item = $items[0];
 	
 	<li><?php echo $item->Description;?></li>
 	<li><b>Total downloads:</b> <?php echo $item->VersionDownloadCount;?> </li>
+	<li><b>Download package:</b> <a href="<?php echo UrlUtils::CurrentUrl(Settings::$SiteRoot."/api/?id=".$item->Id."&version=".$item->Version);?>">Here</a> </li>
 	<li><b>Tags:</b> <?php echo $item->Tags;?></li>
 	<?php
 	if(sizeof($item->Dependencies)>0){
