@@ -66,9 +66,8 @@ class LoginController
 		
 		$udb = new UserDb();
 		$user = null;
-		//echo $pwd."\r\n";
-		$ar = $udb->GetAllRows();
-		
+
+		$ar = $udb->GetAllRows();		
 		
 		foreach($ar as $row)
 		{

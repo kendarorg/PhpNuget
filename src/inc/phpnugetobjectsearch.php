@@ -222,7 +222,6 @@ class PhpNugetObjectSearch extends ObjectSearch
 	public static function IsPreRelease($version)
 	{
 		$version = strtolower($version);
-		$la= [];
 		$tmp = indexOf($version,"-");
 		return $tmp>0;
 	}
