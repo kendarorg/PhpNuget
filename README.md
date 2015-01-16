@@ -143,7 +143,7 @@ Tested on Windows 8 pro X64 bit and Windows 8.1 pro X64
 This guid is adapted from [iis.net](http://www.iis.net/learn/application-frameworks/install-and-configure-php-on-iis/using-php-manager-for-iis-to-setup-and-configure-php)
 
 1. download [php for windows](http://windows.php.net/)
-2. extract downloaded zip ( C:php )
+2. extract downloaded zip ( C:/php )
 3. download [php manager[(http://phpmanager.codeplex.com/releases) for IIS ( its an extension  for managing PHP from IIS control panel )
 4. open php manager and click on register new php installation
 5. choose php-cgi.exe and click ok (usually is inside 'C:\Program Files (x86)\PHP\v5.3\php-cgi.exe')
@@ -197,6 +197,9 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
+* 3.0.9.0
+	* Removed typo on phpnugetobjectsearch.php
+	
 * 3.0.8.0
 	* Modified the hint to register Api Key
 	* Added download link while browsing packages
