@@ -10,7 +10,7 @@ class HttpUtils
 	
 	public static function WriteFile($path, $mime = "text/plain") {
 		header('Content-Type: '.$mime);
-		require_once($path);
+		readfile($path);
 		die();
 	}
 	
