@@ -96,14 +96,14 @@ class ApiNugetBase
         
         
         $t= str_replace("\${NUSPEC.IDLOWER}",(strtolower($e->Id)),$t);
-        $t= str_replace("\${NUSPEC.TITLE}",htmlentities($e->Title),$t);
+        $t= str_replace("\${NUSPEC.TITLE}",htmlspecialchars($e->Title),$t);
         $t= str_replace("\${NUSPEC.VERSION}",($e->Version),$t);
         $t= str_replace("\${NUSPEC.LICENSEURL}",($e->LicenseUrl),$t);
         $t= str_replace("\${NUSPEC.PROJECTURL}",($e->ProjectUrl),$t);
         $t= str_replace("\${NUSPEC.REQUIRELICENSEACCEPTANCE}",$e->RequireLicenseAcceptance?"true":"false",$t);
-        $t= str_replace("\${NUSPEC.DESCRIPTION}",htmlentities($e->Description),$t);
+        $t= str_replace("\${NUSPEC.DESCRIPTION}",htmlspecialchars($e->Description),$t);
         if($e->Tags!=""){
-            $t= str_replace("\${NUSPEC.TAGS}"," ".htmlentities($e->Tags)." ",$t);
+            $t= str_replace("\${NUSPEC.TAGS}"," ".htmlspecialchars($e->Tags)." ",$t);
         }else{
             $t= str_replace("\${NUSPEC.TAGS}","",$t);
         }
@@ -132,9 +132,9 @@ class ApiNugetBase
         $t= str_replace("\${DB.LISTED}",$e->Listed?"true":"false",$t);
         
 		if(!is_array($e->Copyright)){
-			$t= str_replace("\${DB.COPYRIGHT}",htmlentities($e->Copyright),$t);
+			$t= str_replace("\${DB.COPYRIGHT}",htmlspecialchars($e->Copyright),$t);
 		}else{
-			$t= str_replace("\${DB.COPYRIGHT}",htmlentities(implode(", ",$e->Copyright)),$t);
+			$t= str_replace("\${DB.COPYRIGHT}",htmlspecialchars(implode(", ",$e->Copyright)),$t);
 		}
         //rint_r($e);die();
         return preg_replace('/<!--(.*)-->/Uis', '', $t);
