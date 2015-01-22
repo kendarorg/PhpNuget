@@ -14,6 +14,44 @@ Verified on:
 
 ## Installation
 
+### Notes for Apache With Red Hat Linux
+
+On Red Hat Linux the mod_rewrite must be enabled on the application directory
+since most features depends on it. This can be achieved modifying
+
+	/etc/httpd/conf/http.conf
+	
+Then on the definition of the phpnuget directory, change the AllowOverride from "None"
+to "All"
+
+From:
+
+<pre class="brush: xml;">
+	<Directory "/var/www/html/phpnugetdir">
+		Options Indexes FollowSymLinks
+		AllowOverride None
+		Order allow,deny
+		Allow from all
+	</Directory>
+</pre>
+
+To:
+
+<pre class="brush: xml;">
+	<Directory "/var/www/html/phpnugetdir">
+		Options Indexes FollowSymLinks
+		AllowOverride All
+		Order allow,deny
+		Allow from all
+	</Directory>
+</pre>
+
+And then restart Apache
+
+	sudo service httpd restart
+	
+This should be enough to let everything works.	
+
 ### Prerequisities For IIS
 
 These steps are NOT needed if your hosting already configured PHP
