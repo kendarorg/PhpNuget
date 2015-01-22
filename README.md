@@ -11,6 +11,7 @@ Verified on:
 * PHP 5.5.8-Apache 2.0 (Windows 8 Pro)
 * PHP 5.6-IIS 8
 * PHP 5.4.2-Apache 2.0 (OpenSuse 13.1)
+* PHP 5.3.3-Apache 2.2 (CentOS 6.5)
 
 ## Installation
 
