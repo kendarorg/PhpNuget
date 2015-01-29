@@ -38,6 +38,7 @@ class UsersApi extends SmallTextDbApiBase
 			throw new Exception("Not logged in!");
 		}
 		
+		
 		$userId = $_SESSION["UserId"];
 		$isAdmin = $_SESSION["Admin"]=="true" || $_SESSION["Admin"]==true;
 		
@@ -79,7 +80,9 @@ class UsersApi extends SmallTextDbApiBase
 			$password = md5($newPassword);
 		}
 		
-		$new->Admin = $old->Admin;
+		if($isAdmin==false){
+			$new->Admin = $old->Admin;
+		}
 		
 		if($isAdmin){
 			$new->Enabled = UrlUtils::GetRequestParam("Enabled");

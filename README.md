@@ -236,6 +236,11 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
+* 3.0.10.0
+	* Users were not allowed to be made adiministrators by the administrators
+	* Replaced htmlentities with htmlspecialchars
+	* HttpUtils: use readfile instead of require_once
+
 * 3.0.9.0
 	* Removed typo on phpnugetobjectsearch.php
 	
