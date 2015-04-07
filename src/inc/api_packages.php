@@ -196,6 +196,25 @@ class PackagesApi extends SmallTextDbApiBase
 		ApiBase::ReturnSuccess(null);
 	}
 	
+	public function docountpackagestorefresh()
+	{
+		try{
+			$this->_preExecute();
+			global $loginController;
+			
+			if(!$loginController->Admin){
+				throw new Exception("Unauthorized");
+			}
+			$files = scandir(Settings::$PackagesRoot);
+			$result = sizeof($files);
+			$message = $result ;
+			ApiBase::ReturnSuccess($message);
+		}catch(Exception $ex){
+			$message = "Refreshed ".$i." packages over ".sizeof($results).".";
+			ApiBase::ReturnError($message."\r\n".$ex->getMessage(),500);
+		}
+	}
+	
 	public function dorefreshpackages()
 	{
 		$results =array();
@@ -210,10 +229,18 @@ class PackagesApi extends SmallTextDbApiBase
 			}
 			
 			$files = scandir(Settings::$PackagesRoot);
+			
+			$skip = intval(UrlUtils::GetRequestParam("Skip"));
+			$count = intval(UrlUtils::GetRequestParam("Count"));
+			$total = sizeof($files);
+			
+			var_dump($files);
+			
 			$udb = new UserDb();
 			$user = $udb->GetByUserId($loginController->UserId);
 			
-			foreach($files as $file){
+			for($x = $skip;$x<$total;$x++){
+				$file = $files[$x];
 				$ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
 				if($ext == "nupkg"){
 					$m =$this->_loadNupkg(Path::Combine(Settings::$PackagesRoot,$file),$user->Id);
