@@ -170,7 +170,7 @@ class NugetManager
 		}else if(sizeof($res)>0 && $loginController->Admin){
 			$e->UserId = $res[0]->UserId;
 		}
-		$e->IsPreRelease = indexOf($e->version,"-")>0;
+		$e->IsPreRelease = indexOf($e->Version,"-")>0;
 		if($nugetDb->AddRow($e,false)){
 			$destination =Path::Combine(Settings::$PackagesRoot,strtolower($e->Id).".".strtolower($e->Version).".nupkg");
 			if(strtolower($nupkgFile)!=strtolower($destination)){

@@ -1,6 +1,6 @@
 
-app.factory('profilePackagesService',['$http','pathHelper',
-	function($http,pathHelper) {
+app.factory('profilePackagesService',['$http','pathHelper','$q',
+	function($http,pathHelper,$q) {
 		return {
 			apiBase : pathHelper.buildApiPath('packages'),
 			http :$http,
@@ -21,8 +21,41 @@ app.factory('profilePackagesService',['$http','pathHelper',
 			getAllVersions : function(title) {
 				var query = encodeURIComponent("Id eq '"+title+"'");
 				return this.http.get(this.apiBase+'/?Query='+query);
-			},refreshPackages : function() {
-				return this.http.post(this.apiBase+'/?method=refreshpackages');
+			},
+			refreshPackages : function() {
+				var skip = 0;
+				var total = 0;
+				var count = 10;
+				var apiBase = this.apiBase;
+				this.http.post(apiBase+'/?method=countpackagestorefresh')
+					.success(function(data){
+						total = data.Data;
+						
+						var defer = $q.defer();
+						var promises = [];
+						var successed = 0;
+						while(skip<total){
+							var prom =$http.post(apiBase+'/?method=refreshpackages&skip='+skip+'&count='+count);
+							
+							prom.success(function(data){
+									successed+=count;
+									console.log("Correct "+skip+" "+count);
+								}).error(function(data){
+									console.log("Wrong "+skip+" "+count);
+								});
+							promises.push(prom);
+							skip+=count;
+						}
+						
+						$q.all(promises).then(function() {
+							if(successed>=total){
+								alert("Refresh completed!");        
+							}else{
+								alert("Error refreshing!");        
+							}
+						});
+						
+					});
 			}
 		}
 	}
@@ -119,14 +152,15 @@ app.controller('packagesUploadController', ['$scope', '$controller', 'profilePac
 		}
 		
 		$scope.refreshPackages = function(url,packageId,packageVersion){
-			profilePackagesService.refreshPackages().success(function(data) {
+			profilePackagesService.refreshPackages();
+			/*profilePackagesService.refreshPackages().success(function(data) {
 					if(data.Success){
 						alert(data.Data);
 					}else{
 						alert(data.Message);
 						return;
 					}
-				});
+				});*/
 		}
 	}
 ]);
