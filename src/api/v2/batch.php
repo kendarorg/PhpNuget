@@ -131,6 +131,8 @@ class Batcher
 			$result.=$request->ResultData."\r\n";
 		}
 		$result .= "--".$boundary."--\r\n";
+		
+		//file_put_contents("batch.log",$result."\r\n", FILE_APPEND);
 		//header("Content-Length: ".strlen($result));
 		return $result;
 	}
