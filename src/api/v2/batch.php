@@ -7,18 +7,31 @@ require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/http.php");
 require_once(__ROOT__."/inc/api_nuget.php");
 
+$v2BatchDebug = true;
+
+if($v2BatchDebug){
+	file_put_contents("batch.log","==================================\r\n", FILE_APPEND);
+	file_put_contents("batch.log","request: ".$_SERVER['REQUEST_URI']."\r\n", FILE_APPEND);
+	if(sizeof($_POST)>0){
+		file_put_contents("batch.log",var_export($_POST,true)."\r\n", FILE_APPEND);
+	}
+	if(sizeof($_GET)>0){
+		file_put_contents("batch.log",var_export($_GET,true)."\r\n", FILE_APPEND);
+	}
+}
 
 class Batcher
 {
 	public function BuildSubBatch($src){
+		global $v2BatchDebug;
 		$res = new SubBatch();
 		$i =0;
+		$res->Action = null;
+		$res->ContentId = null;
 		for(;$i<sizeof($src);$i++){
 			$li = $src[$i];
 			
 			if(starts_with($li,"Content-ID")) {
-				
-				
 				$res->ContentId = substr($li,strlen("Content-ID:")+1);
 			}else if(starts_with($li,"POST")) {
 				$res->Action = substr($li,strlen("POST")+1);
@@ -26,6 +39,7 @@ class Batcher
 			}else if(starts_with($li,"GET")) {
 				$res->Action =substr($li,strlen("GET")+1);
 				$res->Method = "get";
+				break;
 			}else if(starts_with($li,"PUT")) {
 				$res->Action = substr($li,strlen("PUT")+1);
 				$res->Method = "put";
@@ -38,10 +52,17 @@ class Batcher
 				break;
 			}
 		}
+		if($res->Action!=null){
+			
+			$http = indexOf($res->Action," HTTP");
+			if($http>0){
+				$res->Action = substr($res->Action,0,$http);
+			}
+		}
 		//Add the space after the method
 		$res->Data = "";
 		
-		while($i<sizeof($src)){
+		while($i<sizeof($src) && $res->Method!="get"){
 			if($res->Data!=""){
 				$res->Data .= "\n".$src[$i];
 			}else{
@@ -54,40 +75,47 @@ class Batcher
 	}
 	
 	public function ParseData($boundary,$input){
+		global $v2BatchDebug;
+		
 		//$boundary = "--".$boundary;
 		// split content by boundary and get rid of last -- element
 		$a_blocks =  preg_split("/-+$boundary/", $input);
 		
+		
+		
 		$result = [];
-		//$a_blocks = preg_split("/-+$boundary/", $input);
-		
-		//array_pop($a_blocks);
-		
-		// loop data blocks
-		
+				
 		foreach ($a_blocks as $block){
 			if (empty($block))
 				continue;
 			
 			$splitted = preg_split('/\R/',$block);
+			
+			
 			$subBatch = $this->BuildSubBatch($splitted);
 			if($subBatch->Action!=""){
 				array_push($result,$subBatch);
 			}
 		}
+		
+		
 		return $result;
 	}
 	
 	public function Elaborate($requests){
 		$randBound = randomNumber(strlen("pK7JBAk73-E=_AA5eFwv4m2Q="));
 		$boundary = "batch_".$randBound;
-		header("Content-Type: multipart/mixed; boundary=".$boundary);
+		header("Content-Type: multipart/mixed; boundary=\"".$boundary."\"");
 		$result = "";
 		for($i=0;$i<sizeof($requests);$i++){
 			$request = $requests[$i];
+			
 			$result .= "--".$boundary."\r\n";
 			$result .= "Content-Type: application/http\r\n";
-			$result .= "Content-ID: <response-".substr($request->ContentId,1)."\r\n";
+			$result .="Content-Transfer-Encoding: binary\r\n";
+			if($request->ContentId!=null){
+				$result .= "Content-ID: <response-".substr($request->ContentId,1)."\r\n";
+			}
 			$result.="\r\n";
 			$result .= "HTTP/1.1 ".$request->ResultStatus." ";
 			if($request->ResultStatus==200){
@@ -95,27 +123,30 @@ class Batcher
 			}else{
 				$result.="KO\r\n";
 			}
-			$result.="Content-Type: application/atom+xml;type=feed;charset=utf-8\r\n";
-			$result.="Cache-Control: private, max-age=0\r\n";
-			$result.="Content-Length: ".(strlen($request->ResultData))."\r\n";
+			$result .="Cache-Control: no-cache\r\n";
+			$result .="DataServiceVersion: 2.0;\r\n";
+			$result.="Content-Type: application/atom+xml;charset=utf-8\r\n";
+			//$result.="Content-Length: ".(strlen($request->ResultData))."\r\n";
 			$result.="\r\n";
 			$result.=$request->ResultData."\r\n";
 		}
 		$result .= "--".$boundary."--\r\n";
-		header("Content-Length: ".strlen($result));
+		//header("Content-Length: ".strlen($result));
 		return $result;
 	}
 	
 	public function RawRequest()
 	{
+		global $v2BatchDebug;
+		
 		if(!array_key_exists('CONTENT_TYPE',$_SERVER) && UrlUtils::RequestMethod()!="post"){
+			
 			HttpUtils::ApiError(405,"The HTTP verb used is not allowed.");
 		}
 		$a_data = array();
 		// read incoming data
 		$input = file_get_contents('php://input');
 		
-		//WRITE_FILE
 
 		// grab multipart boundary from content type header
 		preg_match('/boundary=(.*)$/', $_SERVER['CONTENT_TYPE'], $matches);
@@ -126,25 +157,29 @@ class Batcher
 		}
 
 		$boundary = $matches[1];
-
+		
 		$parsed =  $this->ParseData($boundary,$input);
 		
 		$result = [];
 		for($i=0;$i<sizeof($parsed);$i++){
 			$item = $parsed[$i];
-			$action = UrlUtils::Combine(Settings::$SiteRoot,$item->Action);
-			$currentUrl = UrlUtils::CurrentUrl($action);
+			
 			$item->ResultStatus = 200;
 			
 			if($item->Method=="get"){
-				$item->ResultData = HttpUtils::HttpGet($currentUrl);
+				$item->ResultData = HttpUtils::HttpGet($item->Action);
 			}else if($item->Method=="get"){
-				$item->ResultData = HttpUtils::HttpPost($currentUrl,$item->Data,"application/atom+xml");
+				$item->ResultData = HttpUtils::HttpPost($item->Action,$item->Data,"application/atom+xml");
 			}
 			array_push($result,$item);
 		}
 		
-		echo  Batcher::Elaborate($result);
+		
+		$response =  Batcher::Elaborate($result);
+		
+		if($v2BatchDebug){
+			file_put_contents("batch.log","ACTION:".$response."\r\n", FILE_APPEND);
+		}
 	}
 }
 
