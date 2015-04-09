@@ -1,6 +1,22 @@
 <?php
 class HttpUtils
 {
+	public static function HttpGet($url){
+		return file_get_contents($url);
+	}
+	
+	public static function HttpPost($url,$data,$contentType){
+		// use key 'http' even if you send the request to https://...
+		$options = array(
+			'http' => array(
+				'header'  => "Content-type: ".$contentType."\r\n",
+				'method'  => 'POST',
+				'content' => $data,
+			),
+		);
+		$context  = stream_context_create($options);
+		return file_get_contents($url, false, $context);
+	}
 	public static function ApiError($code, $message) {
 		header('Status: ' . $code . ' ' . $message);
 		header('Content-Type: text/plain');
