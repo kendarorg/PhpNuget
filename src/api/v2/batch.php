@@ -58,6 +58,9 @@ class Batcher
 			if($http>0){
 				$res->Action = substr($res->Action,0,$http);
 			}
+			if(indexOf($res->Action,"http")!=0){
+				$res->Action = UrlUtils::CurrentUrl($res->Action);
+			}
 		}
 		//Add the space after the method
 		$res->Data = "";
@@ -76,23 +79,26 @@ class Batcher
 	
 	public function ParseData($boundary,$input){
 		global $v2BatchDebug;
+		$boundary = trim($boundary,'\"');
 		
 		//$boundary = "--".$boundary;
 		// split content by boundary and get rid of last -- element
-		$a_blocks =  preg_split("/-+$boundary/", $input);
-		
-		
-		
+		$a_blocks =  explode("--".$boundary,$input); // preg_split("/-+$boundary/", $input);
+		//echo $boundary."  ";
+		//var_dump($input);die();
 		$result = [];
-				
+		
 		foreach ($a_blocks as $block){
-			if (empty($block))
+			if (empty($block)){
+				
 				continue;
+			}
 			
 			$splitted = preg_split('/\R/',$block);
 			
 			
 			$subBatch = $this->BuildSubBatch($splitted);
+			
 			if($subBatch->Action!=""){
 				array_push($result,$subBatch);
 			}
@@ -104,36 +110,62 @@ class Batcher
 	
 	public function Elaborate($requests){
 		$randBound = randomNumber(strlen("pK7JBAk73-E=_AA5eFwv4m2Q="));
+		$randBoundSub = randomNumber(strlen("pK7JBAk73-E=_AA5eFwv4m2Q="));
 		$boundary = "batch_".$randBound;
-		header("Content-Type: multipart/mixed; boundary=\"".$boundary."\"");
-		$result = "";
-		for($i=0;$i<sizeof($requests);$i++){
-			$request = $requests[$i];
-			
-			$result .= "--".$boundary."\r\n";
-			$result .= "Content-Type: application/http\r\n";
-			$result .="Content-Transfer-Encoding: binary\r\n";
-			if($request->ContentId!=null){
-				$result .= "Content-ID: <response-".substr($request->ContentId,1)."\r\n";
-			}
-			$result.="\r\n";
-			$result .= "HTTP/1.1 ".$request->ResultStatus." ";
-			if($request->ResultStatus==200){
-				$result.="OK\r\n";
-			}else{
-				$result.="KO\r\n";
-			}
-			$result .="Cache-Control: no-cache\r\n";
-			$result .="DataServiceVersion: 2.0;\r\n";
-			$result.="Content-Type: application/atom+xml;charset=utf-8\r\n";
-			//$result.="Content-Length: ".(strlen($request->ResultData))."\r\n";
-			$result.="\r\n";
-			$result.=$request->ResultData."\r\n";
-		}
-		$result .= "--".$boundary."--\r\n";
 		
-		//file_put_contents("batch.log",$result."\r\n", FILE_APPEND);
-		//header("Content-Length: ".strlen($result));
+		http_response_code(202); //accepted
+		
+		
+		
+		$result = "";
+		
+		if(false && sizeof($requests)==1){
+			$request = $requests[0];
+			/*header("DataServiceVersion: 2.0");
+			header("X-XSS-Protection: 1; mode=block");
+			header("Content-Type: application/atom+xml;type=feed;charset=utf-8");*/
+			header('Content-Type: 	application/atom+xml;type=feed;charset=utf-8');
+			echo $request->ResultData;
+			flush();
+			return $request->ResultData;
+		}else{
+			header("DataServiceVersion: 1.0");
+			header("Content-Type: multipart/mixed; boundary=".$boundary);
+			header("X-Content-Type-Options: nosniff");
+			header("X-XSS-Protection: 1; mode=block");
+			for($i=0;$i<sizeof($requests);$i++){
+				$request = $requests[$i];
+				$result .= "--".$boundary."\r\n";
+				$result .= "Content-Type: application/http\r\n";
+				$result .="Content-Transfer-Encoding: binary\r\n";
+				
+				$result.="\r\n";
+				$result .= "HTTP/1.1 ".$request->ResultStatus." ";
+				if($request->ResultStatus==200){
+					$result.="OK\r\n";
+				}else{
+					$result.="KO\r\n";
+				}
+				
+				$result .="DataServiceVersion: 2.0\r\n";
+				$result.="Content-Type: application/atom+xml;type=feed;charset=utf-8\r\n";
+				if($request->ContentId!=null){
+					$result .= "Content-ID: ".$request->ContentId."\r\n";
+				}
+				//$result.="Content-Length: ".(strlen($request->ResultData))."\r\n";
+				$result .="X-Content-Type-Options: nosniff\r\n";
+				$result .="Cache-Control: no-cache\r\n";
+				$result.="\r\n";
+				$result.=$request->ResultData."\r\n";
+			}
+			$result .= "--".$boundary."--\r\n";
+			
+			//file_put_contents("batch.log",$result."\r\n", FILE_APPEND);
+			header("Content-Length: ".strlen($result));
+			echo $result;
+			flush();
+		}
+		
 		return $result;
 	}
 	
@@ -149,6 +181,10 @@ class Batcher
 		// read incoming data
 		$input = file_get_contents('php://input');
 		
+		/*var_dump($input);
+		flush();
+		die();*/
+		
 
 		// grab multipart boundary from content type header
 		preg_match('/boundary=(.*)$/', $_SERVER['CONTENT_TYPE'], $matches);
@@ -160,9 +196,22 @@ class Batcher
 
 		$boundary = $matches[1];
 		
+		
+		if($v2BatchDebug){
+			file_put_contents("batch.log","REQUEST:".$input."\r\n", FILE_APPEND);
+			file_put_contents("batch.log","\r\n", FILE_APPEND);
+		}
+		
 		$parsed =  $this->ParseData($boundary,$input);
 		
 		$result = [];
+		
+		
+		if($v2BatchDebug){
+			file_put_contents("batch.log","PARSING:".sizeof($parsed)."\r\n", FILE_APPEND);
+			file_put_contents("batch.log","\r\n", FILE_APPEND);
+		}
+		
 		for($i=0;$i<sizeof($parsed);$i++){
 			$item = $parsed[$i];
 			
@@ -180,7 +229,8 @@ class Batcher
 		$response =  Batcher::Elaborate($result);
 		
 		if($v2BatchDebug){
-			file_put_contents("batch.log","ACTION:".$response."\r\n", FILE_APPEND);
+			file_put_contents("batch.log","RESULT:".$response."\r\n", FILE_APPEND);
+			file_put_contents("batch.log","\r\n", FILE_APPEND);
 		}
 	}
 }

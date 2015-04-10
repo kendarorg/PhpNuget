@@ -173,6 +173,11 @@ RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/FindPackageById  [NC] 
 RewriteRule  .* /phpnuget/api/v2/index.php?action=findpackagesbyd   [QSA]
 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/\$batch  [NC] 
+RewriteRule  .* /phpnuget/api/v2/batch.php   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -181,10 +186,6 @@ RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/package/([^/]+)/([^/]+)  [NC]
 RewriteRule (.*)api/v2/package/([^/]+)/([^/]+)$  /phpnuget/api/?id=$2&version=$3 [NC,L]
 
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/\$batch  [NC] 
-RewriteRule  .* /phpnuget/api/v2/batch.php   [QSA]
+
 
 #Commons
