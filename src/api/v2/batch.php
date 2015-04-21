@@ -7,7 +7,7 @@ require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/http.php");
 require_once(__ROOT__."/inc/api_nuget.php");
 
-$v2BatchDebug = true;
+$v2BatchDebug = false;
 
 if($v2BatchDebug){
 	file_put_contents("batch.log","==================================\r\n", FILE_APPEND);
@@ -109,9 +109,9 @@ class Batcher
 	}
 	
 	public function Elaborate($requests){
-		$randBound = randomNumber(strlen("pK7JBAk73-E=_AA5eFwv4m2Q="));
-		$randBoundSub = randomNumber(strlen("pK7JBAk73-E=_AA5eFwv4m2Q="));
-		$boundary = "batch_".$randBound;
+		$randBound = randomNumber(strlen("ff6a932f-7ca9-4926-9ae0-0e12776eacbf"));
+		$randBoundSub = randomNumber(strlen("ff6a932f-7ca9-4926-9ae0-0e12776eacbf"));
+		$boundary = "batchresponse_".$randBound;
 		
 		http_response_code(202); //accepted
 		
@@ -119,52 +119,49 @@ class Batcher
 		
 		$result = "";
 		
-		if(false && sizeof($requests)==1){
-			$request = $requests[0];
-			/*header("DataServiceVersion: 2.0");
-			header("X-XSS-Protection: 1; mode=block");
-			header("Content-Type: application/atom+xml;type=feed;charset=utf-8");*/
-			header('Content-Type: 	application/atom+xml;type=feed;charset=utf-8');
-			echo $request->ResultData;
-			flush();
-			return $request->ResultData;
-		}else{
-			header("DataServiceVersion: 1.0");
-			header("Content-Type: multipart/mixed; boundary=".$boundary);
-			header("X-Content-Type-Options: nosniff");
-			header("X-XSS-Protection: 1; mode=block");
-			for($i=0;$i<sizeof($requests);$i++){
-				$request = $requests[$i];
-				$result .= "--".$boundary."\r\n";
-				$result .= "Content-Type: application/http\r\n";
-				$result .="Content-Transfer-Encoding: binary\r\n";
-				
-				$result.="\r\n";
-				$result .= "HTTP/1.1 ".$request->ResultStatus." ";
-				if($request->ResultStatus==200){
-					$result.="OK\r\n";
-				}else{
-					$result.="KO\r\n";
-				}
-				
-				$result .="DataServiceVersion: 2.0\r\n";
-				$result.="Content-Type: application/atom+xml;type=feed;charset=utf-8\r\n";
-				if($request->ContentId!=null){
-					$result .= "Content-ID: ".$request->ContentId."\r\n";
-				}
-				//$result.="Content-Length: ".(strlen($request->ResultData))."\r\n";
-				$result .="X-Content-Type-Options: nosniff\r\n";
-				$result .="Cache-Control: no-cache\r\n";
-				$result.="\r\n";
-				$result.=$request->ResultData."\r\n";
-			}
-			$result .= "--".$boundary."--\r\n";
+		header("DataServiceVersion: 1.0;");
+		header("Content-Type: multipart/mixed; boundary=".$boundary);
+		header("Cache-Control: no-cache");
+		//header("Content-Type: multipart/mixed");
+		//header("X-Content-Type-Options: nosniff");
+		//header("X-XSS-Protection: 1; mode=block");
+		for($i=0;$i<sizeof($requests);$i++){
+			$request = $requests[$i];
+			$result .= "--".$boundary."\r\n";
+			$result .= "Content-Type: application/http\r\n";
+			$result .="Content-Transfer-Encoding: binary\r\n";
 			
-			//file_put_contents("batch.log",$result."\r\n", FILE_APPEND);
-			header("Content-Length: ".strlen($result));
-			echo $result;
-			flush();
+			$result.="\r\n";
+			$result .= "HTTP/1.1 ".$request->ResultStatus." ";
+			if($request->ResultStatus==200){
+				$result.="OK\r\n";
+			}else{
+				$result.="KO\r\n";
+			}
+			$result .="Cache-Control: no-cache\r\n";
+			$result .="DataServiceVersion: 2.0;\r\n";
+			if(is_numeric($request->ResultData)){
+				$result.="Content-Type: text/plain;charset=utf-8\r\n";
+			}else{
+				$result.="Content-Type: application/atom+xml;type=feed;charset=utf-8\r\n";
+			}
+			if($request->ContentId!=null){
+				$result .= "Content-ID: ".$request->ContentId."\r\n";
+			}
+			//$result.="Content-Length: ".(strlen($request->ResultData))."\r\n";
+			//$result .="X-Content-Type-Options: nosniff\r\n";
+			
+			$result.="\r\n";
+			$result.=utf8_encode($request->ResultData)."\r\n";
 		}
+		$result .= "--".$boundary."--\r\n";
+		
+		//file_put_contents("batch.log","RESULT:\r\n".$result."\r\n", FILE_APPEND);
+		header("Content-Length: ".strlen($result));
+		
+
+		echo $result;
+		flush();
 		
 		return $result;
 	}

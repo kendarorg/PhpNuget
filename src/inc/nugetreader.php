@@ -147,7 +147,8 @@ class NugetManager
         
         $e->References = $this->LoadReferences($m);
        
-        $e->PackageHash = base64_encode(hash(strtolower(Settings::$PackageHash), file_get_contents($nupkgFile),true)); //true means raw, fals means in hex
+        //$e->PackageHash = base64_encode(hash(strtolower(Settings::$PackageHash), file_get_contents($nupkgFile),true)); //true means raw, fals means in hex
+		$e->PackageHash = base64_encode(hash_file(strtolower(Settings::$PackageHash), $nupkgFile,true)); //true means raw, fals mean s in hex
         $e->PackageHashAlgorithm = strtoupper(Settings::$PackageHash);
         $e->PackageSize = filesize($nupkgFile);
         $e->Listed = true;
