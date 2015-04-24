@@ -236,6 +236,9 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
+* 3.0.12.0 (in progress)
+	* Support for $batch requests
+	
 * 3.0.11.0
 	* Added "lazy" package refresh to avoid php timeout
 	* Added version lable on footer
