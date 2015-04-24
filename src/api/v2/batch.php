@@ -148,15 +148,14 @@ class Batcher
 			if($request->ContentId!=null){
 				$result .= "Content-ID: ".$request->ContentId."\r\n";
 			}
-			//$result.="Content-Length: ".(strlen($request->ResultData))."\r\n";
-			//$result .="X-Content-Type-Options: nosniff\r\n";
+			$result.="Content-Length: ".strlen($request->ResultData)."\r\n";
 			
 			$result.="\r\n";
-			$result.=utf8_encode($request->ResultData)."\r\n";
+			$result.=$request->ResultData."\r\n";
 		}
 		$result .= "--".$boundary."--\r\n";
 		
-		//file_put_contents("batch.log","RESULT:\r\n".$result."\r\n", FILE_APPEND);
+		//file_put_contents("batch.log","RESULT:\r\n".$result."\r\nENDOFRESULT", FILE_APPEND);
 		header("Content-Length: ".strlen($result));
 		
 
