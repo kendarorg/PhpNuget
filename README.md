@@ -238,6 +238,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 * 3.0.12.0 (in progress)
 	* Support for $batch requests
+	* Support for Nuget v3 protocol
 	
 * 3.0.11.0
 	* Added "lazy" package refresh to avoid php timeout
