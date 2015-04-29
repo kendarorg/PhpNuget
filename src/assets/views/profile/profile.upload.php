@@ -78,10 +78,12 @@ if($loginController->Admin){
 </form>
 </div>
 </div>
-<?php }?>
-<iframe name="output_frame" src="about:blank" id="output_frame" width="100%" height="300px" frameborder="0"></iframe>
-<!-- 
-
-<iframe name="output_frame" src="#" id="output_frame" width="0px" height="0px" frameborder="0"></iframe>
+<?php }?><!-- 
+<iframe name="output_frame" src="about:blank" id="output_frame" width="100%" height="300px" frameborder="1"></iframe>
 -->
+<br>
+<br>
+<br>
+<iframe name="output_frame" src="#" id="output_frame" width="0px" height="0px" frameborder="0"></iframe>
+
 </div>

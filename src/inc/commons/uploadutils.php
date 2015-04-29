@@ -71,9 +71,17 @@ class UploadUtils
             $toret["destination"]=$this->destinationDir."/" . $guid;
 			
 			if($isRealFile){
-				move_uploaded_file($toret["tmpName"],$toret["destination"]);
+				if(!move_uploaded_file($toret["tmpName"],$toret["destination"])){
+					$toret["hasError"] = true;
+					$toret["errorMessage"] =  'Cannot move file from ' . $toret["tmpName"] . ' to ' . $toret["destination"];
+					$toret["errorCode"] = UPLOAD_ERR_CANT_WRITE;
+				}
 			}else{
-				rename($toret["tmpName"],$toret["destination"]);
+				if(!rename($toret["tmpName"],$toret["destination"])){
+					$toret["hasError"] = true;
+					$toret["errorMessage"] = 'Cannot rename file from ' . $toret["tmpName"] . ' to ' . $toret["destination"];
+					$toret["errorCode"] = UPLOAD_ERR_CANT_WRITE;
+				}
 			}
           }
         }
