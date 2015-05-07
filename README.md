@@ -1,4 +1,4 @@
-# PhpNuget V. 3.0.11.0
+# PhpNuget V. 3.0.12.0
 
 ## Purpose
 
@@ -163,10 +163,12 @@ All v1 APIs are present, remind to replace the v1 in the previous section with v
 	* includeAllVersions: Not supported yet
 	* versionConstraints: Not supported yet
 * /api/v2/GetUpdates()/$count: Count all packages satisfyng the query. Same parameters as 'FindPackagesById()'
+* /api/v2/$batch: Executes the queries/action following the OData batch specifications.
 
 ### Api V3
 
 As soon as the guys from nuget defines it.
+Actually is work in progress, trying to follow the "working" example on nuget.org
 
 ### Other entry points
 
@@ -236,9 +238,9 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
-* 3.0.12.0 (in progress)
-	* Support for $batch requests
-	* Support for Nuget v3 protocol
+* 3.0.12.0
+	* Support for $batch requests (hopefully working)
+	* Support for Nuget v3 protocol (started the implementation)
 	
 * 3.0.11.0
 	* Added "lazy" package refresh to avoid php timeout

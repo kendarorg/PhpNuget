@@ -9,7 +9,7 @@ class Settings
 {
 	public static $PackageHash = __PACKAGEHASH__;
 	public static $MaxUploadBytes = __MAXUPLOAD_BYTES__;
-	public static $Version = "3.0.11.0";
+	public static $Version = "3.0.12.0";
 	public static $ResultsPerPage = __RESULTS_PER_PAGE__;
 	public static $SiteRoot = __SITE_ROOT__;
 	public static $DataRoot = "";
