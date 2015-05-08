@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>NuGet Schema Documentation</title>
+    <link rel="stylesheet" href="schema.nuget.org.schema_files/bootstrap.css">
+    <link rel="stylesheet" href="schema.nuget.org.schema_files/font-awesome.css">
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <a href="http://schema.nuget.org/" class="navbar-brand">NuGet Schema Browser</a>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Core</a></li>
+                    <li><a href="http://schema.nuget.org/catalog">Catalog</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <h1>NuGet Core Schema</h1>
+        <p>This site describes the Core NuGet Schema</p><p>
+
+        </p><h2>Properties</h2>
+        <h3><a name="id"></a>id</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#id">http://schema.nuget.org/schema#id</a></p>
+        <p>Type: <a href="http://www.w3.org/TR/xmlschema-2/#string">xsd:string</a>
+        </p><p>Specifies the unique id of the package within a particular gallery</p>
+
+        <h3><a name="version"></a>version</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#version">http://schema.nuget.org/schema#version</a></p>
+        <p>Type: <a href="http://schema.nuget.org/schema#SemanticVersion">nuget:SemanticVersion</a>
+        </p><p>Specifies the version of a package</p>
+
+        <h3><a name="summary"></a>summary</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#summary">http://schema.nuget.org/schema#summary</a></p>
+        <p>Type: <a href="http://www.w3.org/TR/xmlschema-2/#string">xsd:string</a>
+        </p><p>A brief summary of a package, designed for use in search results.</p>
+
+        <h3><a name="iconUrl"></a>iconUrl</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#iconUrl">http://schema.nuget.org/schema#iconUrl</a></p>
+        <p>Type: <a href="http://www.w3.org/TR/xmlschema-2/#anyURI">xsd:anyURI</a>
+        </p><p>A URL to an Icon that represents the package.</p>
+
+        <h3><a name="author"></a>author</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#author">http://schema.nuget.org/schema#author</a></p>
+        <p>Type: <a href="http://www.w3.org/TR/xmlschema-2/#string">xsd:string</a>
+        </p><p>Specifies one of the authors of a package.</p>
+
+        <h3><a name="publisher"></a>publisher</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#publisher">http://schema.nuget.org/schema#publisher</a></p>
+        <p>Type: <a href="http://www.w3.org/TR/xmlschema-2/#string">xsd:string</a>
+        </p><p>Specifies one of the publishers (previously called "owners") of a package.</p>
+
+        <h3><a name="licenseUrl"></a>licenseUrl</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#licenseUrl">http://schema.nuget.org/schema#licenseUrl</a></p>
+        <p>Type: <a href="http://www.w3.org/TR/xmlschema-2/#anyURI">xsd:anyURI</a>
+        </p><p>A URL to the License Agreement that covers usage of the package.</p>
+
+        <h3><a name="projectUrl"></a>projectUrl</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#projectUrl">http://schema.nuget.org/schema#projectUrl</a></p>
+        <p>Type: <a href="http://www.w3.org/TR/xmlschema-2/#anyURI">xsd:anyURI</a>
+        </p><p>A URL to the project home page.</p>
+
+        <h3><a name="tags"></a>tags</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#tags">http://schema.nuget.org/schema#tags</a></p>
+        <p>Type: <a href="http://www.w3.org/TR/xmlschema-2/#string">xsd:string</a>
+        </p><p>A space-separated list of tags to apply to the package</p>
+
+        <h3><a name="downloadCount"></a>downloadCount</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#downloadCount">http://schema.nuget.org/schema#downloadCount</a></p>
+        <p>Type: <a href="http://www.w3.org/TR/xmlschema-2/#integer">xsd:integer</a>
+        </p><p>The number of times the package has been downloaded from the gallery.</p>
+
+        <h3><a name="published"></a>published</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#published">http://schema.nuget.org/schema#published</a></p>
+        <p>Type: <a href="http://www.w3.org/TR/xmlschema-2/#dateTime">xsd:dateTime</a>
+        </p><p>The number of times the package has been downloaded from the gallery.</p>
+
+        <h3><a name="dependencyGroup"></a>dependencyGroup</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#dependencyGroup">http://schema.nuget.org/schema#dependencyGroup</a></p>
+        <p>Type: <a href="http://schema.nuget.org/schema#DependencyGroup">nuget:DependencyGroup</a>
+        </p><p>Specifies a group of dependencies this package has on other packages.</p>
+
+        <h3><a name="dependency"></a>dependency</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#dependency">http://schema.nuget.org/schema#dependency</a></p>
+        <p>Type: <a href="http://schema.nuget.org/schema#dependency">nuget:Dependency</a>
+        </p><p>Specifies a dependency this package has on other packages.</p>
+
+        <h3><a name="targetFramework"></a>targetFramework</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#targetFramework">http://schema.nuget.org/schema#targetFramework</a></p>
+        <p>Type: <a href="http://schema.nuget.org/schema#FrameworkName">nuget:FrameworkName</a>
+        </p><p>Specifies the target framework for a resource.</p>
+
+        <h3><a name="range"></a>range</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#range">http://schema.nuget.org/schema#range</a></p>
+        <p>Type: <a href="http://schema.nuget.org/schema#SemanticVersionRange">nuget:SemanticVersionRange</a>
+        </p><p>Specifies the range of versions that can satisfy this constraint.</p>
+
+        <h2>Types</h2>
+        <h3><a name="DependencyGroup"></a>DependencyGroup</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#DependencyGroup">http://schema.nuget.org/schema#DependencyGroup</a></p>
+        <p>A Group of Dependencies, usually constrained by a <a href="http://schema.nuget.org/schema#targetFramework">targetFramework</a> and other constraints</p>
+
+        <h3><a name="Dependency"></a>Dependency</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#Dependency">http://schema.nuget.org/schema#Dependency</a></p>
+        <p>A Dependency upon another package</p>
+
+        <h3><a name="SemanticVersionRange"></a>SemanticVersionRange</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#SemanticVersionRange">http://schema.nuget.org/schema#SemanticVersionRange</a></p>
+        <p>A range of <a href="http://schema.nuget.org/schema#SemanticVersion">SemanticVersions</a></p>
+
+        <h3><a name="SemanticVersion"></a>SemanticVersion</h3>
+        <p>Full Name: <a href="http://schema.nuget.org/schema#SemanticVersion">http://schema.nuget.org/schema#SemanticVersion</a></p>
+        <p>A SemanticVersion, as specified by <a href="http://semver.org/">semver.org</a>, with the addition of an <strong>OPTIONAL</strong> fourth numeric component. For example: 1.0.0.0</p>
+    </div>
+    <script src="schema.nuget.org.schema_files/jquery-2.js"></script>
+    <script src="schema.nuget.org.schema_files/bootstrap.js"></script>
+
+</body></html>

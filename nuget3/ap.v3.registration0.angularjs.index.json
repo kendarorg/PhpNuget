@@ -1,0 +1,3078 @@
+{
+  "@id": "https://api.nuget.org/v3/registration0/angularjs/index.json",
+  "@type": [
+    "catalog:CatalogRoot",
+    "PackageRegistration",
+    "catalog:Permalink"
+  ],
+  "commitId": "57cbabac-9acf-4a36-b9c6-a1caee9a8146",
+  "commitTimeStamp": "2015-04-27T21:30:52.6126243Z",
+  "count": 2,
+  "items": [
+    {
+      "@id": "https://api.nuget.org/v3/registration0/angularjs/index.json#page/1.0.0/1.3.0-rc1",
+      "@type": "catalog:CatalogPage",
+      "commitId": "57cbabac-9acf-4a36-b9c6-a1caee9a8146",
+      "commitTimeStamp": "2015-04-27T21:30:52.6126243Z",
+      "count": 64,
+      "items": [
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.0.0.json",
+          "@type": "Package",
+          "commitId": "db43e074-a283-4636-8feb-7893eb3a7037",
+          "commitTimeStamp": "2015-02-02T15:05:07.3089124Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.01.22.57.32/angularjs.1.0.0.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2012-06-17T12:55:21.427Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.0.0"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.0.0.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.0.1.json",
+          "@type": "Package",
+          "commitId": "db43e074-a283-4636-8feb-7893eb3a7037",
+          "commitTimeStamp": "2015-02-02T15:05:07.3089124Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.01.22.57.32/angularjs.1.0.1.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2012-06-17T13:43:56.95Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angularjs",
+              "angular"
+            ],
+            "title": "Angular JS",
+            "version": "1.0.1"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.0.1.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.0.2-unstable.json",
+          "@type": "Package",
+          "commitId": "362abf01-72ce-4a3e-ac2c-b918156878c6",
+          "commitTimeStamp": "2015-02-02T15:31:11.2323325Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.01.23.21.37/angularjs.1.0.2-unstable.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2012-06-24T13:11:11.523Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.0.2-Unstable"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.0.2-unstable.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.0.2.json",
+          "@type": "Package",
+          "commitId": "6a1eba8b-d627-4114-925f-d91eaf7e9303",
+          "commitTimeStamp": "2015-02-02T20:26:39.6843856Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.02.16.48.21/angularjs.1.0.2.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2012-09-28T14:05:18.473Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.0.2"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.0.2.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.0.3.json",
+          "@type": "Package",
+          "commitId": "1aeab4ff-840f-4a27-804a-aa4f8b8ae108",
+          "commitTimeStamp": "2015-02-03T00:11:47.8644488Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.02.20.39.07/angularjs.1.0.3.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2012-11-29T16:56:25.23Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.0.3"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.0.3.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.0.4.json",
+          "@type": "Package",
+          "commitId": "ed12e585-a892-4777-895c-f9b5b390f57b",
+          "commitTimeStamp": "2015-02-03T05:51:52.4854725Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.03.00.42.43/angularjs.1.0.4.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2013-01-24T21:35:16.43Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.0.4"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.0.4.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.0.5.json",
+          "@type": "Package",
+          "commitId": "7e5a8651-8406-4eb4-ac49-9bfc2e049062",
+          "commitTimeStamp": "2015-02-03T10:21:37.4766112Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.03.03.22.02/angularjs.1.0.5.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2013-02-22T10:14:45.167Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.0.5"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.0.5.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.0.6.json",
+          "@type": "Package",
+          "commitId": "be772457-643c-4134-a966-bb6a180ef4d4",
+          "commitTimeStamp": "2015-02-03T16:00:00.7064284Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.03.07.30.21/angularjs.1.0.6.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2013-04-15T13:16:21.463Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.0.6"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.0.6.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.0.7.json",
+          "@type": "Package",
+          "commitId": "2fc226c6-e800-450f-9f8b-001405a5d086",
+          "commitTimeStamp": "2015-02-03T20:50:50.7882434Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.03.10.10.41/angularjs.1.0.7.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2013-05-28T08:22:16.303Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.0.7"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.0.7.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.0.8.json",
+          "@type": "Package",
+          "commitId": "6c956e21-3ea5-4729-be07-4e2045950b9b",
+          "commitTimeStamp": "2015-02-04T19:14:41.1417683Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.03.21.49.42/angularjs.1.0.8.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2013-10-06T15:04:44.567Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.0.8"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.0.8.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.1.0-unstable.json",
+          "@type": "Package",
+          "commitId": "6a1eba8b-d627-4114-925f-d91eaf7e9303",
+          "commitTimeStamp": "2015-02-02T20:26:39.6843856Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.02.16.48.21/angularjs.1.1.0-unstable.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2012-09-28T14:13:06.487Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.1.0-Unstable"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.1.0-unstable.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.1.0.json",
+          "@type": "Package",
+          "commitId": "6a1eba8b-d627-4114-925f-d91eaf7e9303",
+          "commitTimeStamp": "2015-02-02T20:26:39.6843856Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.02.16.48.21/angularjs.1.1.0.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "1900-01-01T00:00:00Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.1.0"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.1.0.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.1.1-unstable.json",
+          "@type": "Package",
+          "commitId": "1aeab4ff-840f-4a27-804a-aa4f8b8ae108",
+          "commitTimeStamp": "2015-02-03T00:11:47.8644488Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.02.20.39.07/angularjs.1.1.1-unstable.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2012-11-29T17:05:37.36Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angularjs",
+              "angular"
+            ],
+            "title": "Angular JS",
+            "version": "1.1.1-Unstable"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.1.1-unstable.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.1.1.json",
+          "@type": "Package",
+          "commitId": "1aeab4ff-840f-4a27-804a-aa4f8b8ae108",
+          "commitTimeStamp": "2015-02-03T00:11:47.8644488Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.02.20.39.07/angularjs.1.1.1.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "1900-01-01T00:00:00Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.1.1"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.1.1.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.1.2-unstable.json",
+          "@type": "Package",
+          "commitId": "a59f0d85-55e4-48cf-8eee-f2c3873d8cfa",
+          "commitTimeStamp": "2015-02-03T05:52:07.516766Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.03.00.43.00/angularjs.1.1.2-unstable.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2013-01-24T21:40:18.413Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.1.2-Unstable"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.1.2-unstable.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.1.3-unstable.json",
+          "@type": "Package",
+          "commitId": "7e5a8651-8406-4eb4-ac49-9bfc2e049062",
+          "commitTimeStamp": "2015-02-03T10:21:37.4766112Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.03.03.22.02/angularjs.1.1.3-unstable.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2013-02-22T10:17:10.463Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.1.3-Unstable"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.1.3-unstable.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.1.4-unstable.json",
+          "@type": "Package",
+          "commitId": "be772457-643c-4134-a966-bb6a180ef4d4",
+          "commitTimeStamp": "2015-02-03T16:00:00.7064284Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.03.07.30.21/angularjs.1.1.4-unstable.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2013-04-15T13:19:38.76Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angularjs",
+              "angular"
+            ],
+            "title": "Angular JS",
+            "version": "1.1.4-Unstable"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.1.4-unstable.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.1.4.json",
+          "@type": "Package",
+          "commitId": "be772457-643c-4134-a966-bb6a180ef4d4",
+          "commitTimeStamp": "2015-02-03T16:00:00.7064284Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.03.07.30.21/angularjs.1.1.4.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "1900-01-01T00:00:00Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angularjs",
+              "angular"
+            ],
+            "title": "Angular JS",
+            "version": "1.1.4"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.1.4.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.1.5-unstable.json",
+          "@type": "Package",
+          "commitId": "2fc226c6-e800-450f-9f8b-001405a5d086",
+          "commitTimeStamp": "2015-02-03T20:50:50.7882434Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.03.10.10.41/angularjs.1.1.5-unstable.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2013-05-28T08:23:14.677Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.1.5-Unstable"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.1.5-unstable.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.0-rc1.json",
+          "@type": "Package",
+          "commitId": "6d406e8d-993d-49cd-8eb1-186248f35860",
+          "commitTimeStamp": "2015-02-04T12:09:35.326705Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.03.18.02.27/angularjs.1.2.0-rc1.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2013-08-22T19:55:23.05Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.0-RC1"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.0-rc1.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.0-rc2.json",
+          "@type": "Package",
+          "commitId": "ff603e0b-f888-41dc-9801-d149154ab9dd",
+          "commitTimeStamp": "2015-02-04T18:14:28.4282098Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.03.21.30.23/angularjs.1.2.0-rc2.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2013-10-02T14:10:26.393Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.0-RC2"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.0-rc2.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.0-rc3.json",
+          "@type": "Package",
+          "commitId": "d7554d25-e715-4b42-a56b-fd6c65cbf328",
+          "commitTimeStamp": "2015-02-04T23:05:18.1637731Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.00.05.03/angularjs.1.2.0-rc3.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2013-10-24T15:21:08.533Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.0-RC3"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.0-rc3.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.0.json",
+          "@type": "Package",
+          "commitId": "92de7fdc-cba1-4e64-8d10-e20a6cd5dc02",
+          "commitTimeStamp": "2015-02-05T03:19:21.7515141Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.02.51.14/angularjs.1.2.0.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2013-11-10T08:01:15.65Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.0"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.0.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.1.json",
+          "@type": "Package",
+          "commitId": "c4cce78c-b00d-4d7c-ad6c-317f04d69f2a",
+          "commitTimeStamp": "2015-02-05T06:17:01.2656565Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.04.37.50/angularjs.1.2.1.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2013-11-20T16:17:25.84Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.1"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.1.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.2.json",
+          "@type": "Package",
+          "commitId": "8e18484f-1c48-48c9-b11b-7b97d1bf7eb0",
+          "commitTimeStamp": "2015-02-05T07:39:08.8745685Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.05.34.48/angularjs.1.2.2.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2013-11-25T12:07:35.087Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.2"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.2.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.3.json",
+          "@type": "Package",
+          "commitId": "2d03179b-af31-4193-b951-e2740c1eaf85",
+          "commitTimeStamp": "2015-02-06T07:05:41.8921501Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.19.48.58/angularjs.1.2.3.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-02-19T11:41:35.497Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.3"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.3.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.4.json",
+          "@type": "Package",
+          "commitId": "3f406c73-dc65-42e4-b99e-f2b92b878133",
+          "commitTimeStamp": "2015-02-06T07:05:59.9857311Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.19.49.11/angularjs.1.2.4.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-02-19T12:18:33.637Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angularjs",
+              "angular"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.4"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.4.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.5.json",
+          "@type": "Package",
+          "commitId": "3f406c73-dc65-42e4-b99e-f2b92b878133",
+          "commitTimeStamp": "2015-02-06T07:05:59.9857311Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.19.49.11/angularjs.1.2.5.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-02-19T12:49:53.977Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.5"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.5.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.6.json",
+          "@type": "Package",
+          "commitId": "1222b43a-3757-4819-a3aa-c3829cb87c98",
+          "commitTimeStamp": "2015-02-06T07:06:40.6095814Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.19.49.30/angularjs.1.2.6.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "1900-01-01T00:00:00Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.6"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.6.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.6.1.json",
+          "@type": "Package",
+          "commitId": "759e1c50-cd36-4a57-aef5-62b75ae0eb15",
+          "commitTimeStamp": "2015-02-06T07:11:54.1483488Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.19.50.57/angularjs.1.2.6.1.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-02-19T13:38:07.277Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.6.1"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.6.1.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.7.json",
+          "@type": "Package",
+          "commitId": "1222b43a-3757-4819-a3aa-c3829cb87c98",
+          "commitTimeStamp": "2015-02-06T07:06:40.6095814Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.19.49.30/angularjs.1.2.7.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-02-19T12:55:52.1Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.7"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.7.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.8.json",
+          "@type": "Package",
+          "commitId": "1222b43a-3757-4819-a3aa-c3829cb87c98",
+          "commitTimeStamp": "2015-02-06T07:06:40.6095814Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.19.49.30/angularjs.1.2.8.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-02-19T12:57:48.233Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.8"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.8.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.9.json",
+          "@type": "Package",
+          "commitId": "9571ea3e-1066-47ff-a3b3-a00e6a795279",
+          "commitTimeStamp": "2015-02-06T07:08:03.184521Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.19.49.50/angularjs.1.2.9.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-02-19T12:59:30.377Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.9"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.9.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.10.json",
+          "@type": "Package",
+          "commitId": "9571ea3e-1066-47ff-a3b3-a00e6a795279",
+          "commitTimeStamp": "2015-02-06T07:08:03.184521Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.19.49.50/angularjs.1.2.10.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-02-19T13:02:58.257Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.10"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.10.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.11.json",
+          "@type": "Package",
+          "commitId": "9571ea3e-1066-47ff-a3b3-a00e6a795279",
+          "commitTimeStamp": "2015-02-06T07:08:03.184521Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.19.49.50/angularjs.1.2.11.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-02-19T13:05:38.493Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.11"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.11.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.12.json",
+          "@type": "Package",
+          "commitId": "944e071a-e2e4-4e0f-b752-d0467c71a677",
+          "commitTimeStamp": "2015-02-06T07:09:22.6983275Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.19.50.15/angularjs.1.2.12.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-02-19T13:07:33.967Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.12"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.12.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.13.json",
+          "@type": "Package",
+          "commitId": "944e071a-e2e4-4e0f-b752-d0467c71a677",
+          "commitTimeStamp": "2015-02-06T07:09:22.6983275Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.19.50.15/angularjs.1.2.13.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-02-19T13:09:03.403Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.13"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.13.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.14.json",
+          "@type": "Package",
+          "commitId": "5480bd2e-76c1-4d3a-8e6a-e17395913f4e",
+          "commitTimeStamp": "2015-02-06T10:58:26.9663573Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.22.00.51/angularjs.1.2.14.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-03-03T14:43:24.94Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.14"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.14.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.15.json",
+          "@type": "Package",
+          "commitId": "54811b4c-96aa-4b58-a11a-6abdd11769a6",
+          "commitTimeStamp": "2015-02-06T15:02:06.4776783Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.01.04.09/angularjs.1.2.15.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-03-23T10:38:14.593Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.15"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.15.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.16.json",
+          "@type": "Package",
+          "commitId": "c28e422e-4674-44c9-a2fb-be78b10079ef",
+          "commitTimeStamp": "2015-02-06T18:20:43.6819705Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.03.45.06/angularjs.1.2.16.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-04-07T10:16:32.727Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "SPA",
+              "angular",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.16"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.16.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.17.json",
+          "@type": "Package",
+          "commitId": "62cbb5ab-95c4-4e31-8ecf-493b5824a6f0",
+          "commitTimeStamp": "2015-02-07T10:58:33.6491915Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.13.26.48/angularjs.1.2.17.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-06-08T09:31:09.737Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.17"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.17.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.18.json",
+          "@type": "Package",
+          "commitId": "642b0490-d6a6-4a34-855c-74f454858bf6",
+          "commitTimeStamp": "2015-02-07T13:12:01.9262592Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.14.44.25/angularjs.1.2.18.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-06-17T08:42:12.447Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.18"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.18.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.19.json",
+          "@type": "Package",
+          "commitId": "cc599f21-71f4-4fc2-a359-99a088518588",
+          "commitTimeStamp": "2015-02-07T19:26:31.6716656Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.18.56.13/angularjs.1.2.19.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-07-02T09:08:30.347Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angularjs",
+              "angular",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.19"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.19.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.20.json",
+          "@type": "Package",
+          "commitId": "23ef2e19-c034-406f-905d-fe1e139f2d0a",
+          "commitTimeStamp": "2015-02-07T22:18:48.264402Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.21.10.56/angularjs.1.2.20.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-07-16T10:19:33.907Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.20"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.20.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.21.json",
+          "@type": "Package",
+          "commitId": "68ab47d3-7e5d-475d-af6d-422900629e3f",
+          "commitTimeStamp": "2015-02-08T00:44:37.8569858Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.23.19.32/angularjs.1.2.21.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-07-27T08:48:49.687Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.21"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.21.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.22.json",
+          "@type": "Package",
+          "commitId": "1eefe3f2-1d65-47a1-a9b7-a7bdcbcbcfdb",
+          "commitTimeStamp": "2015-02-08T04:43:38.2278363Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.03.33.56/angularjs.1.2.22.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-08-14T11:54:58.217Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.22"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.22.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.23.json",
+          "@type": "Package",
+          "commitId": "994b2ab0-54d5-49b4-ade2-9e0182984030",
+          "commitTimeStamp": "2015-02-08T06:45:42.1270594Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.05.21.17/angularjs.1.2.23.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-08-24T08:55:06.07Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.23"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.23.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.24.json",
+          "@type": "Package",
+          "commitId": "781cf1fb-d6b9-44d7-9de7-d1c34e80ff21",
+          "commitTimeStamp": "2015-02-08T11:18:56.5704129Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.09.13.13/angularjs.1.2.24.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-09-11T11:59:49.59Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.24"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.24.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.25.json",
+          "@type": "Package",
+          "commitId": "faf30a07-bbbb-4b4d-9aaf-7ee39554e1b3",
+          "commitTimeStamp": "2015-02-08T12:48:33.6090246Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.10.19.56/angularjs.1.2.25.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-09-17T12:50:00.757Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angularjs",
+              "SPA",
+              "angular"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.25"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.25.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.26.json",
+          "@type": "Package",
+          "commitId": "00ef3dd2-ab31-48ad-af06-74659cb922c8",
+          "commitTimeStamp": "2015-02-08T16:43:53.1849849Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.13.17.43/angularjs.1.2.26.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-10-02T17:36:02.653Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.26"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.26.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.27.json",
+          "@type": "Package",
+          "commitId": "03e0ae9c-f00e-4bf6-ab25-a26ea5ecdcec",
+          "commitTimeStamp": "2015-02-09T10:58:13.5106634Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.07.03.48.11/angularjs.1.2.27.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-11-22T19:33:47.077Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.27"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.27.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.2.28.json",
+          "@type": "Package",
+          "commitId": "0fb08247-5e1b-452d-bea3-272a5c5b2e58",
+          "commitTimeStamp": "2015-02-09T16:40:14.4289996Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.07.09.04.37/angularjs.1.2.28.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-12-16T08:20:30.617Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.2.28"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.2.28.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-beta1.json",
+          "@type": "Package",
+          "commitId": "88e55723-8c09-4af9-9793-359ef92ae39e",
+          "commitTimeStamp": "2015-02-06T12:23:06.78245Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.04.22.55.31/angularjs.1.3.0-beta1.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-03-10T10:26:46.847Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-beta1"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-beta1.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-beta10.json",
+          "@type": "Package",
+          "commitId": "5f96cb04-bab4-431a-8c63-0f3511d65261",
+          "commitTimeStamp": "2015-02-07T07:42:55.5739625Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.11.19.19/angularjs.1.3.0-beta10.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "1900-01-01T00:00:00Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angularjs",
+              "SPA",
+              "angular"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-beta10"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-beta10.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-beta2.json",
+          "@type": "Package",
+          "commitId": "6c538ddb-1d94-4f01-8581-eb76a507e848",
+          "commitTimeStamp": "2015-02-06T14:06:23.3395279Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.00.07.39/angularjs.1.3.0-beta2.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-03-18T09:16:17.44Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-beta2"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-beta2.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-beta3.json",
+          "@type": "Package",
+          "commitId": "54811b4c-96aa-4b58-a11a-6abdd11769a6",
+          "commitTimeStamp": "2015-02-06T15:02:06.4776783Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.01.04.09/angularjs.1.3.0-beta3.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-03-23T10:41:05.043Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "SPA",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-beta3"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-beta3.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-beta4.json",
+          "@type": "Package",
+          "commitId": "b54fe431-7fb8-4621-a528-70ed98ffede0",
+          "commitTimeStamp": "2015-02-06T16:47:39.5655245Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.02.13.56/angularjs.1.3.0-beta4.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-03-30T11:06:37.187Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-beta4"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-beta4.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-beta5.json",
+          "@type": "Package",
+          "commitId": "c28e422e-4674-44c9-a2fb-be78b10079ef",
+          "commitTimeStamp": "2015-02-06T18:20:43.6819705Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.03.45.06/angularjs.1.3.0-beta5.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-04-07T10:19:07.597Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "SPA",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-beta5"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-beta5.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-beta6.json",
+          "@type": "Package",
+          "commitId": "853e8879-382d-456e-95a5-4751d088a508",
+          "commitTimeStamp": "2015-02-06T21:18:03.3809979Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.05.54.54/angularjs.1.3.0-beta6.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-04-22T10:25:12.087Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-beta6"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-beta6.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-beta7.json",
+          "@type": "Package",
+          "commitId": "22e47658-4d97-4383-a0f5-72c188d5ce42",
+          "commitTimeStamp": "2015-02-06T22:30:59.3295656Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.06.44.03/angularjs.1.3.0-beta7.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-04-27T14:26:04.127Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-beta7"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-beta7.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-beta8.json",
+          "@type": "Package",
+          "commitId": "e98dd5b4-75dc-42db-889b-d0788e5e7bec",
+          "commitTimeStamp": "2015-02-07T02:46:23.7846752Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.09.02.16/angularjs.1.3.0-beta8.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-05-11T09:52:57.547Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "SPA",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-beta8"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-beta8.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-beta9.json",
+          "@type": "Package",
+          "commitId": "5f96cb04-bab4-431a-8c63-0f3511d65261",
+          "commitTimeStamp": "2015-02-07T07:42:55.5739625Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.11.19.19/angularjs.1.3.0-beta9.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-05-25T09:41:58.687Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-beta9"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-beta9.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-rc0.json",
+          "@type": "Package",
+          "commitId": "877a6ad0-5e69-4203-970f-1314ccba41d5",
+          "commitTimeStamp": "2015-02-08T08:37:34.2374703Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.06.55.43/angularjs.1.3.0-rc0.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-08-31T10:23:28.487Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-rc0"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-rc0.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-rc1.json",
+          "@type": "Package",
+          "commitId": "781cf1fb-d6b9-44d7-9de7-d1c34e80ff21",
+          "commitTimeStamp": "2015-02-08T11:18:56.5704129Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.09.13.13/angularjs.1.3.0-rc1.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-09-11T12:04:05.467Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-rc1"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-rc1.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        }
+      ],
+      "parent": "https://api.nuget.org/v3/registration0/angularjs/index.json",
+      "lower": "1.0.0",
+      "upper": "1.3.0-rc1"
+    },
+    {
+      "@id": "https://api.nuget.org/v3/registration0/angularjs/index.json#page/1.3.0-rc2/1.4.0-rc1",
+      "@type": "catalog:CatalogPage",
+      "commitId": "57cbabac-9acf-4a36-b9c6-a1caee9a8146",
+      "commitTimeStamp": "2015-04-27T21:30:52.6126243Z",
+      "count": 37,
+      "items": [
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-rc2.json",
+          "@type": "Package",
+          "commitId": "faf30a07-bbbb-4b4d-9aaf-7ee39554e1b3",
+          "commitTimeStamp": "2015-02-08T12:48:33.6090246Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.10.19.56/angularjs.1.3.0-rc2.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-09-17T12:54:03.827Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-rc2"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-rc2.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-rc3.json",
+          "@type": "Package",
+          "commitId": "a83ee04a-83c1-4859-b1d0-5c512a008c1a",
+          "commitTimeStamp": "2015-02-08T15:11:25.2100547Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.12.14.21/angularjs.1.3.0-rc3.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-09-27T18:29:23.147Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "SPA",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-rc3"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-rc3.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-rc4.json",
+          "@type": "Package",
+          "commitId": "00ef3dd2-ab31-48ad-af06-74659cb922c8",
+          "commitTimeStamp": "2015-02-08T16:43:53.1849849Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.13.17.43/angularjs.1.3.0-rc4.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-10-02T17:38:12.493Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-rc4"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-rc4.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0-rc5.json",
+          "@type": "Package",
+          "commitId": "ea0247d8-fcf3-4d51-80ec-12793a1fe830",
+          "commitTimeStamp": "2015-02-08T23:21:34.7317038Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.17.11.28/angularjs.1.3.0-rc5.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-10-19T09:39:19.76Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "SPA",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0-rc5"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0-rc5.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0.json",
+          "@type": "Package",
+          "commitId": "ea0247d8-fcf3-4d51-80ec-12793a1fe830",
+          "commitTimeStamp": "2015-02-08T23:21:34.7317038Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.17.11.28/angularjs.1.3.0.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-10-19T09:42:53.537Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0.10-beta.json",
+          "@type": "Package",
+          "commitId": "5f96cb04-bab4-431a-8c63-0f3511d65261",
+          "commitTimeStamp": "2015-02-07T07:42:55.5739625Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.11.19.19/angularjs.1.3.0.10-beta.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "1900-01-01T00:00:00Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0.10-beta"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0.10-beta.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0.11-beta.json",
+          "@type": "Package",
+          "commitId": "62cbb5ab-95c4-4e31-8ecf-493b5824a6f0",
+          "commitTimeStamp": "2015-02-07T10:58:33.6491915Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.13.26.48/angularjs.1.3.0.11-beta.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "1900-01-01T00:00:00Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0.11-beta"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0.11-beta.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0.12-beta.json",
+          "@type": "Package",
+          "commitId": "642b0490-d6a6-4a34-855c-74f454858bf6",
+          "commitTimeStamp": "2015-02-07T13:12:01.9262592Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.14.44.25/angularjs.1.3.0.12-beta.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "1900-01-01T00:00:00Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0.12-beta"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0.12-beta.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0.13-beta.json",
+          "@type": "Package",
+          "commitId": "642b0490-d6a6-4a34-855c-74f454858bf6",
+          "commitTimeStamp": "2015-02-07T13:12:01.9262592Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.14.44.25/angularjs.1.3.0.13-beta.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "1900-01-01T00:00:00Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "SPA",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0.13-beta"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0.13-beta.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0.14-beta.json",
+          "@type": "Package",
+          "commitId": "c4c31e7c-ce0f-4c8f-a2e0-3adefe194ba6",
+          "commitTimeStamp": "2015-02-07T19:27:05.7024817Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.18.56.37/angularjs.1.3.0.14-beta.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "1900-01-01T00:00:00Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0.14-beta"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0.14-beta.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0.15-beta.json",
+          "@type": "Package",
+          "commitId": "23ef2e19-c034-406f-905d-fe1e139f2d0a",
+          "commitTimeStamp": "2015-02-07T22:18:48.264402Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.21.10.56/angularjs.1.3.0.15-beta.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "1900-01-01T00:00:00Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0.15-beta"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0.15-beta.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0.16-beta.json",
+          "@type": "Package",
+          "commitId": "cb8425eb-bc76-42e5-aad9-4d3012d21d22",
+          "commitTimeStamp": "2015-02-07T23:34:12.7982047Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.22.08.10/angularjs.1.3.0.16-beta.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "1900-01-01T00:00:00Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0.16-beta"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0.16-beta.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0.17-beta.json",
+          "@type": "Package",
+          "commitId": "68ab47d3-7e5d-475d-af6d-422900629e3f",
+          "commitTimeStamp": "2015-02-08T00:44:37.8569858Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.05.23.19.32/angularjs.1.3.0.17-beta.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "1900-01-01T00:00:00Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0.17-beta"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0.17-beta.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0.18-beta.json",
+          "@type": "Package",
+          "commitId": "1eefe3f2-1d65-47a1-a9b7-a7bdcbcbcfdb",
+          "commitTimeStamp": "2015-02-08T04:43:38.2278363Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.03.33.56/angularjs.1.3.0.18-beta.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "1900-01-01T00:00:00Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0.18-beta"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0.18-beta.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.0.19-beta.json",
+          "@type": "Package",
+          "commitId": "994b2ab0-54d5-49b4-ade2-9e0182984030",
+          "commitTimeStamp": "2015-02-08T06:45:42.1270594Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.05.21.17/angularjs.1.3.0.19-beta.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "1900-01-01T00:00:00Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.0.19-beta"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.0.19-beta.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.1.json",
+          "@type": "Package",
+          "commitId": "a523c540-e507-48b6-9667-ea040b406369",
+          "commitTimeStamp": "2015-02-09T03:01:53.2729454Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.20.51.32/angularjs.1.3.1.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-11-02T09:21:36.347Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.1"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.1.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.2.json",
+          "@type": "Package",
+          "commitId": "4c1627b5-7af4-4d90-b30e-44a27380c6d4",
+          "commitTimeStamp": "2015-02-09T06:42:24.1618195Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.06.23.42.49/angularjs.1.3.2.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-11-09T10:26:18.267Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "SPA",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.2"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.2.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.3.json",
+          "@type": "Package",
+          "commitId": "a7b48c62-61d4-4ad6-b541-640aea19373a",
+          "commitTimeStamp": "2015-02-09T09:51:48.0035069Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.07.02.38.50/angularjs.1.3.3.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-11-19T11:56:30.287Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.3"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.3.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.4.json",
+          "@type": "Package",
+          "commitId": "3b599888-f387-44a1-bf93-d551914023dd",
+          "commitTimeStamp": "2015-02-09T11:34:02.4962626Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.07.04.27.50/angularjs.1.3.4.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-11-25T15:02:25.717Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "SPA",
+              "angularjs",
+              "angular"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.4"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.4.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.5.json",
+          "@type": "Package",
+          "commitId": "f8f8ed3b-9f48-4c74-9854-1fdeec59d480",
+          "commitTimeStamp": "2015-02-09T13:24:29.9034235Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.07.06.22.04/angularjs.1.3.5.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-12-03T10:07:31.513Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "SPA",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.5"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.5.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.6.json",
+          "@type": "Package",
+          "commitId": "d6ca23f9-dac6-45b5-b5b3-298b9a5bf20b",
+          "commitTimeStamp": "2015-02-09T14:58:43.6908465Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.07.07.55.46/angularjs.1.3.6.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-12-09T11:15:09.74Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angularjs",
+              "angular",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.6"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.6.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.7.json",
+          "@type": "Package",
+          "commitId": "0fb08247-5e1b-452d-bea3-272a5c5b2e58",
+          "commitTimeStamp": "2015-02-09T16:40:14.4289996Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.07.09.04.37/angularjs.1.3.7.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-12-16T08:17:47.223Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.7"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.7.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.8.json",
+          "@type": "Package",
+          "commitId": "7c8862dd-3aab-4c15-9507-c738d92bdc98",
+          "commitTimeStamp": "2015-02-09T17:55:56.0692816Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.07.10.07.23/angularjs.1.3.8.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2014-12-21T10:07:17.117Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "SPA",
+              "angularjs"
+            ],
+            "title": "Angular JS",
+            "version": "1.3.8"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.8.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.9.json",
+          "@type": "Package",
+          "commitId": "0a28feba-a0bc-4298-9953-da7be268b037",
+          "commitTimeStamp": "2015-02-10T09:04:39.7100071Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.07.16.26.07/angularjs.1.3.9.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2015-01-17T19:24:22.227Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "AngularJS",
+            "version": "1.3.9"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.9.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.10.json",
+          "@type": "Package",
+          "commitId": "fd24d784-15af-487c-8e47-558a66eafb51",
+          "commitTimeStamp": "2015-02-10T13:21:14.8491438Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.07.17.43.06/angularjs.1.3.10.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2015-01-22T07:04:57.43Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "AngularJS",
+            "version": "1.3.10"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.10.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.11.json",
+          "@type": "Package",
+          "commitId": "38d8e6b5-f8be-457e-8a1c-214689b53bac",
+          "commitTimeStamp": "2015-02-10T21:56:43.761996Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.07.21.04.54/angularjs.1.3.11.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2015-02-05T06:11:37.203Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "AngularJS",
+            "version": "1.3.11"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.11.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.12.json",
+          "@type": "Package",
+          "commitId": "38d8e6b5-f8be-457e-8a1c-214689b53bac",
+          "commitTimeStamp": "2015-02-10T21:56:43.761996Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.07.21.04.54/angularjs.1.3.12.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2015-02-05T06:18:50.943Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "SPA",
+              "angularjs"
+            ],
+            "title": "AngularJS",
+            "version": "1.3.12"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.12.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.13.json",
+          "@type": "Package",
+          "commitId": "1d4dd6c8-ab56-40e2-b601-0ffb8f3f9f8d",
+          "commitTimeStamp": "2015-02-19T21:21:09.6731007Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.12.00.30.05/angularjs.1.3.13.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2015-02-10T13:21:30.867Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "AngularJS",
+            "version": "1.3.13"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.13.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.14.json",
+          "@type": "Package",
+          "commitId": "4871ba2d-7052-4378-a6d0-202ba1904873",
+          "commitTimeStamp": "2015-02-26T13:04:37.6581332Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.26.12.57.55/angularjs.1.3.14.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2015-02-26T12:57:00.493Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "AngularJS",
+            "version": "1.3.14"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.14.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.3.15.json",
+          "@type": "Package",
+          "commitId": "4634e487-9a1e-4a20-b3f0-b3944658c5eb",
+          "commitTimeStamp": "2015-04-07T19:39:41.9397236Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.04.07.17.20.39/angularjs.1.3.15.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2015-03-19T10:16:36.097Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "AngularJS",
+            "version": "1.3.15"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.3.15.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.4.0-beta1.json",
+          "@type": "Package",
+          "commitId": "fd24d784-15af-487c-8e47-558a66eafb51",
+          "commitTimeStamp": "2015-02-10T13:21:14.8491438Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.07.17.43.06/angularjs.1.4.0-beta1.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2015-01-22T07:11:37.507Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.4.0-beta1"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.4.0-beta1.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.4.0-beta3.json",
+          "@type": "Package",
+          "commitId": "d5c64fdb-db4a-45a9-bee5-d91f3b71cb75",
+          "commitTimeStamp": "2015-02-10T22:01:16.770094Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.07.21.05.26/angularjs.1.4.0-beta3.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2015-02-05T06:20:56.647Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.4.0-beta3"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.4.0-beta3.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.4.0-beta4.json",
+          "@type": "Package",
+          "commitId": "1d4dd6c8-ab56-40e2-b601-0ffb8f3f9f8d",
+          "commitTimeStamp": "2015-02-19T21:21:09.6731007Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.12.00.30.05/angularjs.1.4.0-beta4.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2015-02-10T13:23:41.463Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.4.0-beta4"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.4.0-beta4.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.4.0-beta5.json",
+          "@type": "Package",
+          "commitId": "6c1fbb71-7292-4561-8456-9d01370cb509",
+          "commitTimeStamp": "2015-02-26T13:04:39.1268445Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.02.26.13.01.04/angularjs.1.4.0-beta5.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2015-02-26T13:00:02.433Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.4.0-beta5"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.4.0-beta5.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.4.0-beta6.json",
+          "@type": "Package",
+          "commitId": "fc65ef01-dd68-41da-a770-1df15bd107c8",
+          "commitTimeStamp": "2015-03-19T11:06:11.2138714Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.03.19.10.25.59/angularjs.1.4.0-beta6.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2015-03-19T10:24:57.293Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "SPA",
+              "angularjs",
+              "angular"
+            ],
+            "title": "Angular JS",
+            "version": "1.4.0-beta6"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.4.0-beta6.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.4.0-rc0.json",
+          "@type": "Package",
+          "commitId": "e4e596d1-19b1-458e-ab4b-bc9c0f55c780",
+          "commitTimeStamp": "2015-04-11T19:12:01.930367Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.04.11.18.50.02/angularjs.1.4.0-rc0.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2015-04-11T18:49:08.573Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angularjs",
+              "angular",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.4.0-rc0"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.4.0-rc0.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        },
+        {
+          "@id": "https://api.nuget.org/v3/registration0/angularjs/1.4.0-rc1.json",
+          "@type": "Package",
+          "commitId": "57cbabac-9acf-4a36-b9c6-a1caee9a8146",
+          "commitTimeStamp": "2015-04-27T21:30:52.6126243Z",
+          "catalogEntry": {
+            "@id": "https://api.nuget.org/v3/catalog0/data/2015.04.27.21.14.51/angularjs.1.4.0-rc1.json",
+            "@type": "PackageDetails",
+            "authors": "Fitzchak Yitzchaki,Dov Landau",
+            "description": "AngularJS. HTML enhanced for web apps!",
+            "iconUrl": "https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+            "id": "angularjs",
+            "language": "",
+            "licenseUrl": "",
+            "minClientVersion": "",
+            "projectUrl": "http://angularjs.org",
+            "published": "2015-04-26T09:00:17.647Z",
+            "requireLicenseAcceptance": false,
+            "summary": "",
+            "tags": [
+              "angular",
+              "angularjs",
+              "SPA"
+            ],
+            "title": "Angular JS",
+            "version": "1.4.0-rc1"
+          },
+          "packageContent": "https://api.nuget.org/packages/angularjs.1.4.0-rc1.nupkg",
+          "registration": "https://api.nuget.org/v3/registration0/angularjs/index.json"
+        }
+      ],
+      "parent": "https://api.nuget.org/v3/registration0/angularjs/index.json",
+      "lower": "1.3.0-rc2",
+      "upper": "1.4.0-rc1"
+    }
+  ],
+  "@context": {
+    "@vocab": "http://schema.nuget.org/schema#",
+    "catalog": "http://schema.nuget.org/catalog#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "items": {
+      "@id": "catalog:item",
+      "@container": "@set"
+    },
+    "commitTimeStamp": {
+      "@id": "catalog:commitTimeStamp",
+      "@type": "xsd:dateTime"
+    },
+    "commitId": {
+      "@id": "catalog:commitId"
+    },
+    "count": {
+      "@id": "catalog:count"
+    },
+    "parent": {
+      "@id": "catalog:parent",
+      "@type": "@id"
+    },
+    "tags": {
+      "@container": "@set",
+      "@id": "tag"
+    },
+    "packageTargetFrameworks": {
+      "@container": "@set",
+      "@id": "packageTargetFramework"
+    },
+    "dependencyGroups": {
+      "@container": "@set",
+      "@id": "dependencyGroup"
+    },
+    "dependencies": {
+      "@container": "@set",
+      "@id": "dependency"
+    },
+    "packageContent": {
+      "@type": "@id"
+    },
+    "published": {
+      "@type": "xsd:dateTime"
+    },
+    "registration": {
+      "@type": "@id"
+    }
+  }
+}

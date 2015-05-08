@@ -1,0 +1,18 @@
+{
+  "NumDocs": 457607,
+  "SearcherManagerIdentity": "49dde4c1-76a4-4de0-b560-d93dcc62d2b4",
+  "Index": "v2-lucene0",
+  "RankingsUpdated": "2015-05-08T13:46:59.5491087Z",
+  "DownloadCountsUpdated": "2015-05-08T13:47:10.9863882Z",
+  "CommitUserData": {
+    "commit-time-stamp": "5/8/2015 1:45:02 PM",
+    "commit-description": "update",
+    "commit-document-count": "4",
+    "highest-package-key": "531161",
+    "last-edits-index-time": "1/1/0001 12:00:00 AM",
+    "MaxDocumentsPerCommit": "800",
+    "MergeFactor": "10",
+    "MaxMergeDocs": "7999",
+    "count": "3"
+  }
+}
