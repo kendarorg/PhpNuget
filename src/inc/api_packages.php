@@ -273,6 +273,17 @@ class PackagesApi extends SmallTextDbApiBase
 			$parsedNuspec = $nugetReader->LoadNuspecFromFile($file);
 			$r->Id= $parsedNuspec->Id;
 			$r->Version= $parsedNuspec->Version;
+			
+			$pathInfo = basename($file);
+			$realPath = Path::Combine(Settings::$PackagesRoot,$r->Id.".".$r->Version.".nupkg");
+			if($realPath!=$file){
+				if(file_exists($realPath) && DIRECTORY_SEPARATOR == '/'){
+					unlink($realPath);
+				}
+				rename($file,$realPath);
+				$file = $realPath;
+			}
+			
 			$parsedNuspec->UserId=$userId;
 			$nuspecData = $nugetReader->SaveNuspec($file,$parsedNuspec);
 		}catch(Exception $ex){
