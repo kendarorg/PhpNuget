@@ -173,7 +173,7 @@ class NugetManager
 		}
 		$e->IsPreRelease = indexOf($e->Version,"-")>0;
 		if($nugetDb->AddRow($e,false)){
-			$destination =Path::Combine(Settings::$PackagesRoot,strtolower($e->Id).".".strtolower($e->Version).".nupkg");
+			$destination =Path::Combine(Settings::$PackagesRoot,($e->Id).".".($e->Version).".nupkg");
 			if(strtolower($nupkgFile)!=strtolower($destination)){
 				if(file_exists($destination)){
 					unlink($destination);
