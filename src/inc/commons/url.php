@@ -26,7 +26,7 @@ class UrlUtils
 		UrlUtils::$_method = strtolower($method);
 		UrlUtils::$_requestData = json_encode($requestData);
 		UrlUtils::$_mainUrl = UrlUtils::CurrentUrl(Settings::$SiteRoot);
-		UrlUtils::$_query=[];
+		UrlUtils::$_query=array();
 		$queryIndex = indexOf($url,"?");
 		if($queryIndex>0){
 			$query = substr($url,$queryIndex+1);

@@ -86,7 +86,7 @@ class Batcher
 		$a_blocks =  explode("--".$boundary,$input); // preg_split("/-+$boundary/", $input);
 		//echo $boundary."  ";
 		//var_dump($input);die();
-		$result = [];
+		$result = array();
 		
 		foreach ($a_blocks as $block){
 			if (empty($block)){
@@ -200,7 +200,7 @@ class Batcher
 		
 		$parsed =  $this->ParseData($boundary,$input);
 		
-		$result = [];
+		$result = array();
 		
 		
 		if($v2BatchDebug){
