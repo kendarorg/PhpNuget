@@ -60,7 +60,7 @@ class HttpUtils
 
 		// loop data blocks
 		foreach ($a_blocks as $id => $block){
-			if (empty($block))
+			if (empty($block) || $block=="--")
 				continue;
 
 			// you'll have to var_dump $block to understand this and maybe replace \n or \r with a visibile char
@@ -69,8 +69,11 @@ class HttpUtils
 			if (strpos($block, 'application/octet-stream') !== FALSE){
 				// match "name", then everything after "stream" (optional) except for prepending newlines
 				preg_match("/name=\"([^\"]*)\".*stream[\n|\r]+([^\n\r].*)?$/s", $block, $matches);
+				
+				$realData = mb_substr($matches[2], 0, -2);
+				
 				$a_data['files'][$matches[1]] = array();
-				$a_data['files'][$matches[1]]["tmp_name"]=Utils::WriteTemporaryFile($matches[2]);
+				$a_data['files'][$matches[1]]["tmp_name"]=Utils::WriteTemporaryFile($realData);
 				$a_data['files'][$matches[1]]["type"]="";
 				$a_data['files'][$matches[1]]["size"]=filesize($a_data['files'][$matches[1]]["tmp_name"]);
 				$a_data['files'][$matches[1]]["error"]=0;

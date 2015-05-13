@@ -101,4 +101,13 @@ function randomNumber($length) {
 
     return $result;
 }
+
+function return_var_dump(){//works like var_dump, but returns a string instead of printing it.
+	$args=func_get_args(); //for <5.3.0 support ...
+	ob_start();
+	call_user_func_array('var_dump',$args);
+	return ob_get_clean();
+};
+
+
 ?>
