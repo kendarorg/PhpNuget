@@ -41,6 +41,8 @@ class HttpUtils
 		$a_data = array();
 		// read incoming data
 		$input = file_get_contents('php://input');
+		
+		//file_put_contents("upload.log","==================================\r\n".$input, FILE_APPEND);
 
 		// grab multipart boundary from content type header
 		preg_match('/boundary=(.*)$/', $_SERVER['CONTENT_TYPE'], $matches);
@@ -64,20 +66,28 @@ class HttpUtils
 				continue;
 
 			// you'll have to var_dump $block to understand this and maybe replace \n or \r with a visibile char
-
 			// parse uploaded files
 			if (strpos($block, 'application/octet-stream') !== FALSE){
 				// match "name", then everything after "stream" (optional) except for prepending newlines
-				preg_match("/name=\"([^\"]*)\".*stream[\n|\r]+([^\n\r].*)?$/s", $block, $matches);
+				//preg_match("/name=\"([^\"]*)\".*stream[\n|\r]+([^\n\r].*)?$/s", $block, $matches);
+				preg_match("/octet-stream[\n|\r]+([^\n\r].*)?$/s", $block, $matches);
 				
-				$realData = mb_substr($matches[2], 0, -2);
+				$realData = mb_substr($matches[1], 0, -2);
 				
-				$a_data['files'][$matches[1]] = array();
-				$a_data['files'][$matches[1]]["tmp_name"]=Utils::WriteTemporaryFile($realData);
-				$a_data['files'][$matches[1]]["type"]="";
-				$a_data['files'][$matches[1]]["size"]=filesize($a_data['files'][$matches[1]]["tmp_name"]);
-				$a_data['files'][$matches[1]]["error"]=0;
-				$a_data['files'][$matches[1]]["name"]="name";
+				//$a_data['files'][$matches[1]] = array();
+				//$a_data['files'][$matches[1]]["tmp_name"]=Utils::WriteTemporaryFile($realData);
+				//$a_data['files'][$matches[1]]["type"]="";
+				//$a_data['files'][$matches[1]]["size"]=filesize($a_data['files'][$matches[1]]["tmp_name"]);
+				//$a_data['files'][$matches[1]]["error"]=0;
+				//$a_data['files'][$matches[1]]["name"]="name";
+				
+				$tmpFileName = "package";
+				$a_data['files'][$tmpFileName] = array();
+				$a_data['files'][$tmpFileName]["tmp_name"]=Utils::WriteTemporaryFile($realData);
+				$a_data['files'][$tmpFileName]["type"]="";
+				$a_data['files'][$tmpFileName]["size"]=filesize($a_data['files'][$tmpFileName]["tmp_name"]);
+				$a_data['files'][$tmpFileName]["error"]=0;
+				$a_data['files'][$tmpFileName]["name"]="name";
 			}else{
 				// parse all other fields
 				// match "name" and optional value in between newline sequences
