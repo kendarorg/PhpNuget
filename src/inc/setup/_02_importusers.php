@@ -47,6 +47,7 @@ if(!defined('__INSETUP__')){
 	//Setup the htaccess for api v2 and v1
 	$r["@HtAccess.V1@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/htaccess.v1"),$r);
 	$r["@HtAccess.V2@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/htaccess.v2"),$r);
+	$r["@HtAccess.V3@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/htaccess.v3"),$r);
 	
 	//Write the root htacces
 	Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/htaccess.root",$r),$r,Path::Combine(__ROOT__,".htaccess"));
@@ -56,6 +57,7 @@ if(!defined('__INSETUP__')){
 	$r["@WebConfig.PHPEXE@"]=UrlUtils::GetRequestParamOrDefault("phpCgi","","post");
 	$r["@WebConfig.V1@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/webconfig.v1"),$r);
 	$r["@WebConfig.V2@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/webconfig.v2"),$r);
+	$r["@WebConfig.V3@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/webconfig.v3"),$r);
 	
 	
 	//Write the root web.config

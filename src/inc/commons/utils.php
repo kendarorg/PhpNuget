@@ -91,4 +91,23 @@ function indexOf($mystring, $findme)
 		return $pos;
 	}
 }
+
+function randomNumber($length) {
+    $result = '';
+
+    for($i = 0; $i < $length; $i++) {
+        $result .= mt_rand(0, 9);
+    }
+
+    return $result;
+}
+
+function return_var_dump(){//works like var_dump, but returns a string instead of printing it.
+	$args=func_get_args(); //for <5.3.0 support ...
+	ob_start();
+	call_user_func_array('var_dump',$args);
+	return ob_get_clean();
+};
+
+
 ?>

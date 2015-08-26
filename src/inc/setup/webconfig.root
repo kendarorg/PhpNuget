@@ -14,6 +14,8 @@
 @WebConfig.V1@
 		<!--API V2-->
 @WebConfig.V2@  
+		<!--API V3-->
+@WebConfig.V3@  
 		<!--Commons-->
         </rewrites>
     </urlrewritingnet>

@@ -15,8 +15,22 @@ if($id == null || $version == null){
 if(strlen($id)==0 || strlen($version)==0){
 	HttpUtils::ApiError(500,"Wrong data. Empty id or version.");
 }
-$file = strtolower($id.".".$version.".nupkg");
+
+$query = "Id eq '".$id."' and Version eq '".$version."'";
+$db = new NuGetDb();
+$os = new PhpNugetObjectSearch();
+$os->Parse($query,$db->GetAllColumns());
+$allRows = $db->GetAllRows(1,0,$os);
+
+if(sizeof($allRows)==0){
+	HttpUtils::ApiError(404,"Not found.");
+}
+
+
+$file = ($allRows[0]->Id.".".$allRows[0]->Version.".nupkg");
+
 $path = Path::Combine(Settings::$PackagesRoot,$file);
+
 if(!file_exists($path)){
 	HttpUtils::ApiError(404,"Not found ".$file);
 }

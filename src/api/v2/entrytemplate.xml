@@ -31,7 +31,7 @@ Summary??
 -->
   <entry>
     <id>${BASEURL}/api/?id=${NUSPEC.ID}_${NUSPEC.VERSION}</id>
-    <category term="NuGetGallery.V2FeedPackagee" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <category term="NuGetGallery.V2FeedPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
     <link rel="edit" title="V2FeedPackage" href="Packages(Id='${NUSPEC.ID}',Version='${NUSPEC.VERSION}')" />
     <title type="text">${NUSPEC.ID}</title>
     <summary type="text">${NUSPEC.ID}</summary>
@@ -62,7 +62,7 @@ Summary??
       <d:VersionDownloadCount m:type="Edm.Int32">${DB.VERSIONDOWNLOADCOUNT}</d:VersionDownloadCount>
       <d:Summary m:null="true"></d:Summary>
       <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">${DB.ISABSOLUTELATESTVERSION}</d:IsAbsoluteLatestVersion>
-      <d:Listed m:type="Edm.Boolean">${DB.LISTED}</d:Listed>
+      <!--<d:Listed m:type="Edm.Boolean">${DB.LISTED}</d:Listed>-->
       <d:IconUrl m:null="true"></d:IconUrl>
     </m:properties>
   </entry>

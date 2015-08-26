@@ -1,6 +1,22 @@
 <?php
 class HttpUtils
 {
+	public static function HttpGet($url){
+		return file_get_contents($url);
+	}
+	
+	public static function HttpPost($url,$data,$contentType){
+		// use key 'http' even if you send the request to https://...
+		$options = array(
+			'http' => array(
+				'header'  => "Content-type: ".$contentType."\r\n",
+				'method'  => 'POST',
+				'content' => $data,
+			),
+		);
+		$context  = stream_context_create($options);
+		return file_get_contents($url, false, $context);
+	}
 	public static function ApiError($code, $message) {
 		header('Status: ' . $code . ' ' . $message);
 		header('Content-Type: text/plain');
@@ -25,6 +41,8 @@ class HttpUtils
 		$a_data = array();
 		// read incoming data
 		$input = file_get_contents('php://input');
+		
+		//file_put_contents("upload.log","==================================\r\n".$input, FILE_APPEND);
 
 		// grab multipart boundary from content type header
 		preg_match('/boundary=(.*)$/', $_SERVER['CONTENT_TYPE'], $matches);
@@ -44,21 +62,32 @@ class HttpUtils
 
 		// loop data blocks
 		foreach ($a_blocks as $id => $block){
-			if (empty($block))
+			if (empty($block) || $block=="--")
 				continue;
 
 			// you'll have to var_dump $block to understand this and maybe replace \n or \r with a visibile char
-
 			// parse uploaded files
 			if (strpos($block, 'application/octet-stream') !== FALSE){
 				// match "name", then everything after "stream" (optional) except for prepending newlines
-				preg_match("/name=\"([^\"]*)\".*stream[\n|\r]+([^\n\r].*)?$/s", $block, $matches);
-				$a_data['files'][$matches[1]] = array();
-				$a_data['files'][$matches[1]]["tmp_name"]=Utils::WriteTemporaryFile($matches[2]);
-				$a_data['files'][$matches[1]]["type"]="";
-				$a_data['files'][$matches[1]]["size"]=filesize($a_data['files'][$matches[1]]["tmp_name"]);
-				$a_data['files'][$matches[1]]["error"]=0;
-				$a_data['files'][$matches[1]]["name"]="name";
+				//preg_match("/name=\"([^\"]*)\".*stream[\n|\r]+([^\n\r].*)?$/s", $block, $matches);
+				preg_match("/octet-stream[\n|\r]+([^\n\r].*)?$/s", $block, $matches);
+				
+				$realData = mb_substr($matches[1], 0, -2);
+				
+				//$a_data['files'][$matches[1]] = array();
+				//$a_data['files'][$matches[1]]["tmp_name"]=Utils::WriteTemporaryFile($realData);
+				//$a_data['files'][$matches[1]]["type"]="";
+				//$a_data['files'][$matches[1]]["size"]=filesize($a_data['files'][$matches[1]]["tmp_name"]);
+				//$a_data['files'][$matches[1]]["error"]=0;
+				//$a_data['files'][$matches[1]]["name"]="name";
+				
+				$tmpFileName = "package";
+				$a_data['files'][$tmpFileName] = array();
+				$a_data['files'][$tmpFileName]["tmp_name"]=Utils::WriteTemporaryFile($realData);
+				$a_data['files'][$tmpFileName]["type"]="";
+				$a_data['files'][$tmpFileName]["size"]=filesize($a_data['files'][$tmpFileName]["tmp_name"]);
+				$a_data['files'][$tmpFileName]["error"]=0;
+				$a_data['files'][$tmpFileName]["name"]="name";
 			}else{
 				// parse all other fields
 				// match "name" and optional value in between newline sequences

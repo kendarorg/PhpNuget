@@ -11,4 +11,8 @@ RewriteBase /
 
 @HtAccess.V2@
 
+#API V3
+
+@HtAccess.V3@
+
 #Commons

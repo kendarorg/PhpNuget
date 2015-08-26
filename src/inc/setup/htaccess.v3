@@ -1,0 +1,52 @@
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v3/index.json  [NC] 
+RewriteRule  .* @ApplicationPath@api/v3/index.php?action=resources   [QSA]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v3/search/service/fields  [NC] 
+RewriteRule  .* @ApplicationPath@api/v3/index.php?action=searchFields   [QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v3/search/service/query  [NC] 
+RewriteRule  .* @ApplicationPath@api/v3/index.php?action=searchQuery   [QSA]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v3/search/service/diag  [NC] 
+RewriteRule  .* @ApplicationPath@api/v3/index.php?action=searchDiag   [QSA]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v3/search/service  [NC] 
+RewriteRule  .* @ApplicationPath@api/v3/index.php?action=searchResources   [QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v3/search  [NC] 
+RewriteRule  .* @ApplicationPath@api/v3/index.php?action=searchService   [QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v3/registration/([^/]+)/([^/]+).json  [NC] 
+RewriteRule (.*)api/v3/package/([^/]+)/([^/]+)$  @ApplicationPath@api/v3/index.php?action=package&id=$2&version=$3 [NC,L]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v3/registration/([^/]+)/index.json  [NC] 
+RewriteRule (.*)api/v3/package/([^/]+)/([^/]+)$  @ApplicationPath@api/v3/index.php?action=packages&id=$2 [NC,L]

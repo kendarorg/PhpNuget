@@ -1,4 +1,4 @@
-# PhpNuget V. 3.0.11.0
+# PhpNuget V. 3.0.12.0
 
 ## Purpose
 
@@ -163,10 +163,12 @@ All v1 APIs are present, remind to replace the v1 in the previous section with v
 	* includeAllVersions: Not supported yet
 	* versionConstraints: Not supported yet
 * /api/v2/GetUpdates()/$count: Count all packages satisfyng the query. Same parameters as 'FindPackagesById()'
+* /api/v2/$batch: Executes the queries/action following the OData batch specifications.
 
 ### Api V3
 
 As soon as the guys from nuget defines it.
+Actually is work in progress, trying to follow the "working" example on nuget.org
 
 ### Other entry points
 
@@ -206,6 +208,8 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 * Enable or disable PHP extensions
 * Remotely manage PHP configuration in php.ini file.
 * Easily install, configure, manage and troubleshoot one or many PHP versions on the same IIS server.
+* Get updated packages
+* Support viewing the profile in gallery, "nuget like" https://www.nuget.org/profiles/kendar.org
 
 
 ## TODO
@@ -213,9 +217,6 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 ### Must
 
 * Add captcha and max retries of password for users
-* Verify that 'GetUpdates' work as nuget expects.
-	* Support includeAllVersions
-	* Support versionConstraints	
 * Support Packages(Id='AngularJS.Core',Version='1.2.14') on v1 and v2 API
 * Support /packages/id to select all packages with the given id on the gallery
 * Support /packages/id/version to select a package on the gallery
@@ -229,17 +230,20 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ### Would
 
-* Support viewing the profile in gallery, "nuget like" https://www.nuget.org/profiles/kendar.org
 * Add Email token to reset users passwords
 * Upload multiple nupkg
 * Align the Settings::ResultsPerPage in all the views
 
 ## Updates
 
+* 3.0.12.0
+	* Support for $batch requests (hopefully working)
+	* Support for Nuget v3 protocol (started the implementation)
+	
 * 3.0.11.0
 	* Added "lazy" package refresh to avoid php timeout
 	* Added version lable on footer
-	
+
 * 3.0.10.0
 	* Users were not allowed to be made adiministrators by the administrators
 	* Replaced htmlentities with htmlspecialchars

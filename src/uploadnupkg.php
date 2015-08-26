@@ -46,7 +46,7 @@ if(!$loginController->IsLoggedIn){
 			
 			$message = "Uploaded ".$result["name"]." on ".dirname($result["destination"]);
 			?>
-			parent.packagesUploadControllerCallback(true,"<?php echo $parsedNuspec->Title;?>","<?php echo $parsedNuspec->Version;?>");
+			parent.packagesUploadControllerCallback(true,"<?php echo $parsedNuspec->Id;?>","<?php echo $parsedNuspec->Version;?>");
 			<?php
 		}catch(Exception $ex){
 			unlink($result["destination"]);

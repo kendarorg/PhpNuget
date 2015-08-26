@@ -1,0 +1,65 @@
+The protocol for search
+https://github.com/NuGet/NuGet.Protocol/src/NuGet.Protocol.Core.v3/RawSearchResourceV3.cs
+
+Some infos
+https://github.com/appveyor/ci/issues/163
+
+List of available resources
+https://api.nuget.org/v3/index.json
+
+{
+ "version": "3.0.0-beta.1",
+ "resources": [
+  {
+   "@id": "https://api-search.nuget.org/",	Search entry point
+   "@type": "SearchGalleryQueryService"
+  },
+  {
+   "@id": "https://api-metrics.nuget.org/DownloadEvent", ??????????????
+   "@type": "MetricsService"
+  },
+  {
+   "@id": "https://api.nuget.org/v3/registration0/", ??????????????
+   "@type": "RegistrationsBaseUrl"
+  },
+  {
+   "@id": "https://api.nuget.org/v2",	legacy api
+   "@type": "LegacyGallery"
+  },
+  {
+   "@id": "https://www.nuget.org/packages/{id}/{version}/ReportAbuse",	Report abuse
+   "@type": "ReportAbuseUriTemplate/3.0.0-rc"
+  },
+  {
+   "@id": "https://api.nuget.org/v3/registration0/{id-lower}/index.json",	Display packages id=angularjs. All packages
+   "@type": "PackageDisplayMetadataUriTemplate/3.0.0-rc"
+  },
+  {
+   "@id": "https://api.nuget.org/v3/registration0/{id-lower}/{version-lower}.json", Display package id=angularjs ver=1.0.2, the catalog entry
+																					Is what is the "actual" package https://api.nuget.org/v3/catalog0/data/2015.02.02.16.48.21/angularjs.1.0.2.json
+   "@type": "PackageVersionDisplayMetadataUriTemplate/3.0.0-rc"
+  },
+  {
+    "@id": "https://api.nuget.org/v3/stats0/totals.json",	Stats for the server
+    "@type": "TotalStats/3.0.0-rc"
+  }
+ ],
+ "@context": {
+  "@vocab": "https://schema.nuget.org/services#" ????????????
+ }
+}
+
+
+https://api-search.nuget.org/
+	services
+		search: https://api-search.nuget.org/search
+			resources
+				range: https://api-search.nuget.org/search/range?q=angularjs Lucene ranges
+				segments: https://api-search.nuget.org/search/segments?q=angularjs Lucene segments
+				diagnostics: https://api-search.nuget.org/search/diag?q=angularjs Lucene diagnostics
+				console: https://api-search.nuget.org/search/console?q=angularjs Search console for lucene
+					https://api-search.nuget.org/search/console/
+				fields: https://api-search.nuget.org/search/fields?q=angularjs List of fields
+				query: https://api-search.nuget.org/search/query?q=angularjs Execute a query
+				
+When getting an object				

@@ -179,7 +179,9 @@ class ApiNugetBase
 		$allRows = $db->GetAllRows($pg->Top+1,$pg->Skip,$os);
 		
 		
-		header('Content-Type: 	application/atom+xml;type=feed;charset=utf-8');
+		if(!UrlUtils::IsFake()){
+			header('Content-Type: 	application/atom+xml;type=feed;charset=utf-8');
+		}
 		$baseUrl = UrlUtils::CurrentUrl(Settings::$SiteRoot);
 		
 		//

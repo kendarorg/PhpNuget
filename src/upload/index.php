@@ -45,7 +45,8 @@ try{
 	$uploader = new UploadUtils(Settings::$PackagesRoot,array("nupkg"),Settings::$MaxUploadBytes,true);
 	$uploader->allowAll = true;
 	$result = $uploader->Upload("package");
-
+	if($result['hasError']) { 
+		throw new Exception($result['errorCode']); }
 
 
 	$fileName = basename($result["name"],".nupkg");
