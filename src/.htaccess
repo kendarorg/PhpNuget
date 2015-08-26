@@ -82,12 +82,6 @@ RewriteRule (.*)api/v1/package/([^/]+)/([^/]+)$  /phpnuget/api/?id=$2&version=$3
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
-RewriteCond %{REQUEST_URI}  ^/service/api/v2/\$batch  [NC] 
-RewriteRule  .* /service/api/v2/batch.php   [QSA]
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/\$metadata  [NC] 
 RewriteRule  .* /phpnuget/api/v2/index.php?action=metadata   [QSA]
 
