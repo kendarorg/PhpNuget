@@ -1,5 +1,6 @@
 <?php
 
+		
 class UrlUtils
 {
 	public static $_data;
@@ -15,6 +16,16 @@ class UrlUtils
 		UrlUtils::$_mainUrl = null;
 		UrlUtils::$_query = null;
 		UrlUtils::$_fake = false;
+		
+		if (!empty($_GET["_pq"])) {
+			$query = urldecode($_GET["_pq"]);
+			$gets = explode(",", $query);
+			foreach ($gets as $get) {
+				$item = explode("=", $get);
+				$_GET[$item[0]] = trim($item[1]," '");
+			}
+			unset($_GET["_pq"]);
+		}
 	}
 	
 	public static function IsFake()

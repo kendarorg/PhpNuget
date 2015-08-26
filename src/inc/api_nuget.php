@@ -241,6 +241,28 @@ class ApiNugetBase
 		$filter = UrlUtils::GetRequestParamOrDefault("\$filter",null);		
 		$orderby = UrlUtils::GetRequestParamOrDefault("\$orderby",null);
 		
+		$id = UrlUtils::GetRequestParamOrDefault("id",null);
+		
+		//Maybe allow UrlUtils to check without case sensitivity?
+		if($id==null){
+			$id = UrlUtils::GetRequestParamOrDefault("Id",null);
+		}
+		
+		if($id!=null){
+			$id = trim($id,"'");
+			$x = "(Id eq '".$id."')";
+			$query = $this->_append($query,$x,"and");
+		}
+		$version = UrlUtils::GetRequestParamOrDefault("version",null);
+		if($version==null){
+			$version = UrlUtils::GetRequestParamOrDefault("Version",null);
+		}
+		
+		if($version!=null){
+			$version = trim($version,"'");
+			$x = "(Version eq '".$version."')";
+			$query = $this->_append($query,$x,"and");
+		}
 		
 		
 		if($targetFramework!=null){
@@ -287,6 +309,10 @@ class ApiNugetBase
 		}
 		if($orderby!=null){
 			$query =$query." orderby ".$orderby;
+		}
+		
+		if($orderby==null){
+			$query =$query." orderby Title asc,Version desc";
 		}
 
 		$this->_query($query);

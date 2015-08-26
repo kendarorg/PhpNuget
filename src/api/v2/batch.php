@@ -264,4 +264,3 @@ $result[1]->ResultStatus=500;
 $elab = $b->Elaborate($result);
 var_dump($elab);
 }
-?>
