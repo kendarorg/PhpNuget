@@ -23,7 +23,7 @@ $os->Parse($query,$db->GetAllColumns());
 $allRows = $db->GetAllRows(1,0,$os);
 
 if(sizeof($allRows)==0){
-	HttpUtils::ApiError(404,"Not found.");
+	HttpUtils::ApiError(404,"Not found");
 }
 
 
@@ -31,8 +31,12 @@ $file = ($allRows[0]->Id.".".$allRows[0]->Version.".nupkg");
 
 $path = Path::Combine(Settings::$PackagesRoot,$file);
 
-if(!file_exists($path)){
-	HttpUtils::ApiError(404,"Not found ".$file);
+if(!file_exists($path)){		
+	//previous versions of PhpNuget did not care, so allow backwards compatibility
+	$path = Path::Combine(Settings::$PackagesRoot,strtolower($file));
+	if(!file_exists($path)){
+		HttpUtils::ApiError(404,"Not found ".$file);
+	}
 }
 
 header('Content-Type: application/zip');
@@ -42,4 +46,3 @@ header('Cache-Control: must-revalidate');
 header('Pragma: public');
 header('Content-Length: ' . filesize($path));
 readfile($path);
-?>
