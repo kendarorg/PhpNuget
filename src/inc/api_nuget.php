@@ -39,7 +39,7 @@ class ApiNugetBase
 	function _root()
 	{
 		$r = array();
-		$r["@Base@"] = UrlUtils::CurrentUrl(Settings::$SiteRoot);
+		$r["@Base@"] = rtrim(UrlUtils::CurrentUrl(Settings::$SiteRoot),"/");
 		$result = Utils::ReplaceInFile(Path::Combine($this->_path,"root.xml"),$r);
 		HttpUtils::WriteData($result,"application/xml");
 	}
