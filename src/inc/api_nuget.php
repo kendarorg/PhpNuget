@@ -83,9 +83,12 @@ class ApiNugetBase
     {
         $t = $this->_entryTemplate;
         $t.="  ";
-        $authors = explode(";",($e->Author));
+        $authors = explode(";",$e->Author);
         $author = "";
         if(sizeof($authors)>0){
+			for($i=0;$i<sizeof($authors);$i++){
+				$authors[$i] = htmlspecialchars($authors[$i]);
+			}
             $author = "<name>".implode("</name>\n<name>",$authors)."</name>";
         }
         //print_r($e);
