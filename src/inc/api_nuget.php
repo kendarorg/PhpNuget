@@ -173,11 +173,16 @@ class ApiNugetBase
 			$os = null;
 		}
 		
-		$count = UrlUtils::GetRequestParamOrDefault("count","false");
+		$count = UrlUtils::GetRequestParamOrDefault("count","false")=="true";
+		$allpages = UrlUtils::GetRequestParamOrDefault("\$inlinecount","none")=="allpages";
+		$itemsCount = -1;
 		
-		if($count=="true"){
+		if($count || $allpages){
 			$allRows = $db->GetAllRows(999999,0,$os);
-			HttpUtils::WriteData(sizeof($allRows));
+			$itemsCount = sizeof($allRows);
+			if(!$allpages){
+				HttpUtils::WriteData($itemsCount);
+			}
 		}
 		$allRows = $db->GetAllRows($pg->Top+1,$pg->Skip,$os);
 		
@@ -191,6 +196,11 @@ class ApiNugetBase
 		$r = array();
 		$r["@BASEURL@"]=$baseUrl;
 		$r["@NEXTITEM@"]="";
+		$r["@ITEMSCOUNT@"]="";
+		
+		if($itemsCount>=0){
+			$r["@ITEMSCOUNT@"]="<m:count>".$itemsCount."</m:count>";
+		}
 		
 		echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
 		echo Utils::ReplaceInFile(Path::Combine($this->_path,"entrytemplatepre.xml"),$r);
