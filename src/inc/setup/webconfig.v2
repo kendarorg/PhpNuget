@@ -111,9 +111,17 @@
                 ignoreCase="true" />
 				
 				
-            <add name="V1FindPackagesById19"  
+            <add name="V2FindPackagesById19"  
                 virtualUrl="^http\://(.*)/api/v2/package/(.*)/(.*)"
                 rewriteUrlParameter="ExcludeFromClientQueryString"
                 destinationUrl="~/api/?id=$2&amp;version=$3"
+                rewrite="Domain"
+                ignoreCase="true" />
+				
+			
+            <add name="V2PackagesUpload20"  
+                virtualUrl="^http\://(.*)/api/v2/package"
+                rewriteUrlParameter="ExcludeFromClientQueryString"
+                destinationUrl="~/upload"
                 rewrite="Domain"
                 ignoreCase="true" />

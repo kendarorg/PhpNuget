@@ -16,7 +16,15 @@ To upload packagase through the command line:<br><br>
 	
 	NuGet Push mypackage.nupkg -Source <?php echo UrlUtils::CurrentUrl(Settings::$SiteRoot."upload");?>
 </pre>
+
+If the default command line arguments does not work (or with <a href="https://npe.codeplex.com/">Nuget Package Explorer</a>) try with the following:<br><br>
+<pre>
+	NuGet SetApiKey <?php echo trim(trim($user->Token,"}"),"{");?> -Source <?php echo UrlUtils::CurrentUrl(Settings::$SiteRoot);?>
+	
+	NuGet Push mypackage.nupkg -Source <?php echo UrlUtils::CurrentUrl(Settings::$SiteRoot);?>
+</pre>
 <br>
+To upload packagase via web:<br><br>
 <form method="POST" action="<?php echo Settings::$SiteRoot;?>uploadnupkg.php"  enctype="multipart/form-data" target="output_frame">
 	<div class="form-group col-md-12">
 		<div class="col-md-1">
