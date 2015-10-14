@@ -14,11 +14,11 @@ $version = UrlUtils::GetRequestParamOrDefault("version",null);
 
 $db = new NuGetDb();
 $os = new PhpNugetObjectSearch();
-$query = "Id eq '".$id."' and Version eq '".$version."' and Listed eq true";
+$query = "Id eq '".$id."' and Version eq '".$version."'";
 $os->Parse($query,$db->GetAllColumns());
 $items = $db->GetAllRows(1,0,$os);
 if(sizeof($items)==0){
-	$query = "Id eq '".$id."'  and Listed eq true orderby Version desc";
+	$query = "Id eq '".$id."'  orderby Version desc";
 	$os->Parse($query,$db->GetAllColumns());
 	$items = $db->GetAllRows(1,0,$os);
 }

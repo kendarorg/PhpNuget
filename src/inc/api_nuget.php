@@ -310,6 +310,9 @@ class ApiNugetBase
 			}
 		}
 		
+		
+		$query = $this->_append($query,"(Listed eq true)","and");
+		
 		if($filter=="IsLatestVersion" || $filter == "IsAbsoluteLatestVersion"){
 			$filter = null;
 			$query = $this->_append($query," Listed eq true","and");

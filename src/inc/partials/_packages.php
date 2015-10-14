@@ -56,7 +56,7 @@ if($searchQuery!=null){
 	$os->Parse("Listed eq true ".$orderBy.$groupBy,$db->GetAllColumns());
 }else{
 	$os = new PhpNugetObjectSearch();
-	$os->Parse("orderby Title asc, Version desc".$groupBy,$db->GetAllColumns());
+	$os->Parse("Listed eq true orderby Title asc, Version desc".$groupBy,$db->GetAllColumns());
 }
 
 $next = Settings::$SiteRoot."?specialType=packages";
