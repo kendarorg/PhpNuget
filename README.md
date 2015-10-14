@@ -240,6 +240,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Nuget Package Explorer compatibility: Added support for standard upload
 	* Nuget Package Explorer compatibility: Added support $inlinecount parameter (nuget 2.8)
 	* Fix on path initialization
+	* Empty packages upload not allowed anymore
 	
 * 3.0.12.0
 	* Support for $batch requests (hopefully working)

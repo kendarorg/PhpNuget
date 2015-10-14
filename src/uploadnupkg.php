@@ -19,7 +19,15 @@ if(!$loginController->IsLoggedIn){
 	<?php
 }else if(UploadUtils::IsUploadRequest()){
 	$uploader = new UploadUtils(Settings::$PackagesRoot,array("nupkg"),Settings::$MaxUploadBytes);
-	$result = $uploader->Upload("fileName");
+	$result = null;
+	try{
+		$result = @$uploader->Upload("fileName");
+	}catch(Exception $e){
+		$result["hasError"]=true;
+		$result["name"]="NA";
+		$result["errorCode"]="";
+		$result["errorMessage"]="Wrong file";
+	}
 	$fileName = basename($result["name"],".nupkg");
 	$message = "";
 	if($result["hasError"]==true){
@@ -28,7 +36,9 @@ if(!$loginController->IsLoggedIn){
 		if($result["errorCode"]!=null){
 			$message .= "Error code is:".$result["errorCode"]."."; 
 		}
-		unlink($result["destination"]);
+		try{
+			@unlink($result["destination"]);
+		}catch(Exception $e){}
 		?>
 		parent.packagesUploadControllerCallback(false,"none","none","<?php echo$result["errorMessage"];?>");
 		<?php
@@ -42,6 +52,7 @@ if(!$loginController->IsLoggedIn){
 			$parsedNuspec = $nugetReader->LoadNuspecFromFile($result["destination"]);
 			
 			$parsedNuspec->UserId=$user->Id;
+			//echo "<!-- var_dump($parsedNuspec);die();
 			$nuspecData = $nugetReader->SaveNuspec($result["destination"],$parsedNuspec);
 			
 			$message = "Uploaded ".$result["name"]." on ".dirname($result["destination"]);

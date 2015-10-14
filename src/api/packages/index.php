@@ -7,7 +7,7 @@ require_once(__ROOT__."/inc/commons/url.php");
 $id = UrlUtils::GetRequestParam("Query");
 $api = new PackagesApi();
 if($id!=null)
-	$api->Execute("getbyquery");
+	@$api->Execute("getbyquery");
 else
-	$api->Execute();
+	@$api->Execute();
 ?>

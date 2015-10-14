@@ -48,6 +48,9 @@ class NuGetDb
 	
     public function AddRow($nugetEntity,$update)
     {
+		if($nugetEntity->Id=="" || $nugetEntity->Version==""){
+			throw new Exception("Missing Id and/or Version");
+		}
         $dbInstance =  new SmallTxtDb("3.0.0.0",__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__);
 		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
         $toInsert = array();
