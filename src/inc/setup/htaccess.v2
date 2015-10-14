@@ -102,6 +102,7 @@ RewriteRule (.*)api/v2/package/([^/]+)/([^/]+)$  @ApplicationPath@api/?id=$2&ver
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_METHOD}  !GET
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v2/package  [NC] 
 RewriteRule .*  @ApplicationPath@upload/ [NC,L]

@@ -99,12 +99,14 @@ RewriteRule  .* /phpnuget/api/v2/index.php?action=search   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_METHOD}  =GET
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/Packages\(\)/\$count  [NC] 
 RewriteRule  .* /phpnuget/api/v2/index.php?action=packages&count=true  [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_METHOD}  =GET
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/Packages/\$count  [NC] 
 RewriteRule  .* /phpnuget/api/v2/index.php?action=packages&count=true   [QSA]
@@ -112,18 +114,21 @@ RewriteRule  .* /phpnuget/api/v2/index.php?action=packages&count=true   [QSA]
 #turn parenthesized parameters into a query string (sibling code in url.php)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_METHOD}  =GET
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/Packages\((.+)\)  [NC] 
 RewriteRule  .* /phpnuget/api/v2/index.php?action=packages&_pq=%1   [QSA,B]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_METHOD}  =GET
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/Packages  [NC] 
 RewriteRule  .* /phpnuget/api/v2/index.php?action=packages   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_METHOD}  =GET
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/Packages\(\)  [NC] 
 RewriteRule  .* /phpnuget/api/v2/index.php?action=packages   [QSA]
@@ -183,6 +188,7 @@ RewriteRule  .* /phpnuget/api/v2/index.php?action=findpackagesbyd   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/package/([^/]+)/([^/]+)  [NC] 
 RewriteRule (.*)api/v2/package/([^/]+)/([^/]+)$  /phpnuget/api/?id=$2&version=$3 [NC,L]
@@ -190,6 +196,7 @@ RewriteRule (.*)api/v2/package/([^/]+)/([^/]+)$  /phpnuget/api/?id=$2&version=$3
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_METHOD}  !GET
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/package  [NC] 
 RewriteRule .*  /phpnuget/upload/ [NC,L]
