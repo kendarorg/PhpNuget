@@ -14,12 +14,14 @@ $db = new NuGetDb();
 
 $pg = new Pagination();
 $searchQuery = UrlUtils::GetRequestParamOrDefault("searchQuery",null);
+$q =  UrlUtils::GetRequestParamOrDefault("q",null);
 $orderBy = UrlUtils::GetRequestParamOrDefault("orderBy",null);
 $originalOrderBy = $orderBy;
+$fallbackQuery = "";
 
-if($searchQuery == ""){
-	$q =  UrlUtils::GetRequestParamOrDefault("q","");
-	if($q!=""){
+function buildFallbackQuery($q,$op = "and")
+{
+	if($q!="" && $q!=null){
 		$q = str_replace("'","",$q);
 		$q = str_replace("\"","",$q);
 		$q = preg_split('/\s+/', $q);
@@ -28,8 +30,18 @@ if($searchQuery == ""){
 			$t[]="substringof('".$qs."',Id)";
 			$t[]="substringof('".$qs."',Title)";
 		}
-		$searchQuery = implode(" and ",$t);
+		return implode(" ".$op." ",$t);
 	}
+	return null;
+}
+
+
+if($q!=null && $q!=""){
+	$searchQuery = buildFallbackQuery($q);
+}
+
+if($searchQuery!=null && $searchQuery!=""){
+	$fallbackQuery = buildFallbackQuery($searchQuery,"or");
 }
 
 if($originalOrderBy!=null){
@@ -41,22 +53,49 @@ $pg->Skip = UrlUtils::GetRequestParamOrDefault("skip",0);
 $pg->Top = UrlUtils::GetRequestParamOrDefault("top",10);
 
 $os = null;
+$exceptionThrown = null;
 
-if($searchQuery!=null){
-	if($orderBy!=null){
-		$orderBy = " orderby ".$orderBy;
+try{
+	if($searchQuery!=null){
+		if($orderBy!=null){
+			$orderBy = " orderby ".$orderBy;
+		}else{
+			$orderBy = " orderby Title asc,Version desc";
+		}
+		$os = new PhpNugetObjectSearch();
+		$os->Parse("(".$searchQuery.") and Listed eq true ".$orderBy.$groupBy,$db->GetAllColumns());
+	}else if($orderBy!=null){
+		$orderBy = "orderby ".$orderBy;
+		$os = new PhpNugetObjectSearch();
+		$os->Parse("Listed eq true ".$orderBy.$groupBy,$db->GetAllColumns());
 	}else{
-		$orderBy = " orderby Title asc,Version desc";
+		$os = new PhpNugetObjectSearch();
+		$os->Parse("Listed eq true orderby Title asc, Version desc".$groupBy,$db->GetAllColumns());
 	}
-	$os = new PhpNugetObjectSearch();
-	$os->Parse("(".$searchQuery.") and Listed eq true ".$orderBy.$groupBy,$db->GetAllColumns());
-}else if($orderBy!=null){
-	$orderBy = "orderby ".$orderBy;
-	$os = new PhpNugetObjectSearch();
-	$os->Parse("Listed eq true ".$orderBy.$groupBy,$db->GetAllColumns());
-}else{
-	$os = new PhpNugetObjectSearch();
-	$os->Parse("Listed eq true orderby Title asc, Version desc".$groupBy,$db->GetAllColumns());
+}catch(Exception $ex){
+	$os = null;
+	$exceptionThrown = $ex;
+}
+
+if($os==null){
+	try{
+		if($fallbackQuery!=null){
+			if($orderBy!=null){
+				$orderBy = " orderby ".$orderBy;
+			}else{
+				$orderBy = " orderby Title asc,Version desc";
+			}
+			$os = new PhpNugetObjectSearch();
+			$os->Parse("(".$fallbackQuery.") and Listed eq true ".$orderBy.$groupBy,$db->GetAllColumns());
+		}
+	}catch(Exception $ex){
+		$os = null;
+	}
+}
+
+if($os==null && $exceptionThrown!=null){
+	echo "<b>Parsing error:</b> ".$exceptionThrown->getMessage();
+	die();
 }
 
 $next = Settings::$SiteRoot."?specialType=packages";

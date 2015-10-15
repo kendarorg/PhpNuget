@@ -273,6 +273,8 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Uploading a package with "-" into the name will result in a pre-release package
 	* Field "Is Pre Release" is now honoured correctly
 	* Fixed bug for free text fields not correctly shown on packages list when containing html tags
+	* Some typos
+	* Fixed issue when searching for not standard queries from gallery, fallback to all words under or clause
 	
 * 3.0.6.0
 	* Added "tolower" function (thanks petero-dk!)
