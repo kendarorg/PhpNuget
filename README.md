@@ -244,6 +244,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Fixed duplicate packages upload via CLI/Nuget Package Explorer
 	* Fixed "Listed" flag inconsistencies
 	* Fixed "Group by" clause in database 
+	* Added favicon to the website
 	
 * 3.0.12.0
 	* Support for $batch requests (hopefully working)

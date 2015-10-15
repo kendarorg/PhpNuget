@@ -5,6 +5,7 @@
 ?>
 <html ng-app="phpNugetApp">
 	<head>
+		<link rel="shortcut icon" href="./favicon.ico">
 		<script src="scripts/angular/angular.min.js"></script>
 		<script src="scripts/angular/angular-cookies.min.js"></script>
 		<script src="scripts/angular/angular-resource.min.js"></script>
