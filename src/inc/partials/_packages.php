@@ -77,7 +77,11 @@ try{
 	$exceptionThrown = $ex;
 }
 
-if($os==null){
+$retryCount=0;
+
+doRetry:
+if($os==null && $retryCount ==0){
+	$retryCount++;
 	try{
 		if($fallbackQuery!=null){
 			if($orderBy!=null){
@@ -102,10 +106,20 @@ $next = Settings::$SiteRoot."?specialType=packages";
 if($searchQuery!=null){
 	$next.="&searchQuery=".urlencode($searchQuery);
 }
-
-$items = $db->GetAllRows(999999,0,$os);
-$count = sizeof($items);
-$items = $db->GetAllRows($pg->Top,$pg->Skip,$os);
+try{
+	$items = $db->GetAllRows(999999,0,$os);
+	$count = sizeof($items);
+	$items = $db->GetAllRows($pg->Top,$pg->Skip,$os);
+}catch(Exception $ex)
+{
+	$os = null;
+	if($retryCount==0){
+		goto doRetry;
+	}
+	$count = 0;
+	$items = array();
+	echo "<b>Parsing error:</b> ".$ex->getMessage();
+}
 ?>
 <h3> There are <?php echo $count;?> packages</h3> 
 

@@ -448,8 +448,8 @@ class ObjectSearch
 		$operatorIdentified = $this->_identify($operator,0)->List;
 		$notOperatorIdentified = $this->_identify($notOperator,0)->List;
 		
-		$this->_storeOrderByClause($notOperatorIdentified);
-		$this->parseResult = $this->_reorderLogicalOperators($operatorIdentified);
+		@$this->_storeOrderByClause($notOperatorIdentified);
+		$this->parseResult = @$this->_reorderLogicalOperators($operatorIdentified);
 		
 		return $this->parseResult;
 	}
@@ -463,7 +463,7 @@ class ObjectSearch
 		if(!$this->_extraValidation($subject))return false;
 		$parseTreeItem = $this->parseResult[0];
 		
-		$result = $this->_doExecute($parseTreeItem,$subject);
+		$result = @$this->_doExecute($parseTreeItem,$subject);
 		return $result->Value;
 	}
 	
