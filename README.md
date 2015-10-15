@@ -243,6 +243,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Empty packages upload not allowed anymore
 	* Fixed duplicate packages upload via CLI/Nuget Package Explorer
 	* Fixed "Listed" flag inconsistencies
+	* Fixed "Group by" clause in database 
 	
 * 3.0.12.0
 	* Support for $batch requests (hopefully working)
