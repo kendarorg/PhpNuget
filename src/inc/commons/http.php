@@ -19,6 +19,7 @@ class HttpUtils
 	}
 	public static function ApiError($code, $message) {
 		header('Status: ' . $code . ' ' . $message);
+		http_response_code($code);
 		header('Content-Type: text/plain');
 		echo htmlspecialchars($message);
 		die();
