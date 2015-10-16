@@ -31,6 +31,11 @@ if(!defined('__INSETUP__')){
 	$r["@AdminUserId@"] = UrlUtils::GetRequestParamOrDefault("login","admin","post");
 	$r["@AdminPassword@"] = UrlUtils::GetRequestParamOrDefault("password","password","post");
 	$r["@AdminEmail@"] = UrlUtils::GetRequestParamOrDefault("email","nuget@".$_SERVER["SERVER_NAME"],"post");
+	if (isset($_POST['packageUpdate'])) {
+		$r["@PackageUpdate@"] = "true";
+	} else {
+		$r["@PackageUpdate@"] = "false";
+	}
 	$app =trim(UrlUtils::GetRequestParamOrDefault("applicationPath",$applicationPath,"post"),"/");
 	if($app==""){
 		$app="/";
@@ -42,6 +47,11 @@ if(!defined('__INSETUP__')){
 	//Setup the settings
 	Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/settings.php.template"),$r,Path::Combine(__ROOT__,"settings.php"));
 	echo "<li>Settings initialized.</li>";
+	if($r["@PackageUpdate@"] == "true"){
+		echo "<li>Package update allowed (warning!).</li>";
+	}else{
+		echo "<li>Package update not allowed.</li>";
+	}
 	
 	
 	//Setup the htaccess for api v2 and v1

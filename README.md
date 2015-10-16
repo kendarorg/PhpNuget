@@ -245,6 +245,8 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Fixed "Listed" flag inconsistencies
 	* Fixed "Group by" clause in database 
 	* Added favicon to the website
+	* Default of includePrerelease to false
+	* Added define('__ALLOWPACKAGEUPDATE__', true/false) in settings.php to deny (default) or allow the packages update
 	
 * 3.0.12.0
 	* Support for $batch requests (hopefully working)
