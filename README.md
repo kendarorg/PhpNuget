@@ -133,7 +133,11 @@ All of the api lsited that returns a collection support the usage of parameters
 ### Api V1
 
 * /api/v1: Retrieves the root for the entities that will be used by the API. No parameters.
-* /api/v1/package/\[package-id\]/\[package-version\]: Download the specified package. No parameters.
+* /api/v1/package/\[package-id\]/\[package-version\]: (GET) Download the specified package. No parameters.
+* /api/v1/package/\[package-id\]/\[package-version\]?apiKey=xxx: (POST) Set the package as listed.
+	* apiKey: Mandatory. The api key of the user. Must match the one of the user that firstly inserted the package or the user must be Admin
+* /api/v1/package/\[package-id\]/\[package-version\]?apiKey=xxx: (DELETE) Set the package as not listed.
+	* apiKey: Mandatory. The api key of the user. Must match the one of the user that firstly inserted the package or the user must be Admin
 * /api/v1/$metadata: Retrieves the OData metadata, the actions allowed and the entities specifications. No parameters.
 * /api/v1/FindPackagesById(): Search for packages by id, returns all packages with a certain id ordered by version descending
 	* Id: Mandatory parameter, specify the identifier of the package (e.g. Angular-UI-Router)
@@ -247,6 +251,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Added favicon to the website
 	* Default of includePrerelease to false
 	* Added define('__ALLOWPACKAGEUPDATE__', true/false) in settings.php to deny (default) or allow the packages update
+	* Added support for listed/unlisted Api
 	
 * 3.0.12.0
 	* Support for $batch requests (hopefully working)

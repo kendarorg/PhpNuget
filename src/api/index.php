@@ -7,6 +7,23 @@ require_once(__ROOT__."/inc/commons/http.php");
 require_once(__ROOT__."/inc/api_nuget.php");
 
 $id = UrlUtils::GetRequestParamOrDefault("id",null);
+$apiKey = UrlUtils::GetRequestParamOrDefault("apiKey",null);
+
+if($apiKey==null){
+	if(isset($_SERVER["X-NuGet-ApiKey"])){
+		$apiKey = $_SERVER["X-NuGet-ApiKey"];
+	}
+}
+if($apiKey==null){
+	if (isset($_SERVER['HTTP_X_NUGET_APIKEY'])) {
+		$apiKey = $_SERVER["HTTP_X_NUGET_APIKEY"];
+	}
+}
+if($apiKey!=null){
+	$apiKey = strtoupper(trim(trim($apiKey,"{"),"}"));
+}
+
+$method = UrlUtils::RequestMethod();
 $version = UrlUtils::GetRequestParamOrDefault("version",null);
 if($id == null || $version == null){
 	HttpUtils::ApiError(500,"Wrong data. Missing param.");
@@ -24,6 +41,25 @@ $allRows = $db->GetAllRows(1,0,$os);
 
 if(sizeof($allRows)==0){
 	HttpUtils::ApiError(404,"Not found");
+}
+
+if($method=="post" || $method=="delete"){
+	if($apiKey==null){
+		HttpUtils::ApiError(403,"Missing Api Key");
+	}
+	
+	$dbu = new UserDb();
+	$osu = new ObjectSearch();
+	$osu->Parse("Token eq '{".$apiKey."}'",$dbu->GetAllColumns());
+	$users = $dbu->GetAllRows(1,0,$osu);
+	if(sizeof($users)==0){
+		HttpUtils::ApiError(404,"Not found");
+	}
+	
+	if($allRows[0]->UserId!=$users[0]->Id && !$users[0]->Admin) HttpUtils::ApiError(403,"Missing Api Key");
+	$allRows[0]->Listed=$method=="post";
+	$db->AddRow($allRows[0],true);
+	HttpUtils::ApiError(200,"Ok");
 }
 
 
