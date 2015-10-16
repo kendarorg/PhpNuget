@@ -250,7 +250,7 @@ class ApiNugetBase
 		if($action != "search") return;
 		$searchTerm = UrlUtils::GetRequestParamOrDefault("searchTerm",null);
 		$targetFramework = UrlUtils::GetRequestParamOrDefault("targetFramework",null);
-		$includePrerelease = strtolower(UrlUtils::GetRequestParamOrDefault("includePrerelease",null));
+		$includePrerelease = strtolower(UrlUtils::GetRequestParamOrDefault("includePrerelease","false"));
 		$filter = UrlUtils::GetRequestParamOrDefault("\$filter",null);		
 		$orderby = UrlUtils::GetRequestParamOrDefault("\$orderby",null);
 		
@@ -293,7 +293,7 @@ class ApiNugetBase
 			$query = $this->_append($query,$x,"and");
 		}
 		
-		if($includePrerelease==null){
+		if($includePrerelease==null || strtolower($includePrerelease)=="false"){
 			$x = "(IsPreRelease eq false)";
 			$query = $this->_append($query,$x,"and");
 		}
@@ -397,7 +397,7 @@ class ApiNugetBase
 		if($val!=null)$this->_lastQuery["packageIds"]=$val;
 		$val = UrlUtils::GetRequestParamOrDefault("versions",null);
 		if($val!=null)$this->_lastQuery["versions"]=$val;
-		$val = UrlUtils::GetRequestParamOrDefault("includePrerelease",null);
+		$val = UrlUtils::GetRequestParamOrDefault("includePrerelease","false");
 		if($val!=null)$this->_lastQuery["includePrerelease"]=$val;
 		$val = UrlUtils::GetRequestParamOrDefault("includeAllVersions",null);
 		if($val!=null)$this->_lastQuery["includeAllVersions"]=$val;
