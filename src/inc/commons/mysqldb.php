@@ -52,6 +52,7 @@ class SmallTxtDb
 		if(sizeof($fieldNames)!=sizeof($fieldTypes)){
 			throw new Exception("Mismatch types/fields");
 		}
+		
         for($i=0;$i<sizeof($fieldNames);$i++){
             $field = $fieldNames[$i];
             $type = $fieldTypes[$i];
@@ -70,23 +71,94 @@ class SmallTxtDb
     {
         $this->initialize($version,$dbFile,$dbRows,$dbTypes,$loadData);
     }
+	
+	public function doQuery($query){
+		$connection = mysqli_connect(__MYSQL_SERVER__, __MYSQL_USER__, __MYSQL_PASSWORD__,__MYSQL_DB__);
+		$result = mysqli_query( $connection,$query );
+		$data = array();
+
+		while ( $list = mysqli_fetch_array($result,MYSQLI_ASSOC) ) {
+			array_push($data,$list);
+		}
+		mysqli_close($connection);
+		return $data;
+	}
+	
+	public function doQueryScalar($query){
+		$connection = mysqli_connect(__MYSQL_SERVER__, __MYSQL_USER__, __MYSQL_PASSWORD__,__MYSQL_DB__);
+		$result = mysqli_query( $connection,$query );
+		$data = mysqli_fetch_array($result,MYSQLI_ASSOC);
+			
+		mysqli_close($connection);
+		return $data;
+	}
+	
+	public function doQueryExecute($query){
+		$connection = mysqli_connect(__MYSQL_SERVER__, __MYSQL_USER__, __MYSQL_PASSWORD__,__MYSQL_DB__);
+		$result = mysqli_query( $connection,$query );
+		mysqli_close($connection);
+		return $result;
+	}
+	
+	
     
     private function initialize($version,$dbFile,$dbRows,$dbTypes,$loadData = true)
     {
-        
+        $pi = pathinfo($dbFile);
         $this->cr="\n";
         $this->separator = ":|:";
-        $this->dbFile = $dbFile;
+        $this->dbFile =  $pi["filename"];
         $this->dbRows = $dbRows;
         $this->dbTypes = $dbTypes;
 		$this->_version = $version;
-        if(!file_exists($this->dbFile)){
+		
+		
+		$result = $this->doQueryScalar("SELECT COUNT(*) AS counter FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '"
+			.__MYSQL_DB__."' AND TABLE_NAME = '"
+			.$this->dbFile."'");
+		if($result["counter"]==0){
+			$create = "CREATE TABLE ".$this->dbFile." ";
+			
+			$fieldNames = explode(":|:",$this->FieldNames());
+			$fieldTypes = explode(":|:",$this->FieldTypes());
+			
+			
+			if(sizeof($fieldNames)!=sizeof($fieldTypes)){
+				throw new Exception("Mismatch types/fields");
+			}
+			
+			$toJoin = array();
+			for($i=0;$i<sizeof($fieldNames);$i++){
+				$field = strtolower($fieldNames[$i]);
+				$type = strtolower($fieldTypes[$i]);
+				if($type=="number"){
+					$toJoin[$i]="INT";
+				}else if($type=="boolean"){
+					$toJoin[$i]="TINYINT";
+				}else{
+					$toJoin[$i]="TEXT";
+				}
+				if($field == "id"){
+					if($toJoin[$i]=="TEXT"){
+						$toJoin[$i]="CHAR(128)";
+					}
+					$toJoin[$i] = "`".$field."` ".$toJoin[$i]." PRIMARY KEY";
+				}else{
+					$toJoin[$i] = "`".$field."` ".$toJoin[$i];
+				}
+			}
+			$create = $create." (".join(",",$toJoin).")";
+			$this->doQueryExecute($create);
+			//echo $create;die();
+		}
+		
+        /*if(!file_exists($this->dbFile)){
             $fp = fopen($this->dbFile, 'w');
             fwrite($fp, "@Version:".$this->_version.$this->cr);
             fwrite($fp, $this->dbRows.$this->cr);
             fclose($fp);
-        }
-        $this->load($loadData);
+        }*/
+        //$this->load($loadData);
     }
 	
 	private $_version;
@@ -141,16 +213,35 @@ class SmallTxtDb
     
     public function add_row($rowHash)
     {
-        // print_r($rowHash);print_r($this->columns);die();
-        $hashRow = array();
-        foreach($this->columns as $key => $value){
-            $rowContent = null;
-            if(array_key_exists($key,$rowHash)){
-                $rowContent = $rowHash[$key];
-            }
-            $hashRow[$key]=$rowContent;
-        }
-        $this->rows[]=$this->VerifyTypes($hashRow);
+		//$rowHash = array_change_key_case($rowHash, CASE_LOWER);
+
+        $this->rows[]=$this->VerifyTypes($rowHash);
+		
+		$fieldNames = explode(":|:",$this->FieldNames());
+		$fieldTypes = explode(":|:",$this->FieldTypes());
+		$create = "INSERT INTO ".$this->dbFile." ";
+		$values= array();
+		//var_dump($fieldNames);
+		//var_dump($rowHash);
+		$toJoin = array();
+		for($i=0;$i<sizeof($fieldNames);$i++){
+			$field = $fieldNames[$i];
+			$type = strtolower($fieldTypes[$i]);
+			if(isset( $rowHash[$field])){
+				$value = $rowHash[$field];
+				if($type=="number" || $type=="boolean"){
+					array_push($values,$value);
+				}else{
+					array_push($values,"'".$value."'");
+				}
+				array_push($toJoin,$field);
+			}
+		}
+		$create = $create." (".join(",",$toJoin).") VALUES (".join(",",$values).")";
+		$this->doQueryExecute($create);
+		//echo $create;
+        //print_r($this->columns);
+     // print_r($this->rows);die();
     }
     
     public function delete_row($rowIndex)
@@ -174,7 +265,7 @@ class SmallTxtDb
     function save()
     { 
        // print_r($this->rows);die();
-        $fp = fopen($this->dbFile.".tmp", 'w');
+        /*$fp = fopen($this->dbFile.".tmp", 'w');
 		fwrite($fp, "@Version:".$this->_version.$this->cr);
         fwrite($fp, $this->dbRows.$this->cr);
         foreach($this->rows as $row){
@@ -188,7 +279,7 @@ class SmallTxtDb
         }
         fclose($fp);
         unlink($this->dbFile);
-        rename($this->dbFile.".tmp",$this->dbFile);
+        rename($this->dbFile.".tmp",$this->dbFile);*/
     }
     
     public function VerifyType($value,$type)
