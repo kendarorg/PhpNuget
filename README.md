@@ -252,6 +252,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Default of includePrerelease to false
 	* Added define('__ALLOWPACKAGEUPDATE__', true/false) in settings.php to deny (default) or allow the packages update
 	* Added support for listed/unlisted Api
+	* Fixed includePreRelease on Update packages
 	
 * 3.0.12.0
 	* Support for $batch requests (hopefully working)

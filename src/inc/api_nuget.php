@@ -353,7 +353,7 @@ class ApiNugetBase
 		if($action != "getupdates") return;
 		$packageIds = UrlUtils::GetRequestParamOrDefault("packageIds",null);
 		$versions = UrlUtils::GetRequestParamOrDefault("versions",null);
-		$includePrerelease = UrlUtils::GetRequestParamOrDefault("includePrerelease",null);
+		$includePrerelease = UrlUtils::GetRequestParamOrDefault("includePrerelease","false");
 		$includeAllVersions = UrlUtils::GetRequestParamOrDefault("includeAllVersions",null);	
 		$targetFrameworks = UrlUtils::GetRequestParamOrDefault("targetFrameworks",null);	
 		$versionConstraints = UrlUtils::GetRequestParamOrDefault("versionConstraints",null);
@@ -382,6 +382,14 @@ class ApiNugetBase
 				$query.=$tmp[0];
 			}
 		}
+		if($includePrerelease==null || strtolower($includePrerelease)=="false"){
+			$x = "(IsPreRelease eq false)";
+			$query = $this->_append($query,$x,"and");
+		}
+		
+		$x = "(Listed eq true)";
+		$query = $this->_append($query,$x,"and");
+		
 		$query .=" orderby Title asc, Version desc";
 		if($includeAllVersions!="true"){
 			$query .=" groupby Id";
