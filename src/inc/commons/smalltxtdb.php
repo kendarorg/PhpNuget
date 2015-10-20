@@ -155,9 +155,24 @@ class SmallTxtDb
      // print_r($this->rows);die();
     }
     
-    public function delete_row($rowIndex)
+    public function delete_row($select)
     {
-        unset($this->rows[$rowIndex]);
+		$rowNumber = 0;
+        foreach ($dbInstance->rows as $row) {
+			$isMatch = true;
+			foreach($select as $k=>$v){
+				if ($row[$k] != $v) {
+					$isMatch = false;
+				}
+			}
+        	
+        	if($isMatch){
+        		unset($this->rows[$rowNumber]);
+				break;
+        	}
+        	$rowNumber++;
+        }
+        
         $this->rows= array_values($this->rows);
     }
     
@@ -228,6 +243,7 @@ class SmallTxtDb
 	
 	public function GetAll($limit,$skip=0,$objectSearch=null)
 	{
+		
 		$r = explode(":|:",$this->dbRows);
 		$t = explode(":|:",$this->dbTypes);
 		$rowTypes = array();
@@ -237,6 +253,9 @@ class SmallTxtDb
 		
 		$toSort = array();
 		$bi = $this->BuildItem;
+		if($objectSearch!=null){
+			$objectSearch->dump();
+		}
 		foreach($this->rows as $row){
 		
 			$item = $bi();

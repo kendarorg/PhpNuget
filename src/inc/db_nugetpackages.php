@@ -3,7 +3,11 @@
 require_once(dirname(__FILE__)."/../root.php");
 require_once(__ROOT__."/settings.php");
 
-require_once(__ROOT__."/inc/commons/smalltxtdb.php");
+if(__DB_TYPE__==DBMYSQL){
+	require_once(__ROOT__."/inc/commons/mysqldb.php");
+}else{
+	require_once(__ROOT__."/inc/commons/smalltxtdb.php");
+}	
 require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/objectsearch.php");
 require_once(__ROOT__."/inc/db_nugetpackagesentity.php");
@@ -48,7 +52,16 @@ class NuGetDb
 			$os = new PhpNugetObjectSearch();
 			$os->Parse($query,$this->GetAllColumns());
 		}
-		return $this->GetAllRows($limit,$skip,$os);
+		$this->initialize();
+        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__);
+		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
+		$res =  $dbInstance->GetAll($limit,$skip,$os);
+		foreach($res as $row){
+			if(ends_with(strtolower($row->IconUrl),strtolower("packagedefaulticon-50x50.png"))){
+				$row->IconUrl = UrlUtils::CurrentUrl(Settings::$SiteRoot."content/packagedefaulticon-50x50.png");
+			}
+		}
+		return $res;
 	}
 	
 	public static function RowTypes()
@@ -94,31 +107,14 @@ class NuGetDb
         $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__);
 		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
         $nameOfCaptain = "";
-        $rowNumber = 0;
-        foreach ($dbInstance->rows as $row) {
-        	if ($row['PackageHash'] == $nugetEntity->PackageHash) {
-        		$dbInstance->delete_row($rowNumber);
-        		break;
-        	}
-        	$rowNumber++;
-        }
+        
+		$select = array('PackageHash'=>$nugetEntity->PackageHash);
+        $dbInstance->delete_row($select);
+		
         $dbInstance->save();
     }
     
-    public function GetAllRows($limit=9999999,$skip=0,$objectSearch=null)
-    {
-        $this->initialize();
-        $toret = array();
-        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__);
-		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
-		$res =  $dbInstance->GetAll($limit,$skip,$objectSearch);
-		foreach($res as $row){
-			if(ends_with(strtolower($row->IconUrl),strtolower("packagedefaulticon-50x50.png"))){
-				$row->IconUrl = UrlUtils::CurrentUrl(Settings::$SiteRoot."content/packagedefaulticon-50x50.png");
-			}
-		}
-		return $res;
-    }
+    
     
     public function GetAllColumns()
     {

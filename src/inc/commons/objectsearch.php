@@ -456,6 +456,55 @@ class ObjectSearch
 		return $this->parseResult;
 	}
 	
+	public function ToMySql()
+	{
+		if($this->parseResult==null || sizeof($this->parseResult)==0){
+			return "";
+		}
+		$parseTreeItem = $this->parseResult[0];
+		$result = @$this->_toMySql($parseTreeItem,$subject);
+		return $result->Value;
+	}
+	
+	public function _toMySql($parseTreeItem,$subject)
+	{
+		$t = strtolower($parseTreeItem->Type);
+		$v = $parseTreeItem->Value;
+		$c = $parseTreeItem->Children;
+		switch($t){
+			case "string":
+			case "number":
+			case "boolean":	
+				return $parseTreeItem;
+		}
+		if($t == "function"){
+			$params = array();
+			for($i=0;$i<sizeof($c);$i++){
+				$params[] = $this->_doExecute($c[$i],$subject);
+			}
+			
+			$result = $this->_executeFunction($v,$params);
+		}else if($t == "group"){
+			$params = array();
+			for($i=0;$i<sizeof($c);$i++){
+				$params[] = $this->_doExecute($c[$i],$subject);
+			}
+			$params[]=true;
+			$result = $this->_executeFunction("doeq",$params);
+		}else if($t=="field"){
+			$fo = new Operator();
+			$fo->Type = "fieldinstance";
+			$fo->Value = $subject->$v;
+			$fo->Id = $v;
+			return $fo;
+		}else if($this->externalTypes!=null && $this->externalTypes->IsExternal($v)){
+			return $parseTreeItem;
+		}else{
+			throw new ParserException("Token '".$t."' not supported excuting");
+		}
+		return $result;
+	}
+	
 	public function Execute($subject)
 	{
 		if($this->parseResult==null || sizeof($this->parseResult)==0){
@@ -808,6 +857,11 @@ class ObjectSearch
 		}
 		
 		return 0;
+	}
+	
+	public function dump()
+	{
+		//var_dump($this->parseResult);
 	}
 	
 	public function DoGroupBy($subject)

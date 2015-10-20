@@ -23,11 +23,13 @@ if(!$loginController->IsLoggedIn){
 	try{
 		$result = @$uploader->Upload("fileName");
 	}catch(Exception $e){
+	
 		$result["hasError"]=true;
 		$result["name"]="NA";
 		$result["errorCode"]="";
 		$result["errorMessage"]="Wrong file";
 	}
+	
 	$fileName = basename($result["name"],".nupkg");
 	$message = "";
 	if($result["hasError"]==true){

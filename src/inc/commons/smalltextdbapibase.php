@@ -88,10 +88,6 @@ class SmallTextDbApiBase extends ApiBase
 		$query = join(" and ",$q);
 		$allRows = $db->Query($query);
 		
-		
-		
-		$allRows = $db->GetAllRows();
-		
 		if(sizeof($allRows)==1){
 			$db->DeleteRow($allRows[0]);
 			ApiBase::ReturnSuccess($allRows[0]);

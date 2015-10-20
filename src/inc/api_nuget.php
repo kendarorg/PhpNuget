@@ -101,8 +101,8 @@ class ApiNugetBase
         $t= str_replace("\${NUSPEC.IDLOWER}",(strtolower($e->Id)),$t);
         $t= str_replace("\${NUSPEC.TITLE}",htmlspecialchars($e->Title),$t);
         $t= str_replace("\${NUSPEC.VERSION}",($e->Version),$t);
-        $t= str_replace("\${NUSPEC.LICENSEURL}",($e->LicenseUrl),$t);
-        $t= str_replace("\${NUSPEC.PROJECTURL}",($e->ProjectUrl),$t);
+        $t= str_replace("\${NUSPEC.LICENSEURL}",htmlspecialchars($e->LicenseUrl),$t);
+        $t= str_replace("\${NUSPEC.PROJECTURL}",htmlspecialchars($e->ProjectUrl),$t);
         $t= str_replace("\${NUSPEC.REQUIRELICENSEACCEPTANCE}",$e->RequireLicenseAcceptance?"true":"false",$t);
         $t= str_replace("\${NUSPEC.DESCRIPTION}",htmlspecialchars($e->Description),$t);
         if($e->Tags!=""){

@@ -1,7 +1,11 @@
 <?php
 if(!defined('__ROOT__'))define('__ROOT__',dirname( dirname(__FILE__)));
 
-require_once(__ROOT__."/inc/commons/smalltxtdb.php");
+if(__DB_TYPE__==DBMYSQL){
+	require_once(__ROOT__."/inc/commons/mysqldb.php");
+}else{
+	require_once(__ROOT__."/inc/commons/smalltxtdb.php");
+}	
 require_once(__ROOT__."/inc/commons/utils.php");
 require_once(__ROOT__."/inc/commons/objectsearch.php");
 require_once(__ROOT__."/inc/db_usersentity.php");
@@ -43,7 +47,11 @@ class UserDb
 			$os = new ObjectSearch();
 			$os->Parse($query,$this->GetAllColumns());
 		}
-		return $this->GetAllRows($limit,$skip,$os);
+		
+		$this->initialize();
+        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
+		$dbInstance->BuildItem= 'nugetDbUserBuilder';
+		return $dbInstance->GetAll($limit,$skip,$os);
 	}
     
     public function AddRow($nugetEntity,$update)
@@ -81,38 +89,24 @@ class UserDb
     {
         $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
         $nameOfCaptain = "";
-        $rowNumber = 0;
-        foreach ($dbInstance->rows as $row) {
-        	if ($row['UserId'] == $nugetEntity->UserId) {
-        		$dbInstance->delete_row($rowNumber);
-        		break;
-        	}
-        	$rowNumber++;
-        }
+        
+		$select = array('UserId'=>$nugetEntity->UserId);
+        $dbInstance->delete_row($select);
         $dbInstance->save();
     }
 	
 	public function GetByUserId($id)
     {
-        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
-		$dbInstance->BuildItem= 'nugetDbUserBuilder';
-        $nameOfCaptain = "";
-        foreach ($dbInstance->rows as $row) {
-        	if ($row['UserId'] == $id) {
-        		return $dbInstance->CreateItem($row);
-        	}
-        }
+        //$dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
+		//$dbInstance->BuildItem= 'nugetDbUserBuilder';
+        
+		$items = $this->Query("(UserId eq '".$id."')",1,0);
+		if(sizeof($items)==1) return $items[0];
+        
         return null;
     }
 	
-	public function GetAllRows($limit=999999,$skip=0,$objectSearch=null)
-    {
-        $this->initialize();
-        $toret = array();
-        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
-		$dbInstance->BuildItem= 'nugetDbUserBuilder';
-		return $dbInstance->GetAll($limit,$skip,$objectSearch);
-    }
+	
     
     public function GetAllColumns()
     {

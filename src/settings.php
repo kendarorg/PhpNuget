@@ -16,6 +16,14 @@ define('__ADMINMAIL__',"nuget@127.0.0.1");
 //the admin
 define('__ALLOWUSERADD__',false);
 
+define('__MYSQL_SERVER__', "127.0.0.1");
+define('__MYSQL_USER__',"phpnuget");
+define('__MYSQL_PASSWORD__',"password");
+define('__MYSQL_DB__',"phpnuget");
+// DBMYSQL
+// DBTXT
+define('__DB_TYPE__',DBTXT);
+
 //If true users are allowed to add a package only if the firstly added it
 //or if theyr user id is inside the "owners" field of the package
 define('__LIMITUSERSPACKAGES__',true);
