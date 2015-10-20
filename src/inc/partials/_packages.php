@@ -80,9 +80,12 @@ try{
 	$exceptionThrown = $ex;
 }
 
+
 if($count==-1 ){
 	try{
 		if($fallbackQuery!=null){
+			$orderBy = UrlUtils::GetRequestParamOrDefault("orderBy",null);
+			
 			if($orderBy!=null){
 				$orderBy = " orderby ".$orderBy;
 			}else{
@@ -94,7 +97,6 @@ if($count==-1 ){
 			$items = $db->Query($fallbackQuery);
 			$count = sizeof($items);
 			$items = $db->Query($fallbackQuery,$pg->Top,$pg->Skip);
-			$searchQuery = $fallbackQuery;
 		}
 	}catch(Exception $ex){
 		$count = -1;

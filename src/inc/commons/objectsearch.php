@@ -156,8 +156,10 @@ class ObjectSearch
 	}
 	function _isString($operator)
 	{
+		
 		if($operator[0]==$operator[sizeof($operator)-1]){
-			return $this->_isStartString($operator[0]);
+			$res = $this->_isStartString($operator[0]);
+			return $res;
 		}
 		return false;
 	}
@@ -297,7 +299,7 @@ class ObjectSearch
 				$o->Value = "";
 				$temp[] = $o;
 			}else{
-				throw new ParserException("Token '".$s."' not supported");
+				throw new ParserException("Token '".$s."' not supported parsing");
 			}
 			$prev = $temp[sizeof($temp)-1];
 		}
@@ -462,7 +464,6 @@ class ObjectSearch
 		
 		if(!$this->_extraValidation($subject))return false;
 		$parseTreeItem = $this->parseResult[0];
-		
 		$result = @$this->_doExecute($parseTreeItem,$subject);
 		return $result->Value;
 	}
@@ -475,7 +476,7 @@ class ObjectSearch
 		switch($t){
 			case "string":
 			case "number":
-			case "boolean":
+			case "boolean":	
 				return $parseTreeItem;
 		}
 		if($t == "function"){
@@ -501,7 +502,7 @@ class ObjectSearch
 		}else if($this->externalTypes!=null && $this->externalTypes->IsExternal($v)){
 			return $parseTreeItem;
 		}else{
-			throw new ParserException("Token '".$t."' not supported");
+			throw new ParserException("Token '".$t."' not supported excuting");
 		}
 		return $result;
 	}
