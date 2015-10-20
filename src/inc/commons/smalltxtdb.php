@@ -151,6 +151,8 @@ class SmallTxtDb
             $hashRow[$key]=$rowContent;
         }
         $this->rows[]=$this->VerifyTypes($hashRow);
+        //print_r($this->columns);
+     // print_r($this->rows);die();
     }
     
     public function delete_row($rowIndex)

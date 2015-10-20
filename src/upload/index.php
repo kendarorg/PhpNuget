@@ -31,11 +31,7 @@ try{
 	
 	$token = strtoupper(trim(trim($_SERVER['HTTP_X_NUGET_APIKEY'],"{"),"}"));
 	$db = new UserDb();
-
-	$os = new ObjectSearch();
-	$os->Parse("Token eq '{".$token."}'",$db->GetAllColumns());
-
-	$users = $db->GetAllRows(1,0,$os);
+	$users = $db->Query("Token eq '{".$token."}'",1,0);
 
 	if(sizeof($users)!=1){
 		HttpUtils::ApiError('403', 'Invalid API key');

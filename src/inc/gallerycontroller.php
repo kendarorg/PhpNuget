@@ -12,7 +12,7 @@ class GalleryController
 		$ndb = new NuGetDb();
 		$queryString = UrlUtils::GetRequestParam("searchQuery","post");
 		if($queryString==null){
-			return $ndb->GetAllRows(Settings::$ResultsPerPage);
+			return $ndb->Query(null,Settings::$ResultsPerPage);
 		}
 		return array();
 	}

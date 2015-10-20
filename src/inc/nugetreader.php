@@ -159,10 +159,10 @@ class NugetManager
     {
 		global $loginController;
 		$nugetDb = new NuGetDb();
-		$os = new PhpNugetObjectSearch();
+		
 		$query = "Id eq '".$e->Id."' orderby Version desc";
-		$os->Parse($query,$nugetDb->GetAllColumns());
-		$res = $nugetDb->GetAllRows(999999,0,$os);
+		
+		$res = $nugetDb->Query($query,999999,0);
 		if(sizeof($res)>0 && !$loginController->Admin){
 			$id = $res[0]->UserId;
 			if($id!=$e->UserId){
@@ -193,9 +193,7 @@ class NugetManager
     public function LoadAllPackagesEntries()
     {
         $nugetDb = new NuGetDb();
-        $toret = $nugetDb->GetAllRows();
-        
-        return $toret;
+        return $nugetDb->Query();
     }
     
     

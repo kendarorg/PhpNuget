@@ -165,26 +165,19 @@ class ApiNugetBase
 	{
 		$pg= $this->_getPagination();
 		$db = new NuGetDb();
-		$os = new PhpNugetObjectSearch();
-		
-		if(strlen($query)>0){
-			$os->Parse($query,$db->GetAllColumns());
-		}else{
-			$os = null;
-		}
-		
+				
 		$count = UrlUtils::GetRequestParamOrDefault("count","false")=="true";
 		$allpages = UrlUtils::GetRequestParamOrDefault("\$inlinecount","none")=="allpages";
 		$itemsCount = -1;
 		
 		if($count || $allpages){
-			$allRows = $db->GetAllRows(999999,0,$os);
+			$allRows = $db->Query($query);
 			$itemsCount = sizeof($allRows);
 			if(!$allpages){
 				HttpUtils::WriteData($itemsCount);
 			}
 		}
-		$allRows = $db->GetAllRows($pg->Top+1,$pg->Skip,$os);
+		$allRows = $db->Query($query,$pg->Top+1,$pg->Skip);
 		
 		
 		if(!UrlUtils::IsFake()){

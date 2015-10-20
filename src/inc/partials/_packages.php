@@ -52,9 +52,9 @@ if($originalOrderBy!=null){
 $pg->Skip = UrlUtils::GetRequestParamOrDefault("skip",0);
 $pg->Top = UrlUtils::GetRequestParamOrDefault("top",10);
 
-$os = null;
 $exceptionThrown = null;
-
+$items = array();
+$count = -1;
 try{
 	if($searchQuery!=null){
 		if($orderBy!=null){
@@ -62,26 +62,25 @@ try{
 		}else{
 			$orderBy = " orderby Title asc,Version desc";
 		}
-		$os = new PhpNugetObjectSearch();
-		$os->Parse("(".$searchQuery.") and Listed eq true ".$orderBy.$groupBy,$db->GetAllColumns());
+		$searchQuery = "(".$searchQuery.") and Listed eq true ".$orderBy.$groupBy;
 	}else if($orderBy!=null){
 		$orderBy = "orderby ".$orderBy;
 		$os = new PhpNugetObjectSearch();
-		$os->Parse("Listed eq true ".$orderBy.$groupBy,$db->GetAllColumns());
+		$searchQuery = "Listed eq true ".$orderBy.$groupBy;
 	}else{
-		$os = new PhpNugetObjectSearch();
-		$os->Parse("Listed eq true orderby Title asc, Version desc".$groupBy,$db->GetAllColumns());
+		$searchQuery = "Listed eq true orderby Title asc, Version desc".$groupBy;
 	}
+	
+	$items = $db->Query($searchQuery);
+	$count = sizeof($items);
+	$items = $db->Query($searchQuery,$pg->Top,$pg->Skip);
 }catch(Exception $ex){
-	$os = null;
+	$count = -1;
+	$items = array();
 	$exceptionThrown = $ex;
 }
 
-$retryCount=0;
-
-doRetry:
-if($os==null && $retryCount ==0){
-	$retryCount++;
+if($count==-1 ){
 	try{
 		if($fallbackQuery!=null){
 			if($orderBy!=null){
@@ -90,14 +89,20 @@ if($os==null && $retryCount ==0){
 				$orderBy = " orderby Title asc,Version desc";
 			}
 			$os = new PhpNugetObjectSearch();
-			$os->Parse("(".$fallbackQuery.") and Listed eq true ".$orderBy.$groupBy,$db->GetAllColumns());
+			$fallbackQuery = "(".$fallbackQuery.") and Listed eq true ".$orderBy.$groupBy;
+			
+			$items = $db->Query($fallbackQuery);
+			$count = sizeof($items);
+			$items = $db->Query($fallbackQuery,$pg->Top,$pg->Skip);
+			$searchQuery = $fallbackQuery;
 		}
 	}catch(Exception $ex){
-		$os = null;
+		$count = -1;
+		$items = array();
 	}
 }
 
-if($os==null && $exceptionThrown!=null){
+if($count==-1 && $exceptionThrown!=null){
 	echo "<b>Parsing error:</b> ".$exceptionThrown->getMessage();
 	die();
 }
@@ -106,20 +111,7 @@ $next = Settings::$SiteRoot."?specialType=packages";
 if($searchQuery!=null){
 	$next.="&searchQuery=".urlencode($searchQuery);
 }
-try{
-	$items = $db->GetAllRows(999999,0,$os);
-	$count = sizeof($items);
-	$items = $db->GetAllRows($pg->Top,$pg->Skip,$os);
-}catch(Exception $ex)
-{
-	$os = null;
-	if($retryCount==0){
-		goto doRetry;
-	}
-	$count = 0;
-	$items = array();
-	echo "<b>Parsing error:</b> ".$ex->getMessage();
-}
+
 ?>
 <h3> There are <?php echo $count;?> packages</h3> 
 

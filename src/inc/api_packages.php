@@ -51,8 +51,8 @@ class PackagesApi extends SmallTextDbApiBase
 	protected function _buildKeysFromRequest($db)
 	{
 		$result = array();
-		$result[]= UrlUtils::GetRequestParam("Id");
-		$result[]= UrlUtils::GetRequestParam("Version");
+		$result["Id"]= UrlUtils::GetRequestParam("Id");
+		$result["Version"]= UrlUtils::GetRequestParam("Version");
 		return $result;
 	}
 	
@@ -139,11 +139,10 @@ class PackagesApi extends SmallTextDbApiBase
 		$this->_preExecute();
 		$pg= $this->_getPagination();
 		$db = $this->_openDb();
-		$os = new PhpNugetObjectSearch();
 		
-		$os->Parse($query,$db->GetAllColumns());
-		$count = sizeof($db->GetAllRows(999999,0,$os));
-		$allRows = $db->GetAllRows($pg->Top,$pg->Skip,$os);
+		
+		$count = sizeof($db->Query($query,999999,0));
+		$allRows = $db->Query($query,$pg->Top,$pg->Skip);
 		
 		//$allRows = $os->DoSort($allRows,NuGetDb::RowTypes());
 		ApiBase::ReturnSuccess($allRows,"","",$count);

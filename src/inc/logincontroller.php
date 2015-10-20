@@ -67,17 +67,10 @@ class LoginController
 		$udb = new UserDb();
 		$user = null;
 
-		$ar = $udb->GetAllRows();		
+		$ar = $udb->Query("(Enabled eq true) and (UserId eq '".$uid."' or Email eq '".$uid."')");		
 		
-		foreach($ar as $row)
-		{
-			
-			if($row->Enabled && strtolower($uid) == strtolower($row->Email) || $uid == $row->UserId){
-				if($pwd==$row->Md5Password){
-					$user = $row;
-					break;
-				}
-			}
+		if(sizeof($ar)==1){
+			$user = $ar[0];
 		}
 		
 		

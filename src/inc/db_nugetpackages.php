@@ -3,11 +3,7 @@
 require_once(dirname(__FILE__)."/../root.php");
 require_once(__ROOT__."/settings.php");
 
-if(__DB_TYPE__==DBMYSQL){
-	require_once(__ROOT__."/inc/commons/mysqldb.php");
-}else{
-	require_once(__ROOT__."/inc/commons/smalltxtdb.php");
-}	
+require_once(__ROOT__."/inc/commons/smalltxtdb.php");
 require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/objectsearch.php");
 require_once(__ROOT__."/inc/db_nugetpackagesentity.php");
@@ -45,6 +41,16 @@ class NuGetDb
         
     }
 	
+	public function Query($query=null,$limit=99999,$skip=0)
+	{
+		$os = null;
+		if($query!=null && $query!=""){
+			$os = new PhpNugetObjectSearch();
+			$os->Parse($query,$this->GetAllColumns());
+		}
+		return $this->GetAllRows($limit,$skip,$os);
+	}
+	
 	public static function RowTypes()
 	{
 		return SmallTxtDb::RowTypes(__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__);
@@ -55,7 +61,6 @@ class NuGetDb
 		if($nugetEntity->Id=="" || $nugetEntity->Version==""){
 			throw new Exception("Missing Id and/or Version");
 		}
-		
         $dbInstance =  new SmallTxtDb("3.0.0.0",__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__);
 		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
         $toInsert = array();

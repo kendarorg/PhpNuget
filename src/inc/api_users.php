@@ -102,7 +102,9 @@ class UsersApi extends SmallTextDbApiBase
 	
 	protected function _buildKeysFromRequest($db)
 	{
-		return  UrlUtils::GetRequestParam("UserId");
+		$result = array();
+		$result["UserId"]= UrlUtils::GetRequestParam("UserId");
+		return $result;
 	}
 	
 	protected function _openDb()

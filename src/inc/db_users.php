@@ -1,20 +1,10 @@
 <?php
 if(!defined('__ROOT__'))define('__ROOT__',dirname( dirname(__FILE__)));
 
-require_once(dirname(__FILE__)."/../root.php");
-
-require_once(__ROOT__."/settings.php");
-
-if(__DB_TYPE__==DBMYSQL){
-	require_once(__ROOT__."/inc/commons/mysqldb.php");
-}else{
-	require_once(__ROOT__."/inc/commons/smalltxtdb.php");
-}	
-
+require_once(__ROOT__."/inc/commons/smalltxtdb.php");
 require_once(__ROOT__."/inc/commons/utils.php");
 require_once(__ROOT__."/inc/commons/objectsearch.php");
 require_once(__ROOT__."/inc/db_usersentity.php");
-
 
 
 define('__MYTXTDB_USR__',Path::Combine(Settings::$DataRoot,"nugetdb_usrs.txt"));
@@ -45,6 +35,16 @@ class UserDb
 	{
 		return SmallTxtDb::RowTypes(__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
 	}
+	
+	public function Query($query=null,$limit=99999,$skip=0)
+	{
+		$os = null;
+		if($query!=null && $query!=""){
+			$os = new ObjectSearch();
+			$os->Parse($query,$this->GetAllColumns());
+		}
+		return $this->GetAllRows($limit,$skip,$os);
+	}
     
     public function AddRow($nugetEntity,$update)
     {
@@ -55,27 +55,23 @@ class UserDb
         foreach ($vars as $column) {
             $toInsert[$column] = $nugetEntity->$column;
         }
-		
-		$os = new ObjectSearch();
-		$os->Parse("(UserId eq '".."$nugetEntity->UserId')",$this->GetAllColumns());
-		$allRows = $this->GetAllRows(999999,0,$os);
-		$itemsCount = sizeof($allRows);
-		
-		
         $doAdd = true;
-        if($itemsCount>0){
-            $toInsert["Token"]=$allRows[0]["Token"];
-            $toInsert["UserId"]=$allRows[0]["UserId"];
-            $doAdd = false;
+        for($i=0;$i<sizeof($dbInstance->rows);$i++){
+            if($dbInstance->rows[$i]["UserId"]==$nugetEntity->UserId){
+                 if($update){
+                    $toInsert["Token"]=$dbInstance->rows[$i]["Token"];
+                    $toInsert["UserId"]=$dbInstance->rows[$i]["UserId"];
+                    $dbInstance->rows[$i] = $toInsert;
+                    $doAdd = false;
+                 }
+            }
         }
         
         if($doAdd){
             $toInsert["Token"]=Utils::NewGuid();
 			$toInsert["Id"]=Utils::NewGuid();
             $dbInstance->add_row($toInsert);
-        }else{
-		
-		}
+        }
         $dbInstance->save();
         return true;
     }
