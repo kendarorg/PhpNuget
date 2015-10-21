@@ -283,18 +283,7 @@ class SmallTxtDb
 				$toSort[] = $item;
 			}
 		}
-		
-		/*$result = array();
-		foreach($toSort as $row){
-			if($objectSearch!=null){
-				if(!$objectSearch->Execute($row)){
-					continue;
-				}
-			}
-			$result[]=$row;
-		}
-		$toSort = $result;*/
-		
+				
 		if($objectSearch!=null){
 			$toSort = $objectSearch->DoSort($toSort,$rowTypes);
 			$toSort = $objectSearch->DoGroupBy($toSort);

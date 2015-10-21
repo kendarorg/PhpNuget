@@ -846,6 +846,30 @@ class ObjectSearch
 		return $subject;
 	}
 	
+	public function DoSortMySql()
+	{
+		if(sizeof($this->_sortClause)==0) return "";
+		$toMerge = array();
+		foreach($this->_sortClause as $sc){
+			array_push($toMerge,"`".$sc->Field."` ".($sc->Asc?"ASC":"DESC"));
+		}
+		
+		return " ORDER BY ".join(" , ",$toMerge);
+	}
+	
+	
+	
+	public function DoGroupByMySql()
+	{
+		if(sizeof($this->_groupClause)==0) return "";
+		$toMerge = array();
+		foreach($this->_groupClause as $sc){
+			array_push($toMerge,"`".$sc."`");
+		}
+		
+		return " GROUP BY ".join(" , ",$toMerge);
+	}
+	
 	/*
 	The comparison function must return an integer 
 	less than, if the first argument is considered to be less then the second

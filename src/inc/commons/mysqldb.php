@@ -622,6 +622,10 @@ class SmallTxtDb
 			return $this->doQuery($select);
 		}
 		
+		
+		
+		
+		
 		//$objectSearch->dump();
 		//die();
 		
@@ -631,72 +635,23 @@ class SmallTxtDb
 		if($where!=null && strlen($where)>0){
 			$select = $select." WHERE ".$where;
 		}
+		
+		if($objectSearch!=null){
+			$select = $select." ".$objectSearch->DoSortMySql();
+		}
+		if($objectSearch!=null){
+			$gp = $objectSearch->DoGroupByMySql();
+			if($gp!=""){
+				$select = "SELECT * FROM (".$select.") as TB ".$gp;
+			}
+		}
+		
 		$select = $select." LIMIT ".$limit." OFFSET ".$skip ;
 		
 		//echo "<!-- ".$select."-->";
 		
-		
-		return $this->doQuery($select);
-		
-		
-		die();
-		$r = explode(":|:",$this->dbRows);
-		$t = explode(":|:",$this->dbTypes);
-		$rowTypes = array();
-		for($i=0;$i<sizeof($r);$i++){
-			$rowTypes[$r[$i]]=$t[$i];
-		}
-		
-		$toSort = array();
-		$bi = $this->BuildItem;
-		foreach($this->rows as $row){
-		
-			$item = $bi();
-			foreach ($row as $key=> $value) {
-                $item->$key = $value;
-            }
-			if($objectSearch!=null){
-				if($objectSearch->Execute($item)){
-					$toSort[] = $item;
-				}
-			}else{
-				$toSort[] = $item;
-			}
-		}
-		
-		/*$result = array();
-		foreach($toSort as $row){
-			if($objectSearch!=null){
-				if(!$objectSearch->Execute($row)){
-					continue;
-				}
-			}
-			$result[]=$row;
-		}
-		$toSort = $result;*/
-		
-		if($objectSearch!=null){
-			$toSort = $objectSearch->DoSort($toSort,$rowTypes);
-			$toSort = $objectSearch->DoGroupBy($toSort);
-		}
-		$result = array();
-		
-		
-		
-		foreach($toSort as $row){
-			if($skip>0){
-				$skip--;
-				continue;
-			}
-				
-            $result[]=$row;
-			$limit--;
-			if($limit==0){
-				break;
-			}
-        }
-		
-		return $result;
+		//echo $select;
+		return  $this->doQuery($select);
 	}
 }
 
