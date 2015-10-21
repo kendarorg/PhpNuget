@@ -10,6 +10,16 @@ class PhpNugetExternalTypes
 	{
 		return $this->_isVersion($token);
 	}
+	
+	public function _specialMySqlSort($type,$name)
+	{
+		echo "AAAAAAAAAAAAAAAAAAAAAAAAAAA";
+		if($type == "version"){
+			echo $name." IS ".$type."\r\n<Br>";
+		}
+		return null;
+	}
+	
 	public function BuildToken($token)
 	{
 		$o = null;

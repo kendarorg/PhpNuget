@@ -622,12 +622,8 @@ class SmallTxtDb
 			return $this->doQuery($select);
 		}
 		
-		
-		
-		
-		
-		//$objectSearch->dump();
-		//die();
+		$fieldNames = explode(":|:",$this->FieldNames());
+		$fieldTypes = explode(":|:",$this->FieldTypes());
 		
 		$where = trim($objectSearch->ToMySql());
 		
@@ -637,10 +633,10 @@ class SmallTxtDb
 		}
 		
 		if($objectSearch!=null){
-			$select = $select." ".$objectSearch->DoSortMySql();
+			$select = $select." ".$objectSearch->DoSortMySql($fieldNames,$fieldTypes);
 		}
 		if($objectSearch!=null){
-			$gp = $objectSearch->DoGroupByMySql();
+			$gp = $objectSearch->DoGroupByMySql($fieldNames,$fieldTypes);
 			if($gp!=""){
 				$select = "SELECT * FROM (".$select.") as TB ".$gp;
 			}
