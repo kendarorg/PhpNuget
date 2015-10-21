@@ -458,51 +458,98 @@ class ObjectSearch
 	
 	public function ToMySql()
 	{
+		
 		if($this->parseResult==null || sizeof($this->parseResult)==0){
+		
 			return "";
 		}
 		$parseTreeItem = $this->parseResult[0];
-		$result = @$this->_toMySql($parseTreeItem,$subject);
-		return $result->Value;
+		$result = @$this->_toMySql($parseTreeItem);
+		
+		return $result;
 	}
 	
-	public function _toMySql($parseTreeItem,$subject)
+	public function _toMySql($parseTreeItem)
 	{
+		//var_dump($parseTreeItem); echo "\r\n<br>";
+		
+		$result = "";
 		$t = strtolower($parseTreeItem->Type);
 		$v = $parseTreeItem->Value;
 		$c = $parseTreeItem->Children;
 		switch($t){
 			case "string":
+				return "'".$v."'";
 			case "number":
+				return $v;
 			case "boolean":	
-				return $parseTreeItem;
+				return $v==false?"false":"true";
 		}
 		if($t == "function"){
 			$params = array();
 			for($i=0;$i<sizeof($c);$i++){
-				$params[] = $this->_doExecute($c[$i],$subject);
+				$params[] = $this->_toMySql($c[$i]);
 			}
 			
-			$result = $this->_executeFunction($v,$params);
+			$result = $this->_toMySqlFunction($v,$params);
 		}else if($t == "group"){
 			$params = array();
 			for($i=0;$i<sizeof($c);$i++){
-				$params[] = $this->_doExecute($c[$i],$subject);
+				$params[] = $this->_toMySql($c[$i]);
 			}
 			$params[]=true;
-			$result = $this->_executeFunction("doeq",$params);
+			$result = $this->_toMySqlFunction("doeq",$params);
 		}else if($t=="field"){
+
 			$fo = new Operator();
 			$fo->Type = "fieldinstance";
 			$fo->Value = $subject->$v;
 			$fo->Id = $v;
-			return $fo;
+			return "`".$v."`";
 		}else if($this->externalTypes!=null && $this->externalTypes->IsExternal($v)){
 			return $parseTreeItem;
 		}else{
 			throw new ParserException("Token '".$t."' not supported excuting");
 		}
 		return $result;
+	}
+	
+	function _toMySqlFunction($name,$params)
+	{
+		/*if($this->externalTypes!=null && $this->externalTypes->CanHandle($name,$params)){
+			return $this->externalTypes->$name($params);
+		}*/
+		
+		switch($name){
+			case("doand"):
+				return join(" and ",$params);
+			case("door"):
+				return join(" or ",$params);
+			case("doeq"):
+				return $params[0]."=".$params[1];
+			case("doneq"):
+				return $params[0]."<>".$params[1];
+			case("dogte"):
+				return $params[0].">=".$params[1];
+			case("dogt"):
+				return $params[0].">".$params[1];
+			case("dolt"):
+				return $params[0]."<".$params[1];
+			case("dolte"):
+				return $params[0]."<=".$params[1];
+			case("tolower"):
+				return "LOWER(".$params[0].")";
+			case("toupper"):
+				return "UPPER(".$params[0].")";
+			case("startswith"):
+				return $params[1]." LIKE '%".trim($params[0],"'")."'";
+			case("endswith"):
+				return $params[1]." LIKE '".trim($params[0],"'")."%'";
+			case("substringof"):
+				return $params[1]." LIKE '%".trim($params[0],"'")."%'";
+			default:
+				throw new Exception("Missing operator: ".$name);
+		}
 	}
 	
 	public function Execute($subject)

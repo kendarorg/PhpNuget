@@ -26,7 +26,9 @@ define('__MYTXTDBROWS_PKG_TYPES__',
 define('__MYTXTDBROWS_PKG_EDITABLE__',
       "Tags:|:IsAbsoluteLatestVersion:|:Title:|:Title:|:IconUrl:|:LicenseUrl:|:ProjectUrl:|:".
       "RequireLicenseAcceptance:|:Description:|:ReleaseNotes:|:Copyright:|:".
-      "IsLatestVersion:|:Listed:|:TargetFramework:|:Summary:|:IsPreRelease:|:Owners:|:UserId");      
+      "IsLatestVersion:|:Listed:|:TargetFramework:|:Summary:|:IsPreRelease:|:Owners:|:UserId");  
+define('__MYTXTDBROWS_PKG_KEY__',
+      "Id:|:Version");	  
 
 function nugetDbPackageBuilder()
 {
@@ -53,7 +55,7 @@ class NuGetDb
 			$os->Parse($query,$this->GetAllColumns());
 		}
 		$this->initialize();
-        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__);
+        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__,__MYTXTDBROWS_PKG_KEY__);
 		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
 		$res =  $dbInstance->GetAll($limit,$skip,$os);
 		foreach($res as $row){
@@ -74,7 +76,7 @@ class NuGetDb
 		if($nugetEntity->Id=="" || $nugetEntity->Version==""){
 			throw new Exception("Missing Id and/or Version");
 		}
-        $dbInstance =  new SmallTxtDb("3.0.0.0",__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__);
+        $dbInstance =  new SmallTxtDb("3.0.0.0",__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__,__MYTXTDBROWS_PKG_KEY__);
 		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
         $toInsert = array();
         $vars = explode(":|:",__MYTXTDBROWS_PKG__);
@@ -85,7 +87,7 @@ class NuGetDb
 			}
         }
         $doAdd = true;
-        for($i=0;$i<sizeof($dbInstance->rows);$i++){
+        /*for($i=0;$i<sizeof($dbInstance->rows);$i++){
             //if($dbInstance->rows[$i]["PackageHash"]==$nugetEntity->PackageHash){
 			if($dbInstance->rows[$i]["Version"]==$nugetEntity->Version && $dbInstance->rows[$i]["Id"]==$nugetEntity->Id){
                 if($update){
@@ -96,15 +98,26 @@ class NuGetDb
 					throw new Exception("Duplicate found!");
 				 }
             }
-        }
+        }*/
+		
+		$foundedUsers = $this->Query("(Version eq '".$nugetEntity->Version."') and (Id eq '".$nugetEntity->Id."')",1,0);
+		if(sizeof($foundedUsers)==1){
+			if($update){
+				$doAdd = false;
+			}else{
+				throw new Exception("Duplicate found!");
+			}
+		}
+		
         if($doAdd)$dbInstance->add_row($toInsert);
+		else $dbInstance->update_row($toInsert,array("Id"=>$toInsert["Id"],"Version"=>$toInsert["Version"]));
         $dbInstance->save();
         return true;
     }
     
     public function DeleteRow($nugetEntity)
     {
-        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__);
+        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__,__MYTXTDBROWS_PKG_KEY__);
 		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
         $nameOfCaptain = "";
         

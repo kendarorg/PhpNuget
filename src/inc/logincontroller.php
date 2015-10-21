@@ -26,7 +26,7 @@ class LoginController
 			$this->Admin = $_SESSION["Admin"];
 			$this->Packages = $_SESSION["Packages"];
 		}else if("true"==$doLogin){
-			$this->_login();	
+			$this->_login();
 			$location = UrlUtils::CurrentUrl(Settings::$SiteRoot);
 			header("Location: ".$location);
 			die();			
@@ -68,7 +68,7 @@ class LoginController
 		$user = null;
 
 		$ar = $udb->Query("(Enabled eq true) and (UserId eq '".$uid."' or Email eq '".$uid."')");		
-		
+			
 		if(sizeof($ar)==1){
 			$user = $ar[0];
 		}
@@ -81,9 +81,10 @@ class LoginController
 			return;
 		}
 		$this->IsLoggedIn = true;
-		$this->UserId = $row->UserId;
-		$this->Admin = $row->Admin;
-		$this->Packages = $row->Packages;
+		$this->UserId = $user->UserId;
+		$this->Admin = $user->Admin;
+		$this->Packages = $user->Packages;
+		//var_dump($user);die();
 		$_SESSION["UserId"] = $this->UserId;
 		$_SESSION["Admin"] = $this->Admin;
 		$_SESSION["Packages"] = $this->Packages;

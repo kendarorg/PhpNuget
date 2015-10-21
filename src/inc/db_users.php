@@ -16,6 +16,8 @@ define('__MYTXTDBROWS_USR__',
       "UserId:|:Name:|:Company:|:Md5Password:|:Packages:|:Enabled:|:Email:|:Token:|:Admin:|:Id");
 define('__MYTXTDBROWS_USR_TYP__',
       "string:|:string:|:string:|:string:|:string:|:boolean:|:string:|:string:|:boolean:|:string");
+define('__MYTXTDBROWS_USR_KEY__',
+      "UserId");
 
 
 class UserDb
@@ -49,14 +51,14 @@ class UserDb
 		}
 		
 		$this->initialize();
-        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
+        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
 		$dbInstance->BuildItem= 'nugetDbUserBuilder';
 		return $dbInstance->GetAll($limit,$skip,$os);
 	}
     
     public function AddRow($nugetEntity,$update)
     {
-        $dbInstance =  new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
+        $dbInstance =  new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
         $toInsert = array();
         $vars = explode(":|:",__MYTXTDBROWS_USR__);
         //print_r($vars);
@@ -64,22 +66,25 @@ class UserDb
             $toInsert[$column] = $nugetEntity->$column;
         }
         $doAdd = true;
-        for($i=0;$i<sizeof($dbInstance->rows);$i++){
-            if($dbInstance->rows[$i]["UserId"]==$nugetEntity->UserId){
-                 if($update){
-                    $toInsert["Token"]=$dbInstance->rows[$i]["Token"];
-                    $toInsert["UserId"]=$dbInstance->rows[$i]["UserId"];
-                    $dbInstance->rows[$i] = $toInsert;
-                    $doAdd = false;
-                 }
-            }
-        }
-        
+		$foundedUsers = $this->Query("(UserId eq '".$nugetEntity->UserId."')",1,0);
+		if(sizeof($foundedUsers)==1){
+			$toInsert["Token"]=$foundedUsers[0]->Token;
+            $toInsert["UserId"]=$foundedUsers[0]->UserId;
+			if($update){
+				$doAdd = false;
+			}else{
+				throw new Exception("Duplicate found!");
+			}
+		}
+		
         if($doAdd){
             $toInsert["Token"]=Utils::NewGuid();
 			$toInsert["Id"]=Utils::NewGuid();
             $dbInstance->add_row($toInsert);
-        }
+        }else{
+			$dbInstance->update_row($toInsert,array("UserId"=>$toInsert["UserId"]));
+		}
+		
         $dbInstance->save();
         return true;
     }
@@ -87,7 +92,7 @@ class UserDb
     
     public function DeleteRow($nugetEntity)
     {
-        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
+        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
         $nameOfCaptain = "";
         
 		$select = array('UserId'=>$nugetEntity->UserId);
@@ -97,9 +102,6 @@ class UserDb
 	
 	public function GetByUserId($id)
     {
-        //$dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
-		//$dbInstance->BuildItem= 'nugetDbUserBuilder';
-        
 		$items = $this->Query("(UserId eq '".$id."')",1,0);
 		if(sizeof($items)==1) return $items[0];
         

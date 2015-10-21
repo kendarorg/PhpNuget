@@ -40,7 +40,7 @@ class PackageDescriptor
 	var $RequireLicenseAcceptance;
 	var $Summary;
 	var $Title;
-	//$VersionDownloadCount
+	var $VersionDownloadCount;
 	//$MinClientVersion
 	var $Tags;
 	var $LicenseUrl;

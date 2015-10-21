@@ -52,6 +52,7 @@ class SmallTxtDb
 		if(sizeof($fieldNames)!=sizeof($fieldTypes)){
 			throw new Exception("Mismatch types/fields");
 		}
+		
         for($i=0;$i<sizeof($fieldNames);$i++){
             $field = $fieldNames[$i];
             $type = $fieldTypes[$i];
@@ -61,25 +62,32 @@ class SmallTxtDb
         return $row;   
     }
     
-    public function __construct($version,$dbFile,$dbRows,$dbTypes,$loadData = true) 
+    public function __construct($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData = true) 
     {
-        $this->initialize($version,$dbFile,$dbRows,$dbTypes,$loadData);
+        $this->initialize($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData);
     }
     
-    public function SmallTxtDb($version,$dbFile,$dbRows,$dbTypes,$loadData = true)
+    public function SmallTxtDb($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData = true)
     {
-        $this->initialize($version,$dbFile,$dbRows,$dbTypes,$loadData);
+        $this->initialize($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData);
     }
     
-    private function initialize($version,$dbFile,$dbRows,$dbTypes,$loadData = true)
+
+	var $_keys=array();
+    
+    private function initialize($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData = true)
     {
-        
         $this->cr="\n";
         $this->separator = ":|:";
         $this->dbFile = $dbFile;
         $this->dbRows = $dbRows;
         $this->dbTypes = $dbTypes;
 		$this->_version = $version;
+		$this->_keys = array();
+		foreach(explode(":|:",$keys) as $kk){
+			$this->_keys[strtolower($kk)]=$kk;
+			$this->_keys[$kk]=$kk;
+		}
         if(!file_exists($this->dbFile)){
             $fp = fopen($this->dbFile, 'w');
             fwrite($fp, "@Version:".$this->_version.$this->cr);
@@ -138,6 +146,11 @@ class SmallTxtDb
             }
         }
     }
+	
+	public function update_row($rowHash,$keys)
+    {
+	
+	}
     
     public function add_row($rowHash)
     {

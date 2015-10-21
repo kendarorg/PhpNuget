@@ -296,23 +296,49 @@ class SmallTxtDb
         return $row;   
     }
     
-    public function __construct($version,$dbFile,$dbRows,$dbTypes,$loadData = true) 
+    public function __construct($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData = true) 
     {
-        $this->initialize($version,$dbFile,$dbRows,$dbTypes,$loadData);
+        $this->initialize($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData);
     }
     
-    public function SmallTxtDb($version,$dbFile,$dbRows,$dbTypes,$loadData = true)
+    public function SmallTxtDb($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData = true)
     {
-        $this->initialize($version,$dbFile,$dbRows,$dbTypes,$loadData);
+        $this->initialize($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData);
     }
 	
 	public function doQuery($query){
+		//echo $query;
 		$connection = mysqli_connect(__MYSQL_SERVER__, __MYSQL_USER__, __MYSQL_PASSWORD__,__MYSQL_DB__);
 		$result = mysqli_query( $connection,$query );
 		$data = array();
-
+		
+		$r = explode(":|:",$this->dbRows);
+		$t = explode(":|:",$this->FieldTypes());
+		
+		if(gettype($result)=="boolean"){
+			mysqli_close($connection);
+			return $data;
+		}
+		
 		while ( $list = mysqli_fetch_array($result,MYSQLI_ASSOC) ) {
-			array_push($data,$list);
+			
+			$item = $this->CreateItem($list);
+			for($i=0;$i<sizeof($r);$i++){
+				$k = $r[$i];
+				$kt = $t[$i];
+				$val = $list[strtolower($k)];
+				if($kt=="object"){
+					$item->$k = unserialize($val);
+				}else if($kt=="number" && $val!=null){
+					$item->$k= intval($val);
+				}else if($kt=="boolean"){
+					$item->$k= filter_var($val, FILTER_VALIDATE_BOOLEAN);
+				}else{
+					$item->$k = $val;
+				}
+			}
+			
+			array_push($data,$item);
 		}
 		mysqli_close($connection);
 		return $data;
@@ -334,9 +360,9 @@ class SmallTxtDb
 		return $result;
 	}
 	
-	
+	var $_keys=array();
     
-    private function initialize($version,$dbFile,$dbRows,$dbTypes,$loadData = true)
+    private function initialize($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData = true)
     {
         $pi = pathinfo($dbFile);
         $this->cr="\n";
@@ -345,7 +371,15 @@ class SmallTxtDb
         $this->dbRows = $dbRows;
         $this->dbTypes = $dbTypes;
 		$this->_version = $version;
+		$this->_keys = array();
+		foreach(explode(":|:",$keys) as $kk){
+			$this->_keys[strtolower($kk)]=$kk;
+			$this->_keys[$kk]=$kk;
+		}
 		
+		
+		
+		$fieldTypes = explode(":|:",$this->FieldTypes());
 		
 		$result = $this->doQueryScalar("SELECT COUNT(*) AS counter FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '"
 			.__MYSQL_DB__."' AND TABLE_NAME = '"
@@ -361,27 +395,33 @@ class SmallTxtDb
 				throw new Exception("Mismatch types/fields");
 			}
 			
+			$pks = array();
 			$toJoin = array();
 			for($i=0;$i<sizeof($fieldNames);$i++){
 				$field = strtolower($fieldNames[$i]);
 				$type = strtolower($fieldTypes[$i]);
+				
+				$isPk =false;
+				if(isset($this->_keys[$field])){
+					array_push($pks,"`".$field."`");
+					$isPk =true;
+				}
 				if($type=="number"){
 					$toJoin[$i]="INT";
 				}else if($type=="boolean"){
-					$toJoin[$i]="TINYINT";
+					$toJoin[$i]="BOOLEAN";
 				}else{
 					$toJoin[$i]="TEXT";
 				}
-				if($field == "id"){
-					if($toJoin[$i]=="TEXT"){
-						$toJoin[$i]="CHAR(128)";
-					}
-					$toJoin[$i] = "`".$field."` ".$toJoin[$i]." PRIMARY KEY";
-				}else{
-					$toJoin[$i] = "`".$field."` ".$toJoin[$i];
+				if($isPk  && $toJoin[$i]=="TEXT"){
+					$toJoin[$i]="CHAR(128)";
 				}
+					//$toJoin[$i] = "`".$field."` ".$toJoin[$i]." PRIMARY KEY";
+				
+				$toJoin[$i] = "`".$field."` ".$toJoin[$i];
 			}
-			$create = $create." (".join(",",$toJoin).")";
+			
+			$create = $create." (".join(",",$toJoin).", PRIMARY KEY (".join(",",$pks)."))";
 			$this->doQueryExecute($create);
 			//echo $create;die();
 		}
@@ -403,53 +443,68 @@ class SmallTxtDb
 
     private function load($loadData)
     {
-        $fp = fopen($this->dbFile,"r");
-        $content = fread($fp,filesize($this->dbFile));
-        fclose($fp);
-        $splitted = explode($this->cr,$content);
-		$st = 0;
-		$firstRow = $splitted[$st];
-		if(starts_with($firstRow,"@Version:")){
-			$kk=explode(":",$firstRow);
-			$currentVersion = $kk[1];
-			
-			if($this->_version != strtolower(trim($currentVersion))){
-				throw new Exception("Founded db version ".$currentVersion." instead of ".$this->_version);
-			}
-			$st=1;
-		}
-        $this->dbRows = $splitted[$st];
-		$st++;
-       
-        $cols = explode($this->separator,$this->dbRows);
-        $this->columns=array();
-        for ($i = 0; $i < sizeof($cols); $i++) {
-            $this->columns[$cols[$i]]=$i;
-        }
-		
-        $this->rows = array();
-        if($loadData){
-            for ($i = $st; $i < sizeof($splitted); $i++) {
-			
-                $splitted[$i] = trim($splitted[$i]);
-                if($splitted[$i]!=""){
-                    $row = array();
-                    $vals = explode($this->separator,$splitted[$i]);
-                    foreach($this->columns as $key => $value){
-                        $row[$key]=$this->re_cr_lf(unserialize($vals[$value]));
-                    }
-					
-                    $this->rows[]=$this->VerifyTypes($row);
-                }
-            }
-        }
+        
     }
+	
+	public function update_row($rowHash,$keys)
+    {
+		$this->rows[]=$this->VerifyTypes($rowHash);
+		$connection = mysqli_connect(__MYSQL_SERVER__, __MYSQL_USER__, __MYSQL_PASSWORD__,__MYSQL_DB__);
+		
+		$fieldNames = explode(":|:",$this->FieldNames());
+		$fieldTypes = explode(":|:",$this->FieldTypes());
+		$create = "UPDATE ".$this->dbFile." SET ";
+		$values= array();
+		//var_dump($fieldNames);
+		//var_dump($rowHash);
+		$toJoin = array();
+		for($i=0;$i<sizeof($fieldNames);$i++){
+			$field = $fieldNames[$i];
+			$type = strtolower($fieldTypes[$i]);
+
+			if(isset( $keys[$field])){
+				$value = $keys[$field];
+				if($type=="boolean"){
+					array_push($toJoin,"`".$field."`=".($value==false?"false":"true"));
+				}else if($type=="number" ){
+					array_push($toJoin,"`".$field."`=".$value);
+				}else if($type=="object" || gettype($value)=="array"){
+					array_push($toJoin,"`".$field."`="."'".mysqli_real_escape_string($connection,serialize($value))."'");
+				}else{
+					//echo $field.":".gettype($value)."--";
+					array_push($toJoin,"`".$field."`="."'".mysqli_real_escape_string($connection,$value)."'");
+				}
+			}
+		}
+		
+		for($i=0;$i<sizeof($fieldNames);$i++){
+			$field = $fieldNames[$i];
+			$type = strtolower($fieldTypes[$i]);
+			if(isset( $rowHash[$field]) && !isset( $keys[$field])){
+				$value = $rowHash[$field];
+				if($type=="boolean"){
+					array_push($values,"`".$field."`=".($value==false?"false":"true"));
+				}else if($type=="number" ){
+					array_push($values,"`".$field."`=".$value);
+				}else if($type=="object" || gettype($value)=="array"){
+					array_push($values,"`".$field."`="."'".mysqli_real_escape_string($connection,serialize($value))."'");
+				}else{
+					//echo $field.":".gettype($value)."--";
+					array_push($values,"`".$field."`="."'".mysqli_real_escape_string($connection,$value)."'");
+				}
+			}
+		}
+		$create = $create." ".join(",",$values)." WHERE ".join(" and ",$toJoin);
+		//echo $create;die();
+		$this->doQueryExecute($create);
+	}
     
     public function add_row($rowHash)
     {
 		//$rowHash = array_change_key_case($rowHash, CASE_LOWER);
 
         $this->rows[]=$this->VerifyTypes($rowHash);
+		$connection = mysqli_connect(__MYSQL_SERVER__, __MYSQL_USER__, __MYSQL_PASSWORD__,__MYSQL_DB__);
 		
 		$fieldNames = explode(":|:",$this->FieldNames());
 		$fieldTypes = explode(":|:",$this->FieldTypes());
@@ -463,25 +518,51 @@ class SmallTxtDb
 			$type = strtolower($fieldTypes[$i]);
 			if(isset( $rowHash[$field])){
 				$value = $rowHash[$field];
-				if($type=="number" || $type=="boolean"){
+				if($type=="boolean"){
+					array_push($values,$value==false?"false":"true");
+				}else if($type=="number" ){
 					array_push($values,$value);
+				}else if($type=="object" || gettype($value)=="array"){
+					array_push($values,"'".mysqli_real_escape_string($connection,serialize($value))."'");
 				}else{
-					array_push($values,"'".$value."'");
+					//echo $field.":".gettype($value)."--";
+					array_push($values,"'".mysqli_real_escape_string($connection,$value)."'");
 				}
-				array_push($toJoin,$field);
+				array_push($toJoin,"`".$field."`");
 			}
 		}
 		$create = $create." (".join(",",$toJoin).") VALUES (".join(",",$values).")";
+		//echo $create;
 		$this->doQueryExecute($create);
 		//echo $create;
         //print_r($this->columns);
      // print_r($this->rows);die();
     }
     
-    public function delete_row($rowIndex)
+    public function delete_row($indexs)
     {
-        unset($this->rows[$rowIndex]);
-        $this->rows= array_values($this->rows);
+        $this->rows[]=$this->VerifyTypes($rowHash);
+		
+		$fieldNames = explode(":|:",$this->FieldNames());
+		$fieldTypes = explode(":|:",$this->FieldTypes());
+		$create = "DELETE FROM ".$this->dbFile." ";
+		$values= array();
+		//var_dump($fieldNames);
+		//var_dump($rowHash);
+		for($i=0;$i<sizeof($fieldNames);$i++){
+			$field = $fieldNames[$i];
+			$type = strtolower($fieldTypes[$i]);
+			if(isset( $rowHash[$field])){
+				$value = $rowHash[$field];
+				if($type=="number" || $type=="boolean"){
+					array_push($values,"`".$field."`=".$value);
+				}else{
+					array_push($values,"`".$field."`="."'".$value."'");
+				}
+			}
+		}
+		$create = $create." WHERE ".join(" ABD ",$values);
+		$this->doQueryExecute($create);
     }
     
     function de_cr_lf($value)
@@ -498,22 +579,7 @@ class SmallTxtDb
     
     function save()
     { 
-       // print_r($this->rows);die();
-        /*$fp = fopen($this->dbFile.".tmp", 'w');
-		fwrite($fp, "@Version:".$this->_version.$this->cr);
-        fwrite($fp, $this->dbRows.$this->cr);
-        foreach($this->rows as $row){
-            $towrite = array_fill(0,sizeof( $this->columns),null);
-            $row = $this->VerifyTypes($row);
-            foreach($this->columns as $key => $value){
-                $towrite[$value]=serialize($this->de_cr_lf($row[$key]));
-            }
-            $rowString = implode($this->separator,$towrite);
-            fwrite($fp, $rowString.$this->cr);
-        }
-        fclose($fp);
-        unlink($this->dbFile);
-        rename($this->dbFile.".tmp",$this->dbFile);*/
+      
     }
     
     public function VerifyType($value,$type)
@@ -549,19 +615,29 @@ class SmallTxtDb
 	
 	
 	
-	public function GetAll($limit,$skip=0,$objectSearch=null)
+	public function GetAll($limit=99999,$skip=0,$objectSearch=null)
 	{
 		if($objectSearch==null){
-			$select = "SELECT * FROM ".$this->dbFile." LIMIT ".$skip." OFFSET ".$skip ;
+			$select = "SELECT * FROM ".$this->dbFile." LIMIT ".$limit." OFFSET ".$skip ;
 			return $this->doQuery($select);
 		}
-		$objectSearch->dump();
-		die();
 		
-		$select = "SELECT * FROM ".$this->dbFile." ".$objectSearch->ToMySql();
+		//$objectSearch->dump();
+		//die();
 		
-		echo "\r\n<br>".$select;
+		$where = trim($objectSearch->ToMySql());
+		
+		$select = "SELECT * FROM ".$this->dbFile;
+		if($where!=null && strlen($where)>0){
+			$select = $select." WHERE ".$where;
+		}
+		$select = $select." LIMIT ".$limit." OFFSET ".$skip ;
+		
+		//echo "<!-- ".$select."-->";
+		
+		
 		return $this->doQuery($select);
+		
 		
 		die();
 		$r = explode(":|:",$this->dbRows);
