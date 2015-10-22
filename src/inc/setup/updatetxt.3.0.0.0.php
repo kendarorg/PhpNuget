@@ -21,14 +21,15 @@ function splitVersion($ov){
 	return $newData;
 }
 
-function updateTo4000($dbFile){
+function updateTo3000($dbFile){
 $newVersion = "@Version:4.0.0.0";
+
 
 if($dbFile=="nugetdb_usrs.txt"){
 	$fp = fopen(__DATABASE_DIR__."/".$dbFile,'r');
 	$content = fread($fp,filesize(__DATABASE_DIR__."/".$dbFile));
 	fclose($fp);
-	file_put_contents(__DATABASE_DIR__."/".$dbFile.".3.0.0.0",$rc);
+	file_put_contents(__DATABASE_DIR__."/".$dbFile.".3.0.0.0",$content);
 	$splitted = explode("\n",$content);
 	$splitted[0]=$newVersion;
 
@@ -44,7 +45,7 @@ $newHeader = "Version0:|:Version1:|:Version2:|:Version3:|:VersionBeta:|:Version:
 $fp = fopen(__DATABASE_DIR__."/".$dbFile,'r');
 $content = fread($fp,filesize(__DATABASE_DIR__."/".$dbFile));
 fclose($fp);
-	file_put_contents(__DATABASE_DIR__."/".$dbFile.".3.0.0.0",$rc);
+file_put_contents(__DATABASE_DIR__."/".$dbFile.".3.0.0.0",$content);
 $splitted = explode("\n",$content);
 
 $newco = array();

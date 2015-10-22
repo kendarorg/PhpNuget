@@ -6,6 +6,7 @@ require_once(__ROOT__."/inc/commons/path.php");
 require_once(__ROOT__."/inc/db_nugetpackages.php");
 require_once(__ROOT__."/inc/nugetreader.php");
 require_once(__ROOT__."/inc/phpnugetobjectsearch.php");
+require_once(__ROOT__."/inc/logincontroller.php");
 
 class PackageGroup
 {

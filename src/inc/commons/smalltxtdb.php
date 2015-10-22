@@ -1,23 +1,5 @@
 <?php
 
-function stdVerifyVersion($db)
-{
-	$dbFile = Path::Combine(Settings::$DataRoot,$db);
-	if(file_exists($dbFile)){
-		$fp = fopen($dbFile,'r');
-        $content = fread($fp,filesize($dbFile));
-        fclose($fp);
-        $splitted = explode("\n",$content);
-		$st = 0;
-		$firstRow = $splitted[$st];
-		if(starts_with($firstRow,"@Version:")){
-			$kk=explode(":",$firstRow);
-			return trim($kk[1]);
-		}
-		throw new Exception("Too early version!");
-	}
-	return __DB_VERSION__;
-}
 
 class SmallTxtDb
 {
@@ -151,16 +133,26 @@ class SmallTxtDb
         $this->rows = array();
         if($loadData){
             for ($i = $st; $i < sizeof($splitted); $i++) {
-			
+				
                 $splitted[$i] = trim($splitted[$i]);
+				
                 if($splitted[$i]!=""){
                     $row = array();
                     $vals = explode($this->separator,$splitted[$i]);
                     foreach($this->columns as $key => $value){
-                        $row[$key]=$this->re_cr_lf(unserialize($vals[$value]));
+						@$val= unserialize($vals[$value]);
+						
+                        $row[$key]=$this->re_cr_lf($val);
                     }
 					
-                    $this->rows[]=$this->VerifyTypes($row);
+					$part = $this->VerifyTypes($row);
+					if(array_key_exists("Id",$row)){
+						if($row["Id"]!=false){
+							$this->rows[]= $part;
+						}
+					}else{
+						$this->rows[]= $part;
+					}
                 }
             }
         }
@@ -168,7 +160,26 @@ class SmallTxtDb
 	
 	public function update_row($rowHash,$keys)
     {
-	
+		$hashRow = array();
+		for($i=0;$i<sizeof($this->rows);$i++){
+			$row = $this->rows[$i];
+		
+			$itIsIt =true;
+			foreach($keys as $k=>$v){
+				if($row[$k] != $v) $itIsIt =false;
+			}
+			if($itIsIt==true){
+				foreach($this->columns as $key => $value){
+					$rowContent = null;
+					if(array_key_exists($key,$rowHash)){
+						$rowContent = $rowHash[$key];
+					}
+					$hashRow[$key]=$rowContent;
+				}
+				$this->rows[$i]=$this->VerifyTypes($hashRow);
+				break;
+			}
+        }
 	}
     
     public function add_row($rowHash)
@@ -210,12 +221,14 @@ class SmallTxtDb
     
     function de_cr_lf($value)
     {
+		if(!is_string($value))return $value;
         $v = str_replace(array("\r\n","\r\f","\n","\r","\f"),"@CRLF@",$value);
         return $v;
     }
     
     function re_cr_lf($value)
     {
+		if(!is_string($value))return $value;
         $v = str_replace("@CRLF@","\n",$value);
         return $v;
     }

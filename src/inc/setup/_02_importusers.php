@@ -3,6 +3,27 @@ if(!defined('__INSETUP__')){
 	die("Error");
 }
 
+
+function stdVerifyVersion($db)
+{
+	$dbFile = Path::Combine(Settings::$DataRoot,$db);
+	
+	if(file_exists($dbFile)){
+		$fp = fopen($dbFile,'r');
+        $content = fread($fp,filesize($dbFile));
+        fclose($fp);
+        $splitted = explode("\n",$content);
+		$st = 0;
+		$firstRow = $splitted[$st];
+		if(starts_with($firstRow,"@Version:")){
+			$kk=explode(":",$firstRow);
+			return trim($kk[1]);
+		}
+		throw new Exception("Too early version!");
+	}
+	return __DB_VERSION__;
+}
+
 $useMySql = false;
 ?>
 <html>
@@ -27,6 +48,9 @@ $useMySql = false;
 		</form>-->
 		<ul>
 <?php
+	@define('__UPLOAD_DIR__', "data".DIRECTORY_SEPARATOR."packages");
+	@define('__DATABASE_DIR__', "data".DIRECTORY_SEPARATOR."db");
+	require_once(__ROOT__."/inc/dbversion.php");
 	require_once(__ROOT__."/inc/internalsettings.php");
 	//Create environment
 	$r = array();
@@ -60,10 +84,15 @@ $useMySql = false;
 		if(sizeof($data)==0){
 			mysqli_query( $connection,"INSERT INTO versions (VersionNumber,Id) VALUES ('".__DB_VERSION__."',0)");
 		}else{
-			while($data[0]["VersionNumber"]!=__DB_VERSION__){
+			
+			while($data["VersionNumber"]!=__DB_VERSION__){
 				$result = mysqli_query( $connection,"SELECT VersionNumber FROM versions");
-				$data = mysqli_fetch_array($result,MYSQLI_ASSOC);
-				require_once("updatemysql".$data[0]["VersionNumber"].".php");
+				if($result){
+					$data = mysqli_fetch_array($result,MYSQLI_ASSOC);
+					require_once("updatemysql".$data["VersionNumber"].".php");
+				}else{
+					throw new Exception("Some oddities on db!");
+				}
 			}
 		}
 			
@@ -76,15 +105,18 @@ $useMySql = false;
 			require_once(__ROOT__."/inc/commons/smalltxtdb.php");
 			$dbFile = "nugetdb_pkg.txt";
 			$prever = stdVerifyVersion($dbFile);
+		
 			while($prever!=__DB_VERSION__){
 				require_once("updatetxt.".stdVerifyVersion($dbFile).".php");
-				$prever = updateTo4000($dbFile);
+				$callFunc = "updateTo".str_replace(".","",$prever);
+				$prever = $callFunc($dbFile);
 			}
 			$dbFile = "nugetdb_usrs.txt";
 			$prever = stdVerifyVersion($dbFile);
 			while($prever !=__DB_VERSION__){
 				require_once("updatetxt.".stdVerifyVersion($dbFile).".php");
-				$prever = updateTo4000($dbFile);
+				$callFunc = "updateTo".str_replace(".","",$prever);
+				$prever = $callFunc($dbFile);
 				//echo stdVerifyVersion($dbFile);
 				//break;
 			}

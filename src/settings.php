@@ -3,8 +3,8 @@ require_once(__DIR__."/root.php");
 
 define('__MAXUPLOAD_BYTES__',10*1024*1024*1024);
 define('__PACKAGEHASH__',"SHA512"); //Or SHA256
-define('__UPLOAD_DIR__', "data".DIRECTORY_SEPARATOR."packages");
-define('__DATABASE_DIR__', "data".DIRECTORY_SEPARATOR."db");
+@define('__UPLOAD_DIR__', "data".DIRECTORY_SEPARATOR."packages");
+@define('__DATABASE_DIR__', "data".DIRECTORY_SEPARATOR."db");
 define('__SITE_ROOT__', "/pnm/");
 define('__ALLOWPACKAGEUPDATE__', false);
 define('__RESULTS_PER_PAGE__', 20);
@@ -20,7 +20,7 @@ define('__ALLOWUSERADD__',false);
 @define('__MYSQL_USER__',"phpnuget");
 @define('__MYSQL_PASSWORD__',"password");
 @define('__MYSQL_DB__',"phpnuget");
-@define('__DB_TYPE__',DBMYSQL);
+@define('__DB_TYPE__',DBTXT);
 
 //If true users are allowed to add a package only if the firstly added it
 //or if theyr user id is inside the "owners" field of the package

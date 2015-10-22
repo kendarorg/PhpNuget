@@ -4,6 +4,8 @@ require_once(__ROOT__."/settings.php");
 require_once(__ROOT__."/inc/commons/uploadutils.php");
 require_once(__ROOT__."/inc/nugetreader.php");
 require_once(__ROOT__."/inc/commons/url.php");
+require_once(__ROOT__."/inc/logincontroller.php");
+
 if (!empty($_SERVER['HTTP_X_NUGET_APIKEY'])) {
 	HttpUtils::ApiError('403', 'Invalid request');
 	die();

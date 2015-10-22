@@ -2,9 +2,10 @@
 
 require_once(dirname(__FILE__)."/../root.php");
 require_once(__ROOT__."/inc/commons/path.php");
+require_once(__ROOT__."/inc/dbversion.php");
 
 define('__RW_ADMIN_R_ALL__',0644);
-define('__DB_VERSION__',"4.0.0.0");
+
 
 class Settings
 {
@@ -41,10 +42,11 @@ if($sr!=""){
 @Settings::$LimitUsersPackages = __LIMITUSERSPACKAGES__;
 
 
+if(defined("__DATABASE_DIR__") && defined("__UPLOAD_DIR__")){
 if(!is_dir(Settings::$DataRoot))
 	mkdir(Settings::$DataRoot,__RW_ADMIN_R_ALL__);
 if(!is_dir(Settings::$PackagesRoot))	
 	mkdir(Settings::$PackagesRoot,__RW_ADMIN_R_ALL__);
+}
 
-require_once(__ROOT__."/inc/logincontroller.php");
 ?>
