@@ -1,4 +1,4 @@
-# PhpNuget V. 3.0.12.5
+# PhpNuget V. 3.1.0.0
 
 ## Purpose
 
@@ -229,7 +229,6 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 ### Should
 
 * Add robots.txt
-* Port to MySQL
 * Import v3.0.0.0 txt database on MySQL
 
 ### Would
