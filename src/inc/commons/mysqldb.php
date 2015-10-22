@@ -209,7 +209,9 @@ class SmallTxtDb
 
     private function load($loadData)
     {
-        $result = $this->doQuery("SELECT Version FROM Version");
+        $result = $this->doQuery("SELECT Version FROM versions");
+		if(sizeof($result)!=1) throw new Exception("Wrong database!");
+		if($result[0]["Version"]!=__DB_VERSION__) throw new Exception("Wrong database version! Expected ".__DB_VERSION__." but founded ".$result[0]["Version"]);
     }
 	
 	public function update_row($rowHash,$keys)
@@ -267,6 +269,7 @@ class SmallTxtDb
     
     public function add_row($rowHash)
     {
+		//var_dump($rowHash);
 		//$rowHash = array_change_key_case($rowHash, CASE_LOWER);
 
         $this->rows[]=$this->VerifyTypes($rowHash);
@@ -298,7 +301,7 @@ class SmallTxtDb
 			}
 		}
 		$create = $create." (".join(",",$toJoin).") VALUES (".join(",",$values).")";
-		//echo $create;
+		
 		$this->doQueryExecute($create);
 		//echo $create;
         //print_r($this->columns);

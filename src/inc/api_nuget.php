@@ -49,6 +49,8 @@ class ApiNugetBase
     {
         $tf = strtolower($tf);
         switch($tf){
+			case(".netframework4.5.1"): return "net451";
+            case(".netframework4.5"): return "net45";
             case(".netframework3.5"): return "net35";
             case(".netframework4.0"): return "net40";
             case(".netframework3.0"): return "net30";
@@ -63,18 +65,20 @@ class ApiNugetBase
         $tora = array();
         
         //<d:Dependencies>Castle.Core:3.1.0:net40|Castle.Windsor:3.1.0:net40|Common.Logging:2.0.0:net40|Quartz:2.0.1:net40|Castle.Core:2.1.0:net20|Castle.Windsor:2.1.0:net20|Common.Logging:1.0.0:net20|Quartz:1.0.1:net20</d:Dependencies>
-        for($i=0;$i<sizeof($d);$i++){
-            $sd = $d[$i];
-            if($sd->IsGroup){
-                $fw= $this->TranslateNet($sd->TargetFramework);
-                for($j=0;$j<sizeof($sd->Dependencies);$j++){
-                    $sdd = $sd->Dependencies[$j];
-                    $tora[]=($sdd->Id.":".$sdd->Version.":".$fw);
-                }
-            }else{
-                $tora[]=($sd->Id.":".$sd->Version.":");
-            }
-        }
+		if(is_array($d)){
+			for($i=0;$i<sizeof($d);$i++){
+				$sd = $d[$i];
+				if($sd->IsGroup){
+					$fw= $this->TranslateNet($sd->TargetFramework);
+					for($j=0;$j<sizeof($sd->Dependencies);$j++){
+						$sdd = $sd->Dependencies[$j];
+						$tora[]=($sdd->Id.":".$sdd->Version.":".$fw);
+					}
+				}else{
+					$tora[]=($sd->Id.":".$sd->Version.":");
+				}
+			}
+		}
         //print_r($tora);die();
         return implode("|",$tora);
     }

@@ -88,6 +88,46 @@ class NuGetDb
 		$nugetEntity->Version3 = $v[3];
 		$nugetEntity->VersionBeta = $v[4];
 		
+		if($nugetEntity->TargetFramework==null){
+			$nugetEntity->TargetFramework = "";
+		}
+		if($nugetEntity->ProjectUrl==null){
+			$nugetEntity->ProjectUrl = "";
+		}
+		if($nugetEntity->LicenseUrl==null){
+			$nugetEntity->LicenseUrl = "";
+		}
+		if($nugetEntity->Tags==null){
+			$nugetEntity->Tags = "";
+		}
+		if($nugetEntity->Summary==null){
+			$nugetEntity->Summary = "";
+		}
+		if($nugetEntity->Copyright==null){
+			$nugetEntity->Copyright = "";
+		}
+		if($nugetEntity->Dependencies==null){
+			$nugetEntity->Dependencies = "";
+		}
+		if($nugetEntity->Description==null){
+			$nugetEntity->Description = "";
+		}
+		if($nugetEntity->IconUrl==null){
+			$nugetEntity->IconUrl = "";
+		}
+		if($nugetEntity->Author==null){
+			$nugetEntity->Author = "";
+		}
+		if($nugetEntity->Title==null){
+			$nugetEntity->Id = "";
+		}
+		if($nugetEntity->DownloadCount==null){
+			$nugetEntity->DownloadCount = 0;
+		}
+		if($nugetEntity->VersionDownloadCount==null){
+			$nugetEntity->VersionDownloadCount = 0;
+		}
+		
         foreach ($vars as $column) {
 			if(property_exists($nugetEntity,$column)){
 				$toInsert[$column] = $nugetEntity->$column;

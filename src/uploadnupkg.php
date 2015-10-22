@@ -54,6 +54,7 @@ if(!$loginController->IsLoggedIn){
 			$parsedNuspec = $nugetReader->LoadNuspecFromFile($result["destination"]);
 			
 			$parsedNuspec->UserId=$user->Id;
+			
 			//echo "<!-- var_dump($parsedNuspec);die();
 			$nuspecData = $nugetReader->SaveNuspec($result["destination"],$parsedNuspec);
 			
