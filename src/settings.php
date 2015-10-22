@@ -20,7 +20,7 @@ define('__ALLOWUSERADD__',false);
 @define('__MYSQL_USER__',"phpnuget");
 @define('__MYSQL_PASSWORD__',"password");
 @define('__MYSQL_DB__',"phpnuget");
-@define('__DB_TYPE__',DBTXT);
+@define('__DB_TYPE__',DBMYSQL);
 
 //If true users are allowed to add a package only if the firstly added it
 //or if theyr user id is inside the "owners" field of the package
