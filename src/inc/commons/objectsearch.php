@@ -850,7 +850,12 @@ class ObjectSearch
 		return $subject;
 	}
 	
-	public function _specialMySqlSort($type,$name)
+	public function _specialMySqlSort($type,$name,$direction)
+	{
+		return null;
+	}
+	
+	public function _specialMySqlGroup($type,$name)
 	{
 		return null;
 	}
@@ -865,11 +870,11 @@ class ObjectSearch
 		if(sizeof($this->_sortClause)==0) return "";
 		$toMerge = array();
 		foreach($this->_sortClause as $sc){
-			$special = $this->_specialMySqlSort($items[strtolower($sc->Field)],$sc->Field);
+			$special = $this->_specialMySqlSort($items[strtolower($sc->Field)],$sc->Field,$sc->Asc?"ASC":"DESC");
 			if($special==null || $special==""){
 				array_push($toMerge,"`".$sc->Field."` ".($sc->Asc?"ASC":"DESC"));
 			}else{
-				array_push($toMerge," ".$special."  ".($sc->Asc?"ASC":"DESC"));
+				array_push($toMerge," ".$special."  ");
 			}
 		}
 		
@@ -884,11 +889,10 @@ class ObjectSearch
 		for($i=0;$i<sizeof($fieldNames);$i++){
 			$items[strtolower($fieldNames[$i])]=$fieldTypes[$i];
 		}
-		
 		if(sizeof($this->_groupClause)==0) return "";
 		$toMerge = array();
 		foreach($this->_groupClause as $sc){
-			$special = $this->_specialMySqlSort($items[strtolower($sc)],$sc);
+			$special = $this->_specialMySqlGroup($items[strtolower($sc)],$sc);
 			if($special==null || $special==""){
 				array_push($toMerge,"`".$sc."` ");
 			}else{

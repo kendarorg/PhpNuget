@@ -1,5 +1,24 @@
 <?php
 
+function stdVerifyVersion($db)
+{
+	$dbFile = Path::Combine(Settings::$DataRoot,$db);
+	if(file_exists($dbFile)){
+		$fp = fopen($dbFile,'r');
+        $content = fread($fp,filesize($dbFile));
+        fclose($fp);
+        $splitted = explode("\n",$content);
+		$st = 0;
+		$firstRow = $splitted[$st];
+		if(starts_with($firstRow,"@Version:")){
+			$kk=explode(":",$firstRow);
+			return trim($kk[1]);
+		}
+		throw new Exception("Too early version!");
+	}
+	return __DB_VERSION__;
+}
+
 class SmallTxtDb
 {
     var $cr;
@@ -50,7 +69,7 @@ class SmallTxtDb
         
 		
 		if(sizeof($fieldNames)!=sizeof($fieldTypes)){
-			throw new Exception("Mismatch types/fields");
+			throw new Exception("Mismatch types/fields 03");
 		}
 		
         for($i=0;$i<sizeof($fieldNames);$i++){

@@ -240,6 +240,10 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
+* 3.1.0.0
+	* Support for MySql database
+	* Updated database to version 4.0.0.0
+
 * 3.0.12.5
 	* Nuget Package Explorer compatibility: Added support for standard upload
 	* Nuget Package Explorer compatibility: Added support $inlinecount parameter (nuget 2.8)

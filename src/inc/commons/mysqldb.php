@@ -1,239 +1,5 @@
 <?php
 
-/*
-
-array(1) {
-  [0]=>
-  object(Operator)#47 (4) {
-    ["Type"]=>
-    string(8) "function"
-    ["Value"]=>
-    string(5) "doand"
-    ["Id"]=>
-    NULL
-    ["Children"]=>
-    array(2) {
-      [0]=>
-      object(Operator)#46 (4) {
-        ["Type"]=>
-        string(8) "function"
-        ["Value"]=>
-        string(5) "doand"
-        ["Id"]=>
-        NULL
-        ["Children"]=>
-        array(2) {
-          [0]=>
-          object(Operator)#45 (4) {
-            ["Type"]=>
-            string(8) "function"
-            ["Value"]=>
-            string(5) "doand"
-            ["Id"]=>
-            NULL
-            ["Children"]=>
-            array(2) {
-              [0]=>
-              object(Operator)#41 (4) {
-                ["Type"]=>
-                string(8) "function"
-                ["Value"]=>
-                string(4) "door"
-                ["Id"]=>
-                NULL
-                ["Children"]=>
-                array(2) {
-                  [0]=>
-                  object(Operator)#40 (4) {
-                    ["Type"]=>
-                    string(8) "function"
-                    ["Value"]=>
-                    string(4) "doeq"
-                    ["Id"]=>
-                    NULL
-                    ["Children"]=>
-                    array(2) {
-                      [0]=>
-                      object(Operator)#11 (4) {
-                        ["Type"]=>
-                        string(5) "field"
-                        ["Value"]=>
-                        string(15) "TargetFramework"
-                        ["Id"]=>
-                        NULL
-                        ["Children"]=>
-                        array(0) {
-                        }
-                      }
-                      [1]=>
-                      object(Operator)#13 (4) {
-                        ["Type"]=>
-                        string(6) "string"
-                        ["Value"]=>
-                        string(0) ""
-                        ["Id"]=>
-                        NULL
-                        ["Children"]=>
-                        array(0) {
-                        }
-                      }
-                    }
-                  }
-                  [1]=>
-                  object(Operator)#17 (4) {
-                    ["Type"]=>
-                    string(8) "function"
-                    ["Value"]=>
-                    string(11) "substringof"
-                    ["Id"]=>
-                    NULL
-                    ["Children"]=>
-                    array(2) {
-                      [0]=>
-                      object(Operator)#19 (4) {
-                        ["Type"]=>
-                        string(6) "string"
-                        ["Value"]=>
-                        string(5) "net45"
-                        ["Id"]=>
-                        NULL
-                        ["Children"]=>
-                        array(0) {
-                        }
-                      }
-                      [1]=>
-                      object(Operator)#20 (4) {
-                        ["Type"]=>
-                        string(5) "field"
-                        ["Value"]=>
-                        string(15) "TargetFramework"
-                        ["Id"]=>
-                        NULL
-                        ["Children"]=>
-                        array(0) {
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              [1]=>
-              object(Operator)#42 (4) {
-                ["Type"]=>
-                string(8) "function"
-                ["Value"]=>
-                string(4) "doeq"
-                ["Id"]=>
-                NULL
-                ["Children"]=>
-                array(2) {
-                  [0]=>
-                  object(Operator)#22 (4) {
-                    ["Type"]=>
-                    string(5) "field"
-                    ["Value"]=>
-                    string(12) "IsPreRelease"
-                    ["Id"]=>
-                    NULL
-                    ["Children"]=>
-                    array(0) {
-                    }
-                  }
-                  [1]=>
-                  object(Operator)#24 (4) {
-                    ["Type"]=>
-                    string(7) "boolean"
-                    ["Value"]=>
-                    bool(false)
-                    ["Id"]=>
-                    NULL
-                    ["Children"]=>
-                    array(0) {
-                    }
-                  }
-                }
-              }
-            }
-          }
-          [1]=>
-          object(Operator)#43 (4) {
-            ["Type"]=>
-            string(8) "function"
-            ["Value"]=>
-            string(4) "doeq"
-            ["Id"]=>
-            NULL
-            ["Children"]=>
-            array(2) {
-              [0]=>
-              object(Operator)#27 (4) {
-                ["Type"]=>
-                string(5) "field"
-                ["Value"]=>
-                string(6) "Listed"
-                ["Id"]=>
-                NULL
-                ["Children"]=>
-                array(0) {
-                }
-              }
-              [1]=>
-              object(Operator)#29 (4) {
-                ["Type"]=>
-                string(7) "boolean"
-                ["Value"]=>
-                bool(true)
-                ["Id"]=>
-                NULL
-                ["Children"]=>
-                array(0) {
-                }
-              }
-            }
-          }
-        }
-      }
-      [1]=>
-      object(Operator)#44 (4) {
-        ["Type"]=>
-        string(8) "function"
-        ["Value"]=>
-        string(4) "doeq"
-        ["Id"]=>
-        NULL
-        ["Children"]=>
-        array(2) {
-          [0]=>
-          object(Operator)#30 (4) {
-            ["Type"]=>
-            string(5) "field"
-            ["Value"]=>
-            string(6) "Listed"
-            ["Id"]=>
-            NULL
-            ["Children"]=>
-            array(0) {
-            }
-          }
-          [1]=>
-          object(Operator)#32 (4) {
-            ["Type"]=>
-            string(7) "boolean"
-            ["Value"]=>
-            bool(true)
-            ["Id"]=>
-            NULL
-            ["Children"]=>
-            array(0) {
-            }
-          }
-        }
-      }
-    }
-  }
-}
-*/
-
 class SmallTxtDb
 {
     var $cr;
@@ -284,7 +50,7 @@ class SmallTxtDb
         
 		
 		if(sizeof($fieldNames)!=sizeof($fieldTypes)){
-			throw new Exception("Mismatch types/fields");
+			throw new Exception("Mismatch types/fields 01");
 		}
 		
         for($i=0;$i<sizeof($fieldNames);$i++){
@@ -307,7 +73,7 @@ class SmallTxtDb
     }
 	
 	public function doQuery($query){
-		//echo $query;
+		//echo $query."\r\n<br>";
 		$connection = mysqli_connect(__MYSQL_SERVER__, __MYSQL_USER__, __MYSQL_PASSWORD__,__MYSQL_DB__);
 		$result = mysqli_query( $connection,$query );
 		$data = array();
@@ -392,7 +158,7 @@ class SmallTxtDb
 			
 			
 			if(sizeof($fieldNames)!=sizeof($fieldTypes)){
-				throw new Exception("Mismatch types/fields");
+				throw new Exception("Mismatch types/fields 02");
 			}
 			
 			$pks = array();
@@ -443,7 +209,7 @@ class SmallTxtDb
 
     private function load($loadData)
     {
-        
+        $result = $this->doQuery("SELECT Version FROM Version");
     }
 	
 	public function update_row($rowHash,$keys)
@@ -636,6 +402,7 @@ class SmallTxtDb
 			$select = $select." ".$objectSearch->DoSortMySql($fieldNames,$fieldTypes);
 		}
 		if($objectSearch!=null){
+			
 			$gp = $objectSearch->DoGroupByMySql($fieldNames,$fieldTypes);
 			if($gp!=""){
 				$select = "SELECT * FROM (".$select.") as TB ".$gp;

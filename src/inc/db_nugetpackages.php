@@ -14,12 +14,12 @@ require_once(__ROOT__."/inc/db_nugetpackagesentity.php");
 
 define('__MYTXTDB_PKG__',Path::Combine(Settings::$DataRoot,"nugetdb_pkg.txt"));
 define('__MYTXTDBROWS_PKG__',
-      "Version:|:Title:|:Id:|:Author:|:IconUrl:|:LicenseUrl:|:ProjectUrl:|:DownloadCount:|:".
+      "Version0:|:Version1:|:Version2:|:Version3:|:VersionBeta:|:Version:|:Title:|:Id:|:Author:|:IconUrl:|:LicenseUrl:|:ProjectUrl:|:DownloadCount:|:".
       "RequireLicenseAcceptance:|:Description:|:ReleaseNotes:|:Published:|:Dependencies:|:".
       "PackageHash:|:PackageHashAlgorithm:|:PackageSize:|:Copyright:|:Tags:|:IsAbsoluteLatestVersion:|:".
       "IsLatestVersion:|:Listed:|:VersionDownloadCount:|:References:|:TargetFramework:|:Summary:|:IsPreRelease:|:Owners:|:UserId");
 define('__MYTXTDBROWS_PKG_TYPES__',
-      "string:|:string:|:string:|:object:|:string:|:string:|:string:|:number:|:".
+      "number:|:number:|:number:|:number:|:string:|:string:|:string:|:string:|:object:|:string:|:string:|:string:|:number:|:".
       "boolean:|:string:|:string:|:date:|:object:|:".
       "string:|:string:|:number:|:string:|:string:|:boolean:|:".
       "boolean:|:boolean:|:number:|:array:|:string:|:string:|:boolean:|:string:|:string");      
@@ -55,7 +55,7 @@ class NuGetDb
 			$os->Parse($query,$this->GetAllColumns());
 		}
 		$this->initialize();
-        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__,__MYTXTDBROWS_PKG_KEY__);
+        $dbInstance = new SmallTxtDb(__DB_VERSION__,__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__,__MYTXTDBROWS_PKG_KEY__);
 		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
 		$res =  $dbInstance->GetAll($limit,$skip,$os);
 		foreach($res as $row){
@@ -76,30 +76,25 @@ class NuGetDb
 		if($nugetEntity->Id=="" || $nugetEntity->Version==""){
 			throw new Exception("Missing Id and/or Version");
 		}
-        $dbInstance =  new SmallTxtDb("3.0.0.0",__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__,__MYTXTDBROWS_PKG_KEY__);
+        $dbInstance =  new SmallTxtDb(__DB_VERSION__,__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__,__MYTXTDBROWS_PKG_KEY__);
 		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
         $toInsert = array();
         $vars = explode(":|:",__MYTXTDBROWS_PKG__);
         //print_r($vars);
+		$v = buildSplitVersion($nugetEntity->Version);
+		$nugetEntity->Version0 = $v[0];
+		$nugetEntity->Version1 = $v[1];
+		$nugetEntity->Version2 = $v[2];
+		$nugetEntity->Version3 = $v[3];
+		$nugetEntity->VersionBeta = $v[4];
+		
         foreach ($vars as $column) {
 			if(property_exists($nugetEntity,$column)){
 				$toInsert[$column] = $nugetEntity->$column;
 			}
         }
         $doAdd = true;
-        /*for($i=0;$i<sizeof($dbInstance->rows);$i++){
-            //if($dbInstance->rows[$i]["PackageHash"]==$nugetEntity->PackageHash){
-			if($dbInstance->rows[$i]["Version"]==$nugetEntity->Version && $dbInstance->rows[$i]["Id"]==$nugetEntity->Id){
-                if($update){
-                    $dbInstance->rows[$i] = $toInsert;
-                    $doAdd = false;
-					break;
-                 }else{
-					throw new Exception("Duplicate found!");
-				 }
-            }
-        }*/
-		
+        
 		$foundedUsers = $this->Query("(Version eq '".$nugetEntity->Version."') and (Id eq '".$nugetEntity->Id."')",1,0);
 		if(sizeof($foundedUsers)==1){
 			if($update){
@@ -109,6 +104,7 @@ class NuGetDb
 			}
 		}
 		
+		
         if($doAdd)$dbInstance->add_row($toInsert);
 		else $dbInstance->update_row($toInsert,array("Id"=>$toInsert["Id"],"Version"=>$toInsert["Version"]));
         $dbInstance->save();
@@ -117,7 +113,7 @@ class NuGetDb
     
     public function DeleteRow($nugetEntity)
     {
-        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__,__MYTXTDBROWS_PKG_KEY__);
+        $dbInstance = new SmallTxtDb(__DB_VERSION__,__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__,__MYTXTDBROWS_PKG_KEY__);
 		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
         $nameOfCaptain = "";
         

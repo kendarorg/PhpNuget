@@ -51,14 +51,14 @@ class UserDb
 		}
 		
 		$this->initialize();
-        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
+        $dbInstance = new SmallTxtDb(__DB_VERSION__,__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
 		$dbInstance->BuildItem= 'nugetDbUserBuilder';
 		return $dbInstance->GetAll($limit,$skip,$os);
 	}
     
     public function AddRow($nugetEntity,$update)
     {
-        $dbInstance =  new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
+        $dbInstance =  new SmallTxtDb(__DB_VERSION__,__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
         $toInsert = array();
         $vars = explode(":|:",__MYTXTDBROWS_USR__);
         //print_r($vars);
@@ -92,7 +92,7 @@ class UserDb
     
     public function DeleteRow($nugetEntity)
     {
-        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
+        $dbInstance = new SmallTxtDb(__DB_VERSION__,__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
         $nameOfCaptain = "";
         
 		$select = array('UserId'=>$nugetEntity->UserId);

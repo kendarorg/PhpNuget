@@ -239,6 +239,7 @@ class ApiNugetBase
 	
 	function _search($action)
 	{	
+		
 		$query = "";
 		if($action != "search") return;
 		$searchTerm = UrlUtils::GetRequestParamOrDefault("searchTerm",null);
@@ -321,8 +322,10 @@ class ApiNugetBase
 		}
 		
 		if($orderby==null){
-			$query =$query." orderby Title asc,Version desc";
+			$query =$query." orderby Id asc,Version desc";
 		}
+		
+		$query =$query." groupby Id";
 
 		$this->_query($query);
 	}

@@ -19,8 +19,13 @@ if(!defined('__INSETUP__')){
 				<tr><td>Application Path:</td><td><input type="text" id="applicationPath" name="applicationPath" value="<?php echo $applicationPath;?>"/></td></tr>
 				<tr><td>php-cgi.exe (for IIS):</td><td><input type="text" id="phpCgi" name="phpCgi" value="C:\Program Files (x86)\PHP\v5.3\php-cgi.exe"/></td></tr>
 				<tr><td>Allow package Update:</td><td>
-					<!--<input type="hidden" id="packageUpdate" name="packageUpdate" value="0"/>-->
 					<input type="checkbox" id="packageUpdate" name="packageUpdate" /></td></tr>
+				<tr><td>Use mysql:</td><td>
+					<input type="checkbox" id="useMySql" name="useMySql" /></td></tr>
+				<tr><td>MySql UserId:</td><td><input type="text" id="mySqlLogin" name="mySqlLogin" value="phpnuget"/></td></tr>
+				<tr><td>MySql Password:</td><td><input type="password" id="mySqlPassword" name="mySqlPassword" value="password"/></td></tr>
+				<tr><td>MySql Server:</td><td><input type="text" id="mySqlServer" name="mySqlServer" value="127.0.0.1"/></td></tr>
+				<tr><td>MySql Db:</td><td><input type="text" id="mySqlDb" name="mySqlDb" value="phpnuget"/></td></tr>
 			</table>
 			<input type="submit" value="Install!"></input>
 		</form>

@@ -118,6 +118,7 @@ class PackagesApi extends SmallTextDbApiBase
 	
 	public function dogetbyquery()
 	{
+		
 		$query = UrlUtils::GetRequestParam("Query");
 		$doGroup = UrlUtils::GetRequestParamOrDefault("DoGroup","false");
 		

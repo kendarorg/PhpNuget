@@ -1,6 +1,12 @@
 <?php
 require_once(dirname(__FILE__)."/../root.php");
 require_once(__ROOT__."/inc/commons/objectsearch.php");
+/*
+
+SELECT substring_index('1.2.3.4','.',-4)   "1.2.3.4"
+
+
+*/
 
 
 //http://localhost:8020/phpnuget/api/packages/?Query=substringof%28%27CoroutineCache%27,Dependencies%29
@@ -9,15 +15,6 @@ class PhpNugetExternalTypes
 	public function IsExternal($token)
 	{
 		return $this->_isVersion($token);
-	}
-	
-	public function _specialMySqlSort($type,$name)
-	{
-		echo "AAAAAAAAAAAAAAAAAAAAAAAAAAA";
-		if($type == "version"){
-			echo $name." IS ".$type."\r\n<Br>";
-		}
-		return null;
 	}
 	
 	public function BuildToken($token)
@@ -238,6 +235,20 @@ class PhpNugetObjectSearch extends ObjectSearch
 	public function Parse($queryString,$fieldNames,$externalTypes = null)
 	{
 		return parent::Parse($queryString,$fieldNames,new PhpNugetExternalTypes());
+	}
+	
+	public function _specialMySqlSort($type,$name,$direction)
+	{
+		if(strtolower($name) == "version"){
+			return "Version0 ".$direction.",Version1 ".$direction.",Version2 ".$direction.",Version3 ".$direction.
+				",VersionBeta ".($direction=="ASC"?"DESC":"ASC");
+		}
+		return null;
+	}
+	
+	public function _specialMySqlGroup($type,$name)
+	{
+		return null;
 	}
 	
 }
