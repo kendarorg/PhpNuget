@@ -101,6 +101,7 @@ class NugetManager
 		$e->IsPreRelease = PhpNugetObjectSearch::IsPreRelease($e->Version);
 		$e->Listed = true;
         if(array_key_exists("licenseurl",$m))$e->LicenseUrl = $m["licenseurl"];
+		if(array_key_exists("releasenotes",$m))$e->ReleaseNotes = $m["releasenotes"];
 		if(array_key_exists("iconurl",$m))$e->IconUrl = $m["iconurl"];
 		else $e->IconUrl = UrlUtils::CurrentUrl(Settings::$SiteRoot."content/packagedefaulticon-50x50.png");
         if(array_key_exists("projecturl",$m))$e->ProjectUrl = $m["projecturl"];
@@ -172,7 +173,6 @@ class NugetManager
 			$e->UserId = $res[0]->UserId;
 		}
 		$e->IsPreRelease = indexOf($e->Version,"-")>0;
-		
 		if($nugetDb->AddRow($e,__ALLOWPACKAGEUPDATE__)){
 			$destination =Path::Combine(Settings::$PackagesRoot,($e->Id).".".($e->Version).".nupkg");
 			if(strtolower($nupkgFile)!=strtolower($destination)){

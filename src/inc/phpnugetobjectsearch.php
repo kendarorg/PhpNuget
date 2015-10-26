@@ -1,12 +1,6 @@
 <?php
 require_once(dirname(__FILE__)."/../root.php");
 require_once(__ROOT__."/inc/commons/objectsearch.php");
-/*
-
-SELECT substring_index('1.2.3.4','.',-4)   "1.2.3.4"
-
-
-*/
 
 
 //http://localhost:8020/phpnuget/api/packages/?Query=substringof%28%27CoroutineCache%27,Dependencies%29

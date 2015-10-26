@@ -156,7 +156,6 @@ class ObjectSearch
 	}
 	function _isString($operator)
 	{
-		
 		if($operator[0]==$operator[sizeof($operator)-1]){
 			$res = $this->_isStartString($operator[0]);
 			return $res;
@@ -560,6 +559,7 @@ class ObjectSearch
 		
 		if(!$this->_extraValidation($subject))return false;
 		$parseTreeItem = $this->parseResult[0];
+		
 		$result = @$this->_doExecute($parseTreeItem,$subject);
 		return $result->Value;
 	}

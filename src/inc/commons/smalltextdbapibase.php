@@ -43,14 +43,6 @@ class SmallTextDbApiBase extends ApiBase
 		$pg= $this->_getPagination();
 		$db = $this->_openDb();
 		$result = $db->Query(null,$pg->Top,$pg->Skip);
-		/*$count = sizeof($allRows);
-		if($count<$pg->Skip){
-			ApiBase::ReturnResult(null);
-		}
-		$result = array();
-		for($i=$pg->Skip;$i<$count && $i<($pg->Skip+$pg->Top);$i++){
-			$result[] = $allRows[$i];
-		}*/
 		ApiBase::ReturnSuccess($result);
 	}
 	

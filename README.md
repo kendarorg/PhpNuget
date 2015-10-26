@@ -1,4 +1,4 @@
-# PhpNuget V. 3.1.0.0
+# PhpNuget V. 4.0.0.0-beta
 
 ## Purpose
 
@@ -229,7 +229,6 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 ### Should
 
 * Add robots.txt
-* Import v3.0.0.0 txt database on MySQL
 
 ### Would
 
@@ -239,9 +238,13 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
-* 3.1.0.0
+* 4.0.0.0
 	* Support for MySql database
 	* Updated database to version 4.0.0.0
+
+* 3.0.12.6
+	* Release notes not considered
+	* Escaped license url
 
 * 3.0.12.5
 	* Nuget Package Explorer compatibility: Added support for standard upload
