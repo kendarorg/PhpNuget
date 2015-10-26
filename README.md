@@ -2,7 +2,8 @@
 
 ## Purpose
 
-This is born to have my personal repository for nuget, on my cheapo PHP hostin
+This is born to have my personal repository for nuget, on my cheapo PHP hosting.
+With support for complex OData queries
 
 Verified on:
 
