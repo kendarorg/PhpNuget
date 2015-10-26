@@ -245,6 +245,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 * 3.0.12.6
 	* Release notes not considered
 	* Escaped license url
+	* Fix on package refresh
 
 * 3.0.12.5
 	* Nuget Package Explorer compatibility: Added support for standard upload

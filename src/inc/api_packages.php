@@ -230,16 +230,14 @@ class PackagesApi extends SmallTextDbApiBase
 			
 			$files = scandir(Settings::$PackagesRoot);
 			
-			$skip = intval(UrlUtils::GetRequestParam("Skip"));
-			$count = intval(UrlUtils::GetRequestParam("Count"));
+			$skip = intval(UrlUtils::GetRequestParam("skip"));
+			$count = intval(UrlUtils::GetRequestParam("count"));
 			$total = sizeof($files);
-			
-			var_dump($files);
-			
+						
 			$udb = new UserDb();
 			$user = $udb->GetByUserId($loginController->UserId);
 			
-			for($x = $skip;$x<$total;$x++){
+			for($x = $skip;$x<$total && $x<($skip+$count);$x++){
 				$file = $files[$x];
 				$ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
 				if($ext == "nupkg"){
