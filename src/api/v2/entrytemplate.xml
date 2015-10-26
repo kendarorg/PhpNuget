@@ -46,13 +46,13 @@ Summary??
       <d:Title>${NUSPEC.TITLE}</d:Title>
       <d:Dependencies>${NUSPEC.DEPENDENCIES}</d:Dependencies>
       <d:LicenseUrl>${NUSPEC.LICENSEURL}</d:LicenseUrl>
-      <d:Copyright m:null="true">${DB.COPYRIGHT}</d:Copyright>
+      <d:Copyright>${DB.COPYRIGHT}</d:Copyright>
       <d:DownloadCount m:type="Edm.Int32">${DB.DOWNLOADCOUNT}</d:DownloadCount>
       <d:ProjectUrl>${NUSPEC.PROJECTURL}</d:ProjectUrl>
       <d:RequireLicenseAcceptance m:type="Edm.Boolean">${NUSPEC.REQUIRELICENSEACCEPTANCE}</d:RequireLicenseAcceptance>
 	  <d:GalleryDetailsUrl>${BASEURL}/?specialType=singlePackage&amp;id=${NUSPEC.ID}&amp;version=${NUSPEC.VERSION}</d:GalleryDetailsUrl>
       <d:Description>${NUSPEC.DESCRIPTION}</d:Description>
-      <d:ReleaseNotes m:null="true"></d:ReleaseNotes>
+      <d:ReleaseNotes>${NUSPEC.RELEASENOTES}</d:ReleaseNotes>
       <d:PackageHash>${DB.PACKAGEHASH}</d:PackageHash>
       <d:PackageHashAlgorithm>${DB.PACKAGEHASHALGORITHM}</d:PackageHashAlgorithm>
       <d:PackageSize m:type="Edm.Int64">${DB.PACKAGESIZE}</d:PackageSize>
@@ -60,10 +60,10 @@ Summary??
       <d:Tags xml:space="preserve"> ${NUSPEC.TAGS} </d:Tags>
       <d:IsLatestVersion m:type="Edm.Boolean">${DB.ISLATESTVERSION}</d:IsLatestVersion>
       <d:VersionDownloadCount m:type="Edm.Int32">${DB.VERSIONDOWNLOADCOUNT}</d:VersionDownloadCount>
-      <d:Summary m:null="true"></d:Summary>
+      <d:Summary>${NUSPEC.SUMMARY}</d:Summary>
       <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">${DB.ISABSOLUTELATESTVERSION}</d:IsAbsoluteLatestVersion>
       <!--<d:Listed m:type="Edm.Boolean">${DB.LISTED}</d:Listed>-->
-      <d:IconUrl m:null="true"></d:IconUrl>
+      <d:IconUrl></d:IconUrl>
     </m:properties>
   </entry>
   <!--<link rel="next" href="http://nuget.deltatre.it/nuget/Packages?$skiptoken='Deltatre.FastForward.BrokerService.INotify','2.2.1.0'" />-->

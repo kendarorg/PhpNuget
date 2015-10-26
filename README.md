@@ -1,4 +1,4 @@
-# PhpNuget V. 3.0.12.5
+# PhpNuget V. 3.0.12.6
 
 ## Purpose
 
@@ -240,6 +240,10 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
+* 3.0.12.6
+	* Release notes not considered
+	* Escaped license url
+	
 * 3.0.12.5
 	* Nuget Package Explorer compatibility: Added support for standard upload
 	* Nuget Package Explorer compatibility: Added support $inlinecount parameter (nuget 2.8)

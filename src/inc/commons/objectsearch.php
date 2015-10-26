@@ -297,7 +297,7 @@ class ObjectSearch
 				$o->Value = "";
 				$temp[] = $o;
 			}else{
-				throw new ParserException("Token '".$s."' not supported");
+				throw new ParserException("Token '".$s."' not supported parsing");
 			}
 			$prev = $temp[sizeof($temp)-1];
 		}
@@ -501,7 +501,7 @@ class ObjectSearch
 		}else if($this->externalTypes!=null && $this->externalTypes->IsExternal($v)){
 			return $parseTreeItem;
 		}else{
-			throw new ParserException("Token '".$t."' not supported");
+			throw new ParserException("Token '".$t."' not supported excuting");
 		}
 		return $result;
 	}
@@ -767,14 +767,14 @@ class ObjectSearch
 			
 			$res = $this->_cmp($f->$row,$s->$row,$asc,$type);
 			if($res>0){
-				if($print)echo $f->Title." ".$f->Version.">".$s->Title." ".$s->Version."\r\n";
+				//if($print)echo $f->Title." ".$f->Version.">".$s->Title." ".$s->Version."\r\n";
 				return $asc?1:-1;
 			}else if($res<0){
-				if($print)echo $f->Title." ".$f->Version."<".$s->Title." ".$s->Version."\r\n";
+				//if($print)echo $f->Title." ".$f->Version."<".$s->Title." ".$s->Version."\r\n";
 				return $asc?-1:1;
 			}
 		}
-		if($print)echo $f->Title." ".$f->Version."==".$s->Title." ".$f->Version."\r\n";
+		//if($print)echo $f->Title." ".$f->Version."==".$s->Title." ".$f->Version."\r\n";
 		return 0;
 	}
 	

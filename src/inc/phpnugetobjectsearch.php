@@ -10,6 +10,7 @@ class PhpNugetExternalTypes
 	{
 		return $this->_isVersion($token);
 	}
+	
 	public function BuildToken($token)
 	{
 		$o = null;

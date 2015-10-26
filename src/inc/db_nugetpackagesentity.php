@@ -1,4 +1,25 @@
 <?php
+
+
+function buildSplitVersion($v){
+
+	$blocks= explode("-",$v);
+	$beta = sizeof($blocks)>=2?join("-",array_slice($blocks,1)):"";
+	$number = explode(".",$blocks[0]);
+	
+	while(sizeof($number)<4){
+		array_insert($number,"0",0);
+	}
+	
+	$newData = array();
+	$newData[] = ($number[0]);
+	$newData[] = ($number[1]);
+	$newData[] = ($number[2]);
+	$newData[] =($number[3]);
+	$newData[] = ($beta);
+	return $newData;
+}
+
 class NugetDependency
 {
     var $IsGroup=false;

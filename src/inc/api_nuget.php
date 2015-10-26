@@ -49,6 +49,8 @@ class ApiNugetBase
     {
         $tf = strtolower($tf);
         switch($tf){
+			case(".netframework4.5.1"): return "net451";
+            case(".netframework4.5"): return "net45";
             case(".netframework3.5"): return "net35";
             case(".netframework4.0"): return "net40";
             case(".netframework3.0"): return "net30";
@@ -101,8 +103,8 @@ class ApiNugetBase
         $t= str_replace("\${NUSPEC.IDLOWER}",(strtolower($e->Id)),$t);
         $t= str_replace("\${NUSPEC.TITLE}",htmlspecialchars($e->Title),$t);
         $t= str_replace("\${NUSPEC.VERSION}",($e->Version),$t);
-        $t= str_replace("\${NUSPEC.LICENSEURL}",($e->LicenseUrl),$t);
-        $t= str_replace("\${NUSPEC.PROJECTURL}",($e->ProjectUrl),$t);
+        $t= str_replace("\${NUSPEC.LICENSEURL}",htmlspecialchars($e->LicenseUrl),$t);
+        $t= str_replace("\${NUSPEC.PROJECTURL}",htmlspecialchars($e->ProjectUrl),$t);
         $t= str_replace("\${NUSPEC.REQUIRELICENSEACCEPTANCE}",$e->RequireLicenseAcceptance?"true":"false",$t);
         $t= str_replace("\${NUSPEC.DESCRIPTION}",htmlspecialchars($e->Description),$t);
         if($e->Tags!=""){
@@ -110,6 +112,10 @@ class ApiNugetBase
         }else{
             $t= str_replace("\${NUSPEC.TAGS}","",$t);
         }
+		
+		$t= str_replace("\${NUSPEC.SUMMARY}",htmlspecialchars($e->Summary),$t);
+		$t= str_replace("\${NUSPEC.RELEASENOTES}",htmlspecialchars($e->ReleaseNotes),$t);
+		
         $t= str_replace("\${NUSPEC.AUTHOR}",$author,$t);
         $t= str_replace("\${NUSPEC.AUTHORS}",$author,$t);
         $t= str_replace("\${DB.PUBLISHED}",$e->Published,$t);
@@ -129,12 +135,13 @@ class ApiNugetBase
         $t= str_replace("\${DB.VERSIONDOWNLOADCOUNT}",$e->VersionDownloadCount,$t);
         $t= str_replace("\${DB.ISLATESTVERSION}",$e->IsLatestVersion?"true":"false",$t);
 		*/
+		
+		
 		$t= str_replace("\${DB.ISABSOLUTELATESTVERSION}","true",$t);
         $t= str_replace("\${DB.ISLATESTVERSION}","true",$t);
         $t= str_replace("\${DB.VERSIONDOWNLOADCOUNT}","-1",$t);
         $t= str_replace("\${DB.LISTED}",$e->Listed?"true":"false",$t);
-        
-		if(!is_array($e->Copyright)){
+		if(!is_array($e->Copyright) && $e->Copyright!=null){
 			$t= str_replace("\${DB.COPYRIGHT}",htmlspecialchars($e->Copyright),$t);
 		}else{
 			$t= str_replace("\${DB.COPYRIGHT}",htmlspecialchars(implode(", ",$e->Copyright)),$t);

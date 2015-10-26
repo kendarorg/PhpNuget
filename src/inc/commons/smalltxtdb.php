@@ -50,8 +50,9 @@ class SmallTxtDb
         
 		
 		if(sizeof($fieldNames)!=sizeof($fieldTypes)){
-			throw new Exception("Mismatch types/fields");
+			throw new Exception("Mismatch types/fields 03");
 		}
+		
         for($i=0;$i<sizeof($fieldNames);$i++){
             $field = $fieldNames[$i];
             $type = $fieldTypes[$i];
@@ -126,6 +127,7 @@ class SmallTxtDb
             for ($i = $st; $i < sizeof($splitted); $i++) {
 			
                 $splitted[$i] = trim($splitted[$i]);
+				
                 if($splitted[$i]!=""){
                     $row = array();
                     $vals = explode($this->separator,$splitted[$i]);
@@ -228,6 +230,7 @@ class SmallTxtDb
 	
 	public function GetAll($limit,$skip=0,$objectSearch=null)
 	{
+		
 		$r = explode(":|:",$this->dbRows);
 		$t = explode(":|:",$this->dbTypes);
 		$rowTypes = array();
@@ -251,17 +254,6 @@ class SmallTxtDb
 				$toSort[] = $item;
 			}
 		}
-		
-		/*$result = array();
-		foreach($toSort as $row){
-			if($objectSearch!=null){
-				if(!$objectSearch->Execute($row)){
-					continue;
-				}
-			}
-			$result[]=$row;
-		}
-		$toSort = $result;*/
 		
 		if($objectSearch!=null){
 			$toSort = $objectSearch->DoSort($toSort,$rowTypes);
