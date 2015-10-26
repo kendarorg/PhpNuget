@@ -1,6 +1,22 @@
 
 app.factory('profilePackagesService',['$http','pathHelper','$q',
 	function($http,pathHelper,$q) {
+		var doRunAllThings = function(total,skip,count){
+				console.log("Running "+skip+" "+count);
+				var apiBase = pathHelper.buildApiPath('packages');
+				
+				
+				
+				var prom =$http.post(apiBase+'/?method=refreshpackages&skip='+skip+'&count='+count)
+					.success(function(data){
+						console.log("Correct "+skip+" "+count);
+						if(skip<total){
+							doRunAllThings(total,skip+count,count);
+						}
+					}).error(function(data){
+						console.log("Wrong "+skip+" "+count);
+					});
+			};
 		return {
 			apiBase : pathHelper.buildApiPath('packages'),
 			http :$http,
@@ -22,6 +38,7 @@ app.factory('profilePackagesService',['$http','pathHelper','$q',
 				var query = encodeURIComponent("Id eq '"+title+"'");
 				return this.http.get(this.apiBase+'/?Query='+query);
 			},
+			
 			refreshPackages : function() {
 				var skip = 0;
 				var total = 0;
@@ -30,31 +47,10 @@ app.factory('profilePackagesService',['$http','pathHelper','$q',
 				this.http.post(apiBase+'/?method=countpackagestorefresh')
 					.success(function(data){
 						total = data.Data;
-						
-						var defer = $q.defer();
-						var promises = [];
-						var successed = 0;
-						while(skip<total){
-							var prom =$http.post(apiBase+'/?method=refreshpackages&skip='+skip+'&count='+count);
-							
-							prom.success(function(data){
-									successed+=count;
-									console.log("Correct "+skip+" "+count);
-								}).error(function(data){
-									console.log("Wrong "+skip+" "+count);
-								});
-							promises.push(prom);
-							skip+=count;
-						}
-						
-						$q.all(promises).then(function() {
-							if(successed>=total){
-								alert("Refresh completed!");        
-							}else{
-								alert("Error refreshing!");        
-							}
-						});
-						
+						console.log("Founded items: "+total);
+						doRunAllThings(total,skip,count);						
+					}).error(function(data){
+						console.log("Wrong count");
 					});
 			}
 		}
@@ -151,16 +147,8 @@ app.controller('packagesUploadController', ['$scope', '$controller', 'profilePac
 				});
 		}
 		
-		$scope.refreshPackages = function(url,packageId,packageVersion){
+		$scope.refreshPackages = function(){
 			profilePackagesService.refreshPackages();
-			/*profilePackagesService.refreshPackages().success(function(data) {
-					if(data.Success){
-						alert(data.Data);
-					}else{
-						alert(data.Message);
-						return;
-					}
-				});*/
 		}
 	}
 ]);
