@@ -25,7 +25,7 @@ app.factory('profilePackagesService',['$http','pathHelper','$q',
 			refreshPackages : function() {
 				var skip = 0;
 				var total = 0;
-				var count = 10;
+				var count = 30;
 				var apiBase = this.apiBase;
 				this.http.post(apiBase+'/?method=countpackagestorefresh')
 					.success(function(data){
