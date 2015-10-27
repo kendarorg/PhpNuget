@@ -9,6 +9,13 @@ class UsersApi extends SmallTextDbApiBase
 {
 	protected function _verifyInsert($db,$item)
 	{
+		if(!array_key_exists ("UserId",$_SESSION)){
+			throw new Exception("Not logged in!");
+		}
+		$isAdmin = $_SESSION["Admin"]=="true" || $_SESSION["Admin"]==true;
+		if(!$isAdmin){
+			throw new Exception("Not authorized!");
+		}
 		
 		UrlUtils::InitializeJsonInput();
 		$udb = new UserDb();
@@ -29,7 +36,7 @@ class UsersApi extends SmallTextDbApiBase
 		
 		$item->Md5Password = md5($password);
 		$item->Enabled = UrlUtils::GetRequestParam("Enabled");
-		$item->Admin = UrlUtils::GetRequestParam("IsAdmin");
+		$item->Admin = UrlUtils::GetRequestParam("Admin");
 	}
 	
 	protected function _verifyUpdate($db,$old,$new)
@@ -82,10 +89,12 @@ class UsersApi extends SmallTextDbApiBase
 		
 		if($isAdmin==false){
 			$new->Admin = $old->Admin;
+			$new->Enabled = $old->Enabled;
 		}
 		
 		if($isAdmin){
 			$new->Enabled = UrlUtils::GetRequestParam("Enabled");
+			$new->Admin = UrlUtils::GetRequestParam("Admin");
 			$new->Packages = UrlUtils::GetRequestParam("Packages");
 			if($password!=$old->Md5Password){
 				$new->Md5Password = $password;
@@ -93,6 +102,7 @@ class UsersApi extends SmallTextDbApiBase
 				$new->Md5Password = $old->Md5Password;
 			}
 		}else{
+			$new->Admin = $old->Admin;
 			$new->Enabled = $old->Enabled;
 			$new->Packages = $old->Packages;
 			$new->Md5Password = $password;
