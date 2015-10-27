@@ -117,56 +117,13 @@ class UrlUtils
 	
 	public static function ExistRequestParam($key,$verb = "all")
 	{
-		$verb = strtolower($verb);
-		if($verb=="all" || $verb=="get"){
-			if(UrlUtils::$_query!=null && array_key_exists($key,UrlUtils::$_query)){
-				return true;
-			}
-			if(array_key_exists($key,$_GET)){
-				return true;
-			}
-		}
-		if($verb=="all" || $verb=="post"){
-			if(UrlUtils::$_query!=null && array_key_exists($key,UrlUtils::$_query)){
-				return true;
-			}
-			if(array_key_exists($key,$_POST)){
-				return true;
-			}
-		}
-		if($verb=="all" || $verb=="put" || $verb=="post"){
-			if(is_array(UrlUtils::$_data) && array_key_exists($key,UrlUtils::$_data)){
-				return true;
-			}
-		}
-		return false;
+		$test = "51f5efa7-d656-4a96-aa5a-c554e30ab10a###";
+		return UrlUtils::GetRequestParamOrDefault($key,$test,$verb)!=$test;
 	}
 	
 	public static function GetRequestParam($key,$verb = "all")
 	{
-		$verb = strtolower($verb);
-		if($verb=="all" || $verb=="get"){
-			if(UrlUtils::$_query!=null && array_key_exists($key,UrlUtils::$_query)){
-				return UrlUtils::$_query[$key];
-			}
-			if(array_key_exists($key,$_GET)){
-				return $_GET[$key];
-			}
-		}
-		if($verb=="all" || $verb=="post"){
-			if(UrlUtils::$_query!=null && array_key_exists($key,UrlUtils::$_query)){
-				return UrlUtils::$_query[$key];
-			}
-			if(array_key_exists($key,$_POST)){
-				return $_POST[$key];
-			}
-		}
-		if($verb=="all" || $verb=="put" || $verb=="post"){
-			if(is_array(UrlUtils::$_data) && array_key_exists($key,UrlUtils::$_data)){
-				return UrlUtils::$_data[$key];
-			}
-		}
-		return null;
+		return UrlUtils::GetRequestParamOrDefault($key,null,$verb);
 	}
 	
 	public static function GetBooleanRequestParam($key,$verb = "all")
@@ -180,27 +137,37 @@ class UrlUtils
 	
 	public static function GetRequestParamOrDefault($key,$default,$verb = "all")
 	{
-		
+		$q = array();
+		if(UrlUtils::$_query!=null){
+			$q = array_change_key_case($q, CASE_LOWER);
+		}
 		$verb = strtolower($verb);
+		$key = strtolower($key);
+		
 		if($verb=="all" || $verb=="get"){
-			if(UrlUtils::$_query!=null && array_key_exists($key,UrlUtils::$_query)){
-				return UrlUtils::$_query[$key];
+			if(array_key_exists($key,$q)){
+				return UrlUtils::$q[$key];
 			}
-			if(array_key_exists($key,$_GET)){
-				return $_GET[$key];
+			$g = array_change_key_case($_GET, CASE_LOWER);
+			if(array_key_exists($key,$g)){
+				return $g[$key];
 			}
 		}
 		if($verb=="all" || $verb=="post"){
-			if(UrlUtils::$_query!=null && array_key_exists($key,UrlUtils::$_query)){
-				return UrlUtils::$_query[$key];
+			if(array_key_exists($key,$q)){
+				return UrlUtils::$q[$key];
 			}
-			if(array_key_exists($key,$_POST)){
-				return $_POST[$key];
+			$p = array_change_key_case($_POST, CASE_LOWER);
+			if(array_key_exists($key,$p)){
+				return $p[$key];
 			}
 		}
 		if($verb=="all" || $verb=="put" || $verb=="post"){
-			if(is_array(UrlUtils::$_data) && array_key_exists($key,UrlUtils::$_data)){
-				return UrlUtils::$_data[$key];
+			if(is_array(UrlUtils::$_data)){
+				$d = array_change_key_case(UrlUtils::$_data, CASE_LOWER);
+				if(array_key_exists($key,$d)){
+					return $d[$key];
+				}
 			}
 		}
 		return $default;
