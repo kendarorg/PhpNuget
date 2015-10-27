@@ -24,6 +24,13 @@ RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v1/Search\(\)  [NC] 
 RewriteRule  .* /phpnuget/api/v1/index.php?action=search   [QSA]
 
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v1/Packages\(Id='([^/]+)',Version='([^/]+)'\)  [NC] 
+RewriteRule (.*)api/v1/Packages\(Id='([^/]+)',Version='([^/]+)'\)$  /phpnuget/api/v1/index.php?action=single&id=$2&version=$3&%1 [NC,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
@@ -97,7 +104,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/phpnuget/api/v2/Packages\(Id='([^/]+)',Version='([^/]+)'\)  [NC] 
-RewriteRule (.*)api/v2/Packages\(Id='([^/]+)',Version='([^/]+)'\)$  /phpnuget/api/?id=$2&version=$3&%1 [NC,L]
+RewriteRule (.*)api/v2/Packages\(Id='([^/]+)',Version='([^/]+)'\)$  /phpnuget/api/v2/index.php?action=single&id=$2&version=$3&%1 [NC,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

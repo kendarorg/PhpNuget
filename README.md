@@ -154,6 +154,7 @@ All of the api lsited that returns a collection support the usage of parameters
 * /api/v1/Packages()/$count: Same as Search()/$count
 * /api/v1/Packages: Same as Search()
 * /api/v1/Packages/$count: Same as Search()/$count
+* /api/v1/Packages(Id='\[package-id\]',Version='\[package-id\]'): Retruns the data for the single package
 
 ### Api V2
 

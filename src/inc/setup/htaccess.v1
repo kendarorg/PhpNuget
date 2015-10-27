@@ -17,6 +17,13 @@ RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v1/Search\(\)  [NC] 
 RewriteRule  .* @ApplicationPath@api/v1/index.php?action=search   [QSA]
 
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v1/Packages\(Id='([^/]+)',Version='([^/]+)'\)  [NC] 
+RewriteRule (.*)api/v1/Packages\(Id='([^/]+)',Version='([^/]+)'\)$  @ApplicationPath@api/v1/index.php?action=single&id=$2&version=$3&%1 [NC,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
