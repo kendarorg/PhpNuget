@@ -6,7 +6,7 @@ require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/http.php");
 require_once(__ROOT__."/inc/api_nuget.php");
 
-$v2apiDebug = true;
+$v2apiDebug = false;
 
 if($v2apiDebug){
 	file_put_contents("v2.log","==================================\r\n", FILE_APPEND);
