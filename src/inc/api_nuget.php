@@ -31,6 +31,7 @@ class ApiNugetBase
 		}
 		$this->_buildLastQuery();
 		$this->_findpackagesbyd($action);
+		$this->_findsingle($action);
 		$this->_getupdates($action);
 		$this->_search($action);
 		$this->_metadata($action);
@@ -346,6 +347,18 @@ class ApiNugetBase
 			$id = trim($id,"'");
 		}
 		$query = "Id eq '".$id."' orderby Version desc";
+		
+		$this->_query($query);
+	}
+	
+	function _findsingle($action)
+	{
+		$query = "";
+		if($action != "single") return;
+		$id = UrlUtils::GetRequestParamOrDefault("id","");
+		$version = UrlUtils::GetRequestParamOrDefault("version","");
+		
+		$query = "Id eq '".$id."' and Version eq '".$version."'";
 		
 		$this->_query($query);
 	}
