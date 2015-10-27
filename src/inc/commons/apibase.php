@@ -66,21 +66,28 @@ class ApiBase
 	
 	public function Execute($method = null)
 	{	
+		
 		if($method==null){
 			$method = UrlUtils::RequestMethod();
+			
 			if(UrlUtils::ExistRequestParam("method")){
 				$method = strtolower(UrlUtils::GetRequestParam("method"));
 			}
 		}
 		
-		$availableMethods = get_class_methods(get_class($this));
+		$availableMethodsCased = get_class_methods(get_class($this));
+		$availableMethods = array();
+		for($i=0;$i<sizeof($availableMethodsCased);$i++){
+			$availableMethods[strtolower($availableMethodsCased[$i])] = $availableMethodsCased[$i];
+		}
+		
 		$function = "do".$method;
 		
 		try{
-			if(in_array($function,$availableMethods)){
-				$this->$function();
+			if(array_key_exists($function,$availableMethods)){
+				$this->$availableMethods[$function]();
 			}else{
-				ApiBase::ReturnError("Invalid method",405);
+				ApiBase::ReturnError("Invalid method ".$function,405);
 			}
 		}catch(Exception $ex){
 			ApiBase::ReturnError($ex->getMessage(),500);
