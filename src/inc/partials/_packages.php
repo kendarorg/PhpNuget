@@ -8,6 +8,7 @@ require_once(__ROOT__."/inc/commons/apibase.php");
 require_once(__ROOT__."/inc/commons/smalltextdbapibase.php");
 require_once(__ROOT__."/inc/db_nugetpackages.php");
 require_once(__ROOT__."/inc/phpnugetobjectsearch.php");
+require_once(__ROOT__."/inc/downloadcount.php");
 	
 //Author eq 'Microsoft'
 $db = new NuGetDb();
@@ -148,6 +149,7 @@ try{
 			<?php 
 			for($i=0;$i<sizeof($items);$i++){
 				$item = $items[$i];
+				loadDownloadCount($item);
 				?>
 				<tr>
 					<td><img withd="25px" height="25px" src="<?php echo $item->IconUrl;?>"/></td>
@@ -174,7 +176,7 @@ try{
 						?>
 						</li>
 						<li><b>Description:</b> <?php echo $item->Description;?></li>
-						<li><b>Total downloads:</b> <?php echo $item->VersionDownloadCount;?></li>
+						<li><b>Total downloads:</b> <?php echo $item->DownloadCount;?></li>
 						<li><b>Tags:</b> <?php echo $item->Tags;?></li>
 					</ul>
 					</td>

@@ -8,6 +8,7 @@ require_once(__ROOT__."/inc/commons/apibase.php");
 require_once(__ROOT__."/inc/commons/smalltextdbapibase.php");
 require_once(__ROOT__."/inc/db_nugetpackages.php");
 require_once(__ROOT__."/inc/phpnugetobjectsearch.php");
+require_once(__ROOT__."/inc/downloadcount.php");
 
 $id = UrlUtils::GetRequestParamOrDefault("id",null);
 $version = UrlUtils::GetRequestParamOrDefault("version",null);
@@ -55,6 +56,7 @@ echo "Not found";
 
 }else{
 $item = $items[0];
+loadDownloadCount($item);
 
 ?>
 <ul>
@@ -79,8 +81,9 @@ $item = $items[0];
 						?></li>
 	
 	<li><?php echo $item->Description;?></li>
-	<li><b>Total downloads:</b> <?php echo $item->VersionDownloadCount;?> </li>
-	<li><b>Download package:</b> <a href="<?php echo UrlUtils::CurrentUrl(Settings::$SiteRoot."/api/?id=".$item->Id."&version=".$item->Version);?>">Here</a> </li>
+	<li><b>Total downloads:</b> <?php echo $item->DownloadCount;?> </li>
+	<li><b>This version downloads:</b> <?php echo $item->VersionDownloadCount;?> </li>
+	<li><b>Download package:</b> <a href="<?php echo UrlUtils::CurrentUrl(rtrim(Settings::$SiteRoot,"/")."/api/?id=".$item->Id."&version=".$item->Version);?>">Here</a> </li>
 	<li><b>Tags:</b> <?php echo $item->Tags;?></li>
 	<?php
 	if(sizeof($item->Dependencies)>0){

@@ -8,6 +8,7 @@ require_once(__ROOT__."/inc/commons/apibase.php");
 require_once(__ROOT__."/inc/commons/smalltextdbapibase.php");
 require_once(__ROOT__."/inc/db_nugetpackages.php");
 require_once(__ROOT__."/inc/phpnugetobjectsearch.php");
+require_once(__ROOT__."/inc/downloadcount.php");
 
 
 class ApiNugetBase
