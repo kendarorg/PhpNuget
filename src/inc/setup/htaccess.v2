@@ -14,6 +14,12 @@ RewriteRule  .* @ApplicationPath@api/v2/index.php?action=search&count=true   [QS
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v2/Packages\(Id='([^/]+)',Version='([^/]+)'\)  [NC] 
+RewriteRule (.*)api/v2/Packages\(Id='([^/]+)',Version='([^/]+)'\)$  @ApplicationPath@api/?id=$2&version=$3&%1 [NC,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v2/Search\(\)  [NC] 
 RewriteRule  .* @ApplicationPath@api/v2/index.php?action=search   [QSA]
 

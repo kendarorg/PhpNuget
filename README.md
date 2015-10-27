@@ -222,7 +222,6 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 ### Must
 
 * Add captcha and max retries of password for users
-* Support Packages(Id='AngularJS.Core',Version='1.2.14') on v1 and v2 API
 * Support /packages/id to select all packages with the given id on the gallery
 * Support /packages/id/version to select a package on the gallery
 * Support on v1 the alternate address https://www.nuget.org/v1/FeedService.svc/ for https://www.nuget.org/api/v1/
@@ -247,6 +246,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Release notes not considered
 	* Escaped license url
 	* Fix on package refresh
+	* Support Packages(Id='AngularJS.Core',Version='1.2.14') on v1 and v2 API
 
 * 3.0.12.5
 	* Nuget Package Explorer compatibility: Added support for standard upload
