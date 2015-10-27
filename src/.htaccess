@@ -24,6 +24,13 @@ RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/pnm/api/v1/Search\(\)  [NC] 
 RewriteRule  .* /pnm/api/v1/index.php?action=search   [QSA]
 
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^/pnm/api/v1/Packages\(Id='([^/]+)',Version='([^/]+)'\)  [NC] 
+RewriteRule (.*)api/v1/Packages\(Id='([^/]+)',Version='([^/]+)'\)$  /pnm/api/v1/index.php?action=single&id=$2&version=$3&%1 [NC,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
@@ -92,6 +99,12 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/pnm/api/v2/Search\(\)/\$count  [NC] 
 RewriteRule  .* /pnm/api/v2/index.php?action=search&count=true   [QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^/pnm/api/v2/Packages\(Id='([^/]+)',Version='([^/]+)'\)  [NC] 
+RewriteRule (.*)api/v2/Packages\(Id='([^/]+)',Version='([^/]+)'\)$  /pnm/api/v2/index.php?action=single&id=$2&version=$3&%1 [NC,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
