@@ -5,6 +5,7 @@ require_once(__ROOT__."/inc/api_users.php");
 require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/http.php");
 require_once(__ROOT__."/inc/api_nuget.php");
+require_once(__ROOT__."/inc/downloadcount.php");
 
 $id = UrlUtils::GetRequestParamOrDefault("id",null);
 $apiKey = UrlUtils::GetRequestParamOrDefault("apiKey",null);
@@ -70,6 +71,8 @@ if(!file_exists($path)){
 		HttpUtils::ApiError(404,"Not found ".$file);
 	}
 }
+
+incrementDownload($id,$version);
 
 header('Content-Type: application/zip');
 header('Content-Disposition: attachment; filename='.basename($path));

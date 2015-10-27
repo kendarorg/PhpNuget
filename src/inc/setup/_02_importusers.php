@@ -52,6 +52,7 @@ $useMySql = false;
 	@define('__DATABASE_DIR__', "data".DIRECTORY_SEPARATOR."db");
 	require_once(__ROOT__."/inc/dbversion.php");
 	require_once(__ROOT__."/inc/internalsettings.php");
+
 	//Create environment
 	$r = array();
 	
@@ -121,18 +122,11 @@ $useMySql = false;
 				//break;
 			}
 		}
-		
-		
-		
-		
-	}
-	
+	}	
 	
 	$r["@AdminUserId@"] = UrlUtils::GetRequestParamOrDefault("login","admin","post");
 	$r["@AdminPassword@"] = UrlUtils::GetRequestParamOrDefault("password","password","post");
 	$r["@AdminEmail@"] = UrlUtils::GetRequestParamOrDefault("email","nuget@".$_SERVER["SERVER_NAME"],"post");
-	
-	
 	if (isset($_POST['packageUpdate'])) {
 		$r["@PackageUpdate@"] = "true";
 	} else {
@@ -194,9 +188,6 @@ $useMySql = false;
 	$userEntity->Company = "";
 	$userEntity->Email = $r["@AdminEmail@"];
 	$usersDb->AddRow($userEntity,true);
-	
-	
-	
 	
 	echo "<li>Admin User '".$userEntity->UserId."' added.</li>";
 	?>
