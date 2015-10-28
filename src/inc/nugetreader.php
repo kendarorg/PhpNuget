@@ -160,9 +160,7 @@ class NugetManager
     {
 		global $loginController;
 		$nugetDb = new NuGetDb();
-		
 		$query = "Id eq '".$e->Id."' orderby Version desc";
-		
 		$res = $nugetDb->Query($query,999999,0);
 		if(sizeof($res)>0 && !$loginController->Admin){
 			$id = $res[0]->UserId;

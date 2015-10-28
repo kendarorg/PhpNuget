@@ -157,9 +157,8 @@ class NuGetDb
 		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
         $nameOfCaptain = "";
         
-		$select = array('PackageHash'=>$nugetEntity->PackageHash);
+		$select = array('Id'=>$nugetEntity->Id,'Version'=>$nugetEntity->Version);
         $dbInstance->delete_row($select);
-		
         $dbInstance->save();
     }
     

@@ -56,8 +56,10 @@ class SmallTxtDb
         for($i=0;$i<sizeof($fieldNames);$i++){
             $field = $fieldNames[$i];
             $type = $fieldTypes[$i];
-            $value = $row[$field];
-            $row[$field] = $this->VerifyType($value,$type); 
+			if(array_key_exists($field,$row)){
+				$value = $row[$field];
+				$row[$field] = $this->VerifyType($value,$type); 
+			}
         }
         return $row;   
     }
@@ -297,9 +299,6 @@ class SmallTxtDb
 		
 		$toSort = array();
 		$bi = $this->BuildItem;
-		if($objectSearch!=null){
-			$objectSearch->dump();
-		}
 		foreach($this->rows as $row){
 		
 			$item = $bi();

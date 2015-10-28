@@ -56,8 +56,10 @@ class SmallTxtDb
         for($i=0;$i<sizeof($fieldNames);$i++){
             $field = $fieldNames[$i];
             $type = $fieldTypes[$i];
-            $value = $row[$field];
-            $row[$field] = $this->VerifyType($value,$type); 
+			if(array_key_exists($field,$row)){
+				$value = $row[$field];
+				$row[$field] = $this->VerifyType($value,$type); 
+			}
         }
         return $row;   
     }
@@ -310,7 +312,7 @@ class SmallTxtDb
     
     public function delete_row($indexs)
     {
-        $this->rows[]=$this->VerifyTypes($rowHash);
+        $this->rows[]=$this->VerifyTypes($indexs);
 		
 		$fieldNames = explode(":|:",$this->FieldNames());
 		$fieldTypes = explode(":|:",$this->FieldTypes());
@@ -321,8 +323,8 @@ class SmallTxtDb
 		for($i=0;$i<sizeof($fieldNames);$i++){
 			$field = $fieldNames[$i];
 			$type = strtolower($fieldTypes[$i]);
-			if(isset( $rowHash[$field])){
-				$value = $rowHash[$field];
+			if(isset( $indexs[$field])){
+				$value = $indexs[$field];
 				if($type=="number" || $type=="boolean"){
 					array_push($values,"`".$field."`=".$value);
 				}else{
@@ -330,7 +332,7 @@ class SmallTxtDb
 				}
 			}
 		}
-		$create = $create." WHERE ".join(" ABD ",$values);
+		$create = $create." WHERE ".join(" AND ",$values);
 		$this->doQueryExecute($create);
     }
     

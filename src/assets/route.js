@@ -72,7 +72,7 @@ function($stateProvider, $urlRouterProvider,pathHelper) {
     
 	$stateProvider.state('profile.packages.detail', {
             url: '/:packageId/:packageVersion',
-            templateUrl: pathHelper.buildViewsPath('profile/profile.packages.detail.html'),
+            templateUrl: pathHelper.buildViewsPath('profile/profile.packages.detail.php'),
 			controller: function($scope, $stateParams) {
 				$scope.UserId = $stateParams.userId;
 				$scope.PackageId = $stateParams.packageId;

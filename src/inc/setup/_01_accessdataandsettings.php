@@ -2,9 +2,65 @@
 if(!defined('__INSETUP__')){
 	die("Error");
 }
+
+
+function quick_dev_insights_phpinfo() {
+	ob_start();
+	//phpinfo(11);
+	phpinfo(-1);
+	$phpinfo = array('phpinfo' => array());
+
+	if(preg_match_all('#(?:<h2>(?:<a name=".*?">)?(.*?)(?:</a>)?</h2>)|(?:<tr(?: class=".*?")?><t[hd](?: class=".*?")?>(.*?)\s*</t[hd]>(?:<t[hd](?: class=".*?")?>(.*?)\s*</t[hd]>(?:<t[hd](?: class=".*?")?>(.*?)\s*</t[hd]>)?)?</tr>)#s', 
+			ob_get_clean(), $matches, PREG_SET_ORDER)){
+		foreach($matches as $match){
+			if(strlen($match[1])){
+				$phpinfo[$match[1]] = array();
+			}elseif(isset($match[3])){
+				$keys1 = array_keys($phpinfo);
+				$phpinfo[end($keys1)][$match[2]] = isset($match[4]) ? array($match[3], $match[4]) : $match[3];
+			}else{
+				$keys1 = array_keys($phpinfo);
+				$phpinfo[end($keys1)][] = $match[2];     
+			   
+			}
+		}
+	}
+	return $phpinfo;
+}
+
+$apache = true;
+$phpCgiExe = "";
+if(DIRECTORY_SEPARATOR!== '/'){
+	$pi = quick_dev_insights_phpinfo();
+	if(isset($pi["Server API"])){
+		$pos = stripos($pi["Server API"], "apache");
+		if ($pos === false) { $apache = false;}
+	}
+	if(isset($pi["Apache Environment"])){
+		$apache = true;
+	}
+}
+
+if(!$apache){
+	$phpCgiExe = "C:\\Program Files (x86)\\PHP\\v5.3\\php-cgi.exe";
+}
 ?>
 <html>
 	<head>
+		
+<script type="text/javascript">
+	function showMe (box,cb) {
+		var chboxs = document.getElementsByName(cb);
+		var vis = "none";
+		for(var i=0;i<chboxs.length;i++) { 
+			if(chboxs[i].checked){
+			 vis = "block";
+				break;
+			}
+		}
+		document.getElementById(box).style.display = vis;
+	}
+</script>
 	</head>
 	<body>
 		<h4>First initialization</h4>
@@ -17,11 +73,16 @@ if(!defined('__INSETUP__')){
 				<tr><td>Admin Password:</td><td><input type="password" id="password" name="password" value="password"/></td></tr>
 				<tr><td>Admin Email:</td><td><input type="text" id="email" name="email" value="nuget@<?php echo $_SERVER["SERVER_NAME"]; ?>"/></td></tr>
 				<tr><td>Application Path:</td><td><input type="text" id="applicationPath" name="applicationPath" value="<?php echo $applicationPath;?>"/></td></tr>
-				<tr><td>php-cgi.exe (for IIS):</td><td><input type="text" id="phpCgi" name="phpCgi" value="C:\Program Files (x86)\PHP\v5.3\php-cgi.exe"/></td></tr>
-				<tr><td>Allow package Update:</td><td>
+				<tr><td>php-cgi.exe (for IIS):</td><td><input type="text" id="phpCgi" name="phpCgi" value="<?php echo $phpCgiExe;?>"/></td></tr>
+				<tr><td>Allow package Update via upload:</td><td>
 					<input type="checkbox" id="packageUpdate" name="packageUpdate" /></td></tr>
+				<tr><td>Allow package Delete:</td><td>
+					<input type="checkbox" id="packageDelete" name="packageDelete" /></td></tr>
 				<tr><td>Use mysql:</td><td>
-					<input type="checkbox" id="useMySql" name="useMySql" /></td></tr>
+					<input type="checkbox" id="useMySql" name="useMySql" onclick="showMe('usemysqlsetup','useMySql')" /></td></tr>
+			</table>
+			
+			<table border=0 id="usemysqlsetup" name="usemysqlsetup" style="display:none;">
 				<tr><td>MySql UserId:</td><td><input type="text" id="mySqlLogin" name="mySqlLogin" value="phpnuget"/></td></tr>
 				<tr><td>MySql Password:</td><td><input type="password" id="mySqlPassword" name="mySqlPassword" value="password"/></td></tr>
 				<tr><td>MySql Server:</td><td><input type="text" id="mySqlServer" name="mySqlServer" value="127.0.0.1"/></td></tr>
@@ -29,5 +90,6 @@ if(!defined('__INSETUP__')){
 			</table>
 			<input type="submit" value="Install!"></input>
 		</form>
+		
 	</body>
 </html>

@@ -42,12 +42,13 @@ class PackagesApi extends SmallTextDbApiBase
 		throw new Exception("Operation insert not allowed!");
 	}
 	
-	
 	protected function _verifyDelete($db,$keysArray)
 	{
-		throw new Exception("Operation delete not allowed!");
-	}
-	
+		if(__ALLOWPACKAGESDELETE__!=true){
+			throw new Exception("Operation delete not allowed!");
+		}
+		
+	}	
 	
 	protected function _buildKeysFromRequest($db)
 	{
@@ -139,8 +140,7 @@ class PackagesApi extends SmallTextDbApiBase
 		
 		$this->_preExecute();
 		$pg= $this->_getPagination();
-		$db = $this->_openDb();
-		
+		$db = $this->_openDb();	
 		
 		$count = sizeof($db->Query($query,999999,0));
 		$allRows = $db->Query($query,$pg->Top,$pg->Skip);

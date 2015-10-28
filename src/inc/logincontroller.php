@@ -84,7 +84,7 @@ class LoginController
 		$this->UserId = $user->UserId;
 		$this->Admin = $user->Admin;
 		$this->Packages = $user->Packages;
-		//var_dump($user);die();
+		
 		$_SESSION["UserId"] = $this->UserId;
 		$_SESSION["Admin"] = $this->Admin;
 		$_SESSION["Packages"] = $this->Packages;
