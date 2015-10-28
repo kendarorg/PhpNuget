@@ -137,7 +137,7 @@ $useMySql = false;
 	} else {
 		$r["@AllowPackageDelete@"] = "false";
 	}
-	
+	$serverType = UrlUtils::GetRequestParamOrDefault("servertype","apache","post");
 	
 	$app =trim(UrlUtils::GetRequestParamOrDefault("applicationPath",$applicationPath,"post"),"/");
 	if($app==""){
@@ -161,6 +161,9 @@ $useMySql = false;
 		echo "<li>Package delete not allowed.</li>";
 	}
 	
+	if(!is_writable(__ROOT__)){
+		echo "Cannot write on root!";die();
+	}	
 	
 	
 	//Setup the htaccess for api v2 and v1
@@ -172,11 +175,23 @@ $useMySql = false;
 	Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/htaccess.root",$r),$r,Path::Combine(__ROOT__,".htaccess"));
 	echo "<li>Htaccess initialized with path '".$r["@ApplicationPath@"]."'.</li>";
 	
+		//Setup the urlrewrite for api v2 and v1
+		$r["@ManagedFusion.Rewriter.V1@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/ManagedFusion.Rewriter.txt.v1"),$r);
+		$r["@ManagedFusion.Rewriter.V2@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/ManagedFusion.Rewriter.txt.v2"),$r);
+		$r["@ManagedFusion.Rewriter.V3@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/ManagedFusion.Rewriter.txt.v3"),$r);
+
+		//Write the root htacces
+
+		$dst = Path::Combine(__ROOT__,"ManagedFusion.Rewriter.txt");
+		$src = Path::Combine(__ROOT__,"inc/setup/ManagedFusion.Rewriter.txt.root");
+		
+
+
+		Utils::ReplaceInFile($src,$r,$dst);
+		echo "<li>IIS Mode rewrite initialized with path '".$r["@ApplicationPath@"]."'.</li>";
+
 	//Setup the web.config for api v2 and v1
 	$r["@WebConfig.PHPEXE@"]=UrlUtils::GetRequestParamOrDefault("phpCgi","","post");
-	$r["@WebConfig.V1@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/webconfig.v1"),$r);
-	$r["@WebConfig.V2@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/webconfig.v2"),$r);
-	$r["@WebConfig.V3@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/webconfig.v3"),$r);
 	
 	
 	//Write the root web.config

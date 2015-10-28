@@ -74,7 +74,7 @@ These steps are NOT needed if your hosting already configured PHP
 	* .htaccess
 * Verify to have write permissions on the "db" directory.
 * Open the setup page at http://myhost/mynuget/setup.php and follow the wizard.
-	* If you will use the MySQL version select the appropriate checkbox and fill the relative data
+* If you will use the MySQL version select the appropriate checkbox and fill the relative data
 * If under IIS set the path of 'php-cgi.exe' (leave blank if your hosting already configured PHP)
 * Change the password, email and login of the administration without worries.
 * Rename the setup.php to setup.bak
@@ -251,6 +251,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Support Packages(Id='AngularJS.Core',Version='1.2.14') on v1 and v2 API
 	* Support for downloads count
 	* Support for packages deletion
+	* Resolved setup issue on IIS with a new URLRewrite module [managedfusion-rewriter](https://github.com/kendarorg/managedfusion-rewriter)
 
 * 3.0.12.5
 	* Nuget Package Explorer compatibility: Added support for standard upload
