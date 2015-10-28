@@ -28,14 +28,10 @@ function quick_dev_insights_phpinfo() {
 	return $phpinfo;
 }
 
-$apache = true;
+$apache = false;
 $phpCgiExe = "";
 if(DIRECTORY_SEPARATOR!== '/'){
 	$pi = quick_dev_insights_phpinfo();
-	if(isset($pi["Server API"])){
-		$pos = stripos($pi["Server API"], "apache");
-		if ($pos === false) { $apache = false;}
-	}
 	if(isset($pi["Apache Environment"])){
 		$apache = true;
 	}
@@ -44,6 +40,7 @@ if(DIRECTORY_SEPARATOR!== '/'){
 if(!$apache){
 	$phpCgiExe = "C:\\Program Files (x86)\\PHP\\v5.3\\php-cgi.exe";
 }
+$serverType = $apache==true?"apache":"iis";
 ?>
 <html>
 	<head>
@@ -54,6 +51,7 @@ if(!$apache){
 		If you intend to import the users these values <u>must be corresponding to your old administrative account.</u><br><br>-->
 		<form method="POST" action="setup.php">
 			<input type="hidden" id="dosetup" name="dosetup" value="importUsers"/>
+			<input type="hidden" id="servertype" name="servertype" value="<?php echo $serverType; ?>"/>
 			<table border=0>
 				<tr><td>Admin UserId:</td><td><input type="text" id="login" name="login" value="admin"/></td></tr>
 				<tr><td>Admin Password:</td><td><input type="password" id="password" name="password" value="password"/></td></tr>

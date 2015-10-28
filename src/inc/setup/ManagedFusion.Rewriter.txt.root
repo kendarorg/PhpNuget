@@ -1,0 +1,18 @@
+RewriteEngine On
+
+RewriteBase /
+
+
+#API V1
+
+@ManagedFusion.Rewriter.V1@
+
+#API V2
+
+@ManagedFusion.Rewriter.V2@
+
+#API V3
+
+@ManagedFusion.Rewriter.V3@
+
+#Commons

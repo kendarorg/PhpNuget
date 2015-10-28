@@ -10,71 +10,71 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v1/\$metadata  [NC] 
-RewriteRule  .* /api/v1/index.php?action=metadata   [QSA]
+RewriteRule ^/(.*) /api/v1/index.php?action=metadata   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v1/Search\(\)/\$count  [NC] 
-RewriteRule  .* /api/v1/index.php?action=search&count=true   [QSA]
+RewriteRule ^/(.*) /api/v1/index.php?action=search&count=true   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v1/Search\(\)  [NC] 
-RewriteRule  .* /api/v1/index.php?action=search   [QSA]
+RewriteRule ^/(.*) /api/v1/index.php?action=search   [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v1/Packages\(Id='([^/]+)',Version='([^/]+)'\)  [NC] 
-RewriteRule (.*)api/v1/Packages\(Id='([^/]+)',Version='([^/]+)'\)$  /api/v1/index.php?action=single&id=$2&version=$3&%1 [NC,L]
+RewriteRule ^/(.*)api/v1/Packages\(Id='([^/]+)',Version='([^/]+)'\)$  /api/v1/index.php?action=single&id=$2&version=$3&%1 [NC,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v1/Packages\(\)/\$count  [NC] 
-RewriteRule  .* /api/v1/index.php?action=packages&count=true  [QSA]
+RewriteRule ^/(.*) /api/v1/index.php?action=packages&count=true  [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v1/Packages/\$count  [NC] 
-RewriteRule  .* /api/v1/index.php?action=packages&count=true   [QSA]
+RewriteRule ^/(.*) /api/v1/index.php?action=packages&count=true   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v1/Packages  [NC] 
-RewriteRule  .* /api/v1/index.php?action=packages   [QSA]
+RewriteRule ^/(.*) /api/v1/index.php?action=packages   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v1/FindPackagesById\(\)/\$count  [NC] 
-RewriteRule  .* /api/v1/index.php?action=findpackagesbyd&count=true  [QSA]
+RewriteRule ^/(.*) /api/v1/index.php?action=findpackagesbyd&count=true  [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v1/FindPackagesById\(\)  [NC] 
-RewriteRule  .* /api/v1/index.php?action=findpackagesbyd   [QSA]
+RewriteRule ^/(.*) /api/v1/index.php?action=findpackagesbyd   [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v1/FindPackagesById  [NC] 
-RewriteRule  .* /api/v1/index.php?action=findpackagesbyd   [QSA]
+RewriteRule ^/(.*) /api/v1/index.php?action=findpackagesbyd   [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v1/FindPackagesById/\$count [NC] 
-RewriteRule  .* /api/v1/index.php?action=findpackagesbyd&count=true  [QSA]
+RewriteRule ^/(.*) /api/v1/index.php?action=findpackagesbyd&count=true  [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -82,7 +82,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v1/package/([^/]+)/([^/]+)  [NC] 
 RewriteCond %{QUERY_STRING} ^(.*)$
-RewriteRule (.*)api/v1/package/([^/]+)/([^/]+)$  /api/?id=$2&version=$3&%1 [NC,L]
+RewriteRule ^/(.*)api/v1/package/([^/]+)/([^/]+)$  /api/?id=$2&version=$3&%1 [NC,L]
 
 
 #API V2
@@ -92,101 +92,101 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/\$metadata  [NC] 
-RewriteRule  .* /api/v2/index.php?action=metadata   [QSA]
+RewriteRule ^/(.*) /api/v2/index.php?action=metadata   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/Search\(\)/\$count  [NC] 
-RewriteRule  .* /api/v2/index.php?action=search&count=true   [QSA]
+RewriteRule ^/(.*) /api/v2/index.php?action=search&count=true   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/Packages\(Id='([^/]+)',Version='([^/]+)'\)  [NC] 
-RewriteRule (.*)api/v2/Packages\(Id='([^/]+)',Version='([^/]+)'\)$  /api/v2/index.php?action=single&id=$2&version=$3&%1 [NC,L]
+RewriteRule ^/(.*)api/v2/Packages\(Id='([^/]+)',Version='([^/]+)'\)$  /api/v2/index.php?action=single&id=$2&version=$3&%1 [NC,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/Search\(\)  [NC] 
-RewriteRule  .* /api/v2/index.php?action=search   [QSA]
+RewriteRule ^/(.*) /api/v2/index.php?action=search   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/Packages\(\)/\$count  [NC] 
-RewriteRule  .* /api/v2/index.php?action=packages&count=true  [QSA]
+RewriteRule ^/(.*) /api/v2/index.php?action=packages&count=true  [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/Packages/\$count  [NC] 
-RewriteRule  .* /api/v2/index.php?action=packages&count=true   [QSA]
+RewriteRule ^/(.*) /api/v2/index.php?action=packages&count=true   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/Packages  [NC] 
-RewriteRule  .* /api/v2/index.php?action=packages   [QSA]
+RewriteRule ^/(.*) /api/v2/index.php?action=packages   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/Packages\(\)  [NC] 
-RewriteRule  .* /api/v2/index.php?action=packages   [QSA]
+RewriteRule ^/(.*) /api/v2/index.php?action=packages   [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/GetUpdates\(\)/\$count  [NC] 
-RewriteRule  .* /api/v2/index.php?action=getupdates&count=true  [QSA]
+RewriteRule ^/(.*) /api/v2/index.php?action=getupdates&count=true  [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/GetUpdates\(\)  [NC] 
-RewriteRule  .* /api/v2/index.php?action=getupdates   [QSA]
+RewriteRule ^/(.*) /api/v2/index.php?action=getupdates   [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/FindPackagesById\(\)/\$count  [NC] 
-RewriteRule  .* /api/v2/index.php?action=findpackagesbyd&count=true  [QSA]
+RewriteRule ^/(.*) /api/v2/index.php?action=findpackagesbyd&count=true  [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/FindPackagesById/\$count  [NC] 
-RewriteRule  .* /api/v2/index.php?action=findpackagesbyd&count=true  [QSA]
+RewriteRule ^/(.*) /api/v2/index.php?action=findpackagesbyd&count=true  [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/FindPackagesById\(\)  [NC] 
-RewriteRule  .* /api/v2/index.php?action=findpackagesbyd   [QSA]
+RewriteRule ^/(.*) /api/v2/index.php?action=findpackagesbyd   [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/FindPackagesById  [NC] 
-RewriteRule  .* /api/v2/index.php?action=findpackagesbyd   [QSA]
+RewriteRule ^/(.*) /api/v2/index.php?action=findpackagesbyd   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/FindPackageById\(\)  [NC] 
-RewriteRule  .* /api/v2/index.php?action=findpackagesbyd   [QSA]
+RewriteRule ^/(.*) /api/v2/index.php?action=findpackagesbyd   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/FindPackageById  [NC] 
-RewriteRule  .* /api/v2/index.php?action=findpackagesbyd   [QSA]
+RewriteRule ^/(.*) /api/v2/index.php?action=findpackagesbyd   [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -194,7 +194,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/package/([^/]+)/([^/]+)  [NC] 
 RewriteCond %{QUERY_STRING} ^(.*)$
-RewriteRule (.*)api/v2/package/([^/]+)/([^/]+)$  /api/?id=$2&version=$3&%1 [NC,L]
+RewriteRule ^/(.*)api/v2/package/([^/]+)/([^/]+)$  /api/?id=$2&version=$3&%1 [NC,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -207,7 +207,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v2/\$batch  [NC] 
-RewriteRule  .* /api/v2/batch.php   [QSA]
+RewriteRule ^/(.*) /api/v2/batch.php   [QSA]
 
 #API V3
 
@@ -216,53 +216,53 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v3/index.json  [NC] 
-RewriteRule  .* /api/v3/index.php?action=resources   [QSA]
+RewriteRule ^/(.*) /api/v3/index.php?action=resources   [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v3/search/service/fields  [NC] 
-RewriteRule  .* /api/v3/index.php?action=searchFields   [QSA]
+RewriteRule ^/(.*) /api/v3/index.php?action=searchFields   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v3/search/service/query  [NC] 
-RewriteRule  .* /api/v3/index.php?action=searchQuery   [QSA]
+RewriteRule ^/(.*) /api/v3/index.php?action=searchQuery   [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v3/search/service/diag  [NC] 
-RewriteRule  .* /api/v3/index.php?action=searchDiag   [QSA]
+RewriteRule ^/(.*) /api/v3/index.php?action=searchDiag   [QSA]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v3/search/service  [NC] 
-RewriteRule  .* /api/v3/index.php?action=searchResources   [QSA]
+RewriteRule ^/(.*) /api/v3/index.php?action=searchResources   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v3/search  [NC] 
-RewriteRule  .* /api/v3/index.php?action=searchService   [QSA]
+RewriteRule ^/(.*) /api/v3/index.php?action=searchService   [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v3/registration/([^/]+)/([^/]+).json  [NC] 
-RewriteRule (.*)api/v3/package/([^/]+)/([^/]+)$  /api/v3/index.php?action=package&id=$2&version=$3 [NC,L]
+RewriteRule ^/(.*)api/v3/package/([^/]+)/([^/]+)$  /api/v3/index.php?action=package&id=$2&version=$3 [NC,L]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^/api/v3/registration/([^/]+)/index.json  [NC] 
-RewriteRule (.*)api/v3/package/([^/]+)/([^/]+)$  /api/v3/index.php?action=packages&id=$2 [NC,L]
+RewriteRule ^/(.*)api/v3/package/([^/]+)/([^/]+)$  /api/v3/index.php?action=packages&id=$2 [NC,L]
 
 
 #Commons
