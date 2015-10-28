@@ -216,6 +216,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 * Easily install, configure, manage and troubleshoot one or many PHP versions on the same IIS server.
 * Get updated packages
 * Support viewing the profile in gallery, "nuget like" https://www.nuget.org/profiles/kendar.org
+* Delete packages (when configured)
 
 
 ## TODO
@@ -245,6 +246,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Fix on package refresh
 	* Support Packages(Id='AngularJS.Core',Version='1.2.14') on v1 and v2 API
 	* Support for downloads count
+	* Support for packages deletion
 	
 * 3.0.12.5
 	* Nuget Package Explorer compatibility: Added support for standard upload

@@ -28,26 +28,31 @@ app.factory('usersService',['$http','pathHelper',
 
 app.controller('usersListController', ['$scope', '$controller', 'usersService','$location',
 	function($scope, controller, usersService,$location){
-		usersService.getAll().success(function(data) {
-				$scope.users = data.Data;
-				window.document.title = "Users List";
-			});
+		var loadAll = function(){
+			usersService.getAll().success(function(data) {
+					$scope.users = data.Data;
+					window.document.title = "Users List";
+				});
+			};
 		
 		$scope.delete = function(user){
 			usersService.delete(user.UserId).success(function(data) {
 				if(data.Success) {
 					alert("User deleted!");
+					loadAll();
 				}else{
 					alert(data.Message);
 				}
 			});
 		}
+		
+		loadAll();
 	}
 ]);
 
 
-app.controller('userController', ['$scope', '$controller', 'usersService',
-	function($scope, controller, usersService){
+app.controller('userController', ['$scope', '$controller', 'usersService','$location',
+	function($scope, controller, usersService,$location){
 		usersService.getById($scope.UserId).success(function(data) {
 				if(data.Data==null){
 					$scope.user = {};

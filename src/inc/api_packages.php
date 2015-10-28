@@ -40,13 +40,14 @@ class PackagesApi extends SmallTextDbApiBase
 	{
 		throw new Exception("Operation insert not allowed!");
 	}
-	
-	
+		
 	protected function _verifyDelete($db,$keysArray)
 	{
-		throw new Exception("Operation delete not allowed!");
-	}
-	
+		if(__ALLOWPACKAGESDELETE__!=true){
+			throw new Exception("Operation delete not allowed!");
+		}
+		
+	}	
 	
 	protected function _buildKeysFromRequest($db)
 	{

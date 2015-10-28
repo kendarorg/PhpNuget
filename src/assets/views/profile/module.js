@@ -38,6 +38,9 @@ app.factory('profilePackagesService',['$http','pathHelper','$q',
 				var query = encodeURIComponent("Id eq '"+title+"'");
 				return this.http.get(this.apiBase+'/?Query='+query);
 			},
+			delete : function(packageId,version) {
+				return this.http.post(this.apiBase+'/?method=delete&Id='+packageId+'&Version='+version,{});
+			},
 			
 			refreshPackages : function() {
 				var skip = 0;
@@ -95,8 +98,8 @@ app.controller('profilePackagesController', ['$scope', '$controller', 'profilePa
 	}
 ]);
 
-app.controller('profilePackageController', ['$scope', '$controller', 'profilePackagesService',
-	function($scope, controller, profilePackagesService){
+app.controller('profilePackageController', ['$scope', '$controller', 'profilePackagesService','$location',
+	function($scope, controller, profilePackagesService,$location){
 	
 		profilePackagesService.getById($scope.PackageId,$scope.PackageVersion).success(function(data) {
 				$scope.package = data.Data[0];
@@ -117,6 +120,17 @@ app.controller('profilePackageController', ['$scope', '$controller', 'profilePac
 				}
 				$scope.package = data.Data;
 				window.document.title = "Package '"+data.Data.Title+"'";
+			});
+		}
+		
+		$scope.delete = function(pack){
+			profilePackagesService.delete(pack.Id,pack.Version).success(function(data) {
+				if(data.Success) {
+					alert("Package deleted!");
+					$location.path('/profile/admin/packages/list/0');
+				}else{
+					alert(data.Message);
+				}
 			});
 		}
 	}
