@@ -16,6 +16,15 @@ Verified on:
 
 ## Installation
 
+### Update from previous version
+
+To update from previous versions it will suffice to 
+
+* Save a copy of the settings.php (for reference)
+* Upload the new version
+* Open the setup.php page and fill with the previous settings
+* All the data will be backupped before the update, even when the database is old
+
 ### Notes for Apache With Red Hat Linux
 
 On Red Hat Linux the mod_rewrite must be enabled on the application directory
@@ -73,8 +82,21 @@ These steps are NOT needed if your hosting already configured PHP
 	* Web.Config
 	* .htaccess
 * Verify to have write permissions on the "db" directory.
-* Open the setup page at http://myhost/mynuget/setup.php and follow the wizard.
-* If you will use the MySQL version select the appropriate checkbox and fill the relative data
+* If you use mysql you should create a database with a user with full rights.
+* Open the setup page at http://myhost/mynuget/setup.php and follow the wizard. The value will be prefilled
+	* Admin UserId: the user that will be created (or updated) as admin
+	* Admin Password: the password (on update will be overwritten)
+	* Admin Email: ...
+	* Application path: If the website is "http://host/nuget" will be "nuget". If the website is "http://host" will be empty.
+	* Data Root: The directory in which the packages (and txt db) will be placed. It's usually a subdir of the website but can be changed. NEEDED EVEN FOR MYSQL SETUP.
+	* php-cgi.exe: To allow the configuration of php under IIS.
+	* Allow package update via Upload: Default disabled, if enabled it is possible to overwrite the packages BUT THIS IS NOT A STANDARD BEHAVIOUR.
+	* Allow package delete: Default disabled. LEAVING IT ENABLED IS NOT A STANDARD BEHAVIOUR
+	* Use mysql: If you will use the mysql version this will be checked and will enable further settings:
+		* MySql UserId: MySQL user id
+		* MySql Password: MySQL password
+		* MySql Server: The address of the server
+		* MySql Db: The db on which should store data
 * If under IIS set the path of 'php-cgi.exe' (leave blank if your hosting already configured PHP)
 * Change the password, email and login of the administration without worries.
 * Rename the setup.php to setup.bak
@@ -82,6 +104,7 @@ These steps are NOT needed if your hosting already configured PHP
 	* settings.php
 	* Web.Config
 	* .htaccess
+	* ManagedFusion.Rewriter.txt
 * Now open http://myhost/mynuget and see the gallery
 * Happy Nugetting!
 
@@ -243,6 +266,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 * 4.0.0.0
 	* Support for MySql database
 	* Updated database to version 4.0.0.0
+		* Added Version1-3 and VersionBeta fields to allow the group by version in MySQL
 
 * 3.0.12.6
 	* Release notes not considered
