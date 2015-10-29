@@ -1,4 +1,4 @@
-# PhpNuget V. 3.0.12.6
+# PhpNuget V. 3.0.12.7
 
 ## Purpose
 
@@ -248,15 +248,17 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
+* 3.0.12.7
+	* Support for packages deletion
+	* Resolved setup issue on IIS with a new URLRewrite module [managedfusion-rewriter](https://github.com/kendarorg/managedfusion-rewriter)
+	* Specific override for data root
+	* Support Packages(Id='AngularJS.Core',Version='1.2.14') on v1 and v2 API
+	* Support for downloads count
+	
 * 3.0.12.6
 	* Release notes not considered
 	* Escaped license url
 	* Fix on package refresh
-	* Support Packages(Id='AngularJS.Core',Version='1.2.14') on v1 and v2 API
-	* Support for downloads count
-	* Support for packages deletion
-	* Resolved setup issue on IIS with a new URLRewrite module [managedfusion-rewriter](https://github.com/kendarorg/managedfusion-rewriter)
-	* Specific override for data root
 	
 * 3.0.12.5
 	* Nuget Package Explorer compatibility: Added support for standard upload
