@@ -48,6 +48,21 @@ class PackagesApi extends SmallTextDbApiBase
 			throw new Exception("Operation delete not allowed!");
 		}
 		
+		if(!array_key_exists ("UserId",$_SESSION)){
+			throw new Exception("Not logged in!");
+		}
+		$user = null;
+		global $loginController;
+		//var_dump($loginController);die();
+		$udb = new UserDb();
+		$user = $udb->GetByUserId($loginController->UserId);
+		
+		
+		if(!$loginController->Admin){
+			if($user->Id!=$old->UserId){
+				throw new Exception("Operation not allowed with current rights!");
+			}
+		}
 	}	
 	
 	protected function _buildKeysFromRequest($db)
