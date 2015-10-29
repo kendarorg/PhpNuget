@@ -108,7 +108,6 @@ These steps are NOT needed if your hosting already configured PHP
 * Now open http://myhost/mynuget and see the gallery
 * Happy Nugetting!
 
-
 ## Daily usage
 
 * Configure your Visual Studio or Chocolatey to use http://myhost/mynuget/api/v2/ as repository
@@ -268,15 +267,17 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Updated database to version 4.0.0.0
 		* Added Version1-3 and VersionBeta fields to allow the group by version in MySQL
 
+* 3.0.12.7
+	* Support for packages deletion
+	* Resolved setup issue on IIS with a new URLRewrite module [managedfusion-rewriter](https://github.com/kendarorg/managedfusion-rewriter)
+	* Specific override for data root
+	* Support Packages(Id='AngularJS.Core',Version='1.2.14') on v1 and v2 API
+	* Support for downloads count
+
 * 3.0.12.6
 	* Release notes not considered
 	* Escaped license url
 	* Fix on package refresh
-	* Support Packages(Id='AngularJS.Core',Version='1.2.14') on v1 and v2 API
-	* Support for downloads count
-	* Support for packages deletion
-	* Resolved setup issue on IIS with a new URLRewrite module [managedfusion-rewriter](https://github.com/kendarorg/managedfusion-rewriter)
-	* Specific override for data root
 
 * 3.0.12.5
 	* Nuget Package Explorer compatibility: Added support for standard upload
