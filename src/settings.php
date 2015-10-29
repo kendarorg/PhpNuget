@@ -3,6 +3,7 @@ require_once(__DIR__."/root.php");
 
 define('__MAXUPLOAD_BYTES__',10*1024*1024*1024);
 define('__PACKAGEHASH__',"SHA512"); //Or SHA256
+define('__DATA_ROOT__', "C:\\Projects\\Kendar.Framework\\Github\\endaroza\\PhpNuget.MySQL\\src");
 @define('__UPLOAD_DIR__', "data".DIRECTORY_SEPARATOR."packages");
 @define('__DATABASE_DIR__', "data".DIRECTORY_SEPARATOR."db");
 define('__SITE_ROOT__', "/pnm/");
@@ -16,7 +17,7 @@ define('__ADMINMAIL__',"nuget@localhost");
 define('__ALLOWUSERADD__',false);
 
 define('__ALLOWPACKAGESDELETE__',true);
-define('__ALLOWPACKAGEUPDATE__', false);
+define('__ALLOWPACKAGEUPDATE__', true);
 
 
 @define('__MYSQL_SERVER__', "127.0.0.1");

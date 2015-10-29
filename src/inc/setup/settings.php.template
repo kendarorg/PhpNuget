@@ -3,6 +3,7 @@ require_once(__DIR__."/root.php");
 
 define('__MAXUPLOAD_BYTES__',10*1024*1024*1024);
 define('__PACKAGEHASH__',"SHA512"); //Or SHA256
+define('__DATA_ROOT__', "@DataRoot@");
 @define('__UPLOAD_DIR__', "data".DIRECTORY_SEPARATOR."packages");
 @define('__DATABASE_DIR__', "data".DIRECTORY_SEPARATOR."db");
 define('__SITE_ROOT__', "@ApplicationPath@");
@@ -17,7 +18,6 @@ define('__ALLOWUSERADD__',false);
 
 define('__ALLOWPACKAGESDELETE__',@AllowPackageDelete@);
 define('__ALLOWPACKAGEUPDATE__', @AllowPackageUpdate@);
-
 
 @define('__MYSQL_SERVER__', "@MySqlServer@");
 @define('__MYSQL_USER__',"@MySqlLogin@");
