@@ -23,8 +23,8 @@ class Settings
 }
 
 Settings::$SitePath = Path::CleanUp(__ROOT__);
-Settings::$DataRoot = Path::Combine(Settings::$SitePath,__DATABASE_DIR__);
-Settings::$PackagesRoot = Path::Combine(Settings::$SitePath,__UPLOAD_DIR__);
+Settings::$DataRoot = Path::Combine(__DATA_ROOT__,__DATABASE_DIR__);
+Settings::$PackagesRoot = Path::Combine(__DATA_ROOT__,__UPLOAD_DIR__);
 Settings::$PackageHash = __PACKAGEHASH__;
 Settings::$MaxUploadBytes = __MAXUPLOAD_BYTES__;
 $sr = trim(__SITE_ROOT__,"/\\");

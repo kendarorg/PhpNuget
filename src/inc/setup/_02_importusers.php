@@ -54,11 +54,10 @@ $useMySql = false;
 
 	$r["@AdminUserId@"] = UrlUtils::GetRequestParamOrDefault("login","admin","post");
 	$r["@AdminPassword@"] = UrlUtils::GetRequestParamOrDefault("password","password","post");
-
-				
-
 	$r["@AdminEmail@"] = UrlUtils::GetRequestParamOrDefault("email","nuget@".$_SERVER["SERVER_NAME"],"post");
 
+	$r["@DataRoot@"] = str_replace("\\","\\\\",UrlUtils::GetRequestParamOrDefault("dataRoot","","post"));
+	echo "<li>Data Root initialized to ".UrlUtils::GetRequestParamOrDefault("dataRoot","","post").".</li>";
 
 	if (isset($_POST['packageUpdate'])) {
 		$r["@AllowPackageUpdate@"] = "true";

@@ -248,6 +248,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Support for downloads count
 	* Support for packages deletion
 	* Resolved setup issue on IIS with a new URLRewrite module [managedfusion-rewriter](https://github.com/kendarorg/managedfusion-rewriter)
+	* Specific override for data root
 	
 * 3.0.12.5
 	* Nuget Package Explorer compatibility: Added support for standard upload
