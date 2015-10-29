@@ -73,7 +73,15 @@ These steps are NOT needed if your hosting already configured PHP
 	* Web.Config
 	* .htaccess
 * Verify to have write permissions on the "db" directory.
-* Open the setup page at http://myhost/mynuget/setup.php and follow the wizard
+* Open the setup page at http://myhost/mynuget/setup.php and follow the wizard. The value will be prefilled
+	* Admin UserId: the user that will be created (or updated) as admin
+	* Admin Password: the password (on update will be overwritten)
+	* Admin Email: ...
+	* Application path: If the website is "http://host/nuget" will be "nuget". If the website is "http://host" will be empty.
+	* Data Root: The directory in which the packages (and txt db) will be placed. It's usually a subdir of the website but can be changed. 
+	* php-cgi.exe: To allow the configuration of php under IIS.
+	* Allow package update via Upload: Default disabled, if enabled it is possible to overwrite the packages BUT THIS IS NOT A STANDARD BEHAVIOUR.
+	* Allow package delete: Default disabled. LEAVING IT ENABLED IS NOT A STANDARD BEHAVIOUR
 * If under IIS set the path of 'php-cgi.exe' (leave blank if your hosting already configured PHP)
 * Change the password, email and login of the administration without worries.
 * Rename the setup.php to setup.bak
