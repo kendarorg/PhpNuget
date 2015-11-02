@@ -13,6 +13,8 @@ namespace NugetTesterApplication
 {
     class Program
     {
+        const string TORUN = "NugetPackageExplorer";// "ApiSearch";
+
         const string NUGET_EXE = "nuget.exe";
         const string SAMPLES_DIR = "samples";
         const string DATA_DIR = "data";
@@ -86,6 +88,10 @@ namespace NugetTesterApplication
 
             foreach (var type in types)
             {
+                if (TORUN != "")
+                {
+                    if (TORUN != type.Name) continue;
+                }
                 var test = (TestBase)Activator.CreateInstance(type);
                 test.NugetExe = Path.Combine(directory, NUGET_EXE);
                 test.SamplesDir = Path.Combine(directory, SAMPLES_DIR);
@@ -101,9 +107,16 @@ namespace NugetTesterApplication
                 DoInvoke<TestClassSetup>(test);
 
                 var testMethods = type.GetMethods()
-                          .Where(m => m.GetCustomAttributes(typeof(TestMethod), false).Length > 0);
+                          .Where(m => m.GetCustomAttributes(typeof(TestMethod), false).Length > 0)
+                          .Where(m => m.GetCustomAttributes(typeof(TestIgnore), false).Length == 0);
 
                 DoTest(testMethods, test);
+
+                var testIgnore = type.GetMethods()
+                          .Where(m => m.GetCustomAttributes(typeof(TestMethod), false).Length > 0)
+                          .Where(m => m.GetCustomAttributes(typeof(TestIgnore), false).Length > 0);
+                DoIgnoreTest(testIgnore, test);
+
 
                 DoInvoke<TestClassCleanup>(test);
 
@@ -111,6 +124,15 @@ namespace NugetTesterApplication
             }
 
             Console.ReadKey();
+        }
+
+        private static void DoIgnoreTest(IEnumerable<MethodInfo> testIgnore, TestBase test)
+        {
+            foreach(var meth in testIgnore)
+            {
+                var ignore = (TestIgnore)meth.GetCustomAttributes(typeof(TestIgnore), false).First();
+                Console.WriteLine("\tIG " + meth.Name + " (" + ignore.Message);
+            }
         }
 
         private static string SetupApplication(string host,string phpsrc)
@@ -151,7 +173,9 @@ namespace NugetTesterApplication
             postData.Add("password=password");
             postData.Add("phpCgi=");
             postData.Add("servertype=apache");
-
+            postData.Add("packageDelete=on");
+            postData.Add("packageUpdate=on");
+       
             var data = Encoding.ASCII.GetBytes(string.Join("&",postData));
 
             request.Method = "POST";

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NugetTesterApplication.Tests
 {
-    public class NugetBasicViaCommand : TestBase
+    public class NugetPackageExplorer : TestBase
     {
         
 
@@ -31,12 +31,14 @@ namespace NugetTesterApplication.Tests
         [TestMethod]
         public void PushPackage()
         {
-            PushPackage("NUnitTestAdapter.WithFramework.2.0.0");
+            //var res = this.RunNuget("push", Path.Combine(SamplesDir, complete), NugetToken, "-Source", NugetHost + "/upload");
+            var path = Path.Combine(SamplesDir, "Microsoft.AspNet.WebPages.Data.3.2.0.nupkg");
 
-            var res = this.RunNuget("list", "-Source", NugetApi);
-            Assert(res.Output.Contains("NUnitTestAdapter.WithFramework 2.0.0"),"Package not pushed!"+res.Output);
+
+            var res = this.UploadRequest("api/v2/package", path);
+            Assert(res=="","Package not pushed!"+res);
         }
-
+        /*
         [TestMethod]
         public void PushPackageInPreReleaseNotShownByDefault()
         {
@@ -68,6 +70,6 @@ namespace NugetTesterApplication.Tests
             var res = this.RunNuget("list", "-Source", NugetApi, "-AllVersions");
 
             Assert(!res.Output.Contains("Microsoft.AspNet.WebPages.Data.3.2.2"), "A previous version is visible! Wrong!!" + res.Output);
-        }
+        }*/
     }
 }

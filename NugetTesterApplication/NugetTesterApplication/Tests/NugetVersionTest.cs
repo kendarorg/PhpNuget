@@ -13,10 +13,7 @@ namespace NugetTesterApplication.Tests
         public void VerifyVersion()
         {
             var res = this.RunNuget();
-            if (!res.Output.Contains("NuGet Version: 2.8"))
-            {
-                throw new Exception("Wrong version");
-            }
+            Assert(res.Output.Contains("NuGet Version: 2.8"),"Wrong version");
         }
     }
 }

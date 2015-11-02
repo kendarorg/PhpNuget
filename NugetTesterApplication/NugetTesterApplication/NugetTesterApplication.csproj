@@ -46,15 +46,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\NugetResult.cs" />
+    <Compile Include="Common\StringExtension.cs" />
     <Compile Include="Common\TestBase.cs" />
     <Compile Include="Common\TestClassCleanup.cs" />
     <Compile Include="Common\TestClassSetup.cs" />
     <Compile Include="Common\TestCleanup.cs" />
+    <Compile Include="Common\TestIgnore.cs" />
     <Compile Include="Common\TestMethod.cs" />
     <Compile Include="Common\TestSetup.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\ApiSearch.cs" />
+    <Compile Include="Tests\NugetPackageExplorer.cs" />
     <Compile Include="Tests\NugetBasicViaCommand.cs" />
+    <Compile Include="Tests\DefaultApi.cs" />
     <Compile Include="Tests\NugetVersionTest.cs" />
   </ItemGroup>
   <ItemGroup>
