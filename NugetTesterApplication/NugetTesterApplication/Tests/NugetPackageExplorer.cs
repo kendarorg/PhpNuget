@@ -38,7 +38,15 @@ namespace NugetTesterApplication.Tests
             var res = this.UploadRequest("api/v2/package", path);
             Assert(res=="","Package not pushed!"+res);
         }
-        
+
+        //https://msdn.microsoft.com/en-us/library/dd942040.aspx
+        [TestMethod]
+        [TestIgnore]
+        public void ShouldConsiderInlineCountNone()
+        {
+            ///phpnuget/api/v2/Packages()?$orderby=DownloadCount%20desc&$filter=IsAbsoluteLatestVersion&$skip=0&$top=15&$select=Id,Version,Authors,DownloadCount,VersionDownloadCount,PackageHash,PackageSize,Published&$inlinecount=none
+        }
+
         [TestMethod]
         [TestIgnore]
         public void ShouldConsiderInlineCountAllpages()
