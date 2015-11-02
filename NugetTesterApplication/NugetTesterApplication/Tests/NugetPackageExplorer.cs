@@ -38,18 +38,31 @@ namespace NugetTesterApplication.Tests
             var res = this.UploadRequest("api/v2/package", path);
             Assert(res=="","Package not pushed!"+res);
         }
-        /*
+        
         [TestMethod]
-        public void PushPackageInPreReleaseNotShownByDefault()
+        [TestIgnore]
+        public void ShouldConsiderInlineCountAllpages()
         {
-            PushPackage("Microsoft.AspNet.WebPages.Data.3.2.3-beta1");
-
-            var res = this.RunNuget("list", "-Source", NugetApi);
-
-            Assert(!res.Output.Contains("Microsoft.AspNet.WebPages.Data.3.2.3-beta1"), "PreRelease is visible!" + res.Output);
+            ///phpnuget/api/v2/Packages()?$orderby=DownloadCount%20desc&$filter=IsAbsoluteLatestVersion&$skip=0&$top=15&$select=Id,Version,Authors,DownloadCount,VersionDownloadCount,PackageHash,PackageSize,Published&$inlinecount=allpages
         }
 
         [TestMethod]
+        [TestIgnore]
+        public void ShouldConsiderIsAbsoluteLatestVersion()
+        {
+            //SHOW PRE RELASE FROM NPE
+            ///phpnuget/api/v2/Packages()?$orderby=DownloadCount%20desc&$filter=IsAbsoluteLatestVersion&$skip=0&$top=15&$select=Id,Version,Authors,DownloadCount,VersionDownloadCount,PackageHash,PackageSize,Published&$inlinecount=allpages
+        }
+
+        [TestMethod]
+        [TestIgnore]
+        public void ShouldConsiderIsLatestVersion()
+        {
+            //DO NOT SHOW PRE RELASE FROM NPE
+            ///phpnuget/api/v2/Packages()?$orderby=DownloadCount%20desc&$filter=IsLatestVersion&$skip=0&$top=15&$select=Id,Version,Authors,DownloadCount,VersionDownloadCount,PackageHash,PackageSize,Published&$inlinecount=allpages
+        }
+
+        /*[TestMethod]
         public void PushPackageInPreReleaseShownWithPrerelase()
         {
             PushPackage("Microsoft.AspNet.WebPages.Data.3.2.3-beta1");
