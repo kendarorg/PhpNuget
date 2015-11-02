@@ -9,7 +9,10 @@ require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/uploadutils.php");
 require_once(__ROOT__."/inc/commons/objectsearch.php");
 
-if(false){
+$doUpLog = false;
+
+if($doUpLog){
+			ob_start();
 	file_put_contents("upload.log","==================================\r\n", FILE_APPEND);
 	file_put_contents("upload.log","request: ".$_SERVER['REQUEST_URI']."\r\n", FILE_APPEND);
 	if(sizeof($_POST)>0){
@@ -39,6 +42,10 @@ try{
 
 	if(sizeof($users)!=1){
 		HttpUtils::ApiError('403', 'Invalid API key');
+		
+		if($doUpLog){
+			file_put_contents("upload.log","Invalid API keyr\n", FILE_APPEND);
+		}
 		die();
 	}
 	$user = $users[0];
@@ -55,6 +62,14 @@ try{
 	$parsedNuspec = $nugetReader->LoadNuspecFromFile($result["destination"]);
 	$parsedNuspec->UserId=$user->Id;
 	$nuspecData = $nugetReader->SaveNuspec($result["destination"],$parsedNuspec);
+	
+	if($doUpLog){
+			ob_start();
+var_dump($result);
+			$a=ob_get_contents();
+			ob_end_clean();
+			file_put_contents("upload.log",$a."\r\nUpload completed\n", FILE_APPEND);
+		}
 		
 	// All done!
 	header('HTTP/1.1 201 Created');
