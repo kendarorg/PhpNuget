@@ -1,6 +1,9 @@
 <?php
-
-class SmallTxtDb
+function newMySqlDb($a,$b,$c,$d,$e)
+{
+	return new MySqlDb($a,$b,$c,$d,$e);
+}
+class MySqlDb
 {
     var $cr;
     var $separator;
@@ -69,7 +72,7 @@ class SmallTxtDb
         $this->initialize($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData);
     }
     
-    public function SmallTxtDb($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData = true)
+    public function MySqlDb($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData = true)
     {
         $this->initialize($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData);
     }

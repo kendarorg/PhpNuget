@@ -48,8 +48,6 @@ $useMySql = false;
 		</form>-->
 		<ul>
 <?php
-	@define('__UPLOAD_DIR__', "data".DIRECTORY_SEPARATOR."packages");
-	@define('__DATABASE_DIR__', "data".DIRECTORY_SEPARATOR."db");
 	require_once(__ROOT__."/inc/dbversion.php");
 	require_once(__ROOT__."/inc/internalsettings.php");
 
@@ -61,68 +59,13 @@ $useMySql = false;
 	$r["@MySqlPassword@"] = UrlUtils::GetRequestParamOrDefault("mySqlPassword","password","post");
 	$r["@MySqlDb@"] = UrlUtils::GetRequestParamOrDefault("mySqlDb","phpnuget","post");
 	
-	@define('__MYSQL_SERVER__',$r["@MySqlServer@"]);
-	@define('__MYSQL_USER__',$r["@MySqlLogin@"]);
-	@define('__MYSQL_PASSWORD__',$r["@MySqlPassword@"]);
-	@define('__MYSQL_DB__',$r["@MySqlDb@"]);
-
 	if (isset($_POST['useMySql'])) {
 		$useMySql = true;
 		$r["@DbType@"] = "DBMYSQL";
-		@define('__DB_TYPE__',DBMYSQL);
 	} else {
 		$r["@DbType@"] = "DBTXT";
-		@define('__DB_TYPE__',DBTXT);
 	}
-	if($useMySql){
-		$connection = mysqli_connect(__MYSQL_SERVER__, __MYSQL_USER__, __MYSQL_PASSWORD__,__MYSQL_DB__);
-		$result = mysqli_query( $connection,"CREATE TABLE IF NOT EXISTS `versions` (  `VersionNumber` char(254) NOT NULL,  `Id` tinyint(4) NOT NULL,  PRIMARY KEY (`Id`))");
-		$result = mysqli_query( $connection,"SELECT VersionNumber FROM versions");
-		$data = array();
-		if($result){
-			$data = mysqli_fetch_array($result,MYSQLI_ASSOC);
-		}
-		if(sizeof($data)==0){
-			mysqli_query( $connection,"INSERT INTO versions (VersionNumber,Id) VALUES ('".__DB_VERSION__."',0)");
-		}else{
-			
-			while($data["VersionNumber"]!=__DB_VERSION__){
-				$result = mysqli_query( $connection,"SELECT VersionNumber FROM versions");
-				if($result){
-					$data = mysqli_fetch_array($result,MYSQLI_ASSOC);
-					require_once("updatemysql".$data["VersionNumber"].".php");
-				}else{
-					throw new Exception("Some oddities on db!");
-				}
-			}
-		}
-			
-		mysqli_close($connection);
-	}else{
-		if(file_exists(__ROOT__."/settings.php")){
-			
-			require_once(__ROOT__."/settings.php");
-			
-			require_once(__ROOT__."/inc/commons/smalltxtdb.php");
-			$dbFile = "nugetdb_pkg.txt";
-			$prever = stdVerifyVersion($dbFile);
-		
-			while($prever!=__DB_VERSION__){
-				require_once("updatetxt.".stdVerifyVersion($dbFile).".php");
-				$callFunc = "updateTo".str_replace(".","",$prever);
-				$prever = $callFunc($dbFile);
-			}
-			$dbFile = "nugetdb_usrs.txt";
-			$prever = stdVerifyVersion($dbFile);
-			while($prever !=__DB_VERSION__){
-				require_once("updatetxt.".stdVerifyVersion($dbFile).".php");
-				$callFunc = "updateTo".str_replace(".","",$prever);
-				$prever = $callFunc($dbFile);
-				//echo stdVerifyVersion($dbFile);
-				//break;
-			}
-		}
-	}	
+	
 	
 	$r["@AdminUserId@"] = UrlUtils::GetRequestParamOrDefault("login","admin","post");
 	$r["@AdminPassword@"] = UrlUtils::GetRequestParamOrDefault("password","password","post");
@@ -147,6 +90,11 @@ $useMySql = false;
 	} else {
 		$r["@AllowPackageDelete@"] = "false";
 	}
+	$importFromTxtDb = false;
+	if (isset($_POST['importFromTxtDb'])) {
+		$importFromTxtDb = true;
+	}
+	
 	$serverType = UrlUtils::GetRequestParamOrDefault("servertype","apache","post");
 	
 	$app =trim(UrlUtils::GetRequestParamOrDefault("applicationPath",$applicationPath,"post"),"/");
@@ -185,20 +133,20 @@ $useMySql = false;
 	Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/htaccess.root",$r),$r,Path::Combine(__ROOT__,".htaccess"));
 	echo "<li>Htaccess initialized with path '".$r["@ApplicationPath@"]."'.</li>";
 	
-		//Setup the urlrewrite for api v2 and v1
-		$r["@ManagedFusion.Rewriter.V1@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/ManagedFusion.Rewriter.txt.v1"),$r);
-		$r["@ManagedFusion.Rewriter.V2@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/ManagedFusion.Rewriter.txt.v2"),$r);
-		$r["@ManagedFusion.Rewriter.V3@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/ManagedFusion.Rewriter.txt.v3"),$r);
+	//Setup the urlrewrite for api v2 and v1
+	$r["@ManagedFusion.Rewriter.V1@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/ManagedFusion.Rewriter.txt.v1"),$r);
+	$r["@ManagedFusion.Rewriter.V2@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/ManagedFusion.Rewriter.txt.v2"),$r);
+	$r["@ManagedFusion.Rewriter.V3@"] = Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/ManagedFusion.Rewriter.txt.v3"),$r);
 
-		//Write the root htacces
+	//Write the root htacces
 
-		$dst = Path::Combine(__ROOT__,"ManagedFusion.Rewriter.txt");
-		$src = Path::Combine(__ROOT__,"inc/setup/ManagedFusion.Rewriter.txt.root");
-		
+	$dst = Path::Combine(__ROOT__,"ManagedFusion.Rewriter.txt");
+	$src = Path::Combine(__ROOT__,"inc/setup/ManagedFusion.Rewriter.txt.root");
+	
 
 
-		Utils::ReplaceInFile($src,$r,$dst);
-		echo "<li>IIS Mode rewrite initialized with path '".$r["@ApplicationPath@"]."'.</li>";
+	Utils::ReplaceInFile($src,$r,$dst);
+	echo "<li>IIS Mode rewrite initialized with path '".$r["@ApplicationPath@"]."'.</li>";
 
 	//Setup the web.config for api v2 and v1
 	$r["@WebConfig.PHPEXE@"]=UrlUtils::GetRequestParamOrDefault("phpCgi","","post");
@@ -213,8 +161,81 @@ $useMySql = false;
 	echo "<li>Web.config initialized with path '".$r["@ApplicationPath@"]."'.</li>";
 	
 	
+	
 	require_once(__ROOT__."/settings.php");
+	initializeInternalSettings();
 	require_once(__ROOT__."/inc/db_users.php");
+	require_once(__ROOT__."/inc/db_nugetpackages.php");
+	
+	
+	if($useMySql){
+		$connection = mysqli_connect(__MYSQL_SERVER__, __MYSQL_USER__, __MYSQL_PASSWORD__,__MYSQL_DB__);
+		$result = mysqli_query( $connection,"CREATE TABLE IF NOT EXISTS `versions` (  `VersionNumber` char(254) NOT NULL,  `Id` tinyint(4) NOT NULL,  PRIMARY KEY (`Id`))");
+		$result = mysqli_query( $connection,"SELECT VersionNumber FROM versions");
+		$data = array();
+		if($result){
+			$data = mysqli_fetch_array($result,MYSQLI_ASSOC);
+		}
+		if($importFromTxtDb && sizeof($data)==0){
+			$dbFile = "nugetdb_pkg.txt";
+			$prever = stdVerifyVersion($dbFile);
+		
+			while($prever!=__DB_VERSION__){
+				require_once("updatetxt.".stdVerifyVersion($dbFile).".php");
+				$callFunc = "updateTo".str_replace(".","",$prever);
+				$prever = $callFunc($dbFile);
+			}
+			$dbFile = "nugetdb_usrs.txt";
+			$prever = stdVerifyVersion($dbFile);
+			while($prever !=__DB_VERSION__){
+				require_once("updatetxt.".stdVerifyVersion($dbFile).".php");
+				$callFunc = "updateTo".str_replace(".","",$prever);
+				$prever = $callFunc($dbFile);
+				//echo stdVerifyVersion($dbFile);
+				//break;
+			}
+			
+			require_once("fromtxttomysql.php");
+			
+			mysqli_query( $connection,"INSERT INTO versions (VersionNumber,Id) VALUES ('".__DB_VERSION__."',0)");
+		}else  if(sizeof($data)==0){
+		
+			mysqli_query( $connection,"INSERT INTO versions (VersionNumber,Id) VALUES ('".__DB_VERSION__."',0)");
+			//Pro
+		}else{
+			while($data["VersionNumber"]!=__DB_VERSION__){
+				$result = mysqli_query( $connection,"SELECT VersionNumber FROM versions");
+				if($result){
+					$data = mysqli_fetch_array($result,MYSQLI_ASSOC);
+					require_once("updatemysql".$data["VersionNumber"].".php");
+				}else{
+					throw new Exception("Some oddities on db!");
+				}
+			}
+		}
+			
+		mysqli_close($connection);
+	}else{
+		require_once(__ROOT__."/inc/commons/smalltxtdb.php");
+		$dbFile = "nugetdb_pkg.txt";
+		$prever = stdVerifyVersion($dbFile);
+	
+		while($prever!=__DB_VERSION__){
+			require_once("updatetxt.".stdVerifyVersion($dbFile).".php");
+			$callFunc = "updateTo".str_replace(".","",$prever);
+			$prever = $callFunc($dbFile);
+		}
+		$dbFile = "nugetdb_usrs.txt";
+		$prever = stdVerifyVersion($dbFile);
+		while($prever !=__DB_VERSION__){
+			require_once("updatetxt.".stdVerifyVersion($dbFile).".php");
+			$callFunc = "updateTo".str_replace(".","",$prever);
+			$prever = $callFunc($dbFile);
+			//echo stdVerifyVersion($dbFile);
+			//break;
+		}
+	}	
+	
 	$usersDb = new UserDb();
 	//Create user
 	$userEntity = new UserEntity();

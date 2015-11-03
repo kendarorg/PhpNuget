@@ -1,4 +1,8 @@
 <?php
+function newSmallTxtDb($a,$b,$c,$d,$e)
+{
+	return new SmallTxtDb($a,$b,$c,$d,$e);
+}
 
 class SmallTxtDb
 {
@@ -91,6 +95,10 @@ class SmallTxtDb
 			$this->_keys[$kk]=$kk;
 		}
         if(!file_exists($this->dbFile)){
+			$dir = dirname($this->dbFile);
+			if(!file_exists($dir)){
+				mkdir($dir,__RW_ADMIN_R_ALL__,true);
+			}
             $fp = fopen($this->dbFile, 'w');
             fwrite($fp, "@Version:".$this->_version.$this->cr);
             fwrite($fp, $this->dbRows.$this->cr);

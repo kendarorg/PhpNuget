@@ -3,10 +3,13 @@
 require_once(dirname(__FILE__)."/../root.php");
 require_once(__ROOT__."/settings.php");
 
+require_once(__ROOT__."/inc/commons/mysqldb.php");
+require_once(__ROOT__."/inc/commons/smalltxtdb.php");
+
 if(__DB_TYPE__==DBMYSQL){
-	require_once(__ROOT__."/inc/commons/mysqldb.php");
+	$dbfactory = "newMySqlDb";
 }else{
-	require_once(__ROOT__."/inc/commons/smalltxtdb.php");
+	$dbfactory = "newSmallTxtDb";
 }	
 require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/objectsearch.php");
@@ -49,13 +52,14 @@ class NuGetDb
 	
 	public function Query($query=null,$limit=99999,$skip=0)
 	{
+		global $dbfactory;
 		$os = null;
 		if($query!=null && $query!=""){
 			$os = new PhpNugetObjectSearch();
 			$os->Parse($query,$this->GetAllColumns());
 		}
 		$this->initialize();
-        $dbInstance = new SmallTxtDb(__DB_VERSION__,__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__,__MYTXTDBROWS_PKG_KEY__);
+        $dbInstance = call_user_func($dbfactory,__DB_VERSION__,__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__,__MYTXTDBROWS_PKG_KEY__);
 		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
 		$res =  $dbInstance->GetAll($limit,$skip,$os);
 		foreach($res as $row){
@@ -76,7 +80,8 @@ class NuGetDb
 		if($nugetEntity->Id=="" || $nugetEntity->Version==""){
 			throw new Exception("Missing Id and/or Version");
 		}
-        $dbInstance =  new SmallTxtDb(__DB_VERSION__,__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__,__MYTXTDBROWS_PKG_KEY__);
+		global $dbfactory;
+        $dbInstance =  call_user_func($dbfactory,__DB_VERSION__,__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__,__MYTXTDBROWS_PKG_KEY__);
 		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
         $toInsert = array();
         $vars = explode(":|:",__MYTXTDBROWS_PKG__);
@@ -153,7 +158,8 @@ class NuGetDb
     
     public function DeleteRow($nugetEntity)
     {
-        $dbInstance = new SmallTxtDb(__DB_VERSION__,__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__,__MYTXTDBROWS_PKG_KEY__);
+		global $dbfactory;
+        $dbInstance = call_user_func($dbfactory,__DB_VERSION__,__MYTXTDB_PKG__,__MYTXTDBROWS_PKG__,__MYTXTDBROWS_PKG_TYPES__,__MYTXTDBROWS_PKG_KEY__);
 		$dbInstance->BuildItem= 'nugetDbPackageBuilder';
         $nameOfCaptain = "";
         

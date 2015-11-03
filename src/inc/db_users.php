@@ -1,11 +1,14 @@
 <?php
 if(!defined('__ROOT__'))define('__ROOT__',dirname( dirname(__FILE__)));
 
+require_once(__ROOT__."/inc/commons/mysqldb.php");
+require_once(__ROOT__."/inc/commons/smalltxtdb.php");
+
 if(__DB_TYPE__==DBMYSQL){
-	require_once(__ROOT__."/inc/commons/mysqldb.php");
+	$dbfactory = "newMySqlDb";
 }else{
-	require_once(__ROOT__."/inc/commons/smalltxtdb.php");
-}	
+	$dbfactory = "newSmallTxtDb";
+}
 require_once(__ROOT__."/inc/commons/utils.php");
 require_once(__ROOT__."/inc/commons/objectsearch.php");
 require_once(__ROOT__."/inc/db_usersentity.php");
@@ -44,6 +47,7 @@ class UserDb
 	
 	public function Query($query=null,$limit=99999,$skip=0)
 	{
+		global $dbfactory;
 		$os = null;
 		if($query!=null && $query!=""){
 			$os = new ObjectSearch();
@@ -51,14 +55,15 @@ class UserDb
 		}
 		
 		$this->initialize();
-        $dbInstance = new SmallTxtDb(__DB_VERSION__,__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
+        $dbInstance =call_user_func($dbfactory,__DB_VERSION__,__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
 		$dbInstance->BuildItem= 'nugetDbUserBuilder';
 		return $dbInstance->GetAll($limit,$skip,$os);
 	}
     
     public function AddRow($nugetEntity,$update)
     {
-        $dbInstance =  new SmallTxtDb(__DB_VERSION__,__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
+		global $dbfactory;
+        $dbInstance =  call_user_func($dbfactory,__DB_VERSION__,__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
         $toInsert = array();
         $vars = explode(":|:",__MYTXTDBROWS_USR__);
         //print_r($vars);
@@ -92,7 +97,8 @@ class UserDb
     
     public function DeleteRow($nugetEntity)
     {
-        $dbInstance = new SmallTxtDb(__DB_VERSION__,__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
+		global $dbfactory;
+        $dbInstance = call_user_func($dbfactory,__DB_VERSION__,__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
         $nameOfCaptain = "";
         
 		$select = array('UserId'=>$nugetEntity->UserId);

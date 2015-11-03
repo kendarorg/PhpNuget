@@ -24,6 +24,7 @@ To update from previous versions it will suffice to
 * Upload the new version
 * Open the setup.php page and fill with the previous settings
 * All the data will be backupped before the update, even when the database is old
+* When moving to mysql version all data will be ported if the relative function is enabled
 
 ### Notes for Apache With Red Hat Linux
 
@@ -96,6 +97,7 @@ These steps are NOT needed if your hosting already configured PHP
 	* Allow package update via Upload: Default disabled, if enabled it is possible to overwrite the packages BUT THIS IS NOT A STANDARD BEHAVIOUR.
 	* Allow package delete: Default disabled. LEAVING IT ENABLED IS NOT A STANDARD BEHAVIOUR
 	* Use mysql: If you will use the mysql version this will be checked and will enable further settings:
+		* Import from txt db: checked if should import from txt db
 		* MySql UserId: MySQL user id
 		* MySql Password: MySQL password
 		* MySql Server: The address of the server
@@ -256,19 +258,21 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 ### Should
 
 * Add robots.txt
+* The gallery should be visible without javscript (for search engines)
 
 ### Would
 
+* Export database
 * Add Email token to reset users passwords
 * Upload multiple nupkg
-* Align the Settings::ResultsPerPage in all the views
 
 ## Updates
 
 * 4.0.0.0
 	* Support for MySql database
 	* Updated database to version 4.0.0.0
-		* Added Version1-3 and VersionBeta fields to allow the group by version in MySQL
+	* Added Version1-3 and VersionBeta fields to allow the group by version in MySQL
+	* Added automatic import of data when going to mysql version
 
 * 3.0.12.8
 	* Fixed inconsistency on boolean parameters inside packages update

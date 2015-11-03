@@ -24,29 +24,33 @@ class Settings
 	public static $LimitUsersPackages = false;
 }
 
-@Settings::$SitePath = Path::CleanUp(__ROOT__);
-@Settings::$DataRoot = __DATABASE_DIR__;
-@Settings::$PackagesRoot = __UPLOAD_DIR__;
-@Settings::$PackageHash = __PACKAGEHASH__;
-@Settings::$MaxUploadBytes = __MAXUPLOAD_BYTES__;
-@$sr = trim(__SITE_ROOT__,"/\\");
-if($sr!=""){
-	Settings::$SiteRoot = "/".$sr."/";
-}else{
-	Settings::$SiteRoot = "/";
-}
-@Settings::$AllowUserAdd = __ALLOWUSERADD__;
-@Settings::$AdminId = __ADMINID__;
-@Settings::$AdminPassword = __ADMINPASSWORD__;
-@Settings::$AdminEmail = __ADMINMAIL__;
-@Settings::$LimitUsersPackages = __LIMITUSERSPACKAGES__;
+function initializeInternalSettings(){
 
-if(defined("__DATABASE_DIR__") && defined("__UPLOAD_DIR__")){
-if(!is_dir(Settings::$DataRoot)){
-	mkdir(Settings::$DataRoot,__RW_ADMIN_R_ALL__);
-}
-if(!is_dir(Settings::$PackagesRoot))	
-	mkdir(Settings::$PackagesRoot,__RW_ADMIN_R_ALL__);
+	@Settings::$SitePath = Path::CleanUp(__ROOT__);
+	@Settings::$DataRoot = __DATABASE_DIR__;
+	@Settings::$PackagesRoot = __UPLOAD_DIR__;
+	@Settings::$PackageHash = __PACKAGEHASH__;
+	@Settings::$MaxUploadBytes = __MAXUPLOAD_BYTES__;
+	@$sr = trim(__SITE_ROOT__,"/\\");
+	if($sr!=""){
+		@Settings::$SiteRoot = "/".$sr."/";
+	}else{
+		@Settings::$SiteRoot = "/";
+	}
+	@Settings::$AllowUserAdd = __ALLOWUSERADD__;
+	@Settings::$AdminId = __ADMINID__;
+	@Settings::$AdminPassword = __ADMINPASSWORD__;
+	@Settings::$AdminEmail = __ADMINMAIL__;
+	@Settings::$LimitUsersPackages = __LIMITUSERSPACKAGES__;
+
+	if(defined("__DATABASE_DIR__") && defined("__UPLOAD_DIR__")){
+	if(!is_dir(Settings::$DataRoot)){
+		mkdir(Settings::$DataRoot,__RW_ADMIN_R_ALL__);
+	}
+	if(!is_dir(Settings::$PackagesRoot))	
+		mkdir(Settings::$PackagesRoot,__RW_ADMIN_R_ALL__);
+	}
 }
 
+initializeInternalSettings();
 ?>
