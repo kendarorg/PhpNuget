@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Configuration;
 using System.Net;
 using System.Reflection;
 using System.Text;
@@ -73,9 +74,9 @@ namespace NugetTesterApplication
 
         static void Main(string[] args)
         {
-            var host = (args.Length>=1?args[0]:"http://localhost:8020/phpnuget").Trim().TrimEnd('/');
+            var host = (!string.IsNullOrWhiteSpace(ConfigurationSettings.AppSettings["NugetUrl"]) ? ConfigurationSettings.AppSettings["NugetUrl"] : "http://localhost:8020/phpnuget").Trim().TrimEnd('/');
             var api = host + "/api/v2";
-            var directory = args.Length>=2 ? args[1] : GetNugetDirectory().Trim().TrimEnd('\\');
+            var directory = !string.IsNullOrWhiteSpace(ConfigurationSettings.AppSettings["NugetExeDir"]) ? ConfigurationSettings.AppSettings["NugetExeDir"] : GetNugetDirectory().Trim().TrimEnd('\\');
 
             
 

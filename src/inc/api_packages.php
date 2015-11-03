@@ -58,9 +58,9 @@ class PackagesApi extends SmallTextDbApiBase
 		
 		
 		if(!$loginController->Admin){
-			if($user->Id!=$old->UserId){
+			//if($user->Id!=$old->UserId){
 				throw new Exception("Operation not allowed with current rights!");
-			}
+			//}
 		}
 	}	
 	
