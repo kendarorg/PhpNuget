@@ -18,9 +18,13 @@ namespace NugetTesterApplication.Tests
             if (File.Exists(dbfile)) File.Delete(dbfile);
 
             PushPackage("NUnitTestAdapter.WithFramework.2.0.0");
+
             PushPackage("Microsoft.AspNet.WebPages.Data.3.2.0");
             PushPackage("Microsoft.AspNet.WebPages.Data.3.2.2");
             PushPackage("Microsoft.AspNet.WebPages.Data.3.2.3-beta1");
+
+            PushPackage("MyPackage.3.0.0-alpha4CMT");
+            PushPackage("MyPackage.3.0.0-beta-1-1CMT");
         }
 
         [TestClassCleanup]
@@ -52,16 +56,16 @@ namespace NugetTesterApplication.Tests
         public void Vs2103IncludePreReleaseMostDownloadNoSearch()
         {
             var res = this.GetRequest("api/v2/Search()/$count?$filter=IsLatestVersion&searchTerm=''&targetFramework='net45'&includePrerelease=true");
-            Assert(res == "2", "Wrong items count");
+            Assert(res == "3", "Wrong items count");
 
             var xml = this.GetRequest("api/v2/Search()?$filter=IsLatestVersion&searchTerm=''&targetFramework='net45'&includePrerelease=true").ToXml();
             var founded = xml.FindXmlNodes("feed", "entry").ToArray();
 
-            Assert(founded.Count() == 2, "Wrong items count");
+            Assert(founded.Count() == 3, "Wrong items count");
             Assert(founded[0].FindXmlNodes("title").First().InnerText == "Microsoft.AspNet.WebPages.Data", "Wrong package 1");
             Assert(founded[0].FindXmlNodes("m:properties", "d:Version").First().InnerText == "3.2.3-beta1", "Wrong package id 1");
-            Assert(founded[1].FindXmlNodes("title").First().InnerText == "NUnitTestAdapter.WithFramework", "Wrong package 2");
-            Assert(founded[1].FindXmlNodes("m:properties", "d:Version").First().InnerText == "2.0.0", "Wrong package id 2");
+            Assert(founded[2].FindXmlNodes("title").First().InnerText == "NUnitTestAdapter.WithFramework", "Wrong package 2");
+            Assert(founded[2].FindXmlNodes("m:properties", "d:Version").First().InnerText == "2.0.0", "Wrong package id 2");
         }
 
 
@@ -106,6 +110,29 @@ namespace NugetTesterApplication.Tests
             Assert(founded.Count() == 1, "Wrong items count");
             Assert(founded[0].FindXmlNodes("title").First().InnerText == "Microsoft.AspNet.WebPages.Data", "Wrong package 1");
             Assert(founded[0].FindXmlNodes("m:properties", "d:Version").First().InnerText == "3.2.2", "Wrong package id 1");
+        }
+
+        [TestMethod]
+        public void Vs2103GetUpdatesStable()
+        {
+            var xml = this.GetRequest("api/v2/GetUpdates()?packageIds='Microsoft.AspNet.WebPages.Data'&versions='3.2.0'&includePrerelease=false&includeAllVersions=false&targetFrameworks=''&versionConstraints=''").ToXml();
+            var founded = xml.FindXmlNodes("feed", "entry").ToArray();
+
+            Assert(founded.Count() == 1, "Wrong items count");
+            Assert(founded[0].FindXmlNodes("title").First().InnerText == "Microsoft.AspNet.WebPages.Data", "Wrong package 1");
+            Assert(founded[0].FindXmlNodes("m:properties", "d:Version").First().InnerText == "3.2.2", "Wrong package id 1");
+        }
+
+        [TestMethod]
+        public void Vs2103GetUpdatesPrereleaseToo()
+        {
+            
+            var xml = this.GetRequest("api/v2/GetUpdates()?packageIds='Microsoft.AspNet.WebPages.Data'&versions='3.2.0'&includePrerelease=true&includeAllVersions=false&targetFrameworks=''&versionConstraints=''").ToXml();
+            var founded = xml.FindXmlNodes("feed", "entry").ToArray();
+
+            Assert(founded.Count() == 1, "Wrong items count");
+            Assert(founded[0].FindXmlNodes("title").First().InnerText == "Microsoft.AspNet.WebPages.Data", "Wrong package 1");
+            Assert(founded[0].FindXmlNodes("m:properties", "d:Version").First().InnerText == "3.2.3-beta1", "Wrong package id 1");
         }
 
         [TestMethod]

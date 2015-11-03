@@ -187,7 +187,9 @@ class SmallTxtDb
             $towrite = array_fill(0,sizeof( $this->columns),null);
             $row = $this->VerifyTypes($row);
             foreach($this->columns as $key => $value){
-                $towrite[$value]=serialize($this->de_cr_lf($row[$key]));
+				if(array_key_exists($key,$row)){
+					$towrite[$value]=serialize($this->de_cr_lf($row[$key]));
+				}
             }
             $rowString = implode($this->separator,$towrite);
             fwrite($fp, $rowString.$this->cr);

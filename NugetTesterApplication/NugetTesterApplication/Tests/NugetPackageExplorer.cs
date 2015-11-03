@@ -41,21 +41,21 @@ namespace NugetTesterApplication.Tests
 
         //https://msdn.microsoft.com/en-us/library/dd942040.aspx
         [TestMethod]
-        [TestIgnore]
+        [TestIgnore("TODO")]
         public void ShouldConsiderInlineCountNone()
         {
             ///phpnuget/api/v2/Packages()?$orderby=DownloadCount%20desc&$filter=IsAbsoluteLatestVersion&$skip=0&$top=15&$select=Id,Version,Authors,DownloadCount,VersionDownloadCount,PackageHash,PackageSize,Published&$inlinecount=none
         }
 
         [TestMethod]
-        [TestIgnore]
+        [TestIgnore("TODO")]
         public void ShouldConsiderInlineCountAllpages()
         {
             ///phpnuget/api/v2/Packages()?$orderby=DownloadCount%20desc&$filter=IsAbsoluteLatestVersion&$skip=0&$top=15&$select=Id,Version,Authors,DownloadCount,VersionDownloadCount,PackageHash,PackageSize,Published&$inlinecount=allpages
         }
 
         [TestMethod]
-        [TestIgnore]
+        [TestIgnore("TODO")]
         public void ShouldConsiderIsAbsoluteLatestVersion()
         {
             //SHOW PRE RELASE FROM NPE
@@ -63,7 +63,7 @@ namespace NugetTesterApplication.Tests
         }
 
         [TestMethod]
-        [TestIgnore]
+        [TestIgnore("TODO")]
         public void ShouldConsiderIsLatestVersion()
         {
             //DO NOT SHOW PRE RELASE FROM NPE
