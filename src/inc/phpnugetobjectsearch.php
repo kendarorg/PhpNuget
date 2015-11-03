@@ -100,7 +100,7 @@ class PhpNugetExternalTypes
 		}
 		$numericCompare = $this->_compareNumericVersion($la[0],$ra[0]);
 		
-		if($numericCompare!=0 || sizeof($la)==sizeof($ra)) return $numericCompare;
+		if($numericCompare!=0) return $numericCompare;
 		
 		if(sizeof($la)>sizeof($ra)){
 			return -1;
@@ -109,29 +109,6 @@ class PhpNugetExternalTypes
 		}
 		
 		return strcasecmp ($la[1],$ra[1]);
-		/*
-		$aVersion = explode(".",str_replace("-","",strtolower($l)));
-		$bVersion = explode(".",str_replace("-","",strtolower($r)));
-		for($i=0;$i<sizeof($aVersion) && $i<sizeof($bVersion);$i++){
-			$aCur = $aVersion[$i];
-			$bCur = $bVersion[$i];
-			if($this->_isInteger($aCur)&&$this->_isInteger($bCur)){
-				$res = $aVersion[$i]-$bVersion[$i];
-				if($res!=0) return $res; 
-			}else if(!$this->_isInteger($aCur)&&$this->_isInteger($bCur)){
-				return 1;
-			}else if($this->_isInteger($aCur)&&!$this->_isInteger($bCur)){
-				return -1;
-			}else{
-				//return strcasecmp ($aCur,$bCur);
-				return strcasecmp ($aCur,$bCur);
-				//$aCur = PhpNugetObjectSearch::$letterVersion[$aCur];
-				//$bCur = PhpNugetObjectSearch::$letterVersion[$bCur];
-				//$res = $aCur -$bCur;
-				//if($res!=0) return $res; 
-			}
-		}
-		return 0;*/
 	}
 	
 	function _compareNumericVersion($l,$r)
