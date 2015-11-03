@@ -3,14 +3,15 @@ require_once(__DIR__."/root.php");
 
 define('__MAXUPLOAD_BYTES__',10*1024*1024*1024);
 define('__PACKAGEHASH__',"SHA512"); //Or SHA256
-define('__DATA_ROOT__', "@DataRoot@");
-define('__UPLOAD_DIR__', "data".DIRECTORY_SEPARATOR."packages");
-define('__DATABASE_DIR__', "data".DIRECTORY_SEPARATOR."db");
+define('__UPLOAD_DIR__', "@PackagesRoot@");
+define('__DATABASE_DIR__', "@DataRoot@");
 define('__SITE_ROOT__', "@ApplicationPath@");
 define('__RESULTS_PER_PAGE__', 20);
 define('__ADMINID__',"@AdminUserId@");
 define('__ADMINPASSWORD__',"@AdminPassword@");
 define('__ADMINMAIL__',"@AdminEmail@");
+define('__PWDREGEX__',"@PwdRegEx@");
+define('__PWDDESC__',"@PwdDesc@");
 
 //If false "Register" is disabled. Users would be only allowed to be registered by
 //the admin

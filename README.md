@@ -77,8 +77,11 @@ These steps are NOT needed if your hosting already configured PHP
 	* Admin UserId: the user that will be created (or updated) as admin
 	* Admin Password: the password (on update will be overwritten)
 	* Admin Email: ...
+	* Password Regex: The regex that will be used to verify the password (default min 8 chars, max 40)
+	* Password Description: The error to show when the password is not matching the regex
 	* Application path: If the website is "http://host/nuget" will be "nuget". If the website is "http://host" will be empty.
-	* Data Root: The directory in which the packages (and txt db) will be placed. It's usually a subdir of the website but can be changed. 
+	* Data Root: The directory in which the txt db will be placed. It's usually a subdir of the website but can be changed. 
+	* Packages Root: The directory in which the uploaded packages will be placed. It's usually a subdir of the website but can be changed. 
 	* php-cgi.exe: To allow the configuration of php under IIS.
 	* Allow package update via Upload: Default disabled, if enabled it is possible to overwrite the packages BUT THIS IS NOT A STANDARD BEHAVIOUR.
 	* Allow package delete: Default disabled. LEAVING IT ENABLED IS NOT A STANDARD BEHAVIOUR
@@ -252,6 +255,8 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Fixed inconsistency on boolean parameters inside packages update
 	* Fixed special case for uploading files
 	* Added test application for txt based db
+	* Added separation between data directory and packages directory
+	* Added regex to verify the password and error description
 
 * 3.0.12.7
 	* Support for packages deletion

@@ -13,7 +13,7 @@ namespace NugetTesterApplication
 {
     class Program
     {
-        const string TORUN = "ApiSearch";// ApiSearch  NugetPackageExplorer
+        const string TORUN = "";// ApiSearch  NugetPackageExplorer
 
         const string NUGET_EXE = "nuget.exe";
         const string SAMPLES_DIR = "samples";
@@ -145,7 +145,8 @@ namespace NugetTesterApplication
             doc.LoadHtml(responseString);
             foreach (HtmlNode input in doc.DocumentNode.SelectNodes("//input"))
             {
-                if (input.Attributes["id"]!=null&& input.Attributes["id"].Value.ToLowerInvariant() == "dataroot"){
+                if (input.Attributes["id"] != null && input.Attributes["id"].Value.ToLowerInvariant() == "applicationroot")
+                {
                     _phpsrc = input.Attributes["value"].Value;
                 }
             }
@@ -166,7 +167,8 @@ namespace NugetTesterApplication
             request = (HttpWebRequest)WebRequest.Create(host + "/setup.php");
             var postData = new List<string>();
             postData.Add("applicationPath=phpnuget");
-            postData.Add("dataRoot=" + _phpsrc);
+            postData.Add("dataRoot=" + Path.Combine(_phpsrc, "data", "db"));
+            postData.Add("packagesRoot=" + Path.Combine(_phpsrc, "data", "packages"));
             postData.Add("dosetup=importUsers");
             postData.Add("email=nuget@localhost");
             postData.Add("login=admin");

@@ -30,8 +30,9 @@ class UsersApi extends SmallTextDbApiBase
 		if($password!=$passwordConfirm){
 			throw new Exception("Passwords must match!");
 		}
-		if(strlen($password)<8){
-			throw new Exception("Passwords must be at least 8 chars wide!");
+		$validator = trim($password);
+		if(!preg_match(__PWDREGEX__,$validator)){
+			throw new Exception("Passwords not valid! ".__PWDDESC__);
 		}
 		
 		$item->Md5Password = md5($password);

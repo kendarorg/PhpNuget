@@ -55,9 +55,15 @@ $useMySql = false;
 	$r["@AdminUserId@"] = UrlUtils::GetRequestParamOrDefault("login","admin","post");
 	$r["@AdminPassword@"] = UrlUtils::GetRequestParamOrDefault("password","password","post");
 	$r["@AdminEmail@"] = UrlUtils::GetRequestParamOrDefault("email","nuget@".$_SERVER["SERVER_NAME"],"post");
+	
+	
+	$r["@PwdRegEx@"] = UrlUtils::GetRequestParamOrDefault("passwordRegex","/^.{8,40}$/","post");
+	$r["@PwdDesc@"] = UrlUtils::GetRequestParamOrDefault("passwordDesc","Min len 8, max len 40","post");
 
 	$r["@DataRoot@"] = str_replace("\\","\\\\",UrlUtils::GetRequestParamOrDefault("dataRoot","","post"));
 	echo "<li>Data Root initialized to ".UrlUtils::GetRequestParamOrDefault("dataRoot","","post").".</li>";
+	$r["@PackagesRoot@"] = str_replace("\\","\\\\",UrlUtils::GetRequestParamOrDefault("packagesRoot","","post"));
+	echo "<li>Packages Root initialized to ".UrlUtils::GetRequestParamOrDefault("packagesRoot","","post").".</li>";
 
 	if (isset($_POST['packageUpdate'])) {
 		$r["@AllowPackageUpdate@"] = "true";
