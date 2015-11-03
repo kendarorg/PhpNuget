@@ -1,3 +1,10 @@
+<?php
+require_once(dirname(__FILE__)."/../../../root.php");
+require_once(__ROOT__."/settings.php");
+require_once(__ROOT__."/inc/logincontroller.php");
+
+$loginController->UnauthorizedIfNotLoggedIn();
+?>
 <div ng-controller="usersListController">
 	<!--<div class="col-md-12">
 		<a href="#/admin" class="btn btn-default">Back to Admin Home</a><br>&nbsp;

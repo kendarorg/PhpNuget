@@ -1,3 +1,8 @@
+<?php
+require_once("../../../settings.php");
+require_once(__ROOT__."/inc/logincontroller.php");
+$loginController->UnauthorizedIfNotLoggedIn();
+?>
 <div ng-controller="tabController">
 	<ul class="nav nav-tabs" role="tablist">
 	  <li class="{{getActive(0,'/user')}}"><a ng-click="onClickTab(0)"  href="#/profile/{{UserId}}/user">Profile</a></li>

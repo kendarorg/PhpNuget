@@ -46,6 +46,14 @@ class LoginController
 		die();
 	}
 	
+	function UnauthorizedIfNotLoggedIn()
+	{
+		if($this->IsLoggedIn) return;
+		http_response_code(403);
+		echo "Unauthorized";
+		die();
+	}
+	
 	public $IsLoggedIn;
 	public $UserId;
 	public $Admin;
@@ -67,7 +75,7 @@ class LoginController
 		$udb = new UserDb();
 		$user = null;
 
-		$ar = $udb->Query("(Enabled eq true) and (UserId eq '".$uid."' or Email eq '".$uid."')");		
+		$ar = $udb->Query("(Enabled eq true) and (UserId eq '".$uid."' or Email eq '".$uid."') and (Md5Password eq '".$pwd."'");		
 			
 		if(sizeof($ar)==1){
 			$user = $ar[0];

@@ -8,6 +8,8 @@ require_once(__ROOT__."/inc/nugetreader.php");
 require_once(__ROOT__."/inc/phpnugetobjectsearch.php");
 require_once(__ROOT__."/inc/logincontroller.php");
 
+$loginController->UnauthorizedIfNotLoggedIn();
+
 class PackageGroup
 {
 	public $Id;

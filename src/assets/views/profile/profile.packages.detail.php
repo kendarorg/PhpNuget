@@ -1,5 +1,7 @@
 <?php
 require_once("../../../settings.php");
+require_once(__ROOT__."/inc/logincontroller.php");
+$loginController->UnauthorizedIfNotLoggedIn();
 ?>
 <div ng-controller="profilePackageController">
 	<div class="col-md-12">
