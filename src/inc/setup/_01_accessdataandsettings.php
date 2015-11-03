@@ -41,7 +41,9 @@ if(!$apache){
 	$phpCgiExe = "C:\\Program Files (x86)\\PHP\\v5.3\\php-cgi.exe";
 }
 $serverType = $apache==true?"apache":"iis";
-$dataRoot = rtrim(dirname(dirname(dirname(__FILE__))),DIRECTORY_SEPARATOR);
+$applicationRoot = rtrim(dirname(dirname(dirname(__FILE__))),DIRECTORY_SEPARATOR);
+$dataRoot = rtrim(dirname(dirname(dirname(__FILE__))),DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR."data".DIRECTORY_SEPARATOR."db";
+$packagesRoot = rtrim(dirname(dirname(dirname(__FILE__))),DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR."data".DIRECTORY_SEPARATOR."packages";
 ?>
 <html>
 	<head>
@@ -66,13 +68,18 @@ $dataRoot = rtrim(dirname(dirname(dirname(__FILE__))),DIRECTORY_SEPARATOR);
 		If you intend to import the users these values <u>must be corresponding to your old administrative account.</u><br><br>-->
 		<form method="POST" action="setup.php">
 			<input type="hidden" id="dosetup" name="dosetup" value="importUsers"/>
+			<input type="hidden" id="applicationRoot" name="applicationRoot" value="<?php echo $applicationRoot; ?>" readonly/>
 			<input type="hidden" id="servertype" name="servertype" value="<?php echo $serverType; ?>"/>
 			<table border=0>
 				<tr><td>Admin UserId:</td><td><input type="text" id="login" name="login" value="admin"/></td></tr>
 				<tr><td>Admin Password:</td><td><input type="password" id="password" name="password" value="password"/></td></tr>
+				<tr><td>Password Regex:</td><td><input type="text" id="passwordRegex" name="passwordRegex" value="/^.{8,40}$/"/></td></tr>
+				<tr><td>Password Description:</td><td><input size="100" type="text" id="passwordDesc" name="passwordDesc" value="Min len 8, max len 40"/></td></tr>
+				
 				<tr><td>Admin Email:</td><td><input type="text" id="email" name="email" value="nuget@<?php echo $_SERVER["SERVER_NAME"]; ?>"/></td></tr>
 				<tr><td>Application Path:</td><td><input size="100" type="text" id="applicationPath" name="applicationPath" value="<?php echo $applicationPath;?>"/></td></tr>
-				<tr><td>Data Root:</td><td><input size="80" type="text" id="dataRoot" name="dataRoot" value="<?php echo $dataRoot;?>"/><?php echo DIRECTORY_SEPARATOR;?>data</td></tr>
+				<tr><td>Data Root:</td><td><input size="100" type="text" id="dataRoot" name="dataRoot" value="<?php echo $dataRoot;?>"/></td></tr>
+				<tr><td>Packages Root:</td><td><input size="100" type="text" id="packagesRoot" name="packagesRoot" value="<?php echo $packagesRoot;?>"/></td></tr>
 				<tr><td>php-cgi.exe (for IIS):</td><td><input size="100" type="text" id="phpCgi" name="phpCgi" value="<?php echo $phpCgiExe;?>"/></td></tr>
 				<tr><td>Allow package Update via upload:</td><td>
 					<input type="checkbox" id="packageUpdate" name="packageUpdate" /></td></tr>
