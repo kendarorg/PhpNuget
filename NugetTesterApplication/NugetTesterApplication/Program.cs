@@ -4,16 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Configuration;
 using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+using System.Data;
+using Dapper;
 
 namespace NugetTesterApplication
 {
     class Program
     {
-        const string TORUN = "ApiSearch";// ApiSearch  NugetPackageExplorer
+        const string TORUN = "";// ApiSearch  NugetPackageExplorer
 
         const string NUGET_EXE = "nuget.exe";
         const string SAMPLES_DIR = "samples";
@@ -23,35 +27,38 @@ namespace NugetTesterApplication
 
         static string GetNugetDirectory()
         {
-            try{
-            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-            UriBuilder uri = new UriBuilder(codeBase);
-            string path = Uri.UnescapeDataString(uri.Path);
-            //slndir/prjdir/bin/debug
-            var dir = Path.GetDirectoryName(path);
-            if (File.Exists(Path.Combine(dir, NUGET_EXE)))
+            try
             {
-                return dir;
+                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                //slndir/prjdir/bin/debug
+                var dir = Path.GetDirectoryName(path);
+                if (File.Exists(Path.Combine(dir, NUGET_EXE)))
+                {
+                    return dir;
+                }
+                //slndir/prjdir/bin
+                dir = Path.GetDirectoryName(dir);
+                if (File.Exists(Path.Combine(dir, NUGET_EXE)))
+                {
+                    return dir;
+                }
+                //slndir/prjdir
+                dir = Path.GetDirectoryName(dir);
+                if (File.Exists(Path.Combine(dir, NUGET_EXE)))
+                {
+                    return dir;
+                }
+                //slndir
+                dir = Path.GetDirectoryName(dir);
+                if (File.Exists(Path.Combine(dir, NUGET_EXE)))
+                {
+                    return dir;
+                }
             }
-            //slndir/prjdir/bin
-            dir = Path.GetDirectoryName(dir);
-            if (File.Exists(Path.Combine(dir, NUGET_EXE)))
+            catch (Exception ex)
             {
-                return dir;
-            }
-            //slndir/prjdir
-            dir = Path.GetDirectoryName(dir);
-            if (File.Exists(Path.Combine(dir, NUGET_EXE)))
-            {
-                return dir;
-            }
-            //slndir
-            dir = Path.GetDirectoryName(dir);
-            if (File.Exists(Path.Combine(dir, NUGET_EXE)))
-            {
-                return dir;
-            }
-            }catch(Exception ex){
 
             }
             throw new Exception("missing nuget.exe!");
@@ -73,18 +80,18 @@ namespace NugetTesterApplication
 
         static void Main(string[] args)
         {
-            var host = (args.Length>=1?args[0]:"http://localhost:8020/phpnuget").Trim().TrimEnd('/');
+            var host = (!string.IsNullOrWhiteSpace(ConfigurationSettings.AppSettings["NugetUrl"]) ? ConfigurationSettings.AppSettings["NugetUrl"] : "http://localhost:8020/phpnuget").Trim().TrimEnd('/');
             var api = host + "/api/v2";
-            var directory = args.Length>=2 ? args[1] : GetNugetDirectory().Trim().TrimEnd('\\');
+            var directory = !string.IsNullOrWhiteSpace(ConfigurationSettings.AppSettings["NugetExeDir"]) ? ConfigurationSettings.AppSettings["NugetExeDir"] : GetNugetDirectory().Trim().TrimEnd('\\');
 
-            
+
 
             var userKey = SetupApplication(host, _phpsrc);
 
             var baseType = typeof(TestBase);
             var types = Assembly.GetExecutingAssembly()
                 .GetTypes()
-                .Where(p => baseType.IsAssignableFrom(p) && p!=baseType);
+                .Where(p => baseType.IsAssignableFrom(p) && p != baseType);
 
             foreach (var type in types)
             {
@@ -128,14 +135,14 @@ namespace NugetTesterApplication
 
         private static void DoIgnoreTest(IEnumerable<MethodInfo> testIgnore, TestBase test)
         {
-            foreach(var meth in testIgnore)
+            foreach (var meth in testIgnore)
             {
                 var ignore = (TestIgnore)meth.GetCustomAttributes(typeof(TestIgnore), false).First();
                 Console.WriteLine("\tIG " + meth.Name + " (" + ignore.Message);
             }
         }
 
-        private static string SetupApplication(string host,string phpsrc)
+        private static string SetupApplication(string host, string phpsrc)
         {
             var request = (HttpWebRequest)WebRequest.Create(host+"/setup.php");
             var response = (HttpWebResponse)request.GetResponse();
@@ -145,15 +152,33 @@ namespace NugetTesterApplication
             doc.LoadHtml(responseString);
             foreach (HtmlNode input in doc.DocumentNode.SelectNodes("//input"))
             {
-                if (input.Attributes["id"]!=null&& input.Attributes["id"].Value.ToLowerInvariant() == "dataroot"){
+                if (input.Attributes["id"] != null && input.Attributes["id"].Value.ToLowerInvariant() == "applicationroot")
+                {
                     _phpsrc = input.Attributes["value"].Value;
                 }
             }
 
-            var dbfile = Path.Combine(_phpsrc, "data", "db", "nugetdb_pkg.txt");
-            if (File.Exists(dbfile)) File.Delete(dbfile);
-            var usersFile = Path.Combine(_phpsrc, "data", "db", "nugetdb_usrs.txt");
-            if (File.Exists(usersFile)) File.Delete(usersFile);
+
+            var dbType = ConfigurationSettings.AppSettings["DbType"].ToLowerInvariant();
+            if (dbType == "mysql")
+            {
+                using (IDbConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["phpnuget"].ConnectionString))
+                {
+                    string query = "TRUNCATE TABLE nugetdb_pkg";
+                    connection.Execute(query);
+                    query = "TRUNCATE TABLE nugetdb_usrs";
+                    connection.Execute(query);
+                }
+            }
+            else
+            {
+                var dbfile = Path.Combine(_phpsrc, "data", "db", "nugetdb_pkg.txt");
+                if (File.Exists(dbfile)) File.Delete(dbfile);
+                var usersFile = Path.Combine(_phpsrc, "data", "db", "nugetdb_usrs.txt");
+                if (File.Exists(usersFile)) File.Delete(usersFile);
+
+            }
+            
 
             DirectoryInfo packs = new DirectoryInfo(Path.Combine(_phpsrc, "data", "packages"));
 
@@ -165,8 +190,9 @@ namespace NugetTesterApplication
 
             request = (HttpWebRequest)WebRequest.Create(host + "/setup.php");
             var postData = new List<string>();
-            postData.Add("applicationPath=phpnuget");
-            postData.Add("dataRoot=" + _phpsrc);
+            postData.Add("applicationPath=pnm");
+            postData.Add("dataRoot=" + Path.Combine(_phpsrc, "data", "db"));
+            postData.Add("packagesRoot=" + Path.Combine(_phpsrc, "data", "packages"));
             postData.Add("dosetup=importUsers");
             postData.Add("email=nuget@localhost");
             postData.Add("login=admin");
@@ -175,6 +201,28 @@ namespace NugetTesterApplication
             postData.Add("servertype=apache");
             postData.Add("packageDelete=on");
             postData.Add("packageUpdate=on");
+
+            if (dbType == "mysql")
+            {
+                var cs = ConfigurationManager.ConnectionStrings["phpnuget"].ConnectionString;
+                var css = cs.Split(new []{';'}, StringSplitOptions.RemoveEmptyEntries);
+                var props = new Dictionary<string,string>();
+                foreach (var item in css)
+                {
+                    var iss = item.Split(new []{'='}, StringSplitOptions.RemoveEmptyEntries);
+                    props.Add(iss[0], iss[1]);
+                }
+                
+                postData.Add("mySqlLogin=" + props["Uid"]);
+                postData.Add("mySqlPassword=" + props["Pwd"]);
+                postData.Add("mySqlServer=" + props["Server"]);
+                postData.Add("mySqlDb=" + props["Database"]);
+                postData.Add("useMySql=on");
+            }
+            else
+            {
+                postData.Add("useMySql=off");
+            }
        
             var data = Encoding.ASCII.GetBytes(string.Join("&",postData));
 
@@ -191,16 +239,27 @@ namespace NugetTesterApplication
 
             responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
-            var users = Path.Combine(_phpsrc, "data", "db", "nugetdb_usrs.txt");
-            foreach (var line in File.ReadAllLines(users))
+            if (dbType == "mysql")
             {
-                if (line.StartsWith("s:5:\"admin\";:|"))
+                using (IDbConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["phpnuget"].ConnectionString))
                 {
-                    var expl = line.Split(new string[]{":|:"},StringSplitOptions.None)[7];
-                    //s:38:"{42F65835-CEA8-BC39-CC64-8D24B4E5A816}";
+                    string query = "SELECT Token FROM nugetdb_usrs WHERE UserId='admin'";
+                    return connection.Query<string>(query).FirstOrDefault().Trim('{','}');
+                }
+            }
+            else
+            {
+                var users = Path.Combine(_phpsrc, "data", "db", "nugetdb_usrs.txt");
+                foreach (var line in File.ReadAllLines(users))
+                {
+                    if (line.StartsWith("s:5:\"admin\";:|"))
+                    {
+                        var expl = line.Split(new string[] { ":|:" }, StringSplitOptions.None)[7];
+                        //s:38:"{42F65835-CEA8-BC39-CC64-8D24B4E5A816}";
 
-                    var start = expl.IndexOf("{")+1;
-                    return expl.Substring(start, "8FDA101E-4D23-D4B7-C2BB-B1C588781D76".Length);
+                        var start = expl.IndexOf("{") + 1;
+                        return expl.Substring(start, "8FDA101E-4D23-D4B7-C2BB-B1C588781D76".Length);
+                    }
                 }
             }
             throw new Exception("User not created!");
@@ -221,7 +280,7 @@ namespace NugetTesterApplication
                     testMethod.Invoke(target, new object[] { });
                     DoInvoke<TestCleanup>(target);
                     success++;
-                    sb.AppendLine("\tOK "+testMethod.Name);
+                    sb.AppendLine("\tOK " + testMethod.Name);
                 }
                 catch (Exception ex)
                 {

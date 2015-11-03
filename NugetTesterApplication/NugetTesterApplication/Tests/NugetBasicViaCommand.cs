@@ -15,17 +15,13 @@ namespace NugetTesterApplication.Tests
         [TestSetup]
         public void Setup()
         {
-            //CleanUp data db
-            var dbfile = Path.Combine(PhpSrc, "data", "db", "nugetdb_pkg.txt");
-            if (File.Exists(dbfile)) File.Delete(dbfile);
+            CleanUpPackages();
         }
 
         [TestCleanup]
         public void Cleanup()
         {
-            //CleanUp data db
-            var dbfile = Path.Combine(PhpSrc, "data", "db", "nugetdb_pkg.txt");
-            if (File.Exists(dbfile)) File.Delete(dbfile);
+            CleanUpPackages();
         }
 
         [TestMethod]

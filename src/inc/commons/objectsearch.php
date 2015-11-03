@@ -521,9 +521,9 @@ class ObjectSearch
 		
 		switch($name){
 			case("doand"):
-				return join(" and ",$params);
+				return "(".join(" and ",$params).")";
 			case("door"):
-				return join(" or ",$params);
+				return "(".join(" or ",$params).")";
 			case("doeq"):
 				return $params[0]."=".$params[1];
 			case("doneq"):

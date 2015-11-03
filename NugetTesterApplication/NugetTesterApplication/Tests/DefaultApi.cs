@@ -9,6 +9,18 @@ namespace NugetTesterApplication.Tests
 {
     public class DefaultApi : TestBase
     {
+        [TestClassSetup]
+        public void Setup()
+        {
+            CleanUpPackages();
+        }
+
+        [TestClassCleanup]
+        public void Cleanup()
+        {
+            CleanUpPackages();
+        }
+
         [TestMethod]
         public void LoadRoot()
         {

@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Configuration;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
+using Dapper;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using MySql.Data.MySqlClient;
 
 namespace NugetTesterApplication.Common
 {
@@ -17,6 +21,26 @@ namespace NugetTesterApplication.Common
         public string ResultsDir { get; set; }
         public string SamplesDir { get; set; }
         public string NugetExe { get; set; }
+
+        public void CleanUpPackages()
+        {
+            var dbType = ConfigurationSettings.AppSettings["DbType"].ToLowerInvariant();
+            if (dbType == "mysql")
+            {
+                using (IDbConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["phpnuget"].ConnectionString))
+                {
+                    string query = "TRUNCATE TABLE nugetdb_pkg";
+                    connection.Execute(query);
+                }
+            }
+            else
+            {
+                var dbfile = Path.Combine(PhpSrc, "data", "db", "nugetdb_pkg.txt");
+                if (File.Exists(dbfile)) File.Delete(dbfile);
+
+            }
+
+        }
 
         public NugetResult RunNuget(params string[] args)
         {

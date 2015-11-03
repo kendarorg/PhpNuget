@@ -41,10 +41,10 @@ if($sr!=""){
 @Settings::$AdminEmail = __ADMINMAIL__;
 @Settings::$LimitUsersPackages = __LIMITUSERSPACKAGES__;
 
-
 if(defined("__DATABASE_DIR__") && defined("__UPLOAD_DIR__")){
-if(!is_dir(Settings::$DataRoot))
+if(!is_dir(Settings::$DataRoot)){
 	mkdir(Settings::$DataRoot,__RW_ADMIN_R_ALL__);
+}
 if(!is_dir(Settings::$PackagesRoot))	
 	mkdir(Settings::$PackagesRoot,__RW_ADMIN_R_ALL__);
 }
