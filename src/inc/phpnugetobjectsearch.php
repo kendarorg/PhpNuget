@@ -212,7 +212,7 @@ class PhpNugetObjectSearch extends ObjectSearch
 	{
 		if(strtolower($name) == "version"){
 			return "Version0 ".$direction.",Version1 ".$direction.",Version2 ".$direction.",Version3 ".$direction.
-				",VersionBeta ".($direction=="ASC"?"DESC":"ASC");
+				",VersionBeta ".$direction;
 		}
 		return null;
 	}

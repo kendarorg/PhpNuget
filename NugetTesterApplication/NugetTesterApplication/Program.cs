@@ -190,7 +190,7 @@ namespace NugetTesterApplication
 
             request = (HttpWebRequest)WebRequest.Create(host + "/setup.php");
             var postData = new List<string>();
-            postData.Add("applicationPath=pnm");
+            postData.Add("applicationPath=" + ConfigurationSettings.AppSettings["ApplicationPath"]);
             postData.Add("dataRoot=" + Path.Combine(_phpsrc, "data", "db"));
             postData.Add("packagesRoot=" + Path.Combine(_phpsrc, "data", "packages"));
             postData.Add("dosetup=importUsers");
