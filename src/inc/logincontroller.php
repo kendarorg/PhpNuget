@@ -83,8 +83,7 @@ class LoginController
 		$this->IsLoggedIn = true;
 		$this->UserId = $user->UserId;
 		$this->Admin = $user->Admin;
-		$this->Packages = $user->Packages;
-		
+		$this->Packages = $user->Packages;		
 		$_SESSION["UserId"] = $this->UserId;
 		$_SESSION["Admin"] = $this->Admin;
 		$_SESSION["Packages"] = $this->Packages;

@@ -118,7 +118,7 @@ class UrlUtils
 	public static function ExistRequestParam($key,$verb = "all")
 	{
 		$test = "51f5efa7-d656-4a96-aa5a-c554e30ab10a###";
-		return UrlUtils::GetRequestParamOrDefault($key,$test,$verb)!=$test;
+		return !(UrlUtils::GetRequestParamOrDefault($key,$test,$verb)===$test);
 	}
 	
 	public static function GetRequestParam($key,$verb = "all")

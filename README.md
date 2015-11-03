@@ -267,6 +267,11 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Updated database to version 4.0.0.0
 		* Added Version1-3 and VersionBeta fields to allow the group by version in MySQL
 
+* 3.0.12.8
+	* Fixed inconsistency on boolean parameters inside packages update
+	* Fixed special case for uploading files
+	* Added test application for txt based db
+
 * 3.0.12.7
 	* Support for packages deletion
 	* Resolved setup issue on IIS with a new URLRewrite module [managedfusion-rewriter](https://github.com/kendarorg/managedfusion-rewriter)
