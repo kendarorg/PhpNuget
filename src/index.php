@@ -2,6 +2,11 @@
 	require_once(dirname(__FILE__)."/root.php");
 	require_once(__ROOT__."/settings.php");
 	require_once(__ROOT__."/inc/commons/url.php");	
+
+if(UrlUtils::RequestMethod()=="put"){
+	require_once(__ROOT__."/upload/index.php");
+	die();
+}
 ?>
 <html ng-app="phpNugetApp">
 	<head>

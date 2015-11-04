@@ -34,6 +34,24 @@ namespace NugetTesterApplication.Tests
         }
 
         [TestMethod]
+        public void PushPackageAlternative()
+        {
+            PushPackageAlternative("NUnitTestAdapter.WithFramework.2.0.0");
+
+            var res = this.RunNuget("list", "-Source", NugetApi);
+            Assert(res.Output.Contains("NUnitTestAdapter.WithFramework 2.0.0"), "Package not pushed!" + res.Output);
+        }
+
+        [TestMethod]
+        public void PushPackageAlternativeFromRoot()
+        {
+            PushPackageAlternative("NUnitTestAdapter.WithFramework.2.0.0",target:"");
+
+            var res = this.RunNuget("list", "-Source", NugetApi);
+            Assert(res.Output.Contains("NUnitTestAdapter.WithFramework 2.0.0"), "Package not pushed!" + res.Output);
+        }
+
+        [TestMethod]
         public void PushPackageInPreReleaseNotShownByDefault()
         {
             PushPackage("Microsoft.AspNet.WebPages.Data.3.2.3-beta1");
