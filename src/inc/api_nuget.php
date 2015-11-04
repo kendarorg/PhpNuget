@@ -143,10 +143,14 @@ class ApiNugetBase
         $t= str_replace("\${DB.ISLATESTVERSION}","true",$t);
         $t= str_replace("\${DB.VERSIONDOWNLOADCOUNT}","-1",$t);
         $t= str_replace("\${DB.LISTED}",$e->Listed?"true":"false",$t);
-		if(!is_array($e->Copyright) && $e->Copyright!=null){
-			$t= str_replace("\${DB.COPYRIGHT}",htmlspecialchars($e->Copyright),$t);
+		if($e->Copyright!=null){
+			if(is_string($e->Copyright)){
+				$t= str_replace("\${DB.COPYRIGHT}",htmlspecialchars($e->Copyright),$t);
+			}else{
+				$t= str_replace("\${DB.COPYRIGHT}",htmlspecialchars(implode(", ",$e->Copyright)),$t);
+			}
 		}else{
-			$t= str_replace("\${DB.COPYRIGHT}",htmlspecialchars(implode(", ",$e->Copyright)),$t);
+			$t= str_replace("\${DB.COPYRIGHT}","",$t);
 		}
         //rint_r($e);die();
         return preg_replace('/<!--(.*)-->/Uis', '', $t);
@@ -259,7 +263,7 @@ class ApiNugetBase
 		if($action != "search") return;
 		$searchTerm = UrlUtils::GetRequestParamOrDefault("searchTerm",null);
 		$targetFramework = UrlUtils::GetRequestParamOrDefault("targetFramework",null);
-		$includePrerelease = strtolower(UrlUtils::GetRequestParamOrDefault("includePrerelease","false"));
+		$includePrerelease = strtolower(UrlUtils::GetRequestParamOrDefault("includePrerelease",null));
 		$filter = UrlUtils::GetRequestParamOrDefault("\$filter",null);		
 		$orderby = UrlUtils::GetRequestParamOrDefault("\$orderby",null);
 		
@@ -286,8 +290,7 @@ class ApiNugetBase
 			$query = $this->_append($query,$x,"and");
 		}
 		
-		
-		if($targetFramework!=null){
+		if($targetFramework!=null && $targetFramework!="" && $targetFramework!="''"){
 			$targetFramework = urldecode(trim($targetFramework,"'"));	
 			$tf = explode("|",$targetFramework);
 			$ar = array();
@@ -302,10 +305,30 @@ class ApiNugetBase
 			$query = $this->_append($query,$x,"and");
 		}
 		
-		if($includePrerelease==null || strtolower($includePrerelease)=="false"){
+		if($includePrerelease==null){
+			if($filter=="IsLatestVersion"){
+				$filter = null;
+				$query = $this->_append($query,"(IsPreRelease eq false)","and");
+			}else if($filter=="IsAbsoluteLatestVersion"){
+				$filter = null;
+			}
+		}else if(strtolower($includePrerelease)=="false"){
 			$x = "(IsPreRelease eq false)";
 			$query = $this->_append($query,$x,"and");
+			if($filter=="IsLatestVersion" || $filter=="IsAbsoluteLatestVersion"){
+				$filter = null;
+			}
+		}else if(strtolower($includePrerelease)=="true"){
+			if($filter=="IsLatestVersion" || $filter=="IsAbsoluteLatestVersion"){
+				$filter = null;
+			}
 		}
+		if($filter=="IsLatestVersion" || $filter=="IsAbsoluteLatestVersion"){
+			$filter = null;
+		}
+		
+		
+		
 		
 		if($searchTerm!=null && strlen($searchTerm)>0){
 			if($searchTerm!="''"){
@@ -322,25 +345,21 @@ class ApiNugetBase
 		
 		$query = $this->_append($query,"(Listed eq true)","and");
 		
-		if($filter=="IsLatestVersion" || $filter == "IsAbsoluteLatestVersion"){
-			$filter = null;
-			$query = $this->_append($query," Listed eq true","and");
-			$orderby = "Title asc,Version desc groupby Id";
-		}
+		
 		
 		if($filter!=null){
 			$x = "(".urldecode($filter).")";
 			$query = $this->_append($query,$x,"and");
 		}
 		if($orderby!=null){
-			$query =$query." orderby ".$orderby;
+			$query =$query." orderby Id asc,Version desc, ".$orderby;
 		}
 		
 		if($orderby==null){
 			$query =$query." orderby Id asc,Version desc";
 		}
 		$query =$query." groupby Id";
-		
+
 		$this->_query($query);
 	}
 	
