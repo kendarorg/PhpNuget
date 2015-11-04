@@ -13,9 +13,7 @@ namespace NugetTesterApplication.Tests
         [TestClassSetup]
         public void Setup()
         {
-            //CleanUp data db
-            var dbfile = Path.Combine(PhpSrc, "data", "db", "nugetdb_pkg.txt");
-            if (File.Exists(dbfile)) File.Delete(dbfile);
+            CleanUpPackages();
 
             PushPackage("NUnitTestAdapter.WithFramework.2.0.0");
 
@@ -30,9 +28,7 @@ namespace NugetTesterApplication.Tests
         [TestClassCleanup]
         public void Cleanup()
         {
-            //CleanUp data db
-            var dbfile = Path.Combine(PhpSrc, "data", "db", "nugetdb_pkg.txt");
-            if (File.Exists(dbfile)) File.Delete(dbfile);
+            CleanUpPackages();
         }
 
 
