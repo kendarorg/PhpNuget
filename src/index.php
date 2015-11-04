@@ -1,7 +1,14 @@
 <?php
-	require_once(dirname(__FILE__)."/root.php");
-	require_once(__ROOT__."/settings.php");
-	require_once(__ROOT__."/inc/commons/url.php");	
+require_once(dirname(__FILE__)."/root.php");
+require_once(__ROOT__."/settings.php");
+require_once(__ROOT__."/inc/commons/url.php");	
+
+if(UrlUtils::RequestMethod()=="put"){
+	file_put_contents("v2.log","PRECOMPLETE\r\n", FILE_APPEND);
+	require_once(__ROOT__."/upload/index.php");
+	file_put_contents("v2.log","COMPLETED\r\n", FILE_APPEND);
+	die();
+}
 ?>
 <html ng-app="phpNugetApp">
 	<head>

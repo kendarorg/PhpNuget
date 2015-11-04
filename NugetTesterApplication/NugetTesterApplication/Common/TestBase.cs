@@ -85,10 +85,28 @@ namespace NugetTesterApplication.Common
 
         public string PhpSrc { get; set; }
 
-        public void PushPackage(string id, string version = null)
+        public void PushPackage(string id, string version = null, string target = "/upload")
         {
             var complete = version == null ? id + ".nupkg" : id + "." + version + ".nupkg";
-            var res = this.RunNuget("push", Path.Combine(SamplesDir, complete), NugetToken, "-Source", NugetHost + "/upload");
+            var res = this.RunNuget("push", 
+                "\"" + Path.Combine(SamplesDir, complete) + "\"", 
+                NugetToken, 
+                "-Verbosity","detailed",
+                "-Source", NugetHost + target);
+            if (!res.Output.Contains("Your package was pushed."))
+            {
+                throw new Exception("Package not pushed!");
+            }
+        }
+
+        public void PushPackageAlternative(string id, string version = null, string target = "/upload")
+        {
+            var complete = version == null ? id + ".nupkg" : id + "." + version + ".nupkg";
+            var res = this.RunNuget("push", 
+                "\"" + Path.Combine(SamplesDir, complete) + "\"", 
+                "-ApiKey", NugetToken,
+                "-Verbosity", "detailed",
+                "-Source", NugetHost + target);
             if (!res.Output.Contains("Your package was pushed."))
             {
                 throw new Exception("Package not pushed!");
@@ -161,7 +179,7 @@ namespace NugetTesterApplication.Common
         }
 
 
-        public string UploadRequest(string format, string file, string method="PUT", NameValueCollection nvc = null, params string[] pars)
+        public string UploadRequest(string format, string file, string method = "PUT", NameValueCollection nvc = null, params string[] pars)
         {
 
             var url = NugetHost.TrimEnd('/') + "/" + string.Format(format, pars).TrimStart('/');
@@ -172,7 +190,7 @@ namespace NugetTesterApplication.Common
 
 
             HttpWebRequest httpWebRequest2 = (HttpWebRequest)WebRequest.Create(url);
-            httpWebRequest2.ContentType = "multipart/form-data; boundary=" +boundary;
+            httpWebRequest2.ContentType = "multipart/form-data; boundary=" + boundary;
 
             httpWebRequest2.Headers.Add("X-NUGET-APIKEY: " + this.NugetToken);
             httpWebRequest2.Method = method;
