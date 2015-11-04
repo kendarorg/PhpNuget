@@ -67,6 +67,7 @@
     <Compile Include="Common\TestSetup.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\ApiQuery.cs" />
     <Compile Include="Tests\ApiSearch.cs" />
     <Compile Include="Tests\NugetPackageExplorer.cs" />
     <Compile Include="Tests\NugetBasicViaCommand.cs" />

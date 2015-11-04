@@ -17,7 +17,7 @@ namespace NugetTesterApplication
 {
     class Program
     {
-        const string TORUN = "";// ApiSearch  NugetPackageExplorer
+        const string TORUN = "";// ApiSearch  NugetPackageExplorer ApiQuery
 
         const string NUGET_EXE = "nuget.exe";
         const string SAMPLES_DIR = "samples";
