@@ -66,6 +66,7 @@ $useMySql = false;
 		$r["@DbType@"] = "DBTXT";
 	}
 	
+	echo "<li>DbType: ".$r["@DbType@"].".</li>";
 	
 	$r["@AdminUserId@"] = UrlUtils::GetRequestParamOrDefault("login","admin","post");
 	$r["@AdminPassword@"] = UrlUtils::GetRequestParamOrDefault("password","password","post");
