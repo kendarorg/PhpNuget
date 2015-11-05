@@ -164,10 +164,12 @@ All of the api lsited that returns a collection support the usage of parameters
 
 * /api/v1: Retrieves the root for the entities that will be used by the API. No parameters.
 * /api/v1/package/\[package-id\]/\[package-version\]: (GET) Download the specified package. No parameters.
-* /api/v1/package/\[package-id\]/\[package-version\]?apiKey=xxx: (POST) Set the package as listed.
+* /api/v1/package/\[package-id\]/\[package-version\]?apiKey=xxx&setPrerelease: (POST) Set the package as listed.
 	* apiKey: Mandatory. The api key of the user. Must match the one of the user that firstly inserted the package or the user must be Admin
-* /api/v1/package/\[package-id\]/\[package-version\]?apiKey=xxx: (DELETE) Set the package as not listed.
+	* setPrerelease: Optional. If present will set the package as release (without touching the listed flag) THIS IS SPECIFIC FOR phpnuget
+* /api/v1/package/\[package-id\]/\[package-version\]?apiKey=xxx&setPrerelease: (DELETE) Set the package as not listed.
 	* apiKey: Mandatory. The api key of the user. Must match the one of the user that firstly inserted the package or the user must be Admin
+	* setPrerelease: Optional. If present will set the package as prerelease (without touching the listed flag) THIS IS SPECIFIC FOR phpnuget
 * /api/v1/$metadata: Retrieves the OData metadata, the actions allowed and the entities specifications. No parameters.
 * /api/v1/FindPackagesById(): Search for packages by id, returns all packages with a certain id ordered by version descending
 	* Id: Mandatory parameter, specify the identifier of the package (e.g. Angular-UI-Router)
@@ -184,6 +186,7 @@ All of the api lsited that returns a collection support the usage of parameters
 * /api/v1/Packages: Same as Search()
 * /api/v1/Packages/$count: Same as Search()/$count
 * /api/v1/Packages(Id='\[package-id\]',Version='\[package-id\]'): Retruns the data for the single package
+
 
 ### Api V2
 
