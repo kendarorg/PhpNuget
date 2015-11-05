@@ -137,7 +137,8 @@ namespace NugetTesterApplication.Common
 
             var response = (HttpWebResponse)request.GetResponse();
 
-            return new StreamReader(response.GetResponseStream()).ReadToEnd().Trim();
+            var result= new StreamReader(response.GetResponseStream()).ReadToEnd().Trim();
+            return result;
         }
 
         public string PostRequest(string format, string postData, params string[] pars)
