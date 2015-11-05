@@ -139,14 +139,14 @@ class UrlUtils
 	{
 		$q = array();
 		if(UrlUtils::$_query!=null){
-			$q = array_change_key_case($q, CASE_LOWER);
+			$q = array_change_key_case(UrlUtils::$_query, CASE_LOWER);
 		}
 		$verb = strtolower($verb);
 		$key = strtolower($key);
 		
 		if($verb=="all" || $verb=="get"){
 			if(array_key_exists($key,$q)){
-				return UrlUtils::$q[$key];
+				return $q[$key];
 			}
 			$g = array_change_key_case($_GET, CASE_LOWER);
 			if(array_key_exists($key,$g)){
@@ -155,7 +155,7 @@ class UrlUtils
 		}
 		if($verb=="all" || $verb=="post"){
 			if(array_key_exists($key,$q)){
-				return UrlUtils::$q[$key];
+				return $q[$key];
 			}
 			$p = array_change_key_case($_POST, CASE_LOWER);
 			if(array_key_exists($key,$p)){

@@ -1,5 +1,6 @@
 <?php
 
+
 require_once(dirname(__FILE__)."/../root.php");
 require_once(__ROOT__."/settings.php");
 require_once(__ROOT__."/inc/db_users.php");
@@ -9,7 +10,9 @@ require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/uploadutils.php");
 require_once(__ROOT__."/inc/commons/objectsearch.php");
 
-if(false){
+$doUpLog = false;
+
+if($doUpLog){
 	file_put_contents("upload.log","==================================\r\n", FILE_APPEND);
 	file_put_contents("upload.log","request: ".$_SERVER['REQUEST_URI']."\r\n", FILE_APPEND);
 	if(sizeof($_POST)>0){
@@ -52,12 +55,22 @@ try{
 	$parsedNuspec->UserId=$user->Id;
 	$nuspecData = $nugetReader->SaveNuspec($result["destination"],$parsedNuspec);
 		
+	if($doUpLog){
+			var_dump($result);
+			file_put_contents("upload.log",$a."\r\nUpload completed\n", FILE_APPEND);
+		}
+		
 	// All done!
 	header('HTTP/1.1 201 Created');
 }catch(Exception $ex){
 	if(array_key_exists ("destination",$result)){
 		unlink($result["destination"]);
 	}
+	
+	if($doUpLog){
+		file_put_contents("upload.log",$ex->Message."\r\n", FILE_APPEND);
+	}
+	
 	unlink($temp_file);
 	HttpUtils::ApiError('500', $ex->getMessage());
 	die();

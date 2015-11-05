@@ -54,7 +54,17 @@ if($method=="post" || $method=="delete"){
 	}
 	
 	if($allRows[0]->UserId!=$users[0]->Id && !$users[0]->Admin) HttpUtils::ApiError(403,"Missing Api Key");
-	$allRows[0]->Listed=$method=="post";
+	
+	if(UrlUtils::ExistRequestParam("setPrerelease")){
+		
+		$allRows[0]->IsPreRelease=$method=="delete";
+		//echo "IsPreRelease ".$allRows[0]->IsPreRelease;
+	}else{
+		$allRows[0]->Listed=$method=="post";
+		//echo "Listed ".$allRows[0]->Listed;
+	}
+	
+	
 	$db->AddRow($allRows[0],true);
 	HttpUtils::ApiError(200,"Ok");
 }
