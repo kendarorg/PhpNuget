@@ -359,7 +359,6 @@ class ApiNugetBase
 			$query =$query." orderby Id asc,Version desc";
 		}
 		$query =$query." groupby Id";
-
 		$this->_query($query);
 	}
 	
@@ -371,8 +370,8 @@ class ApiNugetBase
 		if($id!=null){
 			$id = trim($id,"'");
 		}
-		$query = "Id eq '".$id."' orderby Version desc";
-		
+		$query = "Id eq '".$id."' and Listed eq true orderby Id asc,Version desc";
+		//echo $query;die();
 		$this->_query($query);
 	}
 	
