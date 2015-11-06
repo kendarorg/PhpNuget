@@ -100,5 +100,33 @@ namespace NugetTesterApplication.Tests
 
             }
         }
+
+        [TestMethod]
+        public void FindPackageByIdShouldShowOnlyList()
+        {
+            try
+            {
+                this.DeleteRequest("api/v2/package/{0}/{1}?apiKey={2}&setPrerelease", "APack", "1.0.0.13", NugetToken);
+                this.DeleteRequest("api/v2/package/{0}/{1}?apiKey={2}&setPrerelease", "APack", "1.0.0.12", NugetToken);
+                this.DeleteRequest("api/v2/package/{0}/{1}?apiKey={2}&setPrerelease", "APack", "1.0.0.3", NugetToken);
+                this.DeleteRequest("api/v2/package/{0}/{1}?apiKey={2}", "APack", "1.0.0.3", NugetToken);
+
+                var xml = this.GetRequest("api/v2/FindPackagesById?Id=APack").ToXml();
+                var founded = xml.FindXmlNodes("feed", "entry").ToArray();
+
+                Assert(founded.Count() == 1, "Wrong items count");
+                Assert(founded[0].FindXmlNodes("title").First().InnerText == "APack", "Wrong package 2");
+                Assert(founded[0].FindXmlNodes("m:properties", "d:Version").First().InnerText == "1.0.0.2", "Wrong package id 2");
+            }
+            finally
+            {
+                this.PostRequest("api/v2/package/{0}/{1}?apiKey={2}&setPrerelease", "", "APack", "1.0.0.13", NugetToken);
+                this.PostRequest("api/v2/package/{0}/{1}?apiKey={2}&setPrerelease", "", "APack", "1.0.0.12", NugetToken);
+                this.PostRequest("api/v2/package/{0}/{1}?apiKey={2}&setPrerelease", "", "APack", "1.0.0.3", NugetToken);
+                this.PostRequest("api/v2/package/{0}/{1}?apiKey={2}", "", "APack", "1.0.0.3", NugetToken);
+
+
+            }
+        }
     }
 }

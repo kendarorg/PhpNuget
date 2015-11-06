@@ -366,6 +366,12 @@ class ApiNugetBase
 			$id = trim($id,"'");
 		}
 		$query = "Id eq '".$id."' and Listed eq true orderby Id asc,Version desc";
+		
+		$includePrerelease = strtolower(UrlUtils::GetRequestParamOrDefault("includePrerelease","false"));
+		if($includePrerelease=="false"){
+			$query = "IsPreRelease eq false and ".$query;
+		}
+		
 		//echo $query;die();		
 		$this->_query($query);
 	}
