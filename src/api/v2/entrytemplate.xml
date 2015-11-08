@@ -27,6 +27,7 @@
       <d:Description>${NUSPEC.DESCRIPTION}</d:Description>
       <d:ReleaseNotes>${NUSPEC.RELEASENOTES}</d:ReleaseNotes>
       <d:PackageHash>${DB.PACKAGEHASH}</d:PackageHash>
+      <d:IsPrerelease m:type="Edm.Boolean">${DB.ISPRERELEASE}</d:IsPrerelease>
       <d:PackageHashAlgorithm>${DB.PACKAGEHASHALGORITHM}</d:PackageHashAlgorithm>
       <d:PackageSize m:type="Edm.Int64">${DB.PACKAGESIZE}</d:PackageSize>
       <d:Published m:type="Edm.DateTime">${DB.PUBLISHED}</d:Published>

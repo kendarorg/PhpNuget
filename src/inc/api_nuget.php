@@ -51,6 +51,9 @@ class ApiNugetBase
     {
         $tf = strtolower($tf);
         switch($tf){
+			case("native"): return "native";
+			case(".netframework4.6.1"): return "net461";
+			case(".netframework4.6"): return "net46";
 			case(".netframework4.5.1"): return "net451";
             case(".netframework4.5"): return "net45";
             case(".netframework3.5"): return "net35";
@@ -141,6 +144,7 @@ class ApiNugetBase
 		*/
 		
 		
+        $t= str_replace("\${DB.ISPRERELEASE}",$e->IsPreRelease?"true":"false",$t);
 		$t= str_replace("\${DB.ISABSOLUTELATESTVERSION}","true",$t);
         $t= str_replace("\${DB.ISLATESTVERSION}","true",$t);
         $t= str_replace("\${DB.VERSIONDOWNLOADCOUNT}","-1",$t);
@@ -316,7 +320,7 @@ class ApiNugetBase
 		}else if(strtolower($includePrerelease)=="true"){
 			if($filter=="IsLatestVersion" || $filter=="IsAbsoluteLatestVersion"){
 				$filter = null;
-		}
+			}
 		}
 		if($filter=="IsLatestVersion" || $filter=="IsAbsoluteLatestVersion"){
 			$filter = null;
@@ -367,12 +371,6 @@ class ApiNugetBase
 		}
 		$query = "Id eq '".$id."' and Listed eq true orderby Id asc,Version desc";
 		
-		$includePrerelease = strtolower(UrlUtils::GetRequestParamOrDefault("includePrerelease","false"));
-		if($includePrerelease=="false"){
-			$query = "IsPreRelease eq false and ".$query;
-		}
-		
-		//echo $query;die();		
 		$this->_query($query);
 	}
 	
