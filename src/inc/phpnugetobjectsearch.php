@@ -127,6 +127,9 @@ class PhpNugetExternalTypes
 				return -1;
 			}
 		}
+		
+		if(sizeof($aVersion)<sizeof($bVersion)) return -1;
+		if(sizeof($aVersion)>sizeof($bVersion)) return 1;
 		return 0;
 	}
 	
