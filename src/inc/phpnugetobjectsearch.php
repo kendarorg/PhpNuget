@@ -99,9 +99,9 @@ class PhpNugetExternalTypes
 			$ra[] = $r;
 		}
 		$numericCompare = $this->_compareNumericVersion($la[0],$ra[0]);
-		
+				
 		if($numericCompare!=0) return $numericCompare;
-		
+				
 		if(sizeof($la)>sizeof($ra)){
 			return -1;
 		}else if(sizeof($la)<sizeof($ra)){
@@ -127,6 +127,9 @@ class PhpNugetExternalTypes
 				return -1;
 			}
 		}
+		
+		if(sizeof($aVersion)<sizeof($bVersion)) return -1;
+		if(sizeof($aVersion)>sizeof($bVersion)) return 1;
 		return 0;
 	}
 	
