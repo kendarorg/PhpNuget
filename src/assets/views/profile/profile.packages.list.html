@@ -21,7 +21,7 @@
 			<tbody>
 				
 				<tr ng-repeat="package in packages" >
-					<td><img withd="25px" height="25px" src="{{package.IconUrl}}"/></td>
+					<td><img withd="25px" height="25px" ng-src="{{package.IconUrl}}"/></td>
 					<td><a href="#/profile/{{UserId}}/packages/{{package.Id}}/{{package.Version}}">{{package.Title}}</td>
 					<td>{{package.Version}}</td>
 					<td>{{package.Author}}</td>
