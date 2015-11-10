@@ -126,7 +126,7 @@ $loginController->UnauthorizedIfNotLoggedIn();
 						<label><input type="checkbox" ng-model="package.Listed" name="Listed">Is Listed</label>
 					</div></div>
 					<div class="col-md-4"><div class="checkbox">
-						<label><input type="checkbox"   ng-model="package.IsPreRelease" name="IsPreRelease">Is Pre Release</label>
+						<label><input type="checkbox"   ng-model="package.IsPreRelease" name="IsPreRelease" ng-disabled=true>Is Pre Release</label>
 					</div></div>
 					<div class="col-md-4"><div class="checkbox">
 						<label><input type="checkbox"   ng-model="package.RequireLicenseAcceptance" name="RequireLicenseAcceptance">Require License Acceptance</label>

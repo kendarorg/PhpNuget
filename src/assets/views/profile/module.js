@@ -104,12 +104,11 @@ app.controller('profilePackageController', ['$scope', '$controller', 'profilePac
 		profilePackagesService.getById($scope.PackageId,$scope.PackageVersion).success(function(data) {
 				$scope.package = data.Data[0];
 				//console.log($scope.package);
-				window.document.title = "Packages List";
+				window.document.title = "Package Detail";
 				profilePackagesService.getAllVersions($scope.PackageId).success(function(data) {
 					$scope.versions = data.Data;
 				});
 			});
-		
 			
 		$scope.update = function(apackage){
 			profilePackagesService.update(apackage,apackage.Id,apackage.Version).success(function(data) {
