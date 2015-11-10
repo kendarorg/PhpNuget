@@ -143,8 +143,8 @@ class ApiNugetBase
 		
 		
         $t= str_replace("\${DB.ISPRERELEASE}",$e->IsPreRelease?"true":"false",$t);
-		$t= str_replace("\${DB.ISABSOLUTELATESTVERSION}","true",$t);
-        $t= str_replace("\${DB.ISLATESTVERSION}","true",$t);
+		$t= str_replace("\${DB.ISABSOLUTELATESTVERSION}",$e->IsAbsoluteLatestVersion?"true":"false",$t);
+        $t= str_replace("\${DB.ISLATESTVERSION}",$e->IsLatestVersion?"true":"false",$t);
         $t= str_replace("\${DB.VERSIONDOWNLOADCOUNT}","-1",$t);
         $t= str_replace("\${DB.LISTED}",$e->Listed?"true":"false",$t);
 		if($e->Copyright!=null){
@@ -178,7 +178,7 @@ class ApiNugetBase
 	}
 	
 	
-	function _query($query)
+	function _query($query,$setupLatest = false)
 	{
 		$pg= $this->_getPagination();
 		$db = new NuGetDb();
@@ -222,9 +222,29 @@ class ApiNugetBase
 		echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
 		echo Utils::ReplaceInFile(Path::Combine($this->_path,"entrytemplatepre.xml"),$r);
 		
+		if($setupLatest){
+			for($i=sizeof($allRows)-1;$i>=0;$i--)
+			{
+				$allRows[$i]->IsAbsoluteLatestVersion=false;
+				$allRows[$i]->IsLatestVersion=false;
+			}
+			if(sizeof($allRows)>0){
+				$allRows[sizeof($allRows)-1]->IsAbsoluteLatestVersion =true;
+			}
+			for($i=sizeof($allRows)-1;$i>=0;$i--)
+			{
+				$row = $allRows[$i];
+				if($row->IsPreRelease!=true){
+					$row->IsLatestVersion=true;
+					break;
+				}
+			}
+		}
+			
 		for($i=0;$i<sizeof($allRows) && $i<$pg->Top;$i++)
 		{
 			$row = $allRows[$i];
+			
 			echo $this->_buildNuspecEntity($baseUrl,$row);
 		}
 		
@@ -374,9 +394,9 @@ class ApiNugetBase
 		if($id!=null){
 			$id = trim($id,"'");
 		}
-		$query = "Id eq '".$id."' and Listed eq true orderby Id asc,Version desc";
+		$query = "Id eq '".$id."' and Listed eq true orderby Id asc,Version asc";
 		
-		$this->_query($query);
+		$this->_query($query,true);
 	}
 	
 	function _findsingle($action)
