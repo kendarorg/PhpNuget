@@ -1,4 +1,4 @@
-# PhpNuget V. 3.0.12.8
+# PhpNuget V. 3.0.12.9
 
 ## Purpose
 
@@ -253,6 +253,10 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 * Align the Settings::ResultsPerPage in all the views
 
 ## Updates
+
+* 3.0.12.9
+    * Added support for .net 4.5.2
+    * Internal refactoring for net framework selection
 
 * 3.0.12.8
 	* Fixed inconsistency on boolean parameters inside packages update
