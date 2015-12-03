@@ -277,6 +277,10 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Added Version1-3 and VersionBeta fields to allow the group by version in MySQL
 	* Added automatic import of data when going to mysql version
 
+* 3.0.12.9
+    * Added support for .net 4.5.2
+    * Internal refactoring for net framework selection
+
 * 3.0.12.8
 	* Fixed inconsistency on boolean parameters inside packages update
 	* Fixed special case for uploading files
@@ -290,12 +294,12 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Specific override for data root
 	* Support Packages(Id='AngularJS.Core',Version='1.2.14') on v1 and v2 API
 	* Support for downloads count
-
+	
 * 3.0.12.6
 	* Release notes not considered
 	* Escaped license url
 	* Fix on package refresh
-
+	
 * 3.0.12.5
 	* Nuget Package Explorer compatibility: Added support for standard upload
 	* Nuget Package Explorer compatibility: Added support $inlinecount parameter (nuget 2.8)
