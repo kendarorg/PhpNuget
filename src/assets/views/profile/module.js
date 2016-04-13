@@ -1,20 +1,29 @@
 
 app.factory('profilePackagesService',['$http','pathHelper','$q',
 	function($http,pathHelper,$q) {
-		var doRunAllThings = function(total,skip,count){
+		var doRunAllThings = function(spinner,total,skip,count){
+		        
 				console.log("Running "+skip+" "+count);
 				var apiBase = pathHelper.buildApiPath('packages');
-				
 				
 				
 				var prom =$http.post(apiBase+'/?method=refreshpackages&skip='+skip+'&count='+count)
 					.success(function(data){
 						console.log("Correct "+skip+" "+count);
 						if(skip<total){
-							doRunAllThings(total,skip+count,count);
+						    var partial = skip+count;
+						    if(partial>=total){
+						        partial=total;
+						    }
+						    setSpinnerValue("Elaborated "+partial+" over "+total+" items");
+							doRunAllThings(spinner,total,skip+count,count);
+						}else{
+						    setSpinnerValue("Elaborated "+total+" items");
+						    closeModalSpinner();
 						}
 					}).error(function(data){
 						console.log("Wrong "+skip+" "+count);
+						closeModalSpinner();
 					});
 			};
 		return {
@@ -47,13 +56,16 @@ app.factory('profilePackagesService',['$http','pathHelper','$q',
 				var total = 0;
 				var count = 30;
 				var apiBase = this.apiBase;
+				var spinner = openModalSpinner();
 				this.http.post(apiBase+'/?method=countpackagestorefresh')
 					.success(function(data){
 						total = data.Data;
+						setSpinnerValue("Founded "+total+" items");
 						console.log("Founded items: "+total);
-						doRunAllThings(total,skip,count);						
+						doRunAllThings(spinner,total,skip,count);						
 					}).error(function(data){
 						console.log("Wrong count");
+						closeModalSpinner();
 					});
 			}
 		}
@@ -111,14 +123,20 @@ app.controller('profilePackageController', ['$scope', '$controller', 'profilePac
 			});
 			
 		$scope.update = function(apackage){
+		    var spinner = openModalSpinner();
+		    setSpinnerValue("Updating package "+apackage.Id+" "+apackage.Version);
+		    
 			profilePackagesService.update(apackage,apackage.Id,apackage.Version).success(function(data) {
-				if(data.Success) alert("Package updated!");
-				else{
+				if(data.Success) {
+				    alert("Package updated!");
+				}else{
+				    closeModalSpinner();
 					alert(data.Message);
 					return;
 				}
 				$scope.package = data.Data;
 				window.document.title = "Package '"+data.Data.Title+"'";
+				closeModalSpinner();
 			});
 		}
 		
@@ -151,12 +169,15 @@ app.controller('packagesUploadController', ['$scope', '$controller', 'profilePac
 		}
 		
 		$scope.download = function(url,packageId,packageVersion){
+		    var spinner = openModalSpinner();
+		    setSpinnerValue("Downloading package "+$scope.downloadItem.Id+" "+$scope.downloadItem.Version);
 			profilePackagesService.download($scope.downloadItem.Url,$scope.downloadItem.Id,$scope.downloadItem.Version).success(function(data) {
-					if(data.Success) alert("Package downloaded!");
-					else{
+					if(data.Success){
+					     alert("Package downloaded!");
+					}else{
 						alert(data.Message);
-						return;
 					}
+					closeModalSpinner();
 				});
 		}
 		
