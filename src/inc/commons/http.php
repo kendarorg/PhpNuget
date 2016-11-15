@@ -55,8 +55,8 @@ class HttpUtils
 			return $a_data;
 		}
 
-		$boundary = $matches[1];
-
+		$boundary = str_replace("\"","",$matches[1]);
+		
 		// split content by boundary and get rid of last -- element
 		$a_blocks = preg_split("/-+$boundary/", $input);
 		array_pop($a_blocks);
@@ -71,16 +71,9 @@ class HttpUtils
 			if (strpos($block, 'application/octet-stream') !== FALSE){
 				// match "name", then everything after "stream" (optional) except for prepending newlines
 				//preg_match("/name=\"([^\"]*)\".*stream[\n|\r]+([^\n\r].*)?$/s", $block, $matches);
-				preg_match("/octet-stream[\n|\r]+([^\n\r].*)?$/s", $block, $matches);
-				
-				$realData = mb_substr($matches[1], 0, -2);
-				
-				//$a_data['files'][$matches[1]] = array();
-				//$a_data['files'][$matches[1]]["tmp_name"]=Utils::WriteTemporaryFile($realData);
-				//$a_data['files'][$matches[1]]["type"]="";
-				//$a_data['files'][$matches[1]]["size"]=filesize($a_data['files'][$matches[1]]["tmp_name"]);
-				//$a_data['files'][$matches[1]]["error"]=0;
-				//$a_data['files'][$matches[1]]["name"]="name";
+				preg_match("/((Content-Disposition[^\n\r]+[\n|\r]+)(Content-Type[^\n\r]+[\n|\r]+)|(Content-Type[^\n\r]+[\n|\r]+)(Content-Disposition[^\n\r]+[\n|\r]+))([^\n\r].*)?$/s", $block, $matches);
+
+				$realData = $matches[6];
 				
 				$tmpFileName = "package";
 				$a_data['files'][$tmpFileName] = array();

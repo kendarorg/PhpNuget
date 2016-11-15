@@ -1,0 +1,5 @@
+FROM tutum/apache-php
+
+COPY ./src /app/phpnuget
+
+VOLUME /app/phpnuget/data
