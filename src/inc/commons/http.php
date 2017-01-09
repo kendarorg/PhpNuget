@@ -43,6 +43,9 @@ class HttpUtils
 		// read incoming data
 		$input = file_get_contents('php://input');
 		
+		
+		uplogb("http","rawrequest",$input);
+		
 		//file_put_contents("upload.log","==================================\r\n".$input, FILE_APPEND);
 
 		// grab multipart boundary from content type header
@@ -50,16 +53,25 @@ class HttpUtils
 
 		// content type is probably regular form-encoded
 		if (!count($matches)){
+			uplog("http","Regular form encoded");
 			// we expect regular puts to containt a query string containing data
 			parse_str(urldecode($input), $a_data);
 			return $a_data;
 		}
+		
+		
 
 		$boundary = $matches[1];
+		uplog("http","Not regular form encoded. boundary: ".$boundary);
 
 		// split content by boundary and get rid of last -- element
 		$a_blocks = preg_split("/-+$boundary/", $input);
-		array_pop($a_blocks);
+		//uplogh("http","Splitted",$a_blocks);
+		if(sizeof($a_blocks)>1){
+			array_pop($a_blocks);
+		}
+		
+		
 
 		// loop data blocks
 		foreach ($a_blocks as $id => $block){
@@ -98,7 +110,7 @@ class HttpUtils
 				}
 			}
 		}
-		
+		uplogh("http","File founded",$a_data);
 		if($onlyFiles) {
 			return $a_data["files"];
 		}

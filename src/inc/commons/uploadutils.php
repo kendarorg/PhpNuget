@@ -38,8 +38,11 @@ class UploadUtils
 		$files = $_FILES;
 		$isRealFile = true;
 		if(!array_key_exists($fileId,$files)){
+			uplogv("uploadutils","Upload::TryRawRequest",$files);
 			$files = HttpUtils::RawRequest();
 			$isRealFile = false;
+		}else{
+			uplog("uploadutils","Standard request");
 		}
 		
 		

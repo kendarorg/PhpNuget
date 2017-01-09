@@ -254,6 +254,9 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
+* 3.0.12.11
+	* Added "count" value on all packages requests for nuget
+	
 * 3.0.12.10
     * Added wait dialogs for long operations (update, upload from external nuget and refresh packages)
     

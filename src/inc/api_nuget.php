@@ -181,9 +181,11 @@ class ApiNugetBase
 		$allpages = UrlUtils::GetRequestParamOrDefault("\$inlinecount","none")=="allpages";
 		$itemsCount = -1;
 		
+		
+		$allRows = $db->GetAllRows(999999,0,$os);
+		$itemsCount = sizeof($allRows);
+		
 		if($count || $allpages){
-			$allRows = $db->GetAllRows(999999,0,$os);
-			$itemsCount = sizeof($allRows);
 			if(!$allpages){
 				HttpUtils::WriteData($itemsCount);
 			}
@@ -201,8 +203,7 @@ class ApiNugetBase
 		$r["@BASEURL@"]=$baseUrl;
 		$r["@NEXTITEM@"]="";
 		$r["@ITEMSCOUNT@"]="";
-		
-		if($itemsCount>=0){
+		if($itemsCount >=0){
 			$r["@ITEMSCOUNT@"]="<m:count>".$itemsCount."</m:count>";
 		}
 		

@@ -31,7 +31,7 @@ return new PackageDescriptor();
 class NuGetDb
 {
 	public function EntityName(){ return "PackageDescriptor";}
-    public function NuGetDb()
+    public function __constructor()
     {
         $this->initialize();
     }

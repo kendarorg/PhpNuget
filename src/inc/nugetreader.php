@@ -122,6 +122,8 @@ class NugetManager
 		$zipmanager = new ZipManager($nupkgFile);
         $files = $zipmanager->GenerateInfos();
         $nupckgName = "";
+        uplogh("nugetreader","Nupckg content of '".$nupkgFile."'!",$files);
+        die();
         foreach($files["entries_name"] as $fileName)
         {
             $pinfo = pathinfo($fileName);
@@ -133,7 +135,7 @@ class NugetManager
         }
         $nuspecContent = $zipmanager->LoadFile($nupckgName);
         
-		
+		uplogv("nugetreader","Nuspec content!",$nuspecContent);
         $xml = XML2Array($nuspecContent);
         $e = new PackageDescriptor();
         $m=$xml["metadata"];
