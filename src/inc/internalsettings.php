@@ -48,8 +48,8 @@ if(!is_dir(Settings::$PackagesRoot))
 require_once(__ROOT__."/inc/logincontroller.php");
 
 
-$doUpLog = true;
-$doLogBin = true;
+$doUpLog = false;
+$doLogBin = false;
 
 function uplog($who,$data)
 {
@@ -63,7 +63,10 @@ function uplogh($who,$str,$data)
 	if(!$doUpLog)return;
 	if(sizeof($data)>0){
 		uplog($who,$str);
-		uplog($who,var_export($data,true));
+		ob_start();
+		var_dump($data);
+		$result = ob_get_clean();
+		uplog($who,$result);
 	}else{
 		uplog($who,$str."-EMPTY");
 	}
@@ -72,12 +75,11 @@ function uplogv($who,$str,$data)
 {
 	global $doUpLog;
 	if(!$doUpLog)return;
-	if(sizeof($data)>0){
-		uplog($who,$str);
-		uplog($who,var_dump($data,true));
-	}else{
-		uplog($who,$str."-EMPTY");
-	}
+	uplog($who,$str);
+	ob_start();
+	var_dump($data);
+	$result = ob_get_clean();
+	uplog($who,$result);
 }
 function uplogb($who,$str,$data)
 {

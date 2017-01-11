@@ -51,17 +51,18 @@ try{
 		throw new Exception($result['errorCode']); 
 	}
 
-
+	//die();
 	$fileName = basename($result["name"],".nupkg");
 
 	$nugetReader = new NugetManager();
+	uplog("upload","NugetManager initialized!");
 	$parsedNuspec = $nugetReader->LoadNuspecFromFile($result["destination"]);
 	uplogv("upload","Nuspec loaded!",$parsedNuspec);
 	$parsedNuspec->UserId=$user->Id;
 	$nuspecData = $nugetReader->SaveNuspec($result["destination"],$parsedNuspec);
 	
 	
-	uplogv("upload","Uploading",$result);
+	//uplogv("upload","Uploading",$result);
 	uplog("upload","Upload completed");
 	// All done!
 	header('HTTP/1.1 201 Created');

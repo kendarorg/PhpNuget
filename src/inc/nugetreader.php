@@ -123,7 +123,7 @@ class NugetManager
         $files = $zipmanager->GenerateInfos();
         $nupckgName = "";
         uplogh("nugetreader","Nupckg content of '".$nupkgFile."'!",$files);
-        die();
+        //die();
         foreach($files["entries_name"] as $fileName)
         {
             $pinfo = pathinfo($fileName);

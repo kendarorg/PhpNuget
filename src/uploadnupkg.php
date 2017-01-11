@@ -18,7 +18,9 @@ if(!$loginController->IsLoggedIn){
 		parent.packagesUploadControllerCallback("fail-unathorized","none","none");
 	<?php
 }else if(UploadUtils::IsUploadRequest()){
+	
 	$uploader = new UploadUtils(Settings::$PackagesRoot,array("nupkg"),Settings::$MaxUploadBytes);
+	
 	$result = null;
 	try{
 		$result = @$uploader->Upload("fileName");
@@ -28,6 +30,7 @@ if(!$loginController->IsLoggedIn){
 		$result["errorCode"]="";
 		$result["errorMessage"]="Wrong file";
 	}
+	
 	$fileName = basename($result["name"],".nupkg");
 	$message = "";
 	if($result["hasError"]==true){
@@ -48,7 +51,6 @@ if(!$loginController->IsLoggedIn){
 			$user = $udb->GetByUserId($loginController->UserId);
 			
 			$nugetReader = new NugetManager();
-			
 			$parsedNuspec = $nugetReader->LoadNuspecFromFile($result["destination"]);
 			
 			$parsedNuspec->UserId=$user->Id;
@@ -60,7 +62,10 @@ if(!$loginController->IsLoggedIn){
 			parent.packagesUploadControllerCallback(true,"<?php echo $parsedNuspec->Id;?>","<?php echo $parsedNuspec->Version;?>");
 			<?php
 		}catch(Exception $ex){
-			unlink($result["destination"]);
+			
+			if(file_exists($result["destination"])){
+				unlink($result["destination"]);
+			}
 			?>
 			parent.packagesUploadControllerCallback(false,"none","none","<?php echo $ex->getMessage();?>");
 			<?php

@@ -1,6 +1,7 @@
 <?php
 require_once(dirname(__FILE__)."/utils.php");
 require_once(dirname(__FILE__)."/url.php");
+require_once(dirname(__FILE__)."/http.php");
 
 class UploadUtils
 {
@@ -9,13 +10,13 @@ class UploadUtils
     
     public function __construct($destinationDir,$allowedExts,$maxSize,$allowAll=false) 
     {
-        $this->initialize($destinationDir,$allowedExts,$maxSize,$allowAll=false);
+        $this->initialize($destinationDir,$allowedExts,$maxSize,$allowAll=false);      	
     }
     
-    public function UploadUtils($destinationDir,$allowedExts,$maxSize,$allowAll=false)
+    /*public function UploadUtils($destinationDir,$allowedExts,$maxSize,$allowAll=false)
     {
         $this->initialize($destinationDir,$allowedExts,$maxSize,$allowAll);
-    }
+    }*/
 	
     function initialize($destinationDir,$allowedExts,$maxSize,$allowAll=false)
     {
@@ -38,66 +39,75 @@ class UploadUtils
 		$files = $_FILES;
 		$isRealFile = true;
 		if(!array_key_exists($fileId,$files)){
-			uplogv("uploadutils","Upload::TryRawRequest",$files);
+			//uplogv("uploadutils","Upload::TryRawRequest",$files);
 			$files = HttpUtils::RawRequest();
-			$isRealFile = false;
-		}else{
+			//uplogv("uploadutils","Raw request file",$files);die();
+			//$isRealFile = false;
+		}
+		/*}else{
 			uplog("uploadutils","Standard request");
-		}
+		}*/
 		
-		
-	
-		$guid = Utils::NewGuid();
-		$toret = array(); 
-		$toret["hasError"] = false; 
-		$toret["errorCode"] = null; 
-		$toret["errorMessage"] = ""; 
-		$toret["name"]=$files[$fileId]["name"]; 
-		if(array_key_exists("mime",$files[$fileId]))$toret["mime"] = $files[$fileId]["type"]; 
-		if(array_key_exists("size",$files[$fileId]))$toret["sizeBytes"] = $files[$fileId]["size"]; 
-		$exploded  = explode(".", $toret["name"]);
-		$extension = end($exploded);
-		
-		if ( $toret["sizeBytes"] >= $this->maxSize){
-			$toret["hasError"] = true;
-			$toret["errorMessage"] = "Max size is '".$this->maxSize."' bytes. File size is '".$toret["sizeBytes"]."'.";
-		}else if ( $this->allowAll<=0 && !in_array($extension, $this->allowedExts)){
-			$toret["hasError"] = true;
-			$toret["errorMessage"] = "Extension '".$extension."' not allowed. ".
-				"The allowed ones are '".implode(", ",$this->allowedExts)."'";
-		}else {
-		  if (array_key_exists("error",$files[$fileId]) && $files[$fileId]["error"] > 0){
-			//TODO Error translations http://php.net/manual/en/features.file-upload.errors.php
-			$toret["hasError"] = true;
-			$toret["errorCode"]= $files[$fileId]["error"];
-		  }else{
-			$toret["tmpName"] = $files[$fileId]["tmp_name"];
+		foreach($files as $fileId => $file){
 			
-			if (file_exists($this->destinationDir."/" . $guid)){
-				unlink ($this->destinationDir."/" . $guid);
-			}
-			$toret["destination"]=$this->destinationDir."/" . $guid;
+			$guid = Utils::NewGuid();
+			$toret = array(); 
+			$toret["hasError"] = false; 
+			$toret["errorCode"] = null; 
+			$toret["errorMessage"] = ""; 
+			$toret["name"]=$file["name"]; 
+			if(array_key_exists("mime",$file))$toret["mime"] = $file["type"]; 
+			if(array_key_exists("tmp_name",$file))$toret["tmpName"] = $file["tmp_name"]; 
+			if(array_key_exists("size",$file))$toret["sizeBytes"] = $file["size"]; 
+			$exploded  = explode(".", $toret["name"]);
+			$extension = end($exploded);
 			
-			if($isRealFile){
-				if(!move_uploaded_file($toret["tmpName"],$toret["destination"])){
-					$toret["hasError"] = true;
-					$toret["errorMessage"] =  'Cannot move file from ' . $toret["tmpName"] . ' to ' . $toret["destination"];
-					$toret["errorCode"] = UPLOAD_ERR_CANT_WRITE;
+			
+			if ( $toret["sizeBytes"] >= $this->maxSize){
+				$toret["hasError"] = true;
+				$toret["errorMessage"] = "Max size is '".$this->maxSize."' bytes. File size is '".$toret["sizeBytes"]."'.";
+			}else if ( $this->allowAll<=0 && !in_array($extension, $this->allowedExts)){
+				$toret["hasError"] = true;
+				$toret["errorMessage"] = "Extension '".$extension."' not allowed. ".
+					"The allowed ones are '".implode(", ",$this->allowedExts)."'";
+			}else {
+			  if (array_key_exists("error",$file) && $file["error"] > 0){
+				//TODO Error translations http://php.net/manual/en/features.file-upload.errors.php
+				$toret["hasError"] = true;
+				$toret["errorCode"]= $file["error"];
+			  }else{
+				
+				
+				if (file_exists($this->destinationDir."/" . $guid)){
+					unlink ($this->destinationDir."/" . $guid);
 				}
-			}else{
-				if(!rename($toret["tmpName"],$toret["destination"])){
-					$toret["hasError"] = true;
-					$toret["errorMessage"] = 'Cannot rename file from ' . $toret["tmpName"] . ' to ' . $toret["destination"];
-					$toret["errorCode"] = UPLOAD_ERR_CANT_WRITE;
+				$toret["destination"]=$this->destinationDir."/" . $guid;
+				
+				if(file_exists($toret["tmpName"])){
+					if(!move_uploaded_file($toret["tmpName"],$toret["destination"])){
+						$toret["hasError"] = true;
+						$toret["errorMessage"] =  'Cannot move file from ' . $toret["tmpName"] . ' to ' . $toret["destination"];
+						$toret["errorCode"] = UPLOAD_ERR_CANT_WRITE;
+					}
+				}else{
+					//if($toret["tmpName"]==null){
+						file_put_contents($toret["destination"],$file["content"]);
+					/*}
+					else if(!rename($toret["tmpName"],$toret["destination"])){
+						$toret["hasError"] = true;
+						$toret["errorMessage"] = 'Cannot rename file from ' . $toret["tmpName"] . ' to ' . $toret["destination"];
+						$toret["errorCode"] = UPLOAD_ERR_CANT_WRITE;
+					}*/
 				}
+			  }
 			}
-		  }
-		}
-		
-		if($toret["hasError"]){
-			unlink($toret["tmpName"]);
-		}
-        return $toret;
+			//uplogv("uploadutils","Files",$toret);
+			//die();
+			if($toret["hasError"]){
+				unlink($toret["tmpName"]);
+			}
+	        return $toret;
+	    }
     }
 }
 /*
