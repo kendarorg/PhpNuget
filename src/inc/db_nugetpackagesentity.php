@@ -15,7 +15,7 @@ function translateNetVersion($tf)
         case(".netframework3.0"): return "net30";
         case(".netframework2.0"): return "net20";
         case(".netframework1.0"): return "net10";
-        default: return "UNKNOWN";
+        default: return $tf;
     }
 }
 

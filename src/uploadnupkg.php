@@ -50,7 +50,6 @@ if(!$loginController->IsLoggedIn){
 			$user = $udb->GetByUserId($loginController->UserId);
 			
 			$nugetReader = new NugetManager();
-			
 			$parsedNuspec = $nugetReader->LoadNuspecFromFile($result["destination"]);
 			
 			$parsedNuspec->UserId=$user->Id;
@@ -62,7 +61,9 @@ if(!$loginController->IsLoggedIn){
 			parent.packagesUploadControllerCallback(true,"<?php echo $parsedNuspec->Id;?>","<?php echo $parsedNuspec->Version;?>");
 			<?php
 		}catch(Exception $ex){
-			unlink($result["destination"]);
+			if(file_exists($result["destination"])){
+				unlink($result["destination"]);
+			}
 			?>
 			parent.packagesUploadControllerCallback(false,"none","none","<?php echo $ex->getMessage();?>");
 			<?php

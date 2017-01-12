@@ -10,18 +10,11 @@ require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/uploadutils.php");
 require_once(__ROOT__."/inc/commons/objectsearch.php");
 
-$doUpLog = false;
 
-if($doUpLog){
-	file_put_contents("upload.log","==================================\r\n", FILE_APPEND);
-	file_put_contents("upload.log","request: ".$_SERVER['REQUEST_URI']."\r\n", FILE_APPEND);
-	if(sizeof($_POST)>0){
-		file_put_contents("upload.log",var_export($_POST,true)."\r\n", FILE_APPEND);
-	}
-	if(sizeof($_GET)>0){
-		file_put_contents("upload.log",var_export($_GET,true)."\r\n", FILE_APPEND);
-	}
-}
+uplog("upload","==================================");
+uplog("upload","request: ".$_SERVER['REQUEST_URI']);
+uplogh("upload","Post",$_POST);
+uplogh("upload","Get",$_GET);
 
 $temp_file = tempnam(sys_get_temp_dir(), 'Tux');
 $result = array();
@@ -29,6 +22,7 @@ try{
 	
 	if (empty($_SERVER['HTTP_X_NUGET_APIKEY'])) {
 		HttpUtils::ApiError('403', 'Invalid API key');
+		uplog("upload","No api key!");
 		die();
 	}
 	
@@ -38,31 +32,35 @@ try{
 
 	if(sizeof($users)!=1){
 		HttpUtils::ApiError('403', 'Invalid API key');
+		uplog("upload","Wrong api key!");
 		die();
 	}
+	
+	uplog("upload","Validation done!");
 	$user = $users[0];
 	$uploader = new UploadUtils(Settings::$PackagesRoot,array("nupkg"),Settings::$MaxUploadBytes,true);
 	$uploader->allowAll = true;
+	uplog("upload","Upload utils initialized!");
 	$result = $uploader->Upload("package");
 	if($result['hasError']) { 
-		throw new Exception($result['errorCode']); }
-
+		uplogv("upload","UploadUtils error uploading",$result);
+		throw new Exception($result['errorCode']); 
+	}
 
 	$fileName = basename($result["name"],".nupkg");
 
 	$nugetReader = new NugetManager();
+	uplog("upload","NugetManager initialized!");
 	$parsedNuspec = $nugetReader->LoadNuspecFromFile($result["destination"]);
+	uplogv("upload","Nuspec loaded!",$parsedNuspec);
 	$parsedNuspec->UserId=$user->Id;
 	$nuspecData = $nugetReader->SaveNuspec($result["destination"],$parsedNuspec);
-		
-	if($doUpLog){
-			var_dump($result);
-			file_put_contents("upload.log",$a."\r\nUpload completed\n", FILE_APPEND);
-		}
-		
+	
+	uplog("upload","Upload completed");
 	// All done!
 	header('HTTP/1.1 201 Created');
 }catch(Exception $ex){
+	uplogv("upload","Error uploading",$ex);
 	if(array_key_exists ("destination",$result)){
 		unlink($result["destination"]);
 	}

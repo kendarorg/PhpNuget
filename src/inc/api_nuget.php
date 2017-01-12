@@ -62,10 +62,21 @@ class ApiNugetBase
 				$sd = $d[$i];
 				if($sd->IsGroup){
 					$fw= $this->TranslateNet($sd->TargetFramework);
-					for($j=0;$j<sizeof($sd->Dependencies);$j++){
-						$sdd = $sd->Dependencies[$j];
-						$tora[]=($sdd->Id.":".$sdd->Version.":".$fw);
-					}
+					//if(strpos($fw,"+")===FALSE) {
+						for($j=0;$j<sizeof($sd->Dependencies);$j++){
+							$sdd = $sd->Dependencies[$j];
+							$tora[]=($sdd->Id.":".$sdd->Version.":".$fw);
+						}
+					/*}else{
+						$fws = explode("+",$fw);
+						for($k=0;$k<sizeof($fws);$k++){
+							$subfw = $fws[$k]
+							for($j=0;$j<sizeof($sd->Dependencies);$j++){
+								$sdd = $sd->Dependencies[$j];
+								$tora[]=($sdd->Id.":".$sdd->Version.":".$subfw);
+							}
+						}
+					}*/
 				}else{
 					$tora[]=($sd->Id.":".$sd->Version.":");
 				}

@@ -29,7 +29,7 @@ if ($_FILES["file"]["error"] > 0) {
 			<?php }} ?>
 		</ul>
 		<h4>Import Packages</h4>
-		To impor the packages db from a previous version. The files will be uploaded after.
+		To import the packages db from a previous version. The files will be uploaded after.
 		<form method="POST" action="setup.php">
 			<input type="hidden" id="dosetup" name="dosetup" value="finishSetup"/>
 			<!--<table border=0>

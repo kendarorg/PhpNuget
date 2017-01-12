@@ -33,7 +33,7 @@ class LoginController
 		}
 	}
 	
-	function LoginController()
+	function __construct()
 	{
 		$this->_initialize();
 	}

@@ -106,9 +106,11 @@ $useMySql = false;
 	}
 	$r["@ApplicationPath@"] = $app;
 	
+
 	//Setup the settings
 	Utils::ReplaceInFile(Path::Combine(__ROOT__,"inc/setup/settings.php.template"),$r,Path::Combine(__ROOT__,"settings.php"));
 	echo "<li>Settings initialized.</li>";
+
 	if($r["@AllowPackageUpdate@"] == "true"){
 		echo "<li>Package update allowed (warning!).</li>";
 	}else{

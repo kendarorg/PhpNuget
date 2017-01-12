@@ -34,7 +34,7 @@ namespace NugetTesterApplication.Tests
         [TestMethod]
         public void OrderByShouldBeConsistent()
         {
-            
+
             var xml = this.GetRequest("api/v2/Search()?includePrerelease=true").ToXml();
             var founded = xml.FindXmlNodes("feed", "entry").ToArray();
 
@@ -102,7 +102,7 @@ namespace NugetTesterApplication.Tests
         }
 
         [TestMethod]
-        public void FindPackageByIdShouldShowOnlyList()
+        public void FindPackageByIdShouldShowListAllItemsButTheNotListed()
         {
             try
             {
@@ -114,9 +114,9 @@ namespace NugetTesterApplication.Tests
                 var xml = this.GetRequest("api/v2/FindPackagesById?Id=APack").ToXml();
                 var founded = xml.FindXmlNodes("feed", "entry").ToArray();
 
-                Assert(founded.Count() == 1, "Wrong items count");
+                Assert(founded.Count() == 3, "Wrong items count");
                 Assert(founded[0].FindXmlNodes("title").First().InnerText == "APack", "Wrong package 2");
-                Assert(founded[0].FindXmlNodes("m:properties", "d:Version").First().InnerText == "1.0.0.2", "Wrong package id 2");
+                Assert(founded[0].FindXmlNodes("m:properties", "d:Version").First().InnerText == "1.0.0.13", "Wrong package id 2");
             }
             finally
             {

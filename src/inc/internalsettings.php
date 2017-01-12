@@ -6,12 +6,11 @@ require_once(__ROOT__."/inc/dbversion.php");
 
 define('__RW_ADMIN_R_ALL__',0644);
 
-
 class Settings
 {
 	public static $PackageHash = __PACKAGEHASH__;
 	public static $MaxUploadBytes = __MAXUPLOAD_BYTES__;
-	public static $Version = "4.0.0.0-beta";
+	public static $Version = "4.0.0.0";
 	public static $ResultsPerPage = __RESULTS_PER_PAGE__;
 	public static $SiteRoot = __SITE_ROOT__;
 	public static $DataRoot = "";
@@ -53,4 +52,53 @@ function initializeInternalSettings(){
 }
 
 initializeInternalSettings();
+
+
+                                                             
+$doUpLog = false;                                            
+$doLogBin = false;                                           
+                                                             
+function uplog($who,$data)                                   
+{                                                            
+	global $doUpLog;                                         
+	if(!$doUpLog)return;                                     
+	file_put_contents($who.".log",$data."\r\n", FILE_APPEND);
+}                                                            
+function uplogh($who,$str,$data)                             
+{                                                            
+	global $doUpLog;                                         
+	if(!$doUpLog)return;                                     
+	if(sizeof($data)>0){                                     
+		uplog($who,$str);                                    
+		ob_start();                                          
+		var_dump($data);                                     
+		$result = ob_get_clean();                            
+		uplog($who,$result);                                 
+	}else{                                                   
+		uplog($who,$str."-EMPTY");                           
+	}                                                        
+}                                                            
+function uplogv($who,$str,$data)                             
+{                                                            
+	global $doUpLog;                                         
+	if(!$doUpLog)return;                                     
+	uplog($who,$str);                                        
+	ob_start();                                              
+	var_dump($data);                                         
+	$result = ob_get_clean();                                
+	uplog($who,$result);                                     
+}                                                            
+function uplogb($who,$str,$data)                             
+{                                                            
+	global $doUpLog;                                         
+	if(!$doUpLog)return;                                     
+	global $doLogBin;                                        
+	if(!$doLogBin)return;                                    
+	if(sizeof($data)>0){                                     
+		uplog($who,$str);                                    
+		uplog($who,$data);                                   
+	}else{                                                   
+		uplog($who,$str."-EMPTY");                           
+	}                                                        
+}                                                            
 ?>

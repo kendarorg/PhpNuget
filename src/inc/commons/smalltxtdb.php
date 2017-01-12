@@ -142,7 +142,7 @@ class SmallTxtDb
         $this->rows = array();
         if($loadData){
             for ($i = $st; $i < sizeof($splitted); $i++) {
-				
+			
                 $splitted[$i] = trim($splitted[$i]);
 				
                 if($splitted[$i]!=""){

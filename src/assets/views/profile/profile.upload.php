@@ -79,7 +79,7 @@ if($loginController->Admin){
 </div>
 
 
-<div class="panel panel-default">
+<div id="refreshPackages" name="refreshPackages" class="panel panel-default">
 <div class="panel-heading">Refresh packages db from packages directory.</div>
 <div class="panel-body">
 

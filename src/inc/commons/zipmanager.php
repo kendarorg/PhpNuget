@@ -11,11 +11,6 @@ class ZipManager
         $this->initialize($zipFile);
     }
     
-    public function ZipManager($zipFile)
-    {
-        $this->initialize($zipFile);
-    }
-    
     private function initialize($zipFile)
     {
         $this->zipFile = $zipFile;
@@ -26,6 +21,7 @@ class ZipManager
     
     public function LoadFile($path)
     {
+		
         $zip = zip_open($this->zipFile);
         if ($zip) {
             while ($zip_entry = zip_read($zip)) {
@@ -54,6 +50,8 @@ class ZipManager
         if ($zip) {
             while ($zip_entry = zip_read($zip)) {
                 $zip_entry_name = zip_entry_name($zip_entry);
+                
+				
                 if (is_dir($zip_entry_name)) {
                     $folder_count++;
                 }else {
@@ -94,5 +92,4 @@ class ZipManager
     }
 
 }
-
 ?>

@@ -3,9 +3,9 @@ require_once(__DIR__."/root.php");
 
 define('__MAXUPLOAD_BYTES__',10*1024*1024*1024);
 define('__PACKAGEHASH__',"SHA512"); //Or SHA256
-define('__UPLOAD_DIR__', "C:\\Projects\\Kendar.Framework\\Github\\endaroza\\PhpNuget.MySql\\src\\data\\packages");
-define('__DATABASE_DIR__', "C:\\Projects\\Kendar.Framework\\Github\\endaroza\\PhpNuget.MySql\\src\\data\\db");
-define('__SITE_ROOT__', "/pnm/");
+define('__UPLOAD_DIR__', "C:\\Kendar\\Development\\PhpNuget_Evo\\PhpNuget\\src\\data\\packages");
+define('__DATABASE_DIR__', "C:\\Kendar\\Development\\PhpNuget_Evo\\PhpNuget\\src\\data\\db");
+define('__SITE_ROOT__', "/edsa-nuget/");
 define('__RESULTS_PER_PAGE__', 20);
 define('__ADMINID__',"admin");
 define('__ADMINPASSWORD__',"password");
@@ -17,12 +17,12 @@ define('__PWDDESC__',"Min len 8, max len 40");
 //the admin
 define('__ALLOWUSERADD__',false);
 
-define('__ALLOWPACKAGESDELETE__',true);
-define('__ALLOWPACKAGEUPDATE__', true);
+define('__ALLOWPACKAGESDELETE__',false);
+define('__ALLOWPACKAGEUPDATE__', false);
 
 @define('__MYSQL_SERVER__', "127.0.0.1");
-@define('__MYSQL_USER__',"phpnuget");
-@define('__MYSQL_PASSWORD__',"password");
+@define('__MYSQL_USER__',"root");
+@define('__MYSQL_PASSWORD__',"");
 @define('__MYSQL_DB__',"phpnuget");
 @define('__DB_TYPE__',DBMYSQL);
 

@@ -1,4 +1,6 @@
-# PhpNuget V. 4.0.0.0-beta
+# PhpNuget V. 3.0.12.11
+
+### NOTES
 
 ## Purpose
 
@@ -13,18 +15,14 @@ Verified on:
 * PHP 5.6-IIS 8
 * PHP 5.4.2-Apache 2.0 (OpenSuse 13.1)
 * PHP 5.3.3-Apache 2.2 (CentOS 6.5)
+* PHP 7.0.14-Apache 2.4 (Windows 10 Home)
 
 ## Installation
 
-### Update from previous version
+### Notes for everybody
 
-To update from previous versions it will suffice to 
-
-* Save a copy of the settings.php (for reference)
-* Upload the new version
-* Open the setup.php page and fill with the previous settings
-* All the data will be backupped before the update, even when the database is old
-* When moving to mysql version all data will be ported if the relative function is enabled
+* When installing the MySql version the db must be present with the user configured!
+* The module php_curl must be present and configured inside the php.ini
 
 ### Notes for Apache With Red Hat Linux
 
@@ -64,7 +62,17 @@ And then restart Apache
 	
 This should be enough to let everything works.	
 
-### Prerequisities For IIS
+### Notes for Apache on Windows
+
+If php is unable to load curl-related functions copy the following files from the php directory to "C:\Windows\System".
+You can verify this by downloading a file from the official nuget repository via the manage packages page.
+
+* libeay32.dll
+* libsasl.dll
+* ssleay32.dll
+* libssh2
+
+### Prerequisites For IIS
 
 These steps are NOT needed if your hosting already configured PHP
 
@@ -83,7 +91,6 @@ These steps are NOT needed if your hosting already configured PHP
 	* Web.Config
 	* .htaccess
 * Verify to have write permissions on the "db" directory.
-* If you use mysql you should create a database with a user with full rights.
 * Open the setup page at http://myhost/mynuget/setup.php and follow the wizard. The value will be prefilled
 	* Admin UserId: the user that will be created (or updated) as admin
 	* Admin Password: the password (on update will be overwritten)
@@ -96,12 +103,9 @@ These steps are NOT needed if your hosting already configured PHP
 	* php-cgi.exe: To allow the configuration of php under IIS.
 	* Allow package update via Upload: Default disabled, if enabled it is possible to overwrite the packages BUT THIS IS NOT A STANDARD BEHAVIOUR.
 	* Allow package delete: Default disabled. LEAVING IT ENABLED IS NOT A STANDARD BEHAVIOUR
-	* Use mysql: If you will use the mysql version this will be checked and will enable further settings:
-		* Import from txt db: checked if should import from txt db
-		* MySql UserId: MySQL user id
-		* MySql Password: MySQL password
-		* MySql Server: The address of the server
-		* MySql Db: The db on which should store data
+* When using the mysql installation
+	* Check the "Use mysql" and fill the configuration data
+	* NOTE: Import from txt db does not yet work!!!
 * If under IIS set the path of 'php-cgi.exe' (leave blank if your hosting already configured PHP)
 * Change the password, email and login of the administration without worries.
 * Rename the setup.php to setup.bak
@@ -109,7 +113,6 @@ These steps are NOT needed if your hosting already configured PHP
 	* settings.php
 	* Web.Config
 	* .htaccess
-	* ManagedFusion.Rewriter.txt
 * Now open http://myhost/mynuget and see the gallery
 * Happy Nugetting!
 
@@ -261,22 +264,27 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 ### Should
 
 * Add robots.txt
-* The gallery should be visible without javscript (for search engines)
+* Import v3.0.0.0 txt database on MySQL
 
 ### Would
 
-* Export database
 * Add Email token to reset users passwords
 * Upload multiple nupkg
+* Align the Settings::ResultsPerPage in all the views
 
 ## Updates
 
 * 4.0.0.0
-	* Support for MySql database
-	* Updated database to version 4.0.0.0
-	* Added Version1-3 and VersionBeta fields to allow the group by version in MySQL
-	* Added automatic import of data when going to mysql version
-
+	* Added MySQL as storage engine
+	
+* 3.0.12.11
+	* Added "count" value on all packages requests for nuget 3.5
+	* Verified compatibility with Nuget.exe 2.8, 3.4, 3.5
+	* Compatibility with PHP7
+	
+* 3.0.12.10
+    * Added wait dialogs for long operations (update, upload from external nuget and refresh packages)
+    
 * 3.0.12.9
     * Added support for .net 4.5.2
     * Internal refactoring for net framework selection

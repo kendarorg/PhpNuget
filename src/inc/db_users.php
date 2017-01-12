@@ -31,11 +31,6 @@ class UserDb
         $this->initialize();
     }
     
-    public function UserDbSortUserId()
-    {
-        $this->initialize();
-    }
-    
     private function initialize()
     {
         

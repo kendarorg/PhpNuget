@@ -85,7 +85,7 @@ class ApiBase
 		
 		try{
 			if(array_key_exists($function,$availableMethods)){
-				$this->$availableMethods[$function]();
+				$this->{$availableMethods[$function]}();
 			}else{
 				ApiBase::ReturnError("Invalid method ".$function,405);
 			}

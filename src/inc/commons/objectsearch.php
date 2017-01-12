@@ -157,8 +157,7 @@ class ObjectSearch
 	function _isString($operator)
 	{
 		if($operator[0]==$operator[sizeof($operator)-1]){
-			$res = $this->_isStartString($operator[0]);
-			return $res;
+			return $this->_isStartString($operator[0]);
 		}
 		return false;
 	}
@@ -572,7 +571,7 @@ class ObjectSearch
 		switch($t){
 			case "string":
 			case "number":
-			case "boolean":	
+			case "boolean":
 				return $parseTreeItem;
 		}
 		if($t == "function"){
@@ -963,11 +962,6 @@ class ObjectSearch
 		}
 		
 		return 0;
-	}
-	
-	public function dump()
-	{
-		//var_dump($this->parseResult);
 	}
 	
 	public function DoGroupBy($subject)
