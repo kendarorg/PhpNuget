@@ -1,6 +1,4 @@
-# PhpNuget V. 3.0.12.11
-
-### NOTES
+# PhpNuget V. 4.0.0.0
 
 ## Purpose
 
@@ -60,7 +58,7 @@ And then restart Apache
 
 	sudo service httpd restart
 	
-This should be enough to let everything works.	
+This should be enough to let everything works
 
 ### Notes for Apache on Windows
 
@@ -190,7 +188,6 @@ All of the api lsited that returns a collection support the usage of parameters
 * /api/v1/Packages/$count: Same as Search()/$count
 * /api/v1/Packages(Id='\[package-id\]',Version='\[package-id\]'): Retruns the data for the single package
 
-
 ### Api V2
 
 All v1 APIs are present, remind to replace the v1 in the previous section with v2!
@@ -284,7 +281,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	
 * 3.0.12.10
     * Added wait dialogs for long operations (update, upload from external nuget and refresh packages)
-    
+
 * 3.0.12.9
     * Added support for .net 4.5.2
     * Internal refactoring for net framework selection
@@ -302,7 +299,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Specific override for data root
 	* Support Packages(Id='AngularJS.Core',Version='1.2.14') on v1 and v2 API
 	* Support for downloads count
-	
+
 * 3.0.12.6
 	* Release notes not considered
 	* Escaped license url
