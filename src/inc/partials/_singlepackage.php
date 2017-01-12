@@ -14,14 +14,9 @@ $id = UrlUtils::GetRequestParamOrDefault("id",null);
 $version = UrlUtils::GetRequestParamOrDefault("version",null);
 
 $db = new NuGetDb();
-$os = new PhpNugetObjectSearch();
-$query = "Id eq '".$id."' and Version eq '".$version."'";
-$os->Parse($query,$db->GetAllColumns());
-$items = $db->GetAllRows(1,0,$os);
+$items = $db->Query("Id eq '".$id."' and Version eq '".$version."'",1,0);
 if(sizeof($items)==0){
-	$query = "Id eq '".$id."'  orderby Version desc";
-	$os->Parse($query,$db->GetAllColumns());
-	$items = $db->GetAllRows(1,0,$os);
+	$items = $db->Query("Id eq '".$id."'  orderby Version desc",1,0);
 }
 
 
@@ -108,10 +103,7 @@ loadDownloadCount($item);
 	</li>
 	<?php
 	}
-	$os = new PhpNugetObjectSearch();
-	$query = "Id eq '".$id."' orderby Version desc";
-	$os->Parse($query,$db->GetAllColumns());
-	$items = $db->GetAllRows(99999,0,$os);
+	$items = $db->Query("Id eq '".$id."' orderby Version desc",99999,0);
 	if(sizeof($items)>1){
 	?>
 	<li><b>Versions</b>

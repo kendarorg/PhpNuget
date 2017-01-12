@@ -13,10 +13,7 @@ require_once(__ROOT__."/inc/db_users.php");
 $id = UrlUtils::GetRequestParamOrDefault("id",null);
 
 $db = new UserDb();
-$os = new PhpNugetObjectSearch();
-$query = "UserId eq '".$id."' or Name eq '".$id."'";
-$os->Parse($query,$db->GetAllColumns());
-$items = $db->GetAllRows(1,0,$os);
+$items = $db->Query( "UserId eq '".$id."' or Name eq '".$id."'",1,0);
 $inferred = false;
 if(sizeof($items)==0){
 	$nu = new UserEntity();
@@ -43,13 +40,12 @@ if($inferred){
 $query = "substringof('".$item->Name."',Author) or substringof('".$item->UserId."',Author) orderby Title asc, Version desc groupby Id";
 
 $db = new NuGetDb();
-$os = new PhpNugetObjectSearch();
-$os->Parse($query,$db->GetAllColumns());
+
 $pg = new Pagination();
 $pg->Skip = UrlUtils::GetRequestParamOrDefault("skip",0);
 $pg->Top = UrlUtils::GetRequestParamOrDefault("top",10);
 
-$items = $db->GetAllRows(999999,0,$os);
+$items = $db->Query($query,999999,0);
 $count = sizeof($items);
 ?>
 <h3> There are <?php echo $count;?> packages for the given profile</h3> 

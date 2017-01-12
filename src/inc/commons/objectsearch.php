@@ -454,6 +454,102 @@ class ObjectSearch
 		return $this->parseResult;
 	}
 	
+	public function ToMySql()
+	{
+		
+		if($this->parseResult==null || sizeof($this->parseResult)==0){
+		
+			return "";
+		}
+		$parseTreeItem = $this->parseResult[0];
+		$result = @$this->_toMySql($parseTreeItem);
+		
+		return $result;
+	}
+	
+	public function _toMySql($parseTreeItem)
+	{
+		//var_dump($parseTreeItem); echo "\r\n<br>";
+		
+		$result = "";
+		$t = strtolower($parseTreeItem->Type);
+		$v = $parseTreeItem->Value;
+		$c = $parseTreeItem->Children;
+		switch($t){
+			case "string":
+				return "'".$v."'";
+			case "number":
+				return $v;
+			case "boolean":	
+				return $v==false?"false":"true";
+		}
+		if($t == "function"){
+			$params = array();
+			for($i=0;$i<sizeof($c);$i++){
+				$params[] = $this->_toMySql($c[$i]);
+			}
+			
+			$result = $this->_toMySqlFunction($v,$params);
+		}else if($t == "group"){
+			$params = array();
+			for($i=0;$i<sizeof($c);$i++){
+				$params[] = $this->_toMySql($c[$i]);
+			}
+			$params[]=true;
+			$result = $this->_toMySqlFunction("doeq",$params);
+		}else if($t=="field"){
+
+			$fo = new Operator();
+			$fo->Type = "fieldinstance";
+			$fo->Value = $subject->$v;
+			$fo->Id = $v;
+			return "`".$v."`";
+		}else if($this->externalTypes!=null && $this->externalTypes->IsExternal($v)){
+			return $parseTreeItem;
+		}else{
+			throw new ParserException("Token '".$t."' not supported excuting");
+		}
+		return $result;
+	}
+	
+	function _toMySqlFunction($name,$params)
+	{
+		/*if($this->externalTypes!=null && $this->externalTypes->CanHandle($name,$params)){
+			return $this->externalTypes->$name($params);
+		}*/
+		
+		switch($name){
+			case("doand"):
+				return "(".join(" and ",$params).")";
+			case("door"):
+				return "(".join(" or ",$params).")";
+			case("doeq"):
+				return $params[0]."=".$params[1];
+			case("doneq"):
+				return $params[0]."<>".$params[1];
+			case("dogte"):
+				return $params[0].">=".$params[1];
+			case("dogt"):
+				return $params[0].">".$params[1];
+			case("dolt"):
+				return $params[0]."<".$params[1];
+			case("dolte"):
+				return $params[0]."<=".$params[1];
+			case("tolower"):
+				return "LOWER(".$params[0].")";
+			case("toupper"):
+				return "UPPER(".$params[0].")";
+			case("startswith"):
+				return $params[1]." LIKE '%".trim($params[0],"'")."'";
+			case("endswith"):
+				return $params[1]." LIKE '".trim($params[0],"'")."%'";
+			case("substringof"):
+				return $params[1]." LIKE '%".trim($params[0],"'")."%'";
+			default:
+				throw new Exception("Missing operator: ".$name);
+		}
+	}
+	
 	public function Execute($subject)
 	{
 		if($this->parseResult==null || sizeof($this->parseResult)==0){
@@ -709,6 +805,7 @@ class ObjectSearch
 				if(($i+1)==sizeof($ob)){
 					$sc = new SortClause();
 					$sc->Field = $v;
+					$sc->Type = $t;
 					$sc->Asc=true;
 					$this->_sortClause[] = $sc;
 					return;
@@ -719,6 +816,7 @@ class ObjectSearch
 				if($nv=="asc"){
 					$sc = new SortClause();
 					$sc->Field = $v;
+					$sc->Type = $t;
 					$sc->Asc=true;
 					$this->_sortClause[] = $sc;
 					$i++;
@@ -726,11 +824,13 @@ class ObjectSearch
 					$sc = new SortClause();
 					$sc->Field = $v;
 					$sc->Asc=false;
+					$sc->Type = $t;
 					$this->_sortClause[] = $sc;
 					$i++;
 				}else{
 					$sc = new SortClause();
 					$sc->Field = $v;
+					$sc->Type = $t;
 					$sc->Asc=true;
 					$this->_sortClause[] = $sc;
 				}
@@ -747,6 +847,61 @@ class ObjectSearch
 		
 		usort($subject, array($this, "_doSort"));
 		return $subject;
+	}
+	
+	public function _specialMySqlSort($type,$name,$direction)
+	{
+		return null;
+	}
+	
+	public function _specialMySqlGroup($type,$name)
+	{
+		return null;
+	}
+	
+	public function DoSortMySql($fieldNames,$fieldTypes)
+	{
+		$items = array();
+		for($i=0;$i<sizeof($fieldNames);$i++){
+			$items[strtolower($fieldNames[$i])]=$fieldTypes[$i];
+		}
+		
+		if(sizeof($this->_sortClause)==0) return "";
+		$toMerge = array();
+		foreach($this->_sortClause as $sc){
+			$special = $this->_specialMySqlSort($items[strtolower($sc->Field)],$sc->Field,$sc->Asc?"ASC":"DESC");
+			if($special==null || $special==""){
+				array_push($toMerge,"`".$sc->Field."` ".($sc->Asc?"ASC":"DESC"));
+			}else{
+				array_push($toMerge," ".$special."  ");
+			}
+		}
+		
+		return " ORDER BY ".join(" , ",$toMerge);
+	}
+	
+	
+	//ORDER BY INET_ATON(SUBSTRING_INDEX(CONCAT(versionnumber,'.0.0.0'),'.',4)), versionsuffix
+	public function DoGroupByMySql($fieldNames,$fieldTypes)
+	{
+		$items = array();
+		for($i=0;$i<sizeof($fieldNames);$i++){
+			$items[strtolower($fieldNames[$i])]=$fieldTypes[$i];
+		}
+		if(sizeof($this->_groupClause)==0) return "";
+		$toMerge = array();
+		foreach($this->_groupClause as $sc){
+			$special = $this->_specialMySqlGroup($items[strtolower($sc)],$sc);
+			if($special==null || $special==""){
+				array_push($toMerge,"`".$sc."` ");
+			}else{
+				array_push($toMerge," ".$special."  ");
+			}
+		}
+		
+		$res =  " GROUP BY ".join(" , ",$toMerge);
+		
+		return $res;
 	}
 	
 	/*

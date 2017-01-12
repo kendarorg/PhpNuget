@@ -15,15 +15,15 @@ function($stateProvider, $urlRouterProvider,pathHelper) {
         })
 	$stateProvider.state('users', {
             url: '/admin/users',
-            templateUrl: pathHelper.buildViewsPath('users/home.html')
+            templateUrl: pathHelper.buildViewsPath('users/home.php')
         })
 	$stateProvider.state('users_add', {
             url: '/admin/users/add',
-            templateUrl: pathHelper.buildViewsPath('users/add.html')
+            templateUrl: pathHelper.buildViewsPath('users/add.php')
         })
 	$stateProvider.state('users_detail', {
             url: '/admin/users/:userId',
-            templateUrl: pathHelper.buildViewsPath('users/detail.html'),
+            templateUrl: pathHelper.buildViewsPath('users/detail.php'),
 			controller: function($scope, $stateParams) {
 				$scope.UserId = $stateParams.userId;
 			}
@@ -32,14 +32,14 @@ function($stateProvider, $urlRouterProvider,pathHelper) {
 	$stateProvider.state('profile', {
 			abstract: true,
             url: '/profile/:userId',
-            templateUrl: pathHelper.buildViewsPath('profile/home.html'),
+            templateUrl: pathHelper.buildViewsPath('profile/home.php'),
 			controller: function($scope, $stateParams) {
 				$scope.UserId = $stateParams.userId;
 			}
         })
 	$stateProvider.state('profile.user', {
             url: '/user',
-            templateUrl: pathHelper.buildViewsPath('profile/profile.user.html'),
+            templateUrl: pathHelper.buildViewsPath('profile/profile.user.php'),
 			controller: function($scope, $stateParams) {
 				$scope.UserId = $stateParams.userId;
 			}
@@ -55,7 +55,7 @@ function($stateProvider, $urlRouterProvider,pathHelper) {
 	$stateProvider.state('profile.packages', {
 		abstract: true,
 		url: '/packages',
-		templateUrl: pathHelper.buildViewsPath('profile/profile.packages.html'),
+		templateUrl: pathHelper.buildViewsPath('profile/profile.packages.php'),
 		controller: function($scope, $stateParams) {
 			$scope.UserId = $stateParams.userId;
 		}
@@ -63,7 +63,7 @@ function($stateProvider, $urlRouterProvider,pathHelper) {
     
 	$stateProvider.state('profile.packages.list', {
             url: '/list/:skip',
-            templateUrl: pathHelper.buildViewsPath('profile/profile.packages.list.html'),
+            templateUrl: pathHelper.buildViewsPath('profile/profile.packages.list.php'),
 			controller: function($scope, $stateParams) {
 				$scope.UserId = $stateParams.userId;
 				$scope.Skip = parseInt($stateParams.skip);

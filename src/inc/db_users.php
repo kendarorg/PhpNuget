@@ -1,7 +1,14 @@
 <?php
 if(!defined('__ROOT__'))define('__ROOT__',dirname( dirname(__FILE__)));
 
+require_once(__ROOT__."/inc/commons/mysqldb.php");
 require_once(__ROOT__."/inc/commons/smalltxtdb.php");
+
+if(__DB_TYPE__==DBMYSQL){
+	$dbfactory = "newMySqlDb";
+}else{
+	$dbfactory = "newSmallTxtDb";
+}
 require_once(__ROOT__."/inc/commons/utils.php");
 require_once(__ROOT__."/inc/commons/objectsearch.php");
 require_once(__ROOT__."/inc/db_usersentity.php");
@@ -12,17 +19,14 @@ define('__MYTXTDBROWS_USR__',
       "UserId:|:Name:|:Company:|:Md5Password:|:Packages:|:Enabled:|:Email:|:Token:|:Admin:|:Id");
 define('__MYTXTDBROWS_USR_TYP__',
       "string:|:string:|:string:|:string:|:string:|:boolean:|:string:|:string:|:boolean:|:string");
+define('__MYTXTDBROWS_USR_KEY__',
+      "UserId");
 
 
 class UserDb
 {
     public function EntityName(){ return "UserEntity";}
     public function __construct() 
-    {
-        $this->initialize();
-    }
-    
-    public function UserDbSortUserId()
     {
         $this->initialize();
     }
@@ -35,10 +39,26 @@ class UserDb
 	{
 		return SmallTxtDb::RowTypes(__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
 	}
+	
+	public function Query($query=null,$limit=99999,$skip=0)
+	{
+		global $dbfactory;
+		$os = null;
+		if($query!=null && $query!=""){
+			$os = new ObjectSearch();
+			$os->Parse($query,$this->GetAllColumns());
+		}
+		
+		$this->initialize();
+        $dbInstance =call_user_func($dbfactory,__DB_VERSION__,__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
+		$dbInstance->BuildItem= 'nugetDbUserBuilder';
+		return $dbInstance->GetAll($limit,$skip,$os);
+	}
     
     public function AddRow($nugetEntity,$update)
     {
-        $dbInstance =  new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
+		global $dbfactory;
+        $dbInstance =  call_user_func($dbfactory,__DB_VERSION__,__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
         $toInsert = array();
         $vars = explode(":|:",__MYTXTDBROWS_USR__);
         //print_r($vars);
@@ -46,22 +66,25 @@ class UserDb
             $toInsert[$column] = $nugetEntity->$column;
         }
         $doAdd = true;
-        for($i=0;$i<sizeof($dbInstance->rows);$i++){
-            if($dbInstance->rows[$i]["UserId"]==$nugetEntity->UserId){
-                 if($update){
-                    $toInsert["Token"]=$dbInstance->rows[$i]["Token"];
-                    $toInsert["UserId"]=$dbInstance->rows[$i]["UserId"];
-                    $dbInstance->rows[$i] = $toInsert;
-                    $doAdd = false;
-                 }
-            }
-        }
-        
+		$foundedUsers = $this->Query("(UserId eq '".$nugetEntity->UserId."')",1,0);
+		if(sizeof($foundedUsers)==1){
+			$toInsert["Token"]=$foundedUsers[0]->Token;
+            $toInsert["UserId"]=$foundedUsers[0]->UserId;
+			if($update){
+				$doAdd = false;
+			}else{
+				throw new Exception("Duplicate found!");
+			}
+		}
+		
         if($doAdd){
             $toInsert["Token"]=Utils::NewGuid();
 			$toInsert["Id"]=Utils::NewGuid();
             $dbInstance->add_row($toInsert);
-        }
+        }else{
+			$dbInstance->update_row($toInsert,array("UserId"=>$toInsert["UserId"]));
+		}
+		
         $dbInstance->save();
         return true;
     }
@@ -69,40 +92,24 @@ class UserDb
     
     public function DeleteRow($nugetEntity)
     {
-        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
+		global $dbfactory;
+        $dbInstance = call_user_func($dbfactory,__DB_VERSION__,__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
         $nameOfCaptain = "";
-        $rowNumber = 0;
-        foreach ($dbInstance->rows as $row) {
-        	if ($row['UserId'] == $nugetEntity->UserId) {
-        		$dbInstance->delete_row($rowNumber);
-        		break;
-        	}
-        	$rowNumber++;
-        }
+        
+		$select = array('UserId'=>$nugetEntity->UserId);
+        $dbInstance->delete_row($select);
         $dbInstance->save();
     }
 	
 	public function GetByUserId($id)
     {
-        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
-		$dbInstance->BuildItem= 'nugetDbUserBuilder';
-        $nameOfCaptain = "";
-        foreach ($dbInstance->rows as $row) {
-        	if ($row['UserId'] == $id) {
-        		return $dbInstance->CreateItem($row);
-        	}
-        }
+		$items = $this->Query("(UserId eq '".$id."')",1,0);
+		if(sizeof($items)==1) return $items[0];
+        
         return null;
     }
 	
-	public function GetAllRows($limit=999999,$skip=0,$objectSearch=null)
-    {
-        $this->initialize();
-        $toret = array();
-        $dbInstance = new SmallTxtDb("3.0.0.0",__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__);
-		$dbInstance->BuildItem= 'nugetDbUserBuilder';
-		return $dbInstance->GetAll($limit,$skip,$objectSearch);
-    }
+	
     
     public function GetAllColumns()
     {

@@ -1,6 +1,5 @@
 <?php
 
-
 //http://www.innovativephp.com/analyze-zip-file-contents-using-php/
 //http://php.net/manual/en/function.zip-open.php
 
@@ -16,14 +15,13 @@ class ZipManager
     {
         $this->zipFile = $zipFile;
 		if(!file_exists($this->zipFile)){
-			uplog("zipmanger","Missing file ".$zipFile);
 			throw new Exception("Missing file ".$this->zipFile);
 		}
     }
     
     public function LoadFile($path)
     {
-		uplog("zipmanger","Opening file ".$this->zipFile);
+		
         $zip = zip_open($this->zipFile);
         if ($zip) {
             while ($zip_entry = zip_read($zip)) {
@@ -53,7 +51,7 @@ class ZipManager
             while ($zip_entry = zip_read($zip)) {
                 $zip_entry_name = zip_entry_name($zip_entry);
                 
-				uplog("zipmanger","GenerateInfos-".$zip_entry_name);
+				
                 if (is_dir($zip_entry_name)) {
                     $folder_count++;
                 }else {

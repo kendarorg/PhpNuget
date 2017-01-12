@@ -1,9 +1,6 @@
 <?php
 
 require_once(dirname(__FILE__)."/../gerfen/class.stream.php");
-//include_once('class.stream.php');
-
-
 
 class HttpUtils
 {

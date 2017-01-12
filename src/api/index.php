@@ -36,9 +36,7 @@ if(strlen($id)==0 || strlen($version)==0){
 
 $query = "Id eq '".$id."' and Version eq '".$version."'";
 $db = new NuGetDb();
-$os = new PhpNugetObjectSearch();
-$os->Parse($query,$db->GetAllColumns());
-$allRows = $db->GetAllRows(1,0,$os);
+$allRows = $db->Query($query,1,0);
 
 if(sizeof($allRows)==0){
 	HttpUtils::ApiError(404,"Not found");
@@ -50,9 +48,7 @@ if($method=="post" || $method=="delete"){
 	}
 	
 	$dbu = new UserDb();
-	$osu = new ObjectSearch();
-	$osu->Parse("Token eq '{".$apiKey."}'",$dbu->GetAllColumns());
-	$users = $dbu->GetAllRows(1,0,$osu);
+	$users = $dbu->Query("Token eq '{".$apiKey."}'",1,0);
 	if(sizeof($users)==0){
 		HttpUtils::ApiError(404,"Not found");
 	}

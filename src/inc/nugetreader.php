@@ -122,20 +122,29 @@ class NugetManager
 		$zipmanager = new ZipManager($nupkgFile);
         $files = $zipmanager->GenerateInfos();
         $nupckgName = "";
-        uplogh("nugetreader","Nupckg content of '".$nupkgFile."'!",$files);
-        //die();
+        //uplogh("nugetreader","Nupckg content of '".$nupkgFile."'!",$files);
+        $frameworks = array();
         foreach($files["entries_name"] as $fileName)
         {
             $pinfo = pathinfo($fileName);
-            if($pinfo["basename"]==$fileName){
+            if($pinfo["basename"]==$fileName && $nupckgName==""){
                 if(ends_with($fileName,".nuspec")){
                     $nupckgName = $fileName;
                 }
             }
+            
+            $isLib= strpos($pinfo["dirname"],"lib/");
+            if($isLib!==false && $isLib ==0){
+            	$libex = explode("/",$pinfo["dirname"]);
+            	if(sizeof($libex)>=2){
+            		$frameworks[$libex[1]]=$libex[1];
+            	}
+            }
         }
+        uplogv("nugetreader.nuget","ZIPCONT",$files);
         $nuspecContent = $zipmanager->LoadFile($nupckgName);
         
-		uplogv("nugetreader","Nuspec content!",$nuspecContent);
+		//uplogv("nugetreader","Nuspec content!",$nuspecContent);
         $xml = XML2Array($nuspecContent);
         $e = new PackageDescriptor();
         $m=$xml["metadata"];
@@ -144,7 +153,22 @@ class NugetManager
         /*for($i=0;$i<sizeof($ark);$i++){
             $m[strtolower ($ark[$i])]=$mt[$ark[$i]];
         }*/
+        $e->TargetFramework = "";
         
+        uplogv("nugetreader.nuget","fwks",$frameworks);
+        foreach($frameworks as $key=>$val){
+        	$urlKey = urldecode($key);
+        	if(strpos($urlKey,"+")!==false){
+        		$kk = explode("+",$urlKey);
+        		foreach($kk as $subk){
+        			$e->TargetFramework.="|".$subk."|";
+        		}
+        	}else{
+        		$e->TargetFramework.="|".$key."|";
+        	}
+        	
+        }
+        $e->TargetFramework = str_replace("||","|",$e->TargetFramework);
         $e->Dependencies = $this->LoadDependencies($m);
         
         
@@ -155,6 +179,7 @@ class NugetManager
         $e->PackageHashAlgorithm = strtoupper(Settings::$PackageHash);
         $e->PackageSize = filesize($nupkgFile);
         $e->Listed = true;
+        uplogv("nugetreader.nuget","nuspec",$e);
 		return $e;
 	}
 	
@@ -162,10 +187,8 @@ class NugetManager
     {
 		global $loginController;
 		$nugetDb = new NuGetDb();
-		$os = new PhpNugetObjectSearch();
 		$query = "Id eq '".$e->Id."' orderby Version desc";
-		$os->Parse($query,$nugetDb->GetAllColumns());
-		$res = $nugetDb->GetAllRows(999999,0,$os);
+		$res = $nugetDb->Query($query,999999,0);
 		if(sizeof($res)>0 && !$loginController->Admin){
 			$id = $res[0]->UserId;
 			if($id!=$e->UserId){
@@ -196,9 +219,7 @@ class NugetManager
     public function LoadAllPackagesEntries()
     {
         $nugetDb = new NuGetDb();
-        $toret = $nugetDb->GetAllRows();
-        
-        return $toret;
+        return $nugetDb->Query();
     }
     
     
@@ -272,10 +293,10 @@ class NugetManager
     }
     
     
-    private function TranslateNet($tf)
+    /*private function TranslateNet($tf)
     {
         return translateNetVersion($tf);
-    }
+    }*/
     
     public function LoadNextVersions($packages,$versions,$available)
     {

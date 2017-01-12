@@ -15,7 +15,7 @@ function translateNetVersion($tf)
         case(".netframework3.0"): return "net30";
         case(".netframework2.0"): return "net20";
         case(".netframework1.0"): return "net10";
-        default: return "UNKNOWN";
+        default: return $tf;
     }
 }
 
@@ -55,6 +55,11 @@ class NugetDependencyGroup
 class PackageDescriptor
 {
 	var $Id;
+	var $Version0;
+	var $Version1;
+	var $Version2;
+	var $Version3;
+	var $VersionBeta;
 	var $Version;
 	var $Author;
 	var $Copyright;
@@ -79,7 +84,7 @@ class PackageDescriptor
 	var $RequireLicenseAcceptance;
 	var $Summary;
 	var $Title;
-	//$VersionDownloadCount
+	var $VersionDownloadCount;
 	//$MinClientVersion
 	var $Tags;
 	var $LicenseUrl;

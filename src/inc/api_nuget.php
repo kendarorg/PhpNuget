@@ -57,18 +57,31 @@ class ApiNugetBase
         $tora = array();
         
         //<d:Dependencies>Castle.Core:3.1.0:net40|Castle.Windsor:3.1.0:net40|Common.Logging:2.0.0:net40|Quartz:2.0.1:net40|Castle.Core:2.1.0:net20|Castle.Windsor:2.1.0:net20|Common.Logging:1.0.0:net20|Quartz:1.0.1:net20</d:Dependencies>
-        for($i=0;$i<sizeof($d);$i++){
-            $sd = $d[$i];
-            if($sd->IsGroup){
-                $fw= $this->TranslateNet($sd->TargetFramework);
-                for($j=0;$j<sizeof($sd->Dependencies);$j++){
-                    $sdd = $sd->Dependencies[$j];
-                    $tora[]=($sdd->Id.":".$sdd->Version.":".$fw);
-                }
-            }else{
-                $tora[]=($sd->Id.":".$sd->Version.":");
-            }
-        }
+		if(is_array($d)){
+			for($i=0;$i<sizeof($d);$i++){
+				$sd = $d[$i];
+				if($sd->IsGroup){
+					$fw= $this->TranslateNet($sd->TargetFramework);
+					//if(strpos($fw,"+")===FALSE) {
+						for($j=0;$j<sizeof($sd->Dependencies);$j++){
+							$sdd = $sd->Dependencies[$j];
+							$tora[]=($sdd->Id.":".$sdd->Version.":".$fw);
+						}
+					/*}else{
+						$fws = explode("+",$fw);
+						for($k=0;$k<sizeof($fws);$k++){
+							$subfw = $fws[$k]
+							for($j=0;$j<sizeof($sd->Dependencies);$j++){
+								$sdd = $sd->Dependencies[$j];
+								$tora[]=($sdd->Id.":".$sdd->Version.":".$subfw);
+							}
+						}
+					}*/
+				}else{
+					$tora[]=($sd->Id.":".$sd->Version.":");
+				}
+			}
+		}
         //print_r($tora);die();
         return implode("|",$tora);
     }
@@ -169,28 +182,19 @@ class ApiNugetBase
 	{
 		$pg= $this->_getPagination();
 		$db = new NuGetDb();
-		$os = new PhpNugetObjectSearch();
-		
-		if(strlen($query)>0){
-			$os->Parse($query,$db->GetAllColumns());
-		}else{
-			$os = null;
-		}
-		
+				
 		$count = UrlUtils::GetRequestParamOrDefault("count","false")=="true";
 		$allpages = UrlUtils::GetRequestParamOrDefault("\$inlinecount","none")=="allpages";
 		$itemsCount = -1;
 		
-		
-		$allRows = $db->GetAllRows(999999,0,$os);
-		$itemsCount = sizeof($allRows);
-		
 		if($count || $allpages){
+			$allRows = $db->Query($query);
+			$itemsCount = sizeof($allRows);
 			if(!$allpages){
 				HttpUtils::WriteData($itemsCount);
 			}
 		}
-		$allRows = $db->GetAllRows($pg->Top+1,$pg->Skip,$os);
+		$allRows = $db->Query($query,$pg->Top+1,$pg->Skip);
 		
 		
 		if(!UrlUtils::IsFake()){
@@ -203,7 +207,8 @@ class ApiNugetBase
 		$r["@BASEURL@"]=$baseUrl;
 		$r["@NEXTITEM@"]="";
 		$r["@ITEMSCOUNT@"]="";
-		if($itemsCount >=0){
+		
+		if($itemsCount>=0){
 			$r["@ITEMSCOUNT@"]="<m:count>".$itemsCount."</m:count>";
 		}
 		

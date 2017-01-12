@@ -4,6 +4,16 @@ define('__DOWNLOAD_DB__',Path::Combine(Settings::$DataRoot,"downloads"));
 
 function incrementDownload($id,$version)
 {
+	if(__DB_TYPE__==DBMYSQL){
+	
+		$connection = mysqli_connect(__MYSQL_SERVER__, __MYSQL_USER__, __MYSQL_PASSWORD__,__MYSQL_DB__);
+		$query = "UPDATE `nugetdb_pkg` SET versiondownloadcount = versiondownloadcount+1 WHERE `Id`='".$id."' AND `Version`='".$version."'";
+		$result = mysqli_query( $connection,$query );
+		$query = "UPDATE `nugetdb_pkg` SET downloadcount = downloadcount+1 WHERE `Id`='".$id."'";
+		$result = mysqli_query( $connection,$query );
+		mysqli_close($connection);
+		return;
+	}
 	$id = strtolower($id);
 	$version = strtolower($version);
 	if(!file_exists(__DOWNLOAD_DB__)){
@@ -17,6 +27,7 @@ function incrementDownload($id,$version)
 
 function loadDownloadCount(&$nugetEntity)
 {
+	if(__DB_TYPE__==DBMYSQL) return;
 	$id = strtolower($nugetEntity->Id);
 	$version = strtolower($nugetEntity->Version);
 	if(!file_exists(__DOWNLOAD_DB__)){

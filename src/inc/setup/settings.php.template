@@ -20,6 +20,12 @@ define('__ALLOWUSERADD__',false);
 define('__ALLOWPACKAGESDELETE__',@AllowPackageDelete@);
 define('__ALLOWPACKAGEUPDATE__', @AllowPackageUpdate@);
 
+@define('__MYSQL_SERVER__', "@MySqlServer@");
+@define('__MYSQL_USER__',"@MySqlLogin@");
+@define('__MYSQL_PASSWORD__',"@MySqlPassword@");
+@define('__MYSQL_DB__',"@MySqlDb@");
+@define('__DB_TYPE__',@DbType@);
+
 //If true users are allowed to add a package only if the firstly added it
 //or if theyr user id is inside the "owners" field of the package
 define('__LIMITUSERSPACKAGES__',true);

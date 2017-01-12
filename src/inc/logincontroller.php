@@ -26,7 +26,7 @@ class LoginController
 			$this->Admin = $_SESSION["Admin"];
 			$this->Packages = $_SESSION["Packages"];
 		}else if("true"==$doLogin){
-			$this->_login();	
+			$this->_login();
 			$location = UrlUtils::CurrentUrl(Settings::$SiteRoot);
 			header("Location: ".$location);
 			die();			
@@ -43,6 +43,14 @@ class LoginController
 		if($this->IsLoggedIn) return;
 		$location = UrlUtils::CurrentUrl(Settings::$SiteRoot."?specialType=logon");
 		header("Location: ".$location);
+		die();
+	}
+	
+	function UnauthorizedIfNotLoggedIn()
+	{
+		if($this->IsLoggedIn) return;
+		http_response_code(403);
+		echo "Unauthorized";
 		die();
 	}
 	
@@ -67,17 +75,10 @@ class LoginController
 		$udb = new UserDb();
 		$user = null;
 
-		$ar = $udb->GetAllRows();		
-		
-		foreach($ar as $row)
-		{
+		$ar = $udb->Query("(Enabled eq true) and (UserId eq '".$uid."' or Email eq '".$uid."') and (Md5Password eq '".$pwd."'");		
 			
-			if($row->Enabled && strtolower($uid) == strtolower($row->Email) || $uid == $row->UserId){
-				if($pwd==$row->Md5Password){
-					$user = $row;
-					break;
-				}
-			}
+		if(sizeof($ar)==1){
+			$user = $ar[0];
 		}
 		
 		
@@ -88,9 +89,9 @@ class LoginController
 			return;
 		}
 		$this->IsLoggedIn = true;
-		$this->UserId = $row->UserId;
-		$this->Admin = $row->Admin;
-		$this->Packages = $row->Packages;
+		$this->UserId = $user->UserId;
+		$this->Admin = $user->Admin;
+		$this->Packages = $user->Packages;		
 		$_SESSION["UserId"] = $this->UserId;
 		$_SESSION["Admin"] = $this->Admin;
 		$_SESSION["Packages"] = $this->Packages;

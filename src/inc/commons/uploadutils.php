@@ -12,11 +12,6 @@ class UploadUtils
     {
         $this->initialize($destinationDir,$allowedExts,$maxSize,$allowAll=false);      	
     }
-    
-    /*public function UploadUtils($destinationDir,$allowedExts,$maxSize,$allowAll=false)
-    {
-        $this->initialize($destinationDir,$allowedExts,$maxSize,$allowAll);
-    }*/
 	
     function initialize($destinationDir,$allowedExts,$maxSize,$allowAll=false)
     {
@@ -39,14 +34,8 @@ class UploadUtils
 		$files = $_FILES;
 		$isRealFile = true;
 		if(!array_key_exists($fileId,$files)){
-			//uplogv("uploadutils","Upload::TryRawRequest",$files);
 			$files = HttpUtils::RawRequest();
-			//uplogv("uploadutils","Raw request file",$files);die();
-			//$isRealFile = false;
 		}
-		/*}else{
-			uplog("uploadutils","Standard request");
-		}*/
 		
 		foreach($files as $fileId => $file){
 			

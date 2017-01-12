@@ -1,5 +1,7 @@
 # PhpNuget V. 3.0.12.11
 
+### NOTES
+
 ## Purpose
 
 This is born to have my personal repository for nuget, on my cheapo PHP hosting.
@@ -13,8 +15,14 @@ Verified on:
 * PHP 5.6-IIS 8
 * PHP 5.4.2-Apache 2.0 (OpenSuse 13.1)
 * PHP 5.3.3-Apache 2.2 (CentOS 6.5)
+* PHP 7.0.14-Apache 2.4 (Windows 10 Home)
 
 ## Installation
+
+### Notes for everybody
+
+* When installing the MySql version the db must be present with the user configured!
+* The module php_curl must be present and configured inside the php.ini
 
 ### Notes for Apache With Red Hat Linux
 
@@ -54,7 +62,17 @@ And then restart Apache
 	
 This should be enough to let everything works.	
 
-### Prerequisities For IIS
+### Notes for Apache on Windows
+
+If php is unable to load curl-related functions copy the following files from the php directory to "C:\Windows\System".
+You can verify this by downloading a file from the official nuget repository via the manage packages page.
+
+* libeay32.dll
+* libsasl.dll
+* ssleay32.dll
+* libssh2
+
+### Prerequisites For IIS
 
 These steps are NOT needed if your hosting already configured PHP
 
@@ -85,6 +103,9 @@ These steps are NOT needed if your hosting already configured PHP
 	* php-cgi.exe: To allow the configuration of php under IIS.
 	* Allow package update via Upload: Default disabled, if enabled it is possible to overwrite the packages BUT THIS IS NOT A STANDARD BEHAVIOUR.
 	* Allow package delete: Default disabled. LEAVING IT ENABLED IS NOT A STANDARD BEHAVIOUR
+* When using the mysql installation
+	* Check the "Use mysql" and fill the configuration data
+	* NOTE: Import from txt db does not yet work!!!
 * If under IIS set the path of 'php-cgi.exe' (leave blank if your hosting already configured PHP)
 * Change the password, email and login of the administration without worries.
 * Rename the setup.php to setup.bak
@@ -243,7 +264,6 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 ### Should
 
 * Add robots.txt
-* Port to MySQL
 * Import v3.0.0.0 txt database on MySQL
 
 ### Would
@@ -254,6 +274,9 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
+* 4.0.0.0
+	* Added MySQL as storage engine
+	
 * 3.0.12.11
 	* Added "count" value on all packages requests for nuget 3.5
 	* Verified compatibility with Nuget.exe 2.8, 3.4, 3.5

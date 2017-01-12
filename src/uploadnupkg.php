@@ -4,6 +4,8 @@ require_once(__ROOT__."/settings.php");
 require_once(__ROOT__."/inc/commons/uploadutils.php");
 require_once(__ROOT__."/inc/nugetreader.php");
 require_once(__ROOT__."/inc/commons/url.php");
+require_once(__ROOT__."/inc/logincontroller.php");
+
 if (!empty($_SERVER['HTTP_X_NUGET_APIKEY'])) {
 	HttpUtils::ApiError('403', 'Invalid request');
 	die();
@@ -18,9 +20,7 @@ if(!$loginController->IsLoggedIn){
 		parent.packagesUploadControllerCallback("fail-unathorized","none","none");
 	<?php
 }else if(UploadUtils::IsUploadRequest()){
-	
 	$uploader = new UploadUtils(Settings::$PackagesRoot,array("nupkg"),Settings::$MaxUploadBytes);
-	
 	$result = null;
 	try{
 		$result = @$uploader->Upload("fileName");
@@ -30,7 +30,6 @@ if(!$loginController->IsLoggedIn){
 		$result["errorCode"]="";
 		$result["errorMessage"]="Wrong file";
 	}
-	
 	$fileName = basename($result["name"],".nupkg");
 	$message = "";
 	if($result["hasError"]==true){
@@ -62,7 +61,6 @@ if(!$loginController->IsLoggedIn){
 			parent.packagesUploadControllerCallback(true,"<?php echo $parsedNuspec->Id;?>","<?php echo $parsedNuspec->Version;?>");
 			<?php
 		}catch(Exception $ex){
-			
 			if(file_exists($result["destination"])){
 				unlink($result["destination"]);
 			}

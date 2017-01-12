@@ -1,6 +1,9 @@
 <?php
 require_once(dirname(__FILE__)."/../../../root.php");
 require_once(__ROOT__."/settings.php");
+require_once(__ROOT__."/inc/logincontroller.php");
+
+$loginController->UnauthorizedIfNotLoggedIn();
 
 $udb = new UserDb();
 $user = $udb->GetByUserId($loginController->UserId);

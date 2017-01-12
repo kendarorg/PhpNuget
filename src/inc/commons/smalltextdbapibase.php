@@ -42,15 +42,7 @@ class SmallTextDbApiBase extends ApiBase
 	{
 		$pg= $this->_getPagination();
 		$db = $this->_openDb();
-		$allRows = $db->GetAllRows();
-		$count = sizeof($allRows);
-		if($count<$pg->Skip){
-			ApiBase::ReturnResult(null);
-		}
-		$result = array();
-		for($i=$pg->Skip;$i<$count && $i<($pg->Skip+$pg->Top);$i++){
-			$result[] = $allRows[$i];
-		}
+		$result = $db->Query(null,$pg->Top,$pg->Skip);
 		ApiBase::ReturnSuccess($result);
 	}
 	
@@ -58,12 +50,17 @@ class SmallTextDbApiBase extends ApiBase
 	{
 		$db = $this->_openDb();
 		$keyArray = $this->_buildKeysFromRequest($db);
-		$allRows = $db->GetAllRows();
+		$q = array();
 		
-		for($i=0;$i<sizeof($allRows);$i++){
-			if($this->_isMatch($keyArray,$allRows[$i])){
-				ApiBase::ReturnSuccess($allRows[$i]);
-			}
+		foreach($keyArray as $k=>$v){
+			array_push($q,"(".$k." eq '".$v."')");
+		}
+		$query = join(" and ",$q);
+		
+		$allRows = $db->Query($query);
+		
+		if(sizeof($allRows)==1){
+			ApiBase::ReturnSuccess($allRows[0]);
 		}
 		ApiBase::ReturnError("Item not found",404);
 	}
@@ -75,13 +72,17 @@ class SmallTextDbApiBase extends ApiBase
 		
 		$this->_verifyDelete($db,$keyArray);
 		
-		$allRows = $db->GetAllRows();
+		$q = array();
 		
-		for($i=0;$i<sizeof($allRows);$i++){
-			if($this->_isMatch($keyArray,$allRows[$i])){
-				$db->DeleteRow($allRows[$i]);
-				ApiBase::ReturnSuccess($allRows[$i]);
-			}
+		foreach($keyArray as $k=>$v){
+			array_push($q,"(".$k." eq '".$v."')");
+		}
+		$query = join(" and ",$q);
+		$allRows = $db->Query($query);
+		
+		if(sizeof($allRows)==1){
+			$db->DeleteRow($allRows[0]);
+			ApiBase::ReturnSuccess($allRows[0]);
 		}
 		ApiBase::ReturnSuccess(null);
 	}
@@ -108,14 +109,21 @@ class SmallTextDbApiBase extends ApiBase
 		$entity = $this->_buildEntityFromRequest($db);
 		
 		$keyArray = $this->_buildKeysFromRequest($db);
-		$allRows = $db->GetAllRows();
-		$founded = null;
-		for($i=0;$i<sizeof($allRows);$i++){
-			if($this->_isMatch($keyArray,$allRows[$i])){
-				$founded = $allRows[$i];
-				break;
-			}
+		
+		$q = array();
+		
+		foreach($keyArray as $k=>$v){
+			array_push($q,"(".$k." eq '".$v."')");
 		}
+		$query = join(" and ",$q);
+		
+		$allRows = $db->Query($query);
+		
+		$founded = null;
+		if(sizeof($allRows)==1){
+			$founded = $allRows[0];
+		}
+		
 		if($founded==null){
 			ApiBase::ReturnError("Item not found",404);
 		}

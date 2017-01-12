@@ -6,6 +6,9 @@ require_once(__ROOT__."/inc/commons/path.php");
 require_once(__ROOT__."/inc/db_nugetpackages.php");
 require_once(__ROOT__."/inc/nugetreader.php");
 require_once(__ROOT__."/inc/phpnugetobjectsearch.php");
+require_once(__ROOT__."/inc/logincontroller.php");
+
+$loginController->UnauthorizedIfNotLoggedIn();
 
 class PackageGroup
 {
@@ -40,7 +43,7 @@ class PackagesApi extends SmallTextDbApiBase
 	{
 		throw new Exception("Operation insert not allowed!");
 	}
-		
+	
 	protected function _verifyDelete($db,$keysArray)
 	{
 		if(__ALLOWPACKAGESDELETE__!=true){
@@ -58,17 +61,17 @@ class PackagesApi extends SmallTextDbApiBase
 		
 		
 		if(!$loginController->Admin){
-			//if($user->Id!=$old->UserId){
+			if($user->Id!=$old->UserId){
 				throw new Exception("Operation not allowed with current rights!");
-			//}
+			}
 		}
 	}	
 	
 	protected function _buildKeysFromRequest($db)
 	{
 		$result = array();
-		$result[]= UrlUtils::GetRequestParam("Id");
-		$result[]= UrlUtils::GetRequestParam("Version");
+		$result["Id"]= UrlUtils::GetRequestParam("Id");
+		$result["Version"]= UrlUtils::GetRequestParam("Version");
 		return $result;
 	}
 	
@@ -154,12 +157,10 @@ class PackagesApi extends SmallTextDbApiBase
 		
 		$this->_preExecute();
 		$pg= $this->_getPagination();
-		$db = $this->_openDb();
-		$os = new PhpNugetObjectSearch();
+		$db = $this->_openDb();	
 		
-		$os->Parse($query,$db->GetAllColumns());
-		$count = sizeof($db->GetAllRows(999999,0,$os));
-		$allRows = $db->GetAllRows($pg->Top,$pg->Skip,$os);
+		$count = sizeof($db->Query($query,999999,0));
+		$allRows = $db->Query($query,$pg->Top,$pg->Skip);
 		
 		//$allRows = $os->DoSort($allRows,NuGetDb::RowTypes());
 		ApiBase::ReturnSuccess($allRows,"","",$count);
@@ -249,7 +250,7 @@ class PackagesApi extends SmallTextDbApiBase
 			$skip = intval(UrlUtils::GetRequestParam("skip"));
 			$count = intval(UrlUtils::GetRequestParam("count"));
 			$total = sizeof($files);
-			
+						
 			$udb = new UserDb();
 			$user = $udb->GetByUserId($loginController->UserId);
 			

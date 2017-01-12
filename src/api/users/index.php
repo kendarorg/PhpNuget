@@ -3,6 +3,7 @@ require_once(dirname(__FILE__)."/../../root.php");
 require_once(__ROOT__."/settings.php");
 require_once(__ROOT__."/inc/api_users.php");
 require_once(__ROOT__."/inc/commons/url.php");
+require_once(__ROOT__."/inc/logincontroller.php");
 
 if(!$loginController->Admin){
 	$uid = UrlUtils::GetRequestParam("UserId");

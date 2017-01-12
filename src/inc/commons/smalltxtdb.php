@@ -1,4 +1,8 @@
 <?php
+function newSmallTxtDb($a,$b,$c,$d,$e)
+{
+	return new SmallTxtDb($a,$b,$c,$d,$e);
+}
 
 class SmallTxtDb
 {
@@ -64,26 +68,37 @@ class SmallTxtDb
         return $row;   
     }
     
-    public function __construct($version,$dbFile,$dbRows,$dbTypes,$loadData = true) 
+    public function __construct($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData = true) 
     {
-        $this->initialize($version,$dbFile,$dbRows,$dbTypes,$loadData);
+        $this->initialize($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData);
     }
     
-    public function SmallTxtDb($version,$dbFile,$dbRows,$dbTypes,$loadData = true)
+    public function SmallTxtDb($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData = true)
     {
-        $this->initialize($version,$dbFile,$dbRows,$dbTypes,$loadData);
+        $this->initialize($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData);
     }
     
-    private function initialize($version,$dbFile,$dbRows,$dbTypes,$loadData = true)
+
+	var $_keys=array();
+    
+    private function initialize($version,$dbFile,$dbRows,$dbTypes,$keys,$loadData = true)
     {
-        
         $this->cr="\n";
         $this->separator = ":|:";
         $this->dbFile = $dbFile;
         $this->dbRows = $dbRows;
         $this->dbTypes = $dbTypes;
 		$this->_version = $version;
+		$this->_keys = array();
+		foreach(explode(":|:",$keys) as $kk){
+			$this->_keys[strtolower($kk)]=$kk;
+			$this->_keys[$kk]=$kk;
+		}
         if(!file_exists($this->dbFile)){
+			$dir = dirname($this->dbFile);
+			if(!file_exists($dir)){
+				mkdir($dir,__RW_ADMIN_R_ALL__,true);
+			}
             $fp = fopen($this->dbFile, 'w');
             fwrite($fp, "@Version:".$this->_version.$this->cr);
             fwrite($fp, $this->dbRows.$this->cr);
@@ -134,14 +149,47 @@ class SmallTxtDb
                     $row = array();
                     $vals = explode($this->separator,$splitted[$i]);
                     foreach($this->columns as $key => $value){
-                        $row[$key]=$this->re_cr_lf(unserialize($vals[$value]));
+						@$val= unserialize($vals[$value]);
+						
+                        $row[$key]=$this->re_cr_lf($val);
                     }
 					
-                    $this->rows[]=$this->VerifyTypes($row);
+					$part = $this->VerifyTypes($row);
+					if(array_key_exists("Id",$row)){
+						if($row["Id"]!=false){
+							$this->rows[]= $part;
+						}
+					}else{
+						$this->rows[]= $part;
+					}
                 }
             }
         }
     }
+	
+	public function update_row($rowHash,$keys)
+    {
+		$hashRow = array();
+		for($i=0;$i<sizeof($this->rows);$i++){
+			$row = $this->rows[$i];
+		
+			$itIsIt =true;
+			foreach($keys as $k=>$v){
+				if($row[$k] != $v) $itIsIt =false;
+			}
+			if($itIsIt==true){
+				foreach($this->columns as $key => $value){
+					$rowContent = null;
+					if(array_key_exists($key,$rowHash)){
+						$rowContent = $rowHash[$key];
+					}
+					$hashRow[$key]=$rowContent;
+				}
+				$this->rows[$i]=$this->VerifyTypes($hashRow);
+				break;
+			}
+        }
+	}
     
     public function add_row($rowHash)
     {
@@ -159,20 +207,37 @@ class SmallTxtDb
      // print_r($this->rows);die();
     }
     
-    public function delete_row($rowIndex)
+    public function delete_row($select)
     {
-        unset($this->rows[$rowIndex]);
+		$rowNumber = 0;
+        foreach ($dbInstance->rows as $row) {
+			$isMatch = true;
+			foreach($select as $k=>$v){
+				if ($row[$k] != $v) {
+					$isMatch = false;
+				}
+			}
+        	
+        	if($isMatch){
+        		unset($this->rows[$rowNumber]);
+				break;
+        	}
+        	$rowNumber++;
+        }
+        
         $this->rows= array_values($this->rows);
     }
     
     function de_cr_lf($value)
     {
+		if(!is_string($value))return $value;
         $v = str_replace(array("\r\n","\r\f","\n","\r","\f"),"@CRLF@",$value);
         return $v;
     }
     
     function re_cr_lf($value)
     {
+		if(!is_string($value))return $value;
         $v = str_replace("@CRLF@","\n",$value);
         return $v;
     }
@@ -188,8 +253,8 @@ class SmallTxtDb
             $row = $this->VerifyTypes($row);
             foreach($this->columns as $key => $value){
 				if(array_key_exists($key,$row)){
-					$towrite[$value]=serialize($this->de_cr_lf($row[$key]));
-				}
+                $towrite[$value]=serialize($this->de_cr_lf($row[$key]));
+            }
             }
             $rowString = implode($this->separator,$towrite);
             fwrite($fp, $rowString.$this->cr);
@@ -258,7 +323,7 @@ class SmallTxtDb
 				$toSort[] = $item;
 			}
 		}
-		
+				
 		if($objectSearch!=null){
 			$toSort = $objectSearch->DoSort($toSort,$rowTypes);
 			$toSort = $objectSearch->DoGroupBy($toSort);

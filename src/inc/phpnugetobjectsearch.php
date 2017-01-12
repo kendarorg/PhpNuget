@@ -99,9 +99,9 @@ class PhpNugetExternalTypes
 			$ra[] = $r;
 		}
 		$numericCompare = $this->_compareNumericVersion($la[0],$ra[0]);
-				
+		
 		if($numericCompare!=0) return $numericCompare;
-				
+		
 		if(sizeof($la)>sizeof($ra)){
 			return -1;
 		}else if(sizeof($la)<sizeof($ra)){
@@ -209,6 +209,20 @@ class PhpNugetObjectSearch extends ObjectSearch
 	public function Parse($queryString,$fieldNames,$externalTypes = null)
 	{
 		return parent::Parse($queryString,$fieldNames,new PhpNugetExternalTypes());
+	}
+	
+	public function _specialMySqlSort($type,$name,$direction)
+	{
+		if(strtolower($name) == "version"){
+			return "Version0 ".$direction.",Version1 ".$direction.",Version2 ".$direction.",Version3 ".$direction.
+				",VersionBeta ".$direction;
+		}
+		return null;
+	}
+	
+	public function _specialMySqlGroup($type,$name)
+	{
+		return null;
 	}
 	
 }
