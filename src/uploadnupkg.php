@@ -28,7 +28,7 @@ if(!$loginController->IsLoggedIn){
 		$result["hasError"]=true;
 		$result["name"]="NA";
 		$result["errorCode"]="";
-		$result["errorMessage"]="Wrong file";
+		$result["errorMessage"]="Wrong file ".$e->getMessage();
 	}
 	$fileName = basename($result["name"],".nupkg");
 	$message = "";
@@ -42,7 +42,7 @@ if(!$loginController->IsLoggedIn){
 			@unlink($result["destination"]);
 		}catch(Exception $e){}
 		?>
-		parent.packagesUploadControllerCallback(false,"none","none","<?php echo$result["errorMessage"];?>");
+		parent.packagesUploadControllerCallback(false,"none","none","<?php echo$result["errorMessage"].$e->getMessage();?>");
 		<?php
 	}else{
 		try{
