@@ -881,6 +881,27 @@ class ObjectSearch
 	}
 	
 	
+	public function BuildSelectNames($fieldNames,$fieldTypes)
+	{
+		$items = array();
+		for($i=0;$i<sizeof($fieldNames);$i++){
+			$items[strtolower($fieldNames[$i])]=$fieldTypes[$i];
+		}
+		if(sizeof($this->_groupClause)==0) return "*";
+		$toMerge = array();
+		foreach($fieldNames as $sc){
+			if(in_array($sc,$this->_groupClause)){
+				array_push($toMerge,"`".$sc."` ");
+			}else{
+				array_push($toMerge,"MAX(`".$sc."`) AS `".strtolower($sc)."`");
+			}
+		}
+		
+		$res =  join(" , ",$toMerge);
+		
+		return $res;
+	}
+	
 	//ORDER BY INET_ATON(SUBSTRING_INDEX(CONCAT(versionnumber,'.0.0.0'),'.',4)), versionsuffix
 	public function DoGroupByMySql($fieldNames,$fieldTypes)
 	{

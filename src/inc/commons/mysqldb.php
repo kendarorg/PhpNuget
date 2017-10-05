@@ -410,10 +410,10 @@ class MySqlDb
 			$select = $select." ".$objectSearch->DoSortMySql($fieldNames,$fieldTypes);
 		}
 		if($objectSearch!=null){
-			
 			$gp = $objectSearch->DoGroupByMySql($fieldNames,$fieldTypes);
 			if($gp!=""){
-				$select = "SELECT * FROM (".$select.") as TB ".$gp;
+				$selNames = $objectSearch->BuildSelectNames($fieldNames,$fieldTypes);
+				$select = "SELECT ".$selNames." FROM (".$select.") as TB ".$gp;
 			}
 		}
 		
