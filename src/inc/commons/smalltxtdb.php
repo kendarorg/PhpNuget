@@ -210,7 +210,7 @@ class SmallTxtDb
     public function delete_row($select)
     {
 		$rowNumber = 0;
-        foreach ($dbInstance->rows as $row) {
+        foreach ($this->rows as $row) {
 			$isMatch = true;
 			foreach($select as $k=>$v){
 				if ($row[$k] != $v) {
