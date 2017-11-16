@@ -271,6 +271,9 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
+* 4.0.0.2
+	* Fix bug on delete for textdb version
+	
 * 4.0.0.1
 	* Correct visualization of packages on MySQL
 	* Error not finding javascript files
