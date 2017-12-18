@@ -27,18 +27,29 @@ $searchQuery = UrlUtils::GetRequestParamOrDefault("searchQuery","");
 					<input type="submit" value="Search" class="btn btn-default"></input>
 				</div>
 			</form>
-			<ul class="nav navbar-nav navbar-right"><?php
-						if($loginController->IsLoggedIn){
-					?><li>
-	<a href="<?php echo Settings::$SiteRoot;?>#/profile/<?php echo $loginController->UserId; ?>/user"><?php echo $loginController->UserId; ?></a>
-</li>
-<li>
-	<a href="<?php echo Settings::$SiteRoot;?>?specialType=logon&DoLogin=false">Sign out</a>
-</li><?php
-	}else{
-?><li><a href="<?php echo Settings::$SiteRoot;?>?specialType=logon">Register/Sign in</a></li><?php
-	}
-?></ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="<?php echo Settings::$SiteRoot;?>#"><b>Home</b></a></li>
+                <li><a href="<?php echo Settings::$SiteRoot;?>?specialType=packages">Packages</a></li>
+                <?php 
+                    if($loginController->IsLoggedIn){ ?>
+                        <li><a href="<?php echo Settings::$SiteRoot;?>#/profile/<?php echo $loginController->UserId;?>/upload">Upload Package</a></li>
+                        <?php 
+                        if($loginController->Admin){ ?>
+                            <li><a href="<?php echo Settings::$SiteRoot;?>#/admin/users">Users</a></li>
+                            <?php
+                        }
+                    }
+                ?>
+                <?php
+                    if($loginController->IsLoggedIn){ ?>
+                        <li><a href="<?php echo Settings::$SiteRoot;?>#/profile/<?php echo $loginController->UserId; ?>/user"><?php echo $loginController->UserId; ?></a></li>
+                        <li><a href="<?php echo Settings::$SiteRoot;?>?specialType=logon&DoLogin=false">Sign out</a></li>
+                <?php
+                    }else{ ?>
+                        <li><a href="<?php echo Settings::$SiteRoot;?>?specialType=logon">Register/Sign in</a></li><?php
+                    }
+                ?>
+            </ul>
 		</div>
 	</div>
 </nav>

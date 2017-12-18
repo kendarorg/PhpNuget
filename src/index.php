@@ -32,7 +32,6 @@ if(UrlUtils::RequestMethod()=="put"){
 	<body>
 		<?php
 			require_once(__ROOT__."/_header.php");
-			require_once(__ROOT__."/_navbar.php");
 			
 			$specialType = strtolower(UrlUtils::GetRequestParamOrDefault("specialType",null));
 			if($specialType == "packages"){
