@@ -1,3 +1,7 @@
+body {
+    padding-bottom: 50px; /* fixed-bottom navbar fix */
+}
+
 #fade {
     display: none;
     position:fixed;
@@ -53,5 +57,17 @@
     left: 0;
     z-index: 1002;
     text-align:center;
+}
+
+/* Vertical spacing between bootstrap rows, etc. */
+.margin-bottom-xs { margin-bottom:  5px; }
+.margin-bottom-sm { margin-bottom: 10px; }
+.margin-bottom-md { margin-bottom: 20px; }
+.margin-bottom-lg { margin-bottom: 40px; }
+
+/* Packages */
+.packages-table__icon {
+    height: auto;
+    width: 50px;
 }
 
