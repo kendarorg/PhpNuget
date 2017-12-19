@@ -1,5 +1,5 @@
 body {
-    padding-bottom: 50px; /* fixed-bottom navbar fix */
+	padding-bottom: 50px; /* fixed-bottom navbar fix */
 }
 
 #fade {
@@ -66,8 +66,14 @@ body {
 .margin-bottom-lg { margin-bottom: 40px; }
 
 /* Packages */
-.packages-table__icon {
-    height: auto;
-    width: 50px;
+.package__icon {
+	height: auto;
 }
 
+.package__icon--sm {
+	width: 25px;
+}
+
+.package__icon--md {
+	width: 50px;
+}

@@ -54,84 +54,91 @@ $item = $items[0];
 loadDownloadCount($item);
 
 ?>
-<ul>
-	<li><h3><?php echo $item->Id;?> v <?php echo $item->Version;?>
-		<img withd="25px" height="25px" src="<?php echo $item->IconUrl;?>"/>
-	</h3></li>
-	<li><a href="<?php echo $item->ProjectUrl;?>">Website</a></li>
-	<li><a href="<?php echo $item->LicenseUrl;?>">License</a></li>
-	<li><b>Owners:</b><?php echo $item->Owners;?></li>
-	<li><b>Authors:</b> <?php
-						$ath = explode(",",$item->Author);
-						for($k=0;$k<sizeof($ath);$k++){
-							$v= trim($ath[$k]);
-							if($k>0)echo ",&nbsp;";
-							?>
-							<a href="<?php echo Settings::$SiteRoot;
-							?>?specialType=singleProfile<?php
-							echo "&id=".urlencode($v);
-							?>"><?php echo $v;?></a>
-							<?php
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3><?php echo $item->Id;?> v <?php echo $item->Version;?></h3>
+			<img class="package__icon package__icon--sm" src="<?php echo $item->IconUrl;?>"/>
+			<ul>
+				<li><a href="<?php echo $item->ProjectUrl;?>">Website</a></li>
+				<li><a href="<?php echo $item->LicenseUrl;?>">License</a></li>
+				<li><b>Owners:</b> <?php echo $item->Owners;?></li>
+				<li><b>Authors:</b> <?php
+									$ath = explode(",",$item->Author);
+									for($k=0;$k<sizeof($ath);$k++){
+										$v= trim($ath[$k]);
+										if($k>0)echo ",&nbsp;";
+										?>
+										<a href="<?php echo Settings::$SiteRoot;
+										?>?specialType=singleProfile<?php
+										echo "&id=".urlencode($v);
+										?>"><?php echo $v;?></a>
+										<?php
+									}
+									?></li>
+
+				<li><?php echo $item->Description;?></li>
+				<li><b>Total downloads:</b> <?php echo $item->DownloadCount;?> </li>
+				<li><b>This version downloads:</b> <?php echo $item->VersionDownloadCount;?> </li>
+				<li><b>Download package:</b> <a href="<?php echo UrlUtils::CurrentUrl(rtrim(Settings::$SiteRoot,"/")."/api/?id=".$item->Id."&version=".$item->Version);?>">Here</a> </li>
+				<li><b>Tags:</b> <?php echo $item->Tags;?></li>
+				<?php
+				if(sizeof($item->Dependencies)>0){
+				?>
+				<li><b>Dependencies</b>
+					<ul>
+					<?php
+					if(is_array($item->Dependencies)){
+						for($i=0;$i<sizeof($item->Dependencies);$i++){
+							$d = $item->Dependencies[$i];
+							if(!$d->IsGroup){
+								buildSimpleDep($d);
+							}else{
+								buildDepGroup($d);
+							}
 						}
-						?></li>
-	
-	<li><?php echo $item->Description;?></li>
-	<li><b>Total downloads:</b> <?php echo $item->DownloadCount;?> </li>
-	<li><b>This version downloads:</b> <?php echo $item->VersionDownloadCount;?> </li>
-	<li><b>Download package:</b> <a href="<?php echo UrlUtils::CurrentUrl(rtrim(Settings::$SiteRoot,"/")."/api/?id=".$item->Id."&version=".$item->Version);?>">Here</a> </li>
-	<li><b>Tags:</b> <?php echo $item->Tags;?></li>
-	<?php
-	if(sizeof($item->Dependencies)>0){
-	?>
-	<li><b>Dependencies</b>
-		<ul>
-		<?php
-		if(is_array($item->Dependencies)){
-			for($i=0;$i<sizeof($item->Dependencies);$i++){
-				$d = $item->Dependencies[$i];
-				if(!$d->IsGroup){
-					buildSimpleDep($d);
-				}else{
-					buildDepGroup($d);
+					}else{
+						echo "<li>None</li>";
+					}
+					?>
+					</ul>
+				</li>
+				<?php
 				}
-			}
-		}else{
-			echo "<li>None</li>";
-		}
-		?>
-		</ul>
-	</li>
-	<?php
-	}
-	$items = $db->Query("Id eq '".$id."' orderby Version desc",99999,0);
-	if(sizeof($items)>1){
-	?>
-	<li><b>Versions</b>
-	
-		<ul>
-		<?php
-		foreach($items as $item){
-			?>
-			<li>Version: <a href="<?php echo Settings::$SiteRoot;
-						?>?specialType=singlePackage<?php
-						echo "&id=".urlencode($item->Id);
-						echo "&version=".urlencode($item->Version);
-						?>"><?php echo $item->Version;?></a></li>
-			<?php
-		
-		}
-		?>
-		</ul>
-	</li>
-	<?php
-	}
-	?>
-</ul>
-<!--ul>
-	h4>Versions<h4>
-	li>EntityFramework 6.1.1 (this version) 	227408 	Friday, June 20 2014 <li
-	li>EntityFramework 6.1.1-beta1 	17318 	Tuesday, May 20 2014 </li
-ul>-->
+				$items = $db->Query("Id eq '".$id."' orderby Version desc",99999,0);
+				if(sizeof($items)>1){
+				?>
+				<li><b>Versions</b>
+
+					<ul>
+					<?php
+					foreach($items as $item){
+						?>
+						<li>Version: <a href="<?php echo Settings::$SiteRoot;
+									?>?specialType=singlePackage<?php
+									echo "&id=".urlencode($item->Id);
+									echo "&version=".urlencode($item->Version);
+									?>"><?php echo $item->Version;?></a></li>
+						<?php
+
+					}
+					?>
+					</ul>
+				</li>
+				<?php
+				}
+				?>
+			</ul>
+
+			<!--ul>
+				h4>Versions<h4>
+				li>EntityFramework 6.1.1 (this version) 	227408 	Friday, June 20 2014 <li
+				li>EntityFramework 6.1.1-beta1 	17318 	Tuesday, May 20 2014 </li
+			ul>-->
+
+        </div><!-- col ends -->
+    </div><!-- row ends -->
+</div><!-- container ends -->
 <?php
 }
 ?>
