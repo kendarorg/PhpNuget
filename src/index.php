@@ -11,6 +11,8 @@ if(UrlUtils::RequestMethod()=="put"){
 <html ng-app="phpNugetApp">
 	<head>
 		<link rel="shortcut icon" href="./favicon.ico">
+		<link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 		<script src="scripts/spin.min.js"></script>
 		<script src="scripts/angular/angular.min.js"></script>
 		<script src="scripts/angular/angular-cookies.min.js"></script>
@@ -27,7 +29,8 @@ if(UrlUtils::RequestMethod()=="put"){
 		<script src="assets/route.js"></script>
 		<script src="assets/views/users/module.js"></script>
 		<script src="assets/views/profile/module.js"></script>
-		<link rel="stylesheet" href="assets/css/style.css">
+		<script src="scripts/jquery/jquery-3.2.1.min.js"></script>
+		<script src="scripts/bootstrap/bootstrap.min.js"></script>
 	</head>
 	<body>
 		<?php
