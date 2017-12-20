@@ -5,7 +5,6 @@ require_once(__ROOT__."/inc/logincontroller.php");
 $searchQuery = UrlUtils::GetRequestParamOrDefault("searchQuery","");
 
 ?>
-<link href="scripts/bootstrap/bootstrap.min.css" rel="stylesheet" />
 <nav class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation" id="headerBar">
 	<div class="container-fluid">
 		<div class="navbar-header">
