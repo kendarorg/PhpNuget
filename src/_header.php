@@ -31,7 +31,7 @@ $searchQuery = UrlUtils::GetRequestParamOrDefault("searchQuery","");
 					</form>
 				</div>
 
-				<div class="col-md-9">
+				<div class="col-md-7 col-lg-8">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="<?php echo Settings::$SiteRoot;?>#"><b>Home</b></a></li>
 						<li><a href="<?php echo Settings::$SiteRoot;?>?specialType=packages">Packages</a></li>
