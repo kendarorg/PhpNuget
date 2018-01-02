@@ -1,4 +1,4 @@
-# PhpNuget V. 4.0.0.0
+# PhpNuget V. 4.0.4.8
 
 ## Purpose
 
@@ -270,6 +270,29 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 * Align the Settings::ResultsPerPage in all the views
 
 ## Updates
+
+* 4.0.4.8
+	* Fix code indentation
+
+* 4.0.4.7
+	* Fix responsive navbar to display correctly on medium and large screens
+
+* 4.0.4.6
+	* Clean up bootstrap forms by using bootstrap best practice horizontal form templates
+
+* 4.0.3.6
+	* Move copyright notice out of bottom navbar and into separate container to save vertical space
+
+* 4.0.3.5
+	* Move incorrectly placed `link` tag from document body to document head
+    * Move Bootstrap CSS to `assets/css` folder for consistency
+
+* 4.0.3.4
+	* Add functionality to mobile navigation
+    * Include BootstrapJS
+    * Include jQuery
+    * Make search form into input group for clarity
+    * Link navbar brand to site home for consistency
 
 * 4.0.2.4
 	* Unify identation to tabs, size 4
