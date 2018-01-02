@@ -25,13 +25,7 @@ $loginController->UnauthorizedIfNotLoggedIn();
 					<td><a href="#/admin/users/{{user.UserId}}">{{user.UserId}}</td>
 					<td>{{user.Enabled}}</td>
 					<td>{{user.Admin}}</td>
-					<td><button class="btn" ng-click="delete(user)">Delete</button></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td><button class="btn btn-danger" ng-click="delete(user)">Delete</button></td>
 				</tr>
 			</tbody>
 		</table>
