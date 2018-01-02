@@ -50,16 +50,16 @@ if(UrlUtils::RequestMethod()=="put"){
 		?>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-md-12 margin-bottom-md">
 					<div ui-view></div>
 				</div><!-- col ends -->
 			</div><!-- row ends -->
 		</div><!-- container ends -->
-		<?php
-			}
-			require_once(__ROOT__."/_footer.php");
-		?>
+
+		<?php } require_once(__ROOT__."/_footer.php"); ?>
+
 		<div id="fade"></div>
+
 		<div id="modal">
 			<div id="wrapper">
 				<div id="wrapperContent">
