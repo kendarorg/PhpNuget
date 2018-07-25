@@ -10,84 +10,95 @@ $loginController->UnauthorizedIfNotLoggedIn();
 		<!--<a href="#/admin" class="btn btn-default">Back to Admin Home</a><br>-->
 		<a href="#/admin/users" class="btn btn-default">Back to Users</a><br>&nbsp;
 	</div>
-	<form novalidate class="simple-form">
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label>User Id</label>
-			</div>
-			<div class="col-md-2">
+
+	<form novalidate class="form-horizontal">
+
+		<!-- User Id -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="UserId">User Id</label>
+			<div class="col-md-3">
 				<input type="text" class="form-control" name="UserId"  ng-model="user.UserId"/>
 			</div>
 		</div>
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label for="Name">Name</label>
-			</div>
-			<div class="col-md-2">
+
+		<!-- User Full Name -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Name">Name</label>
+			<div class="col-md-3">
 				<input type="text" class="form-control" name="Name"  ng-model="user.Name"/>
 			</div>
 		</div>
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label for="Company">Company</label>
-			</div>
-			<div class="col-md-2">
+
+		<!-- Company Name -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Company">Company</label>
+			<div class="col-md-3">
 				<input type="text" class="form-control" name="Company"  ng-model="user.Company"/>
 			</div>
 		</div>
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label for="Email">Email</label>
-			</div>
-			<div class="col-md-4">
+
+		<!-- Email Address -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Email">Email</label>
+			<div class="col-md-3">
 				<input type="text" class="form-control"  name="Email" ng-model="user.Email"/>
 			</div>
 		</div>
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label for="Packages">Packages</label>
-			</div>
+
+		<!-- Packages -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Packages">Packages</label>
 			<div class="col-md-6">
 				<input type="text" class="form-control" readonly  name="Packages" ng-model="user.Packages"/>
 			</div>
 		</div>
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label for="Token">Token</label>
-			</div>
+
+		<!-- Token -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Token">Token</label>
 			<div class="col-md-6">
-				<input type="text" class="form-control"  readonly  name="Token" ng-model="user.Token"/>
+				<input type="text" class="form-control" readonly name="Token" ng-model="user.Token"/>
 			</div>
 		</div>
-		
-		
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label for="Password">Password</label>
-			</div>
+
+		<!-- Set Password -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Token">Password</label>
 			<div class="col-md-6">
 				<input type="password" class="form-control" name="Password" ng-model="user.Password"/>
 			</div>
 		</div>
-		
-		
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label for="PasswordConfirm">Confirm Password</label>
-			</div>
+
+		<!-- Confirm Password -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="PasswordConfirm">Confirm Password</label>
 			<div class="col-md-6">
 				<input type="password" class="form-control"  name="PasswordConfirm" ng-model="user.PasswordConfirm"/>
 			</div>
 		</div>
-		
-		<div class="form-group col-md-4">
-			<div class="col-md-6"><div class="checkbox">
-				<label><input type="checkbox" ng-model="user.Enabled" name="Enabled">Is Enabled</label>
-			</div></div>
-			<div class="col-md-6"><div class="checkbox">
-				<label><input type="checkbox"   ng-model="user.Admin" name="Admin">Is Administrator</label>
+
+		<div class="form-group">
+
+			<!-- Enable User Checkbox -->
+			<div class="col-md-1 col-md-offset-2">
+				<div class="checkbox">
+					<label><input type="checkbox" ng-model="user.Enabled" name="Enabled" readonly>Is Enabled</label>
+				</div>
+			</div>
+
+			<!-- User Is Admin Checkbox -->
+			<div class="col-md-1">
+				<div class="checkbox">
+					<label><input type="checkbox"   ng-model="user.Admin" name="Admin" readonly>Is Administrator</label>
+				</div>
 			</div>
 		</div>
-		<button ng-click="add(user)" class="btn btn-default">Add</button>
+
+		<!-- Add User Button -->
+		<div class="form-group">
+			<div class="col-md-1 col-md-offset-2">
+				<button ng-click="add(user)" class="btn btn-default">Add</button>
+			</div>
+		</div>
 	</form>
 </div>

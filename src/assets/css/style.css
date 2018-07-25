@@ -1,0 +1,79 @@
+body {
+	padding-bottom: 50px; /* fixed-bottom navbar fix */
+}
+
+#fade {
+	display: none;
+	position:fixed;
+	top:0px;
+	left:0px;
+	bottom:0px;
+	right:0px;
+	background-color: #ababab;
+	z-index: 1001;
+	-moz-opacity: 0.8;
+		 opacity: .70;
+	filter: alpha(opacity=80);
+}
+
+#modalx {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 45%;
+	width: 300px;
+	height: 90px;
+	padding:30px 15px 0px;
+	border: 3px solid #ababab;
+	box-shadow:1px 1px 10px #ababab;
+	border-radius:20px;
+	background-color: white;
+	z-index: 1002;
+	text-align:center;
+	overflow: auto;
+}
+
+#wrapper {
+	 width:300px;
+	 height:100px;
+	 margin:0 auto;
+	 position:fixed;
+	 left:50%;
+	 top:50%;
+	 margin-left:-150px;
+	 margin-top:-150px;
+	 border: 3px solid #ababab;
+	 border-radius:20px;
+	 background-color: white;
+	 box-shadow:1px 1px 10px #ababab;
+}
+
+#modal {
+	display: none;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	bottom: 0;
+	left: 0;
+	z-index: 1002;
+	text-align:center;
+}
+
+/* Vertical spacing between bootstrap rows, etc. */
+.margin-bottom-xs { margin-bottom:  5px; }
+.margin-bottom-sm { margin-bottom: 10px; }
+.margin-bottom-md { margin-bottom: 20px; }
+.margin-bottom-lg { margin-bottom: 40px; }
+
+/* Packages */
+.package__icon {
+	height: auto;
+}
+
+.package__icon--sm {
+	width: 25px;
+}
+
+.package__icon--md {
+	width: 50px;
+}

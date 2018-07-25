@@ -1,9 +1,7 @@
-<div class="navbar navbar-inverse navbar-fixed-bottom">
-        <div class="container">
-			<div class="navbar-collapse collapse" id="footer-body">
-				<ul class="nav navbar-nav">
-					<li><a href="#">Copyright 2001-2015 Kendar.org, Version: <?php echo Settings::$Version; ?></a> </li>
-				</ul>
-			</div>			
-		</div>
-</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<span class="notice--copyright">Copyright 2001-2015 Kendar.org, Version: <?php echo Settings::$Version; ?></span>
+		</div><!-- col ends -->
+	</div><!-- row ends -->
+</div><!-- container ends -->

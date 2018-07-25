@@ -10,95 +10,108 @@ $loginController->UnauthorizedIfNotLoggedIn();
 		<!--<a href="#/admin" class="btn btn-default">Back to Admin Home</a><br>-->
 		<a href="#/admin/users" class="btn btn-default">Back to Users</a><br>&nbsp;
 	</div>
-	<form novalidate class="simple-form">
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label>User Id</label>
-			</div>
-			<div class="col-md-2">
+
+	<form novalidate class="form-horizontal">
+
+		<!-- User Id -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="UserId">User Id</label>
+			<div class="col-md-3">
 				<input type="text" class="form-control" name="UserId" readonly  ng-model="user.UserId"/>
 			</div>
 		</div>
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label for="Name">Name</label>
-			</div>
-			<div class="col-md-2">
+
+		<!-- User Full Name -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Name">Name</label>
+			<div class="col-md-3">
 				<input type="text" class="form-control" name="Name"  ng-model="user.Name"/>
 			</div>
 		</div>
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label for="Company">Company</label>
-			</div>
-			<div class="col-md-2">
+
+		<!-- Company Name -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Company">Company</label>
+			<div class="col-md-3">
 				<input type="text" class="form-control" name="Company"  ng-model="user.Company"/>
 			</div>
 		</div>
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label for="Email">Email</label>
-			</div>
-			<div class="col-md-4">
+
+		<!-- Email Address -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Email">Email</label>
+			<div class="col-md-3">
 				<input type="text" class="form-control"  name="Email" ng-model="user.Email"/>
 			</div>
 		</div>
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label for="Packages">Packages</label>
-			</div>
+
+		<!-- Packages -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Packages">Packages</label>
 			<div class="col-md-6">
 				<input type="text" class="form-control" readonly  name="Packages" ng-model="user.Packages"/>
 			</div>
 		</div>
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label for="Token">Token</label>
-			</div>
+
+		<!-- Current Token / Generate New Token -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Token">Token</label>
 			<div class="col-md-6">
-				<input type="text" class="form-control"  readonly  name="Token" ng-model="user.Token"/>
-			</div>
-			<div class="col-md-5">
-				<button ng-click="updateToken(user)" class="btn btn-default">Regenerate</button>
+				<div class="input-group">
+					<input type="text" class="form-control" readonly name="Token" ng-model="user.Token"/>
+					<span class="input-group-btn">
+						<button ng-click="updateToken(user)" class="btn btn-default">Regenerate</button>
+					</span>
+				</div>
 			</div>
 		</div>
-		
-		
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label for="Token">Password</label>
-			</div>
+
+		<!-- Current Password -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="Password">Password</label>
 			<div class="col-md-6">
 				<input type="password" class="form-control" name="Password" ng-model="user.Password"/>
 			</div>
 		</div>
-		
-		
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label for="Token">New Password</label>
-			</div>
+
+		<!-- Set New Password -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="NewPassword">New Password</label>
 			<div class="col-md-6">
 				<input type="password" class="form-control"  name="NewPassword" ng-model="user.NewPassword"/>
 			</div>
 		</div>
-		<div class="form-group col-md-12">
-			<div class="col-md-1">
-				<label for="Token">New Password Confirm</label>
-			</div>
+
+		<!-- Confirm New Password -->
+		<div class="form-group">
+			<label class="control-label col-md-2" for="NewPasswordConfirm">Confirm New Password</label>
 			<div class="col-md-6">
 				<input type="password" class="form-control"  name="NewPasswordConfirm" ng-model="user.NewPasswordConfirm"/>
 			</div>
 		</div>
-		
-		<div class="form-group col-md-4">
-			<div class="col-md-6"><div class="checkbox">
-				<label><input type="checkbox" ng-model="user.Enabled" name="Enabled" readonly>Is Enabled</label>
-			</div></div>
-			<div class="col-md-6"><div class="checkbox">
-				<label><input type="checkbox"   ng-model="user.Admin" name="Admin" readonly>Is Administrator</label>
+
+		<div class="form-group">
+
+			<!-- Enable User Checkbox -->
+			<div class="col-md-1 col-md-offset-2">
+				<div class="checkbox">
+					<label><input type="checkbox" ng-model="user.Enabled" name="Enabled" readonly>Is Enabled</label>
+				</div>
+			</div>
+
+			<!-- User Is Admin Checkbox -->
+			<div class="col-md-1">
+				<div class="checkbox">
+					<label><input type="checkbox"   ng-model="user.Admin" name="Admin" readonly>Is Administrator</label>
+				</div>
 			</div>
 		</div>
-		<button ng-click="update(user)" class="btn btn-default">Save</button>
+
+		<!-- Add User Button -->
+		<div class="form-group">
+			<div class="col-md-1 col-md-offset-2">
+				<button ng-click="update(user)" class="btn btn-primary">Save</button>
+			</div>
+		</div>
 	</form>
 </div>
