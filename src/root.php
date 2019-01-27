@@ -5,4 +5,7 @@ if(!defined('__ROOT__')){
 }
 define("DBMYSQL","mysql");
 define("DBTXT","txt");
+
+//Wire composer vendor packages.
+require 'vendor/autoload.php';
 ?>

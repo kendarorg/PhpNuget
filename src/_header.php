@@ -3,7 +3,8 @@ require_once(dirname(__FILE__)."/root.php");
 require_once(__ROOT__."/inc/logincontroller.php");
 
 $searchQuery = UrlUtils::GetRequestParamOrDefault("searchQuery","");
-
+# implement gravatar.
+use forxer\Gravatar\Gravatar;
 ?>
 <nav class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation" id="headerBar">
 	<div class="container-fluid">
@@ -47,7 +48,12 @@ $searchQuery = UrlUtils::GetRequestParamOrDefault("searchQuery","");
 						?>
 						<?php
 							if($loginController->IsLoggedIn){ ?>
-								<li><a href="<?php echo Settings::$SiteRoot;?>#/profile/<?php echo $loginController->UserId; ?>/user"><?php echo $loginController->UserId; ?></a></li>
+								<li><a href="<?php echo Settings::$SiteRoot;?>#/profile/<?php echo $loginController->UserId; ?>/user">
+									<?php if(defined('__ALLOWGRAVATAR__') && __ALLOWGRAVATAR__) { ?>
+										<img class="avatar" src="<?php echo Gravatar::image($loginController->Email,20,'mm'); ?>" />
+									<?php } ?>								
+									<?php echo $loginController->UserId; ?>
+								</a></li>
 								<li><a href="<?php echo Settings::$SiteRoot;?>?specialType=logon&DoLogin=false">Sign out</a></li>
 						<?php
 							}else{ ?>

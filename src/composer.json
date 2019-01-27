@@ -1,0 +1,14 @@
+{
+	"repositories": [
+	{
+		"packagist": false
+	},
+	{
+		"type": "composer",
+		"url": "https://packagist.org/"
+	}
+	],
+    "require": {
+		"forxer/Gravatar": "~2.0"
+	}
+}

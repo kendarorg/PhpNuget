@@ -25,6 +25,7 @@ class LoginController
 			$this->UserId = $_SESSION["UserId"];
 			$this->Admin = $_SESSION["Admin"];
 			$this->Packages = $_SESSION["Packages"];
+			$this->Email = $_SESSION["Email"];
 		}else if("true"==$doLogin){
 			$this->_login();
 			$location = UrlUtils::CurrentUrl(Settings::$SiteRoot);
@@ -58,6 +59,7 @@ class LoginController
 	public $UserId;
 	public $Admin;
 	public $Packages;
+	public $Email;
 
 	function _login()
 	{
@@ -91,10 +93,12 @@ class LoginController
 		$this->IsLoggedIn = true;
 		$this->UserId = $user->UserId;
 		$this->Admin = $user->Admin;
-		$this->Packages = $user->Packages;		
+		$this->Packages = $user->Packages;
+		$this->Email = $user->Email;
 		$_SESSION["UserId"] = $this->UserId;
 		$_SESSION["Admin"] = $this->Admin;
 		$_SESSION["Packages"] = $this->Packages;
+		$_SESSION["Email"] = $this->Email;
 	}
 }
 

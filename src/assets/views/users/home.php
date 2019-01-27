@@ -22,7 +22,14 @@ $loginController->UnauthorizedIfNotLoggedIn();
 			<!--UserId:|:Name:|:Company:|:Md5Password:|:Packages:|:Enabled:|:Email:|:Token:|:Admin-->
 			<tbody>
 				<tr ng-repeat="user in users">
-					<td><a href="#/admin/users/{{user.UserId}}">{{user.UserId}}</td>
+					<td>				
+					<?php if(defined('__ALLOWGRAVATAR__') && __ALLOWGRAVATAR__) { ?>
+						<a href="#/admin/users/{{user.UserId}}"><img class="avatar" src="{{user.GravatarUrl}}&s=24" /></a>						
+						<a href="#/admin/users/{{user.UserId}}">{{user.UserId}}</a>
+					<?php } else {?>
+						<a href="#/admin/users/{{user.UserId}}">{{user.UserId}}</a>					
+					<?php } ?>
+					</td>					
 					<td>{{user.Enabled}}</td>
 					<td>{{user.Admin}}</td>
 					<td><button class="btn btn-danger" ng-click="delete(user)">Delete</button></td>

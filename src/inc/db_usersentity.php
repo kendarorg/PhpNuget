@@ -13,6 +13,7 @@ class UserEntity
     var $Packages;
     var $Enabled;
     var $Email;
+	var $GravatarUrl;
     var $Token;
 }
 ?>
