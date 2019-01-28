@@ -70,27 +70,26 @@ class UsersApi extends SmallTextDbApiBase
 	
 		$newPasswordConfirm = UrlUtils::GetRequestParam("NewPasswordConfirm");
 		$newPassword = UrlUtils::GetRequestParam("NewPassword");
+		$password = UrlUtils::GetRequestParam("Password");
 		
-		
-		$password =md5(UrlUtils::GetRequestParam("Password"));
-		
-		if($password!=$old->Md5Password && $isAdmin==false){
-			throw new Exception("Authentication failed");
-		}
-		
-		if(strlen($newPassword)>0){
-			if($newPassword!=$newPasswordConfirm){
-				throw new Exception("Passwords must match!");
+		if (strlen($password) == 0 && strlen($newPassword) == 0) {
+			$password = $old->Md5Password;
+		} else {
+			$password = md5($password);
+			
+			if($password!=$old->Md5Password && $isAdmin==false){
+				throw new Exception("Authentication failed");
 			}
-			if(strlen($newPassword)<8){
-				throw new Exception("Passwords must be at least 8 chars wide!");
-			}
-			$password = md5($newPassword);
-		}
-		
-		if($isAdmin==false){
-			$new->Admin = $old->Admin;
-			$new->Enabled = $old->Enabled;
+			
+			if(strlen($newPassword)>0){
+				if($newPassword!=$newPasswordConfirm){
+					throw new Exception("Passwords must match!");
+				}
+				if(strlen($newPassword)<8){
+					throw new Exception("Passwords must be at least 8 chars wide!");
+				}
+				$password = md5($newPassword);
+			}			
 		}
 		
 		if($isAdmin){
