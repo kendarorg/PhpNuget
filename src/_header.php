@@ -50,7 +50,7 @@ use forxer\Gravatar\Gravatar;
 							if($loginController->IsLoggedIn){ ?>
 								<li><a href="<?php echo Settings::$SiteRoot;?>#/profile/<?php echo $loginController->UserId; ?>/user">
 									<?php if(defined('__ALLOWGRAVATAR__') && __ALLOWGRAVATAR__) { ?>
-										<img class="avatar" src="<?php echo Gravatar::image($loginController->Email,20,'mm'); ?>" />
+										<img class="img-circle" src="<?php echo Gravatar::image($loginController->Email,20,'mm'); ?>" />
 									<?php } ?>								
 									<?php echo $loginController->UserId; ?>
 								</a></li>

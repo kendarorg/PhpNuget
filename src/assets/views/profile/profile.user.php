@@ -13,7 +13,7 @@ $loginController->UnauthorizedIfNotLoggedIn();
 		<div class="form-group">
 			<label class="control-label col-md-2">&nbsp;</label>
 			<div class="col-md-3">
-				<img class="avatar" src="{{user.GravatarUrl}}&s=100" />
+				<img class="img-circle" src="{{user.GravatarUrl}}&s=100" />
 			</div>
 		</div>
 		<?php } ?>	

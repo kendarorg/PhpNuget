@@ -24,7 +24,7 @@ $loginController->UnauthorizedIfNotLoggedIn();
 				<tr ng-repeat="user in users">
 					<td>				
 					<?php if(defined('__ALLOWGRAVATAR__') && __ALLOWGRAVATAR__) { ?>
-						<a href="#/admin/users/{{user.UserId}}"><img class="avatar" src="{{user.GravatarUrl}}&s=24" /></a>						
+						<a href="#/admin/users/{{user.UserId}}"><img class="img-circle" src="{{user.GravatarUrl}}&s=24" /></a>						
 						<a href="#/admin/users/{{user.UserId}}">{{user.UserId}}</a>
 					<?php } else {?>
 						<a href="#/admin/users/{{user.UserId}}">{{user.UserId}}</a>					
