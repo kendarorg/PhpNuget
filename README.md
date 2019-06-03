@@ -278,6 +278,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
         * Download through proxy
         * Header fix
         * gitignore issues with htaccess, settings, phpstorm
+        
 * 4.0.4.8
 	* Fix code indentation
 
