@@ -53,7 +53,8 @@ class UrlUtils
 		
 	public static function CurrentUrl($requestUri = "") {
         $pageURL = 'http';
-        if (array_key_exists("HTTPS",$_SERVER) && $_SERVER["HTTPS"] == "on") {
+        if ((array_key_exists("HTTPS",$_SERVER) && $_SERVER["HTTPS"] == "on") || 
+			(array_key_exists("HTTP_X_FORWARDED_PROTO", $_SERVER) && $_SERVER["HTTP_X_FORWARDED_PROTO"] = "https")) {
 			$pageURL .= "s";
 		}
 		
