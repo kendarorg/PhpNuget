@@ -20,6 +20,13 @@ define('__ALLOWUSERADD__',false);
 define('__ALLOWPACKAGESDELETE__',true);
 define('__ALLOWPACKAGEUPDATE__', true);
 
+// Use a http proxy for fetching external nuget
+// packages. If this is not set, try to retrieve
+// the value of the http_proxy environment variable
+// and use that as the proxy. If both fails, don't
+// use a proxy.
+define('__HTTPPROXY__', '');
+
 @define('__MYSQL_SERVER__', "127.0.0.1");
 @define('__MYSQL_USER__',"root");
 @define('__MYSQL_PASSWORD__',"");
