@@ -33,4 +33,3 @@ if(defined('__ALLOWGRAVATAR__') && __ALLOWGRAVATAR__) {
     }
 }
 ?>
-
