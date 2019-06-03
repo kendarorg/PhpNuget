@@ -1,7 +1,8 @@
 <?php
 require_once(dirname(__FILE__)."/root.php");
 require_once(__ROOT__."/settings.php");
-require_once(__ROOT__."/inc/commons/url.php");
+require_once(__ROOT__."/inc/commons/url.php");	
+require_once(__ROOT__."/inc/logincontroller.php");
 
 if(UrlUtils::RequestMethod()=="put"){
 	require_once(__ROOT__."/upload/index.php");
