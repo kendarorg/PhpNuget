@@ -43,13 +43,13 @@ class LoginController
 		$result = "";
 		switch($errorCode){
 			case -1:
-				$result = base64_encode("User does not exist.");
+				$result = base64_encode("Invalid credentials");//"User does not exist.");
 				break;
 			case -2:
-				$result = base64_encode("Incorrect password.");
+				$result = base64_encode("Invalid credentials");//"Incorrect password.");
 				break;
 			case -3:
-				$result = base64_encode("This user is currently disabled.");
+				$result = base64_encode("Invalid credentials");//"This user is currently disabled.");
 				break;
 		}
 		$location = UrlUtils::CurrentUrl(Settings::$SiteRoot."?specialType=logon&result=$result");
