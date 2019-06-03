@@ -15,6 +15,10 @@ local.properties
 .settings/
 .loadpath
 
+# settings and user data
+src/settings.php
+src/data/*
+
 # External tool builders
 .externalToolBuilders/
 
