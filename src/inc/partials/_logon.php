@@ -66,6 +66,16 @@
 								<input type="submit" value="Sign In" class="btn btn-default"></input>
 							</div>
 						</div>
+						<?php if(isset($_GET["result"]) && strlen($_GET["result"]) > 0) {?>
+						<div class="form-group">
+							<div class="col-md-offset-2 col-md-10">
+								<div class="alert alert-danger alert-dismissible fade in">
+									<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>								
+									<?php echo base64_decode($_GET["result"]); ?>
+								</div>
+							</div>
+						</div>
+						<?php } ?>
 					</form>
 				</div><!-- col ends -->
 				<?php
