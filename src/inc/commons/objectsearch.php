@@ -156,9 +156,16 @@ class ObjectSearch
 	}
 	function _isString($operator)
 	{
-		if($operator[0]==$operator[sizeof($operator)-1]){
-			return $this->_isStartString($operator[0]);
+		if(is_array($operator)){
+			if($operator[0]==$operator[sizeof($operator)-1]){
+				return $this->_isStartString($operator[0]);
+			}
+		}else if(is_string($operator)){
+			if($operator[0]==$operator[strlen($operator)-1]){
+				return $this->_isStartString($operator[0]);
+			}
 		}
+		
 		return false;
 	}
 	function _isNumeric($operator)
