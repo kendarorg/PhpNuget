@@ -6,6 +6,7 @@ require_once(__ROOT__."/inc/api_users.php");
 require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/http.php");
 require_once(__ROOT__."/inc/api_nuget.php");
+require_once(__ROOT__."/inc/compatibility.php");
 
 $v2BatchDebug = false;
 
@@ -264,3 +265,5 @@ $result[1]->ResultStatus=500;
 $elab = $b->Elaborate($result);
 var_dump($elab);
 }
+
+?>

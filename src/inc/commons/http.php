@@ -1,6 +1,7 @@
 <?php
 
 require_once(dirname(__FILE__)."/../gerfen/class.stream.php");
+require_once(dirname(__FILE__)."/../compatibility.php");
 
 class HttpUtils
 {
@@ -50,3 +51,5 @@ class HttpUtils
 		return $data['file'];
 	}
 }
+
+?>
