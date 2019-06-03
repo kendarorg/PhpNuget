@@ -14,6 +14,7 @@ Verified on:
 * PHP 5.4.2-Apache 2.0 (OpenSuse 13.1)
 * PHP 5.3.3-Apache 2.2 (CentOS 6.5)
 * PHP 7.0.14-Apache 2.4 (Windows 10 Home)
+* PHP 7.3.5-Apache 2.4 (Windows 7 Pro)
 
 ## Installation
 
