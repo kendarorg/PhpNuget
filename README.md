@@ -271,6 +271,12 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
+* 4.0.5.0
+    * Various fix and improvement:
+        * Gravatar support
+        * Download through proxy
+        * Header fix
+        * gitignore issues with htaccess, settings, phpstorm
 * 4.0.4.8
 	* Fix code indentation
 
