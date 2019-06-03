@@ -10,9 +10,17 @@ $loginController->UnauthorizedIfNotLoggedIn();
 		<!--<a href="#/admin" class="btn btn-default">Back to Admin Home</a><br>-->
 		<a href="#/admin/users" class="btn btn-default">Back to Users</a><br>&nbsp;
 	</div>
-
 	<form novalidate class="form-horizontal">
-
+		<?php if(defined('__ALLOWGRAVATAR__') && __ALLOWGRAVATAR__) { ?>
+		<!-- Avatar -->		
+		<div class="form-group">
+			<label class="control-label col-md-2">&nbsp;</label>
+			<div class="col-md-3">
+				<img class="img-circle" src="{{user.GravatarUrl}}&s=100" />
+			</div>
+		</div>
+		<?php } ?>
+		
 		<!-- User Id -->
 		<div class="form-group">
 			<label class="control-label col-md-2" for="UserId">User Id</label>

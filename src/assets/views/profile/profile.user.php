@@ -1,6 +1,23 @@
+<?php
+require_once(dirname(__FILE__)."/../../../root.php");
+require_once(__ROOT__."/settings.php");
+require_once(__ROOT__."/inc/logincontroller.php");
+
+$loginController->UnauthorizedIfNotLoggedIn();
+?>
 <div ng-controller="userController">
 	<form novalidate class="form-horizontal">
 
+		<?php if(defined('__ALLOWGRAVATAR__') && __ALLOWGRAVATAR__) { ?>
+		<!-- Avatar -->		
+		<div class="form-group">
+			<label class="control-label col-md-2">&nbsp;</label>
+			<div class="col-md-3">
+				<img class="img-circle" src="{{user.GravatarUrl}}&s=100" />
+			</div>
+		</div>
+		<?php } ?>	
+		
 		<!-- User Id -->
 		<div class="form-group">
 			<label class="control-label col-md-2" for="UserId">User Id</label>

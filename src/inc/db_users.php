@@ -22,6 +22,7 @@ define('__MYTXTDBROWS_USR_TYP__',
 define('__MYTXTDBROWS_USR_KEY__',
       "UserId");
 
+use forxer\Gravatar\Gravatar;
 
 class UserDb
 {
@@ -52,7 +53,16 @@ class UserDb
 		$this->initialize();
         $dbInstance =call_user_func($dbfactory,__DB_VERSION__,__MYTXTDB_USR__,__MYTXTDBROWS_USR__,__MYTXTDBROWS_USR_TYP__,__MYTXTDBROWS_USR_KEY__);
 		$dbInstance->BuildItem= 'nugetDbUserBuilder';
-		return $dbInstance->GetAll($limit,$skip,$os);
+		$dataset = $dbInstance->GetAll($limit,$skip,$os);
+
+		// generate the avatar URL.
+		if(defined('__ALLOWGRAVATAR__') && __ALLOWGRAVATAR__) {
+			foreach($dataset as $row){
+				$row->GravatarUrl = html_entity_decode((string)Gravatar::image($row->Email,null,'mm'));
+			}			
+		}
+
+		return $dataset;
 	}
     
     public function AddRow($nugetEntity,$update)

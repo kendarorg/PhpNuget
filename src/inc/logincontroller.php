@@ -24,6 +24,7 @@ class LoginController
 			$this->UserId = $_SESSION["UserId"];
 			$this->Admin = $_SESSION["Admin"];
 			$this->Packages = $_SESSION["Packages"];
+			$this->Email = $_SESSION["Email"];
 		}else if("true"==$doLogin){
 			$this->_login();
 			$location = UrlUtils::CurrentUrl(Settings::$SiteRoot);
@@ -69,6 +70,7 @@ class LoginController
 	public $UserId;
 	public $Admin;
 	public $Packages;
+	public $Email;
 
 	function _login()
 	{
@@ -86,7 +88,7 @@ class LoginController
 		$udb = new UserDb();
 		$user = null;
 
-		$ar = $udb->Query("(UserId eq '".$uid."' or Email eq '".$uid."')");		
+		$ar = $udb->Query("(UserId eq '".$uid."' or Email eq '".$uid."')");
 		$errorCode = 0;
 			
 		if(sizeof($ar)==1){
@@ -111,10 +113,12 @@ class LoginController
 		$this->IsLoggedIn = true;
 		$this->UserId = $user->UserId;
 		$this->Admin = $user->Admin;
-		$this->Packages = $user->Packages;		
+		$this->Packages = $user->Packages;
+		$this->Email = $user->Email;
 		$_SESSION["UserId"] = $this->UserId;
 		$_SESSION["Admin"] = $this->Admin;
 		$_SESSION["Packages"] = $this->Packages;
+		$_SESSION["Email"] = $this->Email;
 	}
 }
 
