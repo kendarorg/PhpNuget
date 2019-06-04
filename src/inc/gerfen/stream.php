@@ -35,7 +35,7 @@ function parse_raw_http_request(array &$a_data)
     array_pop($a_blocks);
     
     // loop data blocks
-    foreach ($a_blocks as $id =&gt; $block)
+    foreach ($a_blocks as $id => $block)
     {
         if (empty($block))
             continue;

@@ -71,9 +71,9 @@ class PackagesApi extends SmallTextDbApiBase
 		
 		
 		if(!$loginController->Admin){
-			if($user->Id!=$old->UserId){
+			//if($user->Id!=$old->UserId){
 				throw new Exception("Operation not allowed with current rights!");
-			}
+			//}
 		}
 	}	
 	
@@ -225,6 +225,7 @@ class PackagesApi extends SmallTextDbApiBase
 	
 	public function docountpackagestorefresh()
 	{
+        $result =0;
 		try{
 			$this->_preExecute();
 			global $loginController;
@@ -237,7 +238,7 @@ class PackagesApi extends SmallTextDbApiBase
 			$message = $result ;
 			ApiBase::ReturnSuccess($message);
 		}catch(Exception $ex){
-			$message = "Refreshed ".$i." packages over ".sizeof($results).".";
+			$message = "Refreshed only ".$result." files.";
 			ApiBase::ReturnError($message."\r\n".$ex->getMessage(),500);
 		}
 	}
