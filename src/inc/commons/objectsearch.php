@@ -717,7 +717,7 @@ class ObjectSearch
 		$l=$args[0];
 		$r=$args[1];
 
-		if($l->Type=="string" || $r->Type=="string"){var_dump($args);
+		if($l->Type=="string" || $r->Type=="string"){
 		    return BuildBool(strtolower($l->Value)==strtolower($r->Value));
         }
 
