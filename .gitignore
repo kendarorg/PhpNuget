@@ -17,6 +17,7 @@ local.properties
 
 # settings and user data
 src/settings.php
+
 src/data/db/*.txt
 src/data/packages/*.nupkg
 
