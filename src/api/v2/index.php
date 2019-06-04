@@ -21,7 +21,12 @@ if($v2apiDebug){
 
 $api = new ApiNugetBaseV2();
 $api->Initialize(dirname(__FILE__));
-$api->Execute();
+$filter = UrlUtils::GetRequestParam("\$filter");
+if($filter!=null){
+    $api->Execute("search");
+}else {
+    $api->Execute();
+}
 
 
 HttpUtils::ApiError(404,"Not found");

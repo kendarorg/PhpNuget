@@ -19,10 +19,12 @@ class ApiNugetBase
 	var $_template;	
 	var $_lastQuery;		
 	
-	public function Execute()
+	public function Execute($passedAction = null)
 	{
 		$action = UrlUtils::GetRequestParamOrDefault("action",null);
-		
+		if($passedAction!=null){
+			$action = $passedAction;
+		}
 		if($action == null){
 			$this->_root();
 		}
@@ -30,6 +32,7 @@ class ApiNugetBase
 		if($action=="packages"){
 			$action = "search";
 		}
+
 		$this->_buildLastQuery();
 		$this->_findpackagesbyd($action);
 		$this->_findsingle($action);
@@ -281,7 +284,8 @@ class ApiNugetBase
 		$searchTerm = UrlUtils::GetRequestParamOrDefault("searchTerm",null);
 		$targetFramework = UrlUtils::GetRequestParamOrDefault("targetFramework",null);
 		$includePrerelease = strtolower(UrlUtils::GetRequestParamOrDefault("includePrerelease",null));
-		$filter = UrlUtils::GetRequestParamOrDefault("\$filter",null);		
+		$filter = UrlUtils::GetRequestParamOrDefault("\$filter",null);
+
 		$orderby = UrlUtils::GetRequestParamOrDefault("\$orderby",null);
 		
 		$id = UrlUtils::GetRequestParamOrDefault("id",null);

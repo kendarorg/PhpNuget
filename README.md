@@ -272,6 +272,9 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 ## Updates
 
+* 4.0.6.0
+    * Support for chocolatey usePackageRepositoryOptimizations
+    
 * 4.0.5.0
     * Various fix and improvement:
         * Gravatar support
