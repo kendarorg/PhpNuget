@@ -17,7 +17,8 @@ local.properties
 
 # settings and user data
 src/settings.php
-
+src/web.config
+src/ManagedFusion.Rewriter.txt
 src/data/db/*.txt
 src/data/packages/*.nupkg
 
