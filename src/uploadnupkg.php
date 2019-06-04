@@ -57,7 +57,7 @@ if(!$loginController->IsLoggedIn){
 			
 			$parsedNuspec->UserId=$user->Id;
 			//echo "<!-- var_dump($parsedNuspec);die();
-			$nuspecData = $nugetReader->SaveNuspec($result["destination"],$parsedNuspec);
+			$nugetReader->SaveNuspec($result["destination"],$parsedNuspec);
 			
 			$message = "Uploaded ".$result["name"]." on ".dirname($result["destination"]);
 			?>

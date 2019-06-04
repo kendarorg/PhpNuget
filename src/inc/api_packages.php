@@ -213,7 +213,7 @@ class PackagesApi extends SmallTextDbApiBase
 			$parsedNuspec = $nugetReader->LoadNuspecFromFile($tempFile);
 			
 			$parsedNuspec->UserId=$user->Id;
-			$nuspecData = $nugetReader->SaveNuspec($tempFile,$parsedNuspec);
+			$nugetReader->SaveNuspec($tempFile,$parsedNuspec);
 		}catch(Exception $ex){
 			if(file_exists($tempFile))
 			unlink($tempFile);
@@ -298,8 +298,7 @@ class PackagesApi extends SmallTextDbApiBase
 			$parsedNuspec = $nugetReader->LoadNuspecFromFile($file);
 			$r->Id= $parsedNuspec->Id;
 			$r->Version= $parsedNuspec->Version;
-			
-			$pathInfo = basename($file);
+
 			$realPath = Path::Combine(Settings::$PackagesRoot,$r->Id.".".$r->Version.".nupkg");
 			if($realPath!=$file){
 				if(file_exists($realPath) && DIRECTORY_SEPARATOR == '/'){
@@ -310,7 +309,7 @@ class PackagesApi extends SmallTextDbApiBase
 			}
 			
 			$parsedNuspec->UserId=$userId;
-			$nuspecData = $nugetReader->SaveNuspec($file,$parsedNuspec);
+			$nugetReader->SaveNuspec($file,$parsedNuspec);
 		}catch(Exception $ex){
 			$r->Success = false;
 			$r->Reason = $ex->getMessage();

@@ -8,12 +8,12 @@ $error = false;
 if ($_FILES["file"]["error"] > 0) {
   $message = "Error: " . $_FILES["file"]["error"] . "<br>";
   $error = true;
-} else {
-  /*echo "Upload: " . $_FILES["file"]["name"] . "<br>";
+} /*else {
+  echo "Upload: " . $_FILES["file"]["name"] . "<br>";
   echo "Type: " . $_FILES["file"]["type"] . "<br>";
   echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-  echo "Stored in: " . $_FILES["file"]["tmp_name"];*/
-}
+  echo "Stored in: " . $_FILES["file"]["tmp_name"];
+}*/
 ?>
 <html>
 	<head>

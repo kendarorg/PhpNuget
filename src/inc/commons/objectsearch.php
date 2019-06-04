@@ -101,16 +101,18 @@ class ObjectSearch
 	
 	function _isMatching($object)
 	{
+		return true;
 	}
 	
 	function _reorder($array)
 	{
+		return $array;
 	}
 	
 	function Filter($objectArray)
 	{
 		$result = array();
-		for($i;$i< sizeof($objectArray);$i++){
+		for($i=0;$i< sizeof($objectArray);$i++){
 			if($this->_isMatching($objectArray[$i])){
 				$result[] = $objectArray[$i];
 			}

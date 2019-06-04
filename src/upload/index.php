@@ -54,7 +54,7 @@ try{
 	$parsedNuspec = $nugetReader->LoadNuspecFromFile($result["destination"]);
 	uplogv("upload","Nuspec loaded!",$parsedNuspec);
 	$parsedNuspec->UserId=$user->Id;
-	$nuspecData = $nugetReader->SaveNuspec($result["destination"],$parsedNuspec);
+	$nugetReader->SaveNuspec($result["destination"],$parsedNuspec);
 	
 	uplog("upload","Upload completed");
 	// All done!
