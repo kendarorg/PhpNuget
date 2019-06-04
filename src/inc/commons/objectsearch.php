@@ -230,6 +230,10 @@ class ObjectSearch
 			if($this->_isField($s)){
 				$o = new Operator();
 				$o->Type = "field";
+                //Fix for Chocolatey dirty search
+				if(strcmp($s,"id")==0){
+					$s="Id";
+				}
 				$o->Value = $s;
 				$temp[] = $o;
 			}else if($this->_isString($s)){
@@ -508,7 +512,6 @@ class ObjectSearch
 
 			$fo = new Operator();
 			$fo->Type = "fieldinstance";
-			$fo->Value = $subject->$v;
 			$fo->Id = $v;
 			return "`".$v."`";
 		}else if($this->externalTypes!=null && $this->externalTypes->IsExternal($v)){
