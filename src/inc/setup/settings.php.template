@@ -12,6 +12,9 @@ define('__ADMINPASSWORD__',"@AdminPassword@");
 define('__ADMINMAIL__',"@AdminEmail@");
 define('__PWDREGEX__',"@PwdRegEx@");
 define('__PWDDESC__',"@PwdDesc@");
+if(@AllowGravatar@){
+    define('__ALLOWGRAVATAR__',true);
+}
 
 //If false "Register" is disabled. Users would be only allowed to be registered by
 //the admin

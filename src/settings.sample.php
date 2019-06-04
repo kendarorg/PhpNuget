@@ -12,6 +12,7 @@ define('__ADMINPASSWORD__',"password");
 define('__ADMINMAIL__',"nuget@localhost");
 define('__PWDREGEX__',"/^.{8,40}$/");
 define('__PWDDESC__',"Min len 8, max len 40");
+define('__ALLOWGRAVATAR__',true);
 
 //If false "Register" is disabled. Users would be only allowed to be registered by
 //the admin

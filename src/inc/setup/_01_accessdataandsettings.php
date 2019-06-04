@@ -90,12 +90,15 @@ $packagesRoot = rtrim(dirname(dirname(dirname(__FILE__))),DIRECTORY_SEPARATOR).D
 				<tr><td>Data Root:</td><td><input size="100" type="text" id="dataRoot" name="dataRoot" value="<?php echo $dataRoot;?>"/></td></tr>
 				<tr><td>Packages Root:</td><td><input size="100" type="text" id="packagesRoot" name="packagesRoot" value="<?php echo $packagesRoot;?>"/></td></tr>
 				<tr><td>php-cgi.exe (for IIS):</td><td><input size="100" type="text" id="phpCgi" name="phpCgi" value="<?php echo $phpCgiExe;?>"/></td></tr>
+                <tr><td>Allow Gravatar:</td><td>
+                    <input type="checkbox" id="allowGravatar" name="allowGravatar" /></td></tr>
 				<tr><td>Allow package Update via upload:</td><td>
 					<input type="checkbox" id="packageUpdate" name="packageUpdate" /></td></tr>
 				<tr><td>Allow package Delete:</td><td>
 					<input type="checkbox" id="packageDelete" name="packageDelete" /></td></tr>
 				<tr><td>Use mysql:</td><td>
 					<input type="checkbox" id="useMySql" name="useMySql" onclick="showMe('usemysqlsetup','useMySql')" /></td></tr>
+
 			</table>
 			
 			<table border=0 id="usemysqlsetup" name="usemysqlsetup" style="display:none;">
