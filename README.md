@@ -90,6 +90,9 @@ These steps are NOT needed if your hosting already configured PHP
 	* Web.Config
 	* .htaccess
 * Verify to have write permissions on the "db" directory.
+* Eventually set the environment variables for custom data directories. This will override the setting in the setup page
+    * UPLOAD_DIR: Where the files will be uploaded
+    * DATA_DIR: For txt based version where the plain text db files will be saved
 * Open the setup page at http://myhost/mynuget/setup.php and follow the wizard. The value will be prefilled
 	* Admin UserId: the user that will be created (or updated) as admin
 	* Admin Password: the password (on update will be overwritten)
@@ -274,6 +277,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 
 * 4.0.6.0
     * Support for chocolatey usePackageRepositoryOptimizations
+    * Added support for env.variables for db and packages directories
     
 * 4.0.5.0
     * Various fix and improvement:

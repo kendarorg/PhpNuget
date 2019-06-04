@@ -17,7 +17,8 @@ local.properties
 
 # settings and user data
 src/settings.php
-src/data/*
+src/data/db/*.txt
+src/data/packages/*.nupkg
 
 # External tool builders
 .externalToolBuilders/

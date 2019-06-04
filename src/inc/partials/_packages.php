@@ -179,7 +179,7 @@ if($searchQuery!=null){
 								</li>
 								<li><b>Description:</b> <?php echo $item->Description;?></li>
 								<li><b>Total downloads:</b> <?php echo $item->DownloadCount;?></li>
-								<li><b>Tags:</b> <?php echo $item->Tags;?></li>
+								<li><b>Tags:</b> <?php echo is_array($item->Tags) ? implode(",",$item->Tags):$item->Tags;?></li>
 							</ul>
 						</td>
 					</tr>

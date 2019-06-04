@@ -3,8 +3,8 @@ require_once(__DIR__."/root.php");
 
 define('__MAXUPLOAD_BYTES__',10*1024*1024*1024);
 define('__PACKAGEHASH__',"SHA512"); //Or SHA256
-define('__UPLOAD_DIR__', "C:\\Kendar\\Development\\PhpNuget_Evo\\PhpNuget\\src\\data\\packages");
-define('__DATABASE_DIR__', "C:\\Kendar\\Development\\PhpNuget_Evo\\PhpNuget\\src\\data\\db");
+define('__UPLOAD_DIR__', getenv("UPLOAD_DIR") ? $_ENV["UPLOAD_DIR"] : "C:\\Kendar\\Development\\PhpNuget_Evo\\PhpNuget\\src\\data\\packages");
+define('__DATABASE_DIR__',getenv("DATABASE_DIR") ? $_ENV["DATABASE_DIR"] :  "C:\\Kendar\\Development\\PhpNuget_Evo\\PhpNuget\\src\\data\\db");
 define('__SITE_ROOT__', "/edsa-nuget/");
 define('__RESULTS_PER_PAGE__', 20);
 define('__ADMINID__',"admin");
