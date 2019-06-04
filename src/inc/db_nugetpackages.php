@@ -57,8 +57,6 @@ class NuGetDb
 		$os = null;
 		if($query!=null && $query!=""){
 			$os = new PhpNugetObjectSearch();
-			//Fix for Chocolatey dirty search
-			$query = str_ireplace("tolower(Id)","Id",$query);
 			$os->Parse($query,$this->GetAllColumns());
 		}
 		$this->initialize();

@@ -394,16 +394,17 @@ class ObjectSearch
 		return $andResult;
 	}
 	
-	function _reorderLogicalOperators($identified)
+	function _reorderLogicalOperators($identified,$parent=null)
 	{
 		$result = array();
 		for($i=0;$i<sizeof($identified);$i++){
 			$o = $identified[$i];
 			$t = strtolower($o->Type);
+			$v = $o->Value;
 			if($t=="function"){
-				$o->Children = $this->_reorderLogicalOperators($o->Children);
+				$o->Children = $this->_reorderLogicalOperators($o->Children,$o);
 			}else if($t=="group"){
-				$temp = $this->_reorderLogicalOperators($o->Children);		
+				$temp = $this->_reorderLogicalOperators($o->Children,$o);
 
 				if(sizeof($temp)==1){
 					$o = $temp[0];
@@ -423,7 +424,26 @@ class ObjectSearch
 		
 		$identified = $this->_subRenderLogicalOperators($identified,"and",-1);
 		$identified = $this->_subRenderLogicalOperators($identified,"or",-1);
-		
+
+
+		for($i=0;$i<sizeof($identified);$i++){
+            $o = $identified[$i];
+            $t = strtolower($o->Type);
+            $v = $o->Value;
+            if($t=="function" && $this->_isBinary(str_ireplace("do","",$v))) {
+
+                if("function" ==$o->Children[0]->Type && sizeof($o->Children[0]->Children)==1 && $this->_isField($o->Children[0]->Children[0]->Value)){
+                    //echo "_".$o->Children[0]->Type."_".$v."\r\n";
+
+                    $functionCall = $o->Children[0];
+                    $realField = $o->Children[0]->Children[0];
+                    $fieldValue = $o->Children[1];
+                    $o->Children[0] = $realField;
+                    $functionCall->Children[0]=$fieldValue;
+                    $o->Children[1] = $functionCall;
+                }
+            }
+        }
 		return $identified;
 	}
 	
@@ -461,7 +481,7 @@ class ObjectSearch
 		
 		@$this->_storeOrderByClause($notOperatorIdentified);
 		$this->parseResult = @$this->_reorderLogicalOperators($operatorIdentified);
-		
+		//zzzvar_dump($this->parseResult);die();
 		return $this->parseResult;
 	}
 	
@@ -696,6 +716,11 @@ class ObjectSearch
 	{
 		$l=$args[0];
 		$r=$args[1];
+
+		if($l->Type=="string" || $r->Type=="string"){var_dump($args);
+		    return BuildBool(strtolower($l->Value)==strtolower($r->Value));
+        }
+
 		return BuildBool($l->Value == $r->Value);
 	}
 	
