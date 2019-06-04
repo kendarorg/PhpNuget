@@ -122,7 +122,11 @@ class ApiNugetBase
         }
 		
 		$t= str_replace("\${NUSPEC.SUMMARY}",htmlspecialchars($e->Summary),$t);
-		$t= str_replace("\${NUSPEC.RELEASENOTES}",htmlspecialchars($e->ReleaseNotes),$t);
+        if(is_string($e->ReleaseNotes)) {
+			$t = str_replace("\${NUSPEC.RELEASENOTES}", htmlspecialchars($e->ReleaseNotes), $t);
+		}else{
+			$t = str_replace("\${NUSPEC.RELEASENOTES}", htmlspecialchars(implode(" ",$e->ReleaseNotes)), $t);
+		}
 		
         $t= str_replace("\${NUSPEC.AUTHOR}",$author,$t);
         $t= str_replace("\${NUSPEC.AUTHORS}",$author,$t);
