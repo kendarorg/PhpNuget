@@ -124,7 +124,7 @@ class ApiNugetBase
 		$t= str_replace("\${NUSPEC.SUMMARY}",htmlspecialchars($e->Summary),$t);
         if(is_string($e->ReleaseNotes)) {
 			$t = str_replace("\${NUSPEC.RELEASENOTES}", htmlspecialchars($e->ReleaseNotes), $t);
-		}else{
+		}else if(is_array($e->ReleaseNotes)) {
 			$t = str_replace("\${NUSPEC.RELEASENOTES}", htmlspecialchars(implode(" ",$e->ReleaseNotes)), $t);
 		}
 		
@@ -135,9 +135,9 @@ class ApiNugetBase
         $t= str_replace("\${DB.PACKAGEHASHALGORITHM}",$e->PackageHashAlgorithm,$t);
         $t= str_replace("\${DB.PACKAGEHASH}",$e->PackageHash,$t);
        
-        if(sizeof($e->Dependencies)==0){
+        if(is_string($e->Dependencies) && strlen($e->Dependencies)==0){
             $t= str_replace("\${NUSPEC.DEPENDENCIES}","",$t);
-        }else{
+        }else if(is_array($e->Dependencies)){
             $t= str_replace("\${NUSPEC.DEPENDENCIES}",$this->MakeDepString($e->Dependencies),$t);
         }
         $t= str_replace("\${DB.DOWNLOADCOUNT}",$e->DownloadCount,$t);
