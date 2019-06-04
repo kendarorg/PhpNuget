@@ -149,7 +149,21 @@ class NuGetDb
 				throw new Exception("Duplicate found!");
 			}
 		}
-		
+
+        $toInsert["IsLatestVersion"] = false;
+
+        $prevversions = $this->Query("(IsLatestVersion eq true) and (Id eq '".$nugetEntity->Id."') and (Version lte ".$toInsert["Version"].")",1,0);
+        if(sizeof($prevversions)==1) {
+            $item = $prevversions[0];
+            $item->IsLatestVersion = false;
+            $itemObj = (array)$item;
+            $dbInstance->update_row($itemObj, array("Id" => $item->Id, "Version" => $item->Version));
+            $toInsert["IsLatestVersion"] = true;
+
+        }else if(sizeof($prevversions)==0){
+            $toInsert["IsLatestVersion"] = true;
+        }
+
 		
         if($doAdd)$dbInstance->add_row($toInsert);
 		else $dbInstance->update_row($toInsert,array("Id"=>$toInsert["Id"],"Version"=>$toInsert["Version"]));

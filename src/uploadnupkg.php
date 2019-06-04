@@ -40,10 +40,13 @@ if(!$loginController->IsLoggedIn){
 		}
 		try{
 			@unlink($result["destination"]);
-		}catch(Exception $e){}
-		?>
-		parent.packagesUploadControllerCallback(false,"none","none","<?php echo$result["errorMessage"].$e->getMessage();?>");
-		<?php
+		}catch(Exception $e){
+            $result["errorMessage"].=$e->getMessage();
+        }
+    ?>
+    parent.packagesUploadControllerCallback(false,"none","none","<?php echo$result["errorMessage"];?>");
+    <?php
+
 	}else{
 		try{
 			$udb = new UserDb();

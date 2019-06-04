@@ -146,8 +146,8 @@ class PhpNugetExternalTypes
 	{
 		$l=$args[0];
 		$r=$args[1];
-		if($l->Value == $r->Value) return BuildBool(true);
-		return dogt($args);
+        if($l->Value == $r->Value) return BuildBool(true);
+		return $this->dogt($args);
 	}
 	
 	public function dolt($args)
@@ -164,8 +164,8 @@ class PhpNugetExternalTypes
 	{
 		$l=$args[0];
 		$r=$args[1];
-		if($l->Value == $r->Value) return BuildBool(true);
-		return dolt($args);
+        if($l->Value == $r->Value) return BuildBool(true);
+		return $this->dolt($args);
 	}
 	
 	public function substringof($args)
