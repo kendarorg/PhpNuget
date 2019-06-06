@@ -122,10 +122,13 @@ class ApiNugetBase
         }
 		
 		$t= str_replace("\${NUSPEC.SUMMARY}",htmlspecialchars($e->Summary),$t);
-        if(is_string($e->ReleaseNotes)) {
+        if(null==$e->ReleaseNotes) {
+			$e->ReleaseNotes="";
+		}
+		if (is_string($e->ReleaseNotes)) {
 			$t = str_replace("\${NUSPEC.RELEASENOTES}", htmlspecialchars($e->ReleaseNotes), $t);
-		}else if(is_array($e->ReleaseNotes)) {
-			$t = str_replace("\${NUSPEC.RELEASENOTES}", htmlspecialchars(implode(" ",$e->ReleaseNotes)), $t);
+		} else if (is_array($e->ReleaseNotes)) {
+			$t = str_replace("\${NUSPEC.RELEASENOTES}", htmlspecialchars(implode(" ", $e->ReleaseNotes)), $t);
 		}
 		
         $t= str_replace("\${NUSPEC.AUTHOR}",$author,$t);
@@ -163,7 +166,7 @@ class ApiNugetBase
 		}else{
 			$t= str_replace("\${DB.COPYRIGHT}","",$t);
 		}
-        //rint_r($e);die();
+
         return preg_replace('/<!--(.*)-->/Uis', '', $t);
     }
 	

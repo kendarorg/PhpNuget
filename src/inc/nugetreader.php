@@ -92,10 +92,10 @@ class NugetManager
 		$e->Version = $m["version"];
         $e->Id = $m["id"];
         if(array_key_exists("title",$m))$e->Title = $m["title"];
-        if( $e->Title==""){
+        if((is_array($e->Title) && !is_string($e->Title)) || $e->Title==null ||  $e->Title==""){
             $e->Title = $e->Id;   
         }
-		if( $e->Id==""){
+		if( $e->Id==null || $e->Id==""){
             $e->Id = $e->Title;   
         }
 		$e->IsPreRelease = PhpNugetObjectSearch::IsPreRelease($e->Version);

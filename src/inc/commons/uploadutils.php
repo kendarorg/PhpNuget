@@ -7,6 +7,8 @@ class UploadUtils
 {
     var $destinationDir;
 	var $allowAll;
+	var $maxSize;
+	var $allowedExts;
     
     public function __construct($destinationDir,$allowedExts,$maxSize,$allowAll=false) 
     {
@@ -50,7 +52,6 @@ class UploadUtils
 			if(array_key_exists("size",$file))$toret["sizeBytes"] = $file["size"]; 
 			$exploded  = explode(".", $toret["name"]);
 			$extension = end($exploded);
-			
 			
 			if ( $toret["sizeBytes"] >= $this->maxSize){
 				$toret["hasError"] = true;
