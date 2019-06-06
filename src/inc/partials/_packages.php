@@ -29,7 +29,8 @@ function buildFallbackQuery($q,$op = "and")
 		$t = array();
 		foreach($q as $qs){
 			$t[]="substringof('".$qs."',Id)";
-			$t[]="substringof('".$qs."',Title)";
+            $t[]="substringof('".$qs."',Title)";
+            $t[]="substringof('".$qs."',Description)";
 		}
 		return implode(" ".$op." ",$t);
 	}
