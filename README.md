@@ -22,6 +22,9 @@ Verified on:
 
 * When installing the MySql version the db must be present with the user configured!
 * The module php_curl must be present and configured inside the php.ini
+* The max size for uploads and post should be set on php.ini, with according values. I usually set the following values
+    * post_max_size=20M
+    * upload_max_filesize=20M
 
 ### Notes for Apache With Red Hat Linux
 
@@ -103,6 +106,7 @@ These steps are NOT needed if your hosting already configured PHP
 	* Data Root: The directory in which the txt db will be placed. It's usually a subdir of the website but can be changed.
 	* Packages Root: The directory in which the uploaded packages will be placed. It's usually a subdir of the website but can be changed.
 	* php-cgi.exe: To allow the configuration of php under IIS.
+	* Allow GRAVATAR usage: Allow the search for gravatar icon to be shown on users.
 	* Allow package update via Upload: Default disabled, if enabled it is possible to overwrite the packages BUT THIS IS NOT A STANDARD BEHAVIOUR.
 	* Allow package delete: Default disabled. LEAVING IT ENABLED IS NOT A STANDARD BEHAVIOUR
 * When using the mysql installation
@@ -110,7 +114,7 @@ These steps are NOT needed if your hosting already configured PHP
 	* NOTE: Import from txt db does not yet work!!!
 * If under IIS set the path of 'php-cgi.exe' (leave blank if your hosting already configured PHP)
 * Change the password, email and login of the administration without worries.
-* Rename the setup.php to setup.bak
+* Rename the setup.php to setup.bak FOR SECURITY REASONS
 * Remove write access on
 	* settings.php
 	* Web.Config

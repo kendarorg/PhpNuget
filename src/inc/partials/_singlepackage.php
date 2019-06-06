@@ -83,7 +83,7 @@ loadDownloadCount($item);
 				<li><b>Download package:</b> <a href="<?php echo UrlUtils::CurrentUrl(rtrim(Settings::$SiteRoot,"/")."/api/?id=".$item->Id."&version=".$item->Version);?>">Here</a> </li>
 				<li><b>Tags:</b> <?php echo is_array($item->Tags) ? implode(",",$item->Tags):$item->Tags;?></li>
 				<?php
-				if(sizeof($item->Dependencies)>0){
+				if($item->Dependencies!=null && sizeof($item->Dependencies)>0){
 				?>
 				<li><b>Dependencies</b>
 					<ul>

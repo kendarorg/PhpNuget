@@ -88,11 +88,34 @@ class ApiNugetBase
         //print_r($tora);die();
         return implode("|",$tora);
     }
-	
+
+    private function _doReplace($what, $with, $in, $useSpecialChars=false, $glue=" "){
+		if(null==$with) {
+			$with="";
+		}
+		if (is_string($with)) {
+			if($useSpecialChars) {
+				return str_replace($what, htmlspecialchars($with), $in);
+			}else{
+				return str_replace($what, $with, $in);
+			}
+		} else if (is_array($with)) {
+			if($useSpecialChars) {
+				return str_replace($what, htmlspecialchars(implode($glue, $with)), $in);
+			}else{
+				return str_replace($what, implode($glue, $with), $in);
+			}
+		}else{
+			return str_replace($what, $with, $in);
+		}
+	}
     public function _buildNuspecEntity($baseUrl,$e)
     {
         $t = $this->_entryTemplate;
         $t.="  ";
+        if($e->Author==null){
+        	$e->Author="";
+		}
         $authors = explode(";",$e->Author);
         $author = "";
         if(sizeof($authors)>0){
@@ -104,68 +127,44 @@ class ApiNugetBase
         //print_r($e);
 		$baseUrl = trim($baseUrl,"\\/");
 		
-        $t= str_replace("\${BASEURL}",$baseUrl,$t);
-        $t= str_replace("\${NUSPEC.ID}",$e->Id,$t);
+        $t= $this->_doReplace("\${BASEURL}",$baseUrl,$t);
+        $t= $this->_doReplace("\${NUSPEC.ID}",$e->Id,$t);
         
         
-        $t= str_replace("\${NUSPEC.IDLOWER}",(strtolower($e->Id)),$t);
-        $t= str_replace("\${NUSPEC.TITLE}",htmlspecialchars($e->Title),$t);
-        $t= str_replace("\${NUSPEC.VERSION}",($e->Version),$t);
-        $t= str_replace("\${NUSPEC.LICENSEURL}",htmlspecialchars($e->LicenseUrl),$t);
-        $t= str_replace("\${NUSPEC.PROJECTURL}",htmlspecialchars($e->ProjectUrl),$t);
-        $t= str_replace("\${NUSPEC.REQUIRELICENSEACCEPTANCE}",$e->RequireLicenseAcceptance?"true":"false",$t);
-        $t= str_replace("\${NUSPEC.DESCRIPTION}",htmlspecialchars($e->Description),$t);
-        if($e->Tags!=""){
-            $t= str_replace("\${NUSPEC.TAGS}"," ".htmlspecialchars($e->Tags)." ",$t);
-        }else{
-            $t= str_replace("\${NUSPEC.TAGS}","",$t);
-        }
-		
-		$t= str_replace("\${NUSPEC.SUMMARY}",htmlspecialchars($e->Summary),$t);
-        if(null==$e->ReleaseNotes) {
-			$e->ReleaseNotes="";
-		}
-		if (is_string($e->ReleaseNotes)) {
-			$t = str_replace("\${NUSPEC.RELEASENOTES}", htmlspecialchars($e->ReleaseNotes), $t);
-		} else if (is_array($e->ReleaseNotes)) {
-			$t = str_replace("\${NUSPEC.RELEASENOTES}", htmlspecialchars(implode(" ", $e->ReleaseNotes)), $t);
-		}
-		
-        $t= str_replace("\${NUSPEC.AUTHOR}",$author,$t);
-        $t= str_replace("\${NUSPEC.AUTHORS}",$author,$t);
-        $t= str_replace("\${DB.PUBLISHED}",$e->Published,$t);
-        $t= str_replace("\${DB.PACKAGESIZE}",$e->PackageSize,$t);
-        $t= str_replace("\${DB.PACKAGEHASHALGORITHM}",$e->PackageHashAlgorithm,$t);
-        $t= str_replace("\${DB.PACKAGEHASH}",$e->PackageHash,$t);
+        $t= $this->_doReplace("\${NUSPEC.IDLOWER}",strtolower($e->Id),$t);
+        $t= $this->_doReplace("\${NUSPEC.TITLE}",$e->Title,$t,true);
+        $t= $this->_doReplace("\${NUSPEC.VERSION}",$e->Version,$t);
+        $t= $this->_doReplace("\${NUSPEC.LICENSEURL}",$e->LicenseUrl,$t,true);
+        $t= $this->_doReplace("\${NUSPEC.PROJECTURL}",$e->ProjectUrl,$t,true);
+        $t= $this->_doReplace("\${NUSPEC.REQUIRELICENSEACCEPTANCE}",$e->RequireLicenseAcceptance?"true":"false",$t);
+        $t= $this->_doReplace("\${NUSPEC.DESCRIPTION}",$e->Description,$t,true);
+		$t= $this->_doReplace("\${NUSPEC.TAGS}",$e->Tags,$t,true);
+		$t= $this->_doReplace("\${NUSPEC.SUMMARY}",$e->Summary,$t,true);
+		$t= $this->_doReplace("\${NUSPEC.RELEASENOTES}",$e->ReleaseNotes,$t,true);
+
+        $t= $this->_doReplace("\${NUSPEC.AUTHOR}",$author,$t);
+        $t= $this->_doReplace("\${NUSPEC.AUTHORS}",$author,$t);
+        $t= $this->_doReplace("\${DB.PUBLISHED}",$e->Published,$t);
+        $t= $this->_doReplace("\${DB.PACKAGESIZE}",$e->PackageSize,$t);
+        $t= $this->_doReplace("\${DB.PACKAGEHASHALGORITHM}",$e->PackageHashAlgorithm,$t);
+        $t= $this->_doReplace("\${DB.PACKAGEHASH}",$e->PackageHash,$t);
        
         if(is_string($e->Dependencies) && strlen($e->Dependencies)==0){
             $t= str_replace("\${NUSPEC.DEPENDENCIES}","",$t);
         }else if(is_array($e->Dependencies)){
             $t= str_replace("\${NUSPEC.DEPENDENCIES}",$this->MakeDepString($e->Dependencies),$t);
         }
-        $t= str_replace("\${DB.DOWNLOADCOUNT}",$e->DownloadCount,$t);
-        $t= str_replace("\${DB.UPDATED}",$e->Published,$t);
-        /*
-        $t= str_replace("\${DB.ISABSOLUTELATESTVERSION}",$e->IsAbsoluteLatestVersion?"true":"false",$t);
-        $t= str_replace("\${DB.VERSIONDOWNLOADCOUNT}",$e->VersionDownloadCount,$t);
-        $t= str_replace("\${DB.ISLATESTVERSION}",$e->IsLatestVersion?"true":"false",$t);
-		*/
+        $t= $this->_doReplace("\${DB.DOWNLOADCOUNT}",$e->DownloadCount,$t);
+        $t= $this->_doReplace("\${DB.UPDATED}",$e->Published,$t);
+
 		
 		
-        $t= str_replace("\${DB.ISPRERELEASE}",$e->IsPreRelease?"true":"false",$t);
-		$t= str_replace("\${DB.ISABSOLUTELATESTVERSION}",$e->IsAbsoluteLatestVersion?"true":"false",$t);
-        $t= str_replace("\${DB.ISLATESTVERSION}",$e->IsLatestVersion?"true":"false",$t);
-        $t= str_replace("\${DB.VERSIONDOWNLOADCOUNT}","-1",$t);
-        $t= str_replace("\${DB.LISTED}",$e->Listed?"true":"false",$t);
-		if($e->Copyright!=null){
-			if(is_string($e->Copyright)){
-				$t= str_replace("\${DB.COPYRIGHT}",htmlspecialchars($e->Copyright),$t);
-			}else{
-				$t= str_replace("\${DB.COPYRIGHT}",htmlspecialchars(implode(", ",$e->Copyright)),$t);
-			}
-		}else{
-			$t= str_replace("\${DB.COPYRIGHT}","",$t);
-		}
+        $t= $this->_doReplace("\${DB.ISPRERELEASE}",$e->IsPreRelease?"true":"false",$t);
+		$t= $this->_doReplace("\${DB.ISABSOLUTELATESTVERSION}",$e->IsAbsoluteLatestVersion?"true":"false",$t);
+        $t= $this->_doReplace("\${DB.ISLATESTVERSION}",$e->IsLatestVersion?"true":"false",$t);
+        $t= $this->_doReplace("\${DB.VERSIONDOWNLOADCOUNT}","-1",$t);
+        $t= $this->_doReplace("\${DB.LISTED}",$e->Listed?"true":"false",$t);
+		$t= $this->_doReplace("\${DB.COPYRIGHT}",$e->Copyright,$t,true);
 
         return preg_replace('/<!--(.*)-->/Uis', '', $t);
     }
