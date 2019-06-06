@@ -359,7 +359,7 @@ class ObjectSearch
 				
 			$v = strtolower($o->Value);
 			$t = strtolower($o->Type);
-			if($v==$operator){
+			if($v==$operator && $t!="string" ){
 				//Seek last logical operator
 				$popped = array_pop($andResult);
 				$lastEnd = $i;
@@ -539,7 +539,7 @@ class ObjectSearch
 		}else if($this->externalTypes!=null && $this->externalTypes->IsExternal($v)){
 			return $parseTreeItem;
 		}else{
-			throw new ParserException("Token '".$t."' not supported excuting");
+			throw new ParserException("Token '".$t."' not supported excuting (1)");
 		}
 		return $result;
 	}
@@ -629,7 +629,7 @@ class ObjectSearch
 		}else if($this->externalTypes!=null && $this->externalTypes->IsExternal($v)){
 			return $parseTreeItem;
 		}else{
-			throw new ParserException("Token '".$t."' not supported excuting");
+			throw new ParserException("Token '".$t."' not supported excuting (2)");
 		}
 		return $result;
 	}

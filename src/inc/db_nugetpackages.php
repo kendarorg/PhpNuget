@@ -50,6 +50,20 @@ class NuGetDb
     {
         
     }
+
+    public function TryParse($query){
+	    try {
+            $os = null;
+            if ($query != null && $query != "") {
+                $os = new PhpNugetObjectSearch();
+                $os->Parse($query, $this->GetAllColumns());
+                $os->Execute(new PackageDescriptor());
+            }
+            return true;
+        }catch(Exception $e){
+	        return false;
+        }
+    }
 	
 	public function Query($query=null,$limit=99999,$skip=0)
 	{

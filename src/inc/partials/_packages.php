@@ -57,31 +57,35 @@ $pg->Top = UrlUtils::GetRequestParamOrDefault("top",10);
 $exceptionThrown = null;
 $items = array();
 $count = -1;
-try{
-	if($searchQuery!=null){
-		if($orderBy!=null){
-			$orderBy = " orderby ".$orderBy;
-		}else{
-			$orderBy = " orderby Title asc,Version desc";
-		}
-		$searchQuery = "(".$searchQuery.") and Listed eq true ".$orderBy.$groupBy;
-	}else if($orderBy!=null){
-		$orderBy = "orderby ".$orderBy;
-		$os = new PhpNugetObjectSearch();
-		$searchQuery = "Listed eq true ".$orderBy.$groupBy;
-	}else{
-		$searchQuery = "Listed eq true orderby Title asc, Version desc".$groupBy;
-	}
 
-	$items = $db->Query($searchQuery);
-	$count = sizeof($items);
-	$items = $db->Query($searchQuery,$pg->Top,$pg->Skip);
-}catch(Exception $ex){
-	$count = -1;
-	$items = array();
-	$exceptionThrown = $ex;
+
+if($searchQuery == null || !$db->TryParse($searchQuery)) {
+    try {
+        if ($searchQuery != null) {
+            if ($orderBy != null) {
+                $orderBy = " orderby " . $orderBy;
+            } else {
+                $orderBy = " orderby Title asc,Version desc";
+            }
+
+            $searchQuery = "(" . $searchQuery . ") and Listed eq true " . $orderBy . $groupBy;
+        } else if ($orderBy != null) {
+            $orderBy = "orderby " . $orderBy;
+            $os = new PhpNugetObjectSearch();
+            $searchQuery = "Listed eq true " . $orderBy . $groupBy;
+        } else {
+            $searchQuery = "Listed eq true orderby Title asc, Version desc" . $groupBy;
+        }
+
+        $items = $db->Query($searchQuery);
+        $count = sizeof($items);
+        $items = $db->Query($searchQuery, $pg->Top, $pg->Skip);
+    } catch (Exception $ex) {
+        $count = -1;
+        $items = array();
+        $exceptionThrown = $ex;
+    }
 }
-
 
 if($count==-1 ){
 	try{
@@ -95,7 +99,7 @@ if($count==-1 ){
 			}
 			$os = new PhpNugetObjectSearch();
 			$fallbackQuery = "(".$fallbackQuery.") and Listed eq true ".$orderBy.$groupBy;
-
+            //var_dump($fallbackQuery);die();
 			$items = $db->Query($fallbackQuery);
 			$count = sizeof($items);
 			$items = $db->Query($fallbackQuery,$pg->Top,$pg->Skip);
