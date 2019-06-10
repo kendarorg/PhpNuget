@@ -30,7 +30,18 @@ if(!$loginController->IsLoggedIn){
 		$result["errorCode"]="";
 		$result["errorMessage"]="Wrong file ".$e->getMessage();
 	}
-	$fileName = basename($result["name"],".nupkg");
+	$isSymbol = false;
+	if(stripos($result["name"],".snupkg")!==false ||stripos($result["name"],".symbols.")!==false || UrlUtils::GetRequestParamOrDefault("symbol",null)!=null){
+        $isSymbol=true;
+    }
+
+    if($isSymbol){
+        $fileName = basename($result["name"],".snupkg");
+        $fileName = str_ireplace(".symbols.",".",$fileName);
+    }else{
+        $fileName = basename($result["name"],".nupkg");
+    }
+
 	$message = "";
 	if($result["hasError"]==true){
 		$message = "Failed uploading '".$result["name"]."'.";
@@ -54,15 +65,21 @@ if(!$loginController->IsLoggedIn){
 			
 			$nugetReader = new NugetManager();
 			$parsedNuspec = $nugetReader->LoadNuspecFromFile($result["destination"]);
-			
+
 			$parsedNuspec->UserId=$user->Id;
 			//echo "<!-- var_dump($parsedNuspec);die();
-			$nugetReader->SaveNuspec($result["destination"],$parsedNuspec);
+			$nugetReader->SaveNuspec($result["destination"],$parsedNuspec,$isSymbol);
 			
 			$message = "Uploaded ".$result["name"]." on ".dirname($result["destination"]);
-			?>
-			parent.packagesUploadControllerCallback(true,"<?php echo $parsedNuspec->Id;?>","<?php echo $parsedNuspec->Version;?>");
-			<?php
+			if($isSymbol){
+                ?>
+                    alert("Symbol updated");
+                <?php
+            }else{
+               ?>
+                    parent.packagesUploadControllerCallback(true, "<?php echo $parsedNuspec->Id;?>", "<?php echo $parsedNuspec->Version;?>");
+                <?php
+            }
 		}catch(Exception $ex){
 			if(file_exists($result["destination"])){
 				unlink($result["destination"]);

@@ -54,6 +54,7 @@ class NugetDependencyGroup
 
 class PackageDescriptor
 {
+    var $IsSymbols;
 	var $Id;
 	var $Version0;
 	var $Version1;

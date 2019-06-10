@@ -49,12 +49,19 @@ try{
 
 	$fileName = basename($result["name"],".nupkg");
 
+
 	$nugetReader = new NugetManager();
 	uplog("upload","NugetManager initialized!");
 	$parsedNuspec = $nugetReader->LoadNuspecFromFile($result["destination"]);
 	uplogv("upload","Nuspec loaded!",$parsedNuspec);
 	$parsedNuspec->UserId=$user->Id;
-	$nugetReader->SaveNuspec($result["destination"],$parsedNuspec);
+
+    $isSymbol = false;
+    if(stripos($result["name"],".snupkg")!==false ||stripos($result["name"],".symbols.")!==false || UrlUtils::GetRequestParamOrDefault("symbol",null)!=null){
+        $isSymbol=true;
+    }
+
+	$nugetReader->SaveNuspec($result["destination"],$parsedNuspec,$isSymbol);
 	
 	uplog("upload","Upload completed");
 	// All done!

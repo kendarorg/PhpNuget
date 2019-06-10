@@ -63,11 +63,12 @@ class NugetManager
         
         
         $destination = Path::Combine(Settings::$PackagesRoot,"/".strtolower($e->Id).".".strtolower($e->Version).".nupkg");
-        
-        if(file_exists($destination)) unlink($destination);
-        
+        $symbols = Path::Combine(Settings::$PackagesRoot,"/".strtolower($e->Id).".".strtolower($e->Version).".snupkg");
+
         $nugetDb->DeleteRow($e);
-        
+
+        if(file_exists($destination)) unlink($destination);
+        if(file_exists($symbols)) unlink($symbols);
     }
     
     public function SpecialChars($hasMap)
@@ -157,6 +158,7 @@ class NugetManager
             $m[strtolower ($ark[$i])]=$mt[$ark[$i]];
         }*/
         $e->TargetFramework = "";
+        $e->IsSymbols = stripos($nuspecContent,'SymbolsPackage')!==false;
         
         uplogv("nugetreader.nuget","fwks",$frameworks);
         foreach($frameworks as $key=>$val){
@@ -186,8 +188,12 @@ class NugetManager
 		return $e;
 	}
 	
-    public function SaveNuspec($nupkgFile,$e)
+    public function SaveNuspec($nupkgFile,$e,$isSymbol=false)
     {
+
+        if($nupkgFile->IsSymbol){
+            $isSymbol=true;
+        }
 		global $loginController;
 		$nugetDb = new NuGetDb();
 		$query = "Id eq '".$e->Id."' orderby Version desc";
@@ -201,9 +207,16 @@ class NugetManager
 			$e->UserId = $res[0]->UserId;
 		}
 		$e->IsPreRelease = indexOf($e->Version,"-")>0;
+
         $destination =Path::Combine(Settings::$PackagesRoot,($e->Id).".".($e->Version).".nupkg");
 
-		if($nugetDb->AddRow($e,__ALLOWPACKAGEUPDATE__)){
+        if($isSymbol){
+            $destination =Path::Combine(Settings::$PackagesRoot,($e->Id).".".($e->Version).".snupkg");
+
+            $destination = str_ireplace(".symbols.",".",$destination);
+        }
+
+		if($isSymbol || $nugetDb->AddRow($e,__ALLOWPACKAGEUPDATE__)){
 
 			if(strtolower($nupkgFile)!=strtolower($destination)){
 				if(file_exists($destination)){

@@ -69,8 +69,9 @@ if($method=="post" || $method=="delete"){
 	HttpUtils::ApiError(200,"Ok");
 }
 
+$isSymbol = UrlUtils::GetRequestParamOrDefault("symbol",null)!=null;
 
-$file = ($allRows[0]->Id.".".$allRows[0]->Version.".nupkg");
+$file = ($allRows[0]->Id.".".$allRows[0]->Version.($isSymbol?".snupkg":".nupkg"));
 
 $path = Path::Combine(Settings::$PackagesRoot,$file);
 
@@ -82,7 +83,9 @@ if(!file_exists($path)){
 	}
 }
 
-incrementDownload($id,$version);
+if(!$isSymbol) {
+    incrementDownload($id, $version);
+}
 
 header('Content-Type: application/zip');
 header('Content-Disposition: attachment; filename='.basename($path));

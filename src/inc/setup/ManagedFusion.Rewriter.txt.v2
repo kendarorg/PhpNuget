@@ -107,12 +107,28 @@ RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v2/package/([^/]+)/([^/]+)  [N
 RewriteCond %{QUERY_STRING} ^(.*)$
 RewriteRule ^/(.*)api/v2/package/([^/]+)/([^/]+)$  @ApplicationPath@api/?id=$2&version=$3&%1 [NC,L]
 
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v2/symbolpackage/([^/]+)/([^/]+)  [NC]
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^/(.*)api/v2/package/([^/]+)/([^/]+)$  @ApplicationPath@api/?id=$2&version=$3&%1&symbol=true [NC,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_METHOD}  !GET
 RewriteCond %{REQUEST_URI}  !index\.php          [NC]
 RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v2/package  [NC] 
 RewriteRule .*  @ApplicationPath@upload/ [NC,L]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_METHOD}  !GET
+RewriteCond %{REQUEST_URI}  !index\.php          [NC]
+RewriteCond %{REQUEST_URI}  ^@ApplicationPath@api/v2/symbolupload  [NC]
+RewriteRule .*  @ApplicationPath@upload/?symbol=true [NC,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

@@ -188,7 +188,8 @@ class PackagesApi extends SmallTextDbApiBase
 			$this->_preExecute();
 			$url = UrlUtils::GetRequestParam("Url");
 			$id = UrlUtils::GetRequestParam("Id");
-			$version = UrlUtils::GetRequestParam("Version");
+            $version = UrlUtils::GetRequestParam("Version");
+            $isSymbol =UrlUtils::GetRequestParam("symbol")!=null;
 			
 			if($id==null || $url==null || $version==null){
 				throw new Exception("Missing data");
@@ -211,9 +212,12 @@ class PackagesApi extends SmallTextDbApiBase
 			$nugetReader = new NugetManager();
 			
 			$parsedNuspec = $nugetReader->LoadNuspecFromFile($tempFile);
+			if(!$isSymbol){
+			    $isSymbol=$parsedNuspec->IsSymbols;
+            }
 			
 			$parsedNuspec->UserId=$user->Id;
-			$nugetReader->SaveNuspec($tempFile,$parsedNuspec);
+			$nugetReader->SaveNuspec($tempFile,$parsedNuspec,$isSymbol);
 		}catch(Exception $ex){
 			if(file_exists($tempFile))
 			unlink($tempFile);

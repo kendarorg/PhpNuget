@@ -4,37 +4,65 @@ SET NUROOT=http://localhost:9999
 
 cd nuget_exes
 
+echo NuGet.5.0, Upload of Symbols file
+
+SET PCKG=newtonsoft.json.12.0.2.symbols.nupkg
+NuGet.5.0.exe SetApiKey %APIKEY% -Source %NUROOT%/symbolupload
+NuGet.5.0.exe Push %PCKG% -Source %NUROOT%/symbolupload
+dir ..\src\data\packages\newtonsoft.json.12.0.2.snupkg> NULL 2>&1
+if errorlevel 1 (
+   GOTO FINISH
+)
+
+SET PCKG=Newtonsoft.Json.12.0.2.nupkg
+NuGet.5.0.exe SetApiKey %APIKEY% -Source %NUROOT%/upload
+NuGet.5.0.exe Push %PCKG% -Source %NUROOT%/upload
+dir ..\src\data\packages\%PCKG% > NULL 2>&1
+if errorlevel 1 (
+   GOTO FINISH
+)
 
 echo NuGet.2.8, Upload of simple file
 
+SET PCKG=Moq.4.5.28.nupkg
 NuGet.2.8.exe SetApiKey %APIKEY% -Source %NUROOT%/upload 
-NuGet.2.8.exe Push Moq.4.5.28.nupkg -Source %NUROOT%/upload
-dir ..\src\data\packages\*.nupkg
+NuGet.2.8.exe Push %PCKG% -Source %NUROOT%/upload
+dir ..\src\data\packages\%PCKG% > NULL 2>&1
+if errorlevel 1 (
+   GOTO FINISH
+)
 
 echo NuGet.3.4, Upload of simple file
 
+SET PCKG=NLog.4.3.0.nupkg
 NuGet.3.4.exe SetApiKey %APIKEY% -Source %NUROOT%/upload 
-NuGet.3.4.exe Push Newtonsoft.Json.4.5.11.nupkg -Source %NUROOT%/upload
-dir ..\src\data\packages\*.nupkg
+NuGet.3.4.exe Push %PCKG% -Source %NUROOT%/upload
+dir ..\src\data\packages\%PCKG% > NULL 2>&1
+if errorlevel 1 (
+   GOTO FINISH
+)
+
+echo NuGet.5.0, Upload of simple file
+
+SET PCKG=NoRelease.1.0.0.nupkg
+NuGet.5.0.exe SetApiKey %APIKEY% -Source %NUROOT%/upload 
+NuGet.5.0.exe Push %PCKG% -Source %NUROOT%/upload
+dir ..\src\data\packages\%PCKG% > NULL 2>&1
+if errorlevel 1 (
+   GOTO FINISH
+)
 
 
 echo NuGet.5.0, Upload of simple file
 
+SET PCKG=Hebrew.1.0.0.nupkg
 NuGet.5.0.exe SetApiKey %APIKEY% -Source %NUROOT%/upload 
-NuGet.5.0.exe Push NLog.4.3.0.nupkg -Source %NUROOT%/upload
-dir ..\src\data\packages\*.nupkg
+NuGet.5.0.exe Push %PCKG% -Source %NUROOT%/upload
+dir ..\src\data\packages\%PCKG% > NULL 2>&1
+if errorlevel 1 (
+   GOTO FINISH
+)
 
-echo NuGet.5.0, Upload of simple file
-
-NuGet.5.0.exe SetApiKey %APIKEY% -Source %NUROOT%/upload 
-NuGet.5.0.exe Push NoRelease.1.0.0.nupkg -Source %NUROOT%/upload
-dir ..\src\data\packages\*.nupkg
-
-
-echo NuGet.5.0, Upload of simple file
-
-NuGet.5.0.exe SetApiKey %APIKEY% -Source %NUROOT%/upload 
-NuGet.5.0.exe Push Hebrew.1.0.0.nupkg -Source %NUROOT%/upload
-dir ..\src\data\packages\*.nupkg
-
+:FINISH
+del null
 cd ..

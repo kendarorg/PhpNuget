@@ -81,6 +81,16 @@ loadDownloadCount($item);
 				<li><b>Total downloads:</b> <?php echo $item->DownloadCount;?> </li>
 				<li><b>This version downloads:</b> <?php echo $item->VersionDownloadCount;?> </li>
 				<li><b>Download package:</b> <a href="<?php echo UrlUtils::CurrentUrl(rtrim(Settings::$SiteRoot,"/")."/api/?id=".$item->Id."&version=".$item->Version);?>">Here</a> </li>
+                <?php
+                $file = ($item->Id.".".$item->Version.".snupkg");
+
+                $path = Path::Combine(Settings::$PackagesRoot,$file);
+
+                if(file_exists($path)){
+                    ?><li><b>Download symbols:</b> <a href="<?php echo UrlUtils::CurrentUrl(rtrim(Settings::$SiteRoot,"/")."/api/?id=".$item->Id."&version=".$item->Version);?>&symbol=true">Here</a> </li>
+                    <?php
+                }
+                ?>
 				<li><b>Tags:</b> <?php echo is_array($item->Tags) ? implode(",",$item->Tags):$item->Tags;?></li>
 				<?php
 				if($item->Dependencies!=null && sizeof($item->Dependencies)>0){

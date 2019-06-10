@@ -1,4 +1,6 @@
-# PhpNuget V. 4.0.5.0
+https://www.nuget.org/api/v2/symbolpackage/Newtonsoft.Json/12.0.2
+
+# PhpNuget V. 4.1.0.0
 
 ## Purpose
 
@@ -38,25 +40,22 @@ to "All"
 
 From:
 
-<pre class="brush: xml;">
+
 	<Directory "/var/www/html/phpnugetdir">
 		Options Indexes FollowSymLinks
 		AllowOverride None
 		Order allow,deny
 		Allow from all
 	</Directory>
-</pre>
 
 To:
 
-<pre class="brush: xml;">
 	<Directory "/var/www/html/phpnugetdir">
 		Options Indexes FollowSymLinks
 		AllowOverride All
 		Order allow,deny
 		Allow from all
 	</Directory>
-</pre>
 
 And then restart Apache
 
@@ -127,9 +126,34 @@ These steps are NOT needed if your hosting already configured PHP
 * Configure your Visual Studio or Chocolatey to use http://myhost/mynuget/api/v2/ as repository
 * To upload packages through command line:
 
-<pre>
+#### Simple package
+
 	nuget push mypackage.nupkg myApiKey http://myhost/mynuget/upload
-</pre>
+
+
+#### Symbol package without packageType in nuspec
+
+Specifying a different API (the url must be registered through the API key).
+
+
+	nuget push mypackage.nupkg myApiKey http://myhost/mynuget/uploadsymbol
+
+
+#### Symbol package with packageType in nuspec
+
+Can be used the standard command, adding inside the nuspec the following part
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+      <metadata>
+        ...
+        <packageTypes>
+          <packageType name="SymbolsPackage" />
+        </packageTypes>
+        ...
+      </metadata>
+    </package>
+
 
 * To search items the syntax follow the OData specification (more or less). Some example
 	* Id eq \'NUnit\': Search for all packages with id equals to NUnit
@@ -143,6 +167,9 @@ These steps are NOT needed if your hosting already configured PHP
 	* substringof: Check if the first parameter is contained in the second parameter
 
 ## Administration
+
+Note that the symbol packages are visible only through the "Packages" UI function.
+Deleting a package will  result in deleting its associated symbols.
 
 ### Simple user
 
@@ -200,6 +227,7 @@ All of the api lsited that returns a collection support the usage of parameters
 
 All v1 APIs are present, remind to replace the v1 in the previous section with v2!
 
+* /api/v2/symbolpackage/\[package-id\]/\[package-version\]: (GET) Download the specified symbol package. No parameters.
 * /api/v2/FindPackageById(): Same as FindPackagesById()
 * /api/v2/GetUpdates(): Search for packages satisfyng the query with a certain id ordered by version descending
 	* packageIds: Optional. Pipe (|) separated list of package ids
@@ -219,7 +247,10 @@ Actually is work in progress, trying to follow the "working" example on nuget.or
 ### Other entry points
 
 * /packages?q=term1 term2: Given the terms passed in 'q' a search is made checking that the Id or Name of the package corespond to at least one of the term passed as parameter
-* /upload: The access point to upload the packages.
+* /api?id=\[package-id\]&version=\[package-version\]: To download a package
+* /api?id=\[package-id\]&version=\[package-version\]&symbol=true: To download a package symbol
+* /uploadsymbol: (POST) Upload a symbol package
+* /upload: (POST) Upload a package
 
 ## Installation of PHP for IIS
 
@@ -278,6 +309,9 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 * Align the Settings::ResultsPerPage in all the views
 
 ## Updates
+
+* 4.1.0.0
+    * Support for symbol packages
 
 * 4.0.6.0
     * Support for chocolatey usePackageRepositoryOptimizations
