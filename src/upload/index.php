@@ -38,7 +38,7 @@ try{
 	
 	uplog("upload","Validation done!");
 	$user = $users[0];
-	$uploader = new UploadUtils(Settings::$PackagesRoot,array("nupkg"),Settings::$MaxUploadBytes,true);
+	$uploader = new UploadUtils(Settings::$PackagesRoot,array("nupkg","snupkg"),Settings::$MaxUploadBytes,true);
 	$uploader->allowAll = true;
 	uplog("upload","Upload utils initialized!");
 	$result = $uploader->Upload("package");

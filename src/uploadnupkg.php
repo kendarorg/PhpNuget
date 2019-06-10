@@ -20,7 +20,7 @@ if(!$loginController->IsLoggedIn){
 		parent.packagesUploadControllerCallback("fail-unathorized","none","none");
 	<?php
 }else if(UploadUtils::IsUploadRequest()){
-	$uploader = new UploadUtils(Settings::$PackagesRoot,array("nupkg"),Settings::$MaxUploadBytes);
+	$uploader = new UploadUtils(Settings::$PackagesRoot,array("nupkg","snupkg"),Settings::$MaxUploadBytes);
 	$result = null;
 	try{
 		$result = @$uploader->Upload("fileName");
