@@ -100,20 +100,23 @@ class NugetManager
         }
 		$e->IsPreRelease = PhpNugetObjectSearch::IsPreRelease($e->Version);
 		$e->Listed = true;
+        $e->RequireLicenseAcceptance =false;
+        $e->Description="";
+        $e->Copyright="";
         if(array_key_exists("licenseurl",$m))$e->LicenseUrl = $m["licenseurl"];
 		if(array_key_exists("releasenotes",$m))$e->ReleaseNotes = $m["releasenotes"];
 		if(array_key_exists("iconurl",$m))$e->IconUrl = $m["iconurl"];
 		else $e->IconUrl = UrlUtils::CurrentUrl(Settings::$SiteRoot."content/packagedefaulticon-50x50.png");
         if(array_key_exists("projecturl",$m))$e->ProjectUrl = $m["projecturl"];
-        $e->RequireLicenseAcceptance = $m["requirelicenseacceptance"];
-        $e->Description = $m["description"];
+        if(array_key_exists("requirelicenseacceptance",$m))$e->RequireLicenseAcceptance = $m["requirelicenseacceptance"];
+        if(array_key_exists("description",$m))$e->Description = $m["description"];
 		if(array_key_exists("tags",$m))$e->Tags = $m["tags"];
         if(array_key_exists("author",$m))$e->Author = $m["author"];
 		if(array_key_exists("authors",$m))$e->Author = $m["authors"];
 		if(array_key_exists("summary",$m))$e->Summary = $m["summary"];
         $e->Published = Utils::FormatToIso8601Date();
         if(array_key_exists("copyright",$m))$e->Copyright = $m["copyright"];
-		else $e->Copyright = $m["owners"];
+		else if(array_key_exists("owners",$m))$e->Copyright = $m["owners"];
         if(array_key_exists("owners",$m))$e->Owners = $m["owners"];
 	}
     
