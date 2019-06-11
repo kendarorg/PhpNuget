@@ -4,6 +4,16 @@ SET NUROOT=http://localhost:9999
 
 cd nuget_exes
 
+echo NuGet.5.0, Common libs
+
+SET PCKG=EPG.CommonLibrary.1.1.21.7096.symbols.nupkg
+NuGet.5.0.exe SetApiKey %APIKEY% -Source %NUROOT%/symbolupload 
+NuGet.5.0.exe Push %PCKG% -Source %NUROOT%/symbolupload
+dir ..\src\data\packages\EPG.CommonLibrary.1.1.21.7096.snupkg > NULL 2>&1
+if errorlevel 1 (
+   GOTO FINISH
+)
+
 echo NuGet.5.0, Upload of Symbols file
 
 SET PCKG=newtonsoft.json.12.0.2.symbols.nupkg
@@ -62,6 +72,8 @@ dir ..\src\data\packages\%PCKG% > NULL 2>&1
 if errorlevel 1 (
    GOTO FINISH
 )
+
+
 
 :FINISH
 del null

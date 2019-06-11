@@ -93,14 +93,11 @@ class NugetManager
 		$e->Version = $m["version"];
         $e->Id = $m["id"];
         $e->Title = "";
-        $e->Id = "";
         if(array_key_exists("title",$m))$e->Title = $m["title"];
-        if($e->Title==null|| !is_string($e->Title)  ||  $e->Title==""){
+        if($e->Title==null|| !is_string($e->Title)  ||  strlen($e->Title)==0){
             $e->Title = $e->Id;   
         }
-		if( $e->Id==null || !is_string($e->Id) || $e->Id==""){
-            $e->Id = $e->Title;   
-        }
+
 		$e->IsPreRelease = PhpNugetObjectSearch::IsPreRelease($e->Version);
 		$e->Listed = true;
         $e->RequireLicenseAcceptance =false;
@@ -149,12 +146,12 @@ class NugetManager
         }
         uplogv("nugetreader.nuget","ZIPCONT",$files);
         $nuspecContent = $zipmanager->LoadFile($nupckgName);
-        
+
 		//uplogv("nugetreader","Nuspec content!",$nuspecContent);
         $xml = XML2Array($nuspecContent);
         $e = new PackageDescriptor();
         $m=$xml["metadata"];
-        
+
         $this->LoadXml($e,$m,$xml);
         /*for($i=0;$i<sizeof($ark);$i++){
             $m[strtolower ($ark[$i])]=$mt[$ark[$i]];
@@ -193,7 +190,7 @@ class NugetManager
     public function SaveNuspec($nupkgFile,$e,$isSymbol=false)
     {
 
-        if($nupkgFile->IsSymbol){
+        if($e->IsSymbols){
             $isSymbol=true;
         }
 		global $loginController;
