@@ -1,5 +1,3 @@
-https://www.nuget.org/api/v2/symbolpackage/Newtonsoft.Json/12.0.2
-
 # PhpNuget V. 4.1.0.0
 
 ## Purpose
