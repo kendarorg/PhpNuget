@@ -21,6 +21,8 @@ class Settings
 	public static $AdminEmail = "";
 	public static $AllowUserAdd = false;
 	public static $LimitUsersPackages = false;
+	public static $EnterpriseAuthEnv = false;
+	public static $DisplayUser = 'userid';
 }
 
 function initializeInternalSettings(){
@@ -48,6 +50,12 @@ function initializeInternalSettings(){
 	}
 	if(!is_dir(Settings::$PackagesRoot))	
 		mkdir(Settings::$PackagesRoot,__RW_ADMIN_R_ALL__);
+	}
+	if(defined("__ENTERPRISE_AUTH_ENV__")){
+	    @Settings::$EnterpriseAuthEnv = __ENTERPRISE_AUTH_ENV__;
+	}
+	if(defined("__DISPLAY_USER__")){
+	    @Settings::$DisplayUser = __DISPLAY_USER__;
 	}
 }
 
