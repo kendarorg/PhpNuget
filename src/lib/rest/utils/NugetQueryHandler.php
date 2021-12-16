@@ -52,6 +52,9 @@ class NugetQueryHandler
                 return $result;
             }
         }
+        if($nugetQuery->pagination == null){
+            $nugetQuery->pagination = new Pagination();
+        }
         $result->data = $this->nugetPackages->query(
             $nugetQuery->query,$nugetQuery->pagination->Top+1,$nugetQuery->pagination->Skip);
         return $result;
