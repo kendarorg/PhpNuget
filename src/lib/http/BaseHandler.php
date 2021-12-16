@@ -27,16 +27,18 @@ class BaseHandler
         try {
             $request = new Request();
             $this->preHandle($request);
-            if ($request->getMethod() == "put") {
-                $this->put($request);
-            } else if ($request->getMethod() == "post") {
-                $this->post($request);
-            } else if ($request->getMethod() == "get") {
-                $this->httpGet($request);
-            } else if ($request->getMethod() == "delete") {
-                $this->delete($request);
-            } else if ($request->getMethod() == "option") {
-                $this->option($request);
+            if(!$this->catchAll()) {
+                if ($request->getMethod() == "put") {
+                    $this->put($request);
+                } else if ($request->getMethod() == "post") {
+                    $this->post($request);
+                } else if ($request->getMethod() == "get") {
+                    $this->httpGet($request);
+                } else if ($request->getMethod() == "delete") {
+                    $this->delete($request);
+                } else if ($request->getMethod() == "option") {
+                    $this->option($request);
+                }
             }
             $this->postHandle($request);
         } catch (HandlerException $ex) {
@@ -165,5 +167,13 @@ class BaseHandler
         header('Pragma: public');
         $json = $prefix.json_encode($object).$postfix;
         echo $json;
+    }
+
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public function catchAll($request){
+        return false;
     }
 }
