@@ -1,3 +1,3 @@
 <?php
-require_once("../../tests/index.php");
+require_once("../../tests.old/index.php");
 ?>

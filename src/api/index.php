@@ -1,4 +1,16 @@
 <?php
+
+namespace api;
+
+use lib\rest\Root;
+use lib\utils\Properties;
+
+$root = new Root();
+$root->handle();
+
+
+/*
+
 require_once(dirname(__FILE__)."/../root.php");
 require_once(__ROOT__."/settings.php");
 require_once(__ROOT__."/inc/api_users.php");
@@ -94,3 +106,4 @@ header('Cache-Control: must-revalidate');
 header('Pragma: public');
 header('Content-Length: ' . filesize($path));
 readfile($path);
+*/

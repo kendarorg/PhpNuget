@@ -1,0 +1,5 @@
+{
+  "packagesRoot": "/var/phpNuget/data/packages",
+  "databaseRoot": "/var/phpNuget/data/db",
+  "siteRoot": "http://localhost/phpnuget"
+}
