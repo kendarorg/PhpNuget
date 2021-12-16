@@ -2,10 +2,10 @@
 
 namespace api;
 
-use lib\rest\Root;
+use lib\rest\ApiRoot;
 use lib\utils\Properties;
 
-$root = new Root();
+$root = new ApiRoot();
 $root->handle();
 
 

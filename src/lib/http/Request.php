@@ -30,9 +30,9 @@ class Request
 
     public function __construct()
     {
-        $this->files = [];
-        $this->extraData = [];
-        $this->requestData = [];
+        $this->files = array();
+        $this->extraData = array();
+        $this->requestData = array();
         ArrayUtils::mergeLowerCase($this->files,$_FILES);
         ArrayUtils::mergeLowerCase($this->requestData,$_SERVER);
         ArrayUtils::mergeLowerCase($this->requestData,$_GET);

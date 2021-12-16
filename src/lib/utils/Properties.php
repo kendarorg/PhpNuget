@@ -7,7 +7,7 @@ class Properties
     /**
      * @var array
      */
-    private $properties = [];
+    private $properties = array();
 
     /**
      * @param string $fileName
@@ -40,5 +40,15 @@ class Properties
     public function setProperty($key,$value){
         $key = strtolower($key);
         $this->properties[$key] = $value;
+    }
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public function hasProperty($key)
+    {
+        $key = strtolower($key);
+        return isset($this->properties[$key]);
     }
 }

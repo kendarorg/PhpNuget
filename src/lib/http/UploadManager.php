@@ -18,7 +18,7 @@ class UploadManager
      */
     public function __construct($request)
     {
-        $this->files = [];
+        $this->files = array();
         $this->request = $request;
         foreach($request->files as $fileId => $fileData){
             $this->files[$fileId] = new UploadedFile($fileData);
@@ -29,7 +29,7 @@ class UploadManager
      * @return string[]
      */
     public function listFiles(){
-        $result = [];
+        $result = array();
         foreach($this->files as $fileId => $fileData){
             $result[] = $fileId;
         }

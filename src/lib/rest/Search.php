@@ -4,120 +4,108 @@ namespace lib\rest;
 
 use lib\http\BaseHandler;
 use lib\http\Request;
+use lib\utils\HttpUtils;
 use lib\utils\PathUtils;
+use lib\utils\Properties;
 
-class Search extends BaseQueryable
+class Search extends BaseHandler
 {
+    /**
+     * @var ResourcesLoader
+     */
+    private $resourcesLoader;
+    /**
+     * @var NugetQueryHandler
+     */
+    private $nugetQueryHandler;
+    /**
+     * @var NugetResultParser
+     */
+    private $nugetResultParser;
 
+    /**
+     * @param ResourcesLoader $resourcesLoader
+     * @param Properties $properties
+     * @param NugetQueryHandler $nugetQueryHandler
+     * @param NugetResultParser $nugetResultParser
+     */
+    public function __construct($resourcesLoader, $properties, $nugetQueryHandler,$nugetResultParser)
+    {
+        parent::__construct($properties);
+        $this->resourcesLoader = $resourcesLoader;
+        $this->nugetQueryHandler = $nugetQueryHandler;
+        $this->nugetResultParser = $nugetResultParser;
+    }
+
+    /**
+     * @param Request $request
+     * @param $top
+     * @param $verbs
+     * @return Pagination
+     */
+    private function getPagination($request,$top=10,$verbs = "all")
+    {
+        $pg = new Pagination();
+        $pg->Skip = $request->getInteger("\$skip",0);
+        $pg->Top = $request->getInteger("\$top",1000);
+        return $pg;
+    }
     /**
      * @param Request $request
      * @return bool
      */
-    public function catchAll($request){
-        //$path = PathUtils::combine($this->root,$this->version,"resources","metadata.xml");
-        //$this->answerFile($path,"application/xml");
-        $query = "";
-        $searchTerm = $request->getParam("searchTerm",null);
-        $targetFramework = $request->getParam("targetFramework",null);
-        $includePrerelease = strtolower($request->getParam("includePrerelease",null));
-        $filter = $request->getParam("\$filter",null);
+    public function catchAll($request)
+    {
+        $nugetQuery = new NugetQuery();
+        $nugetQuery->pagination = $this->getPagination($request);
+        $nugetQuery->xmlAction = "Search";
+        $nugetQuery->count = $request->getBoolean("count",false);
+        $nugetQuery->lineCount = strtolower($request->getParam("\$inlinecount", "none"))=="allpages";
+        $nugetQuery->baseUrl = HttpUtils::currentUrl($this->properties->getProperty("siteRoot"),$this->properties);
 
-        $orderby = $request->getParam("\$orderby",null);
+        $nugetQuery->searchTerm = $request->getParam("searchTerm", null);
+        $nugetQuery->targetFramework = $request->getParam("targetFramework", null);
+        $nugetQuery->includePrerelease = $request->getBoolean("includePrerelease", null);
+        $nugetQuery->includePrereleaseSet = $request->getParam("includePrerelease", null)!=null;
+        $nugetQuery->filter = $request->getParam("\$filter", null);
 
-        $id = $request->getParam("id",null);
+        $nugetQuery->orderby = $request->getParam("\$orderby", null);
 
-        //Maybe allow UrlUtils to check without case sensitivity?
-        if($id==null){
-            $id = $request->getParam("Id",null);
-        }
-
-        if($id!=null){
-            $id = trim($id,"'");
-            $x = "(Id eq '".$id."')";
-            $query = $this->_append($query,$x,"and");
-        }
-        $version = $request->getParam("version",null);
-        if($version==null){
-            $version = $request->getParam("Version",null);
-        }
-
-        if($version!=null){
-            $version = trim($version,"'");
-            $x = "(Version eq '".$version."')";
-            $query = $this->_append($query,$x,"and");
-        }
-
-        if($targetFramework!=null && $targetFramework!="" && $targetFramework!="''"){
-            $targetFramework = urldecode(trim($targetFramework,"'"));
-            $tf = explode("|",$targetFramework);
-            $ar = array();
-            $tt = array();
-            foreach($tf as $ti){
-                if(!in_array($ti,$ar)){
-                    $ar[]=$ti;
-                    $tt[]=" substringof('".$ti."',TargetFramework) ";
-                }
-            }
-            $x = "(TargetFramework eq '' or (".implode("and",$tt)."))";
-            $query = $this->_append($query,$x,"and");
-        }
-
-        if($includePrerelease==null){
-            if($filter=="IsLatestVersion"){
-                $filter = null;
-                $query = $this->_append($query,"(IsPreRelease eq false)","and");
-            }else if($filter=="IsAbsoluteLatestVersion"){
-                $filter = null;
-            }
-        }else if(strtolower($includePrerelease)=="false"){
-            $x = "(IsPreRelease eq false)";
-            $query = $this->_append($query,$x,"and");
-            if($filter=="IsLatestVersion" || $filter=="IsAbsoluteLatestVersion"){
-                $filter = null;
-            }
-        }else if(strtolower($includePrerelease)=="true"){
-            if($filter=="IsLatestVersion" || $filter=="IsAbsoluteLatestVersion"){
-                $filter = null;
-            }
-        }
-        if($filter=="IsLatestVersion" || $filter=="IsAbsoluteLatestVersion"){
-            $filter = null;
-        }
+        $nugetQuery->id = $request->getParam("id", null);
+        $nugetQuery->version = $request->getParam("version", null);
 
 
 
-
-        if($searchTerm!=null && strlen($searchTerm)>0){
-            if($searchTerm!="''"){
-                $searchTerm = trim($searchTerm,"'");
-                $x = "(";
-                $x.= "substringof('".$searchTerm."',Title) or ";
-                $x.= "substringof('".$searchTerm."',Id) or ";
-                $x.= "substringof('".$searchTerm."',Description))";
-                $query = $this->_append($query,$x,"and");
-                $query = $this->_append($query," Listed eq true","and");
-            }
-        }
-
-
-        $query = $this->_append($query,"(Listed eq true)","and");
-
-
-
-        if($filter!=null){
-            $x = "(".urldecode($filter).")";
-            $query = $this->_append($query,$x,"and");
-        }
-        if($orderby!=null){
-            $query =$query." orderby Id asc,Version desc, ".$orderby;
-        }
-
-        if($orderby==null){
-            $query =$query." orderby Id asc,Version desc";
-        }
-        $query =$query." groupby Id";
-        $this->_query($query);
+        $result = $this->nugetQueryHandler->query($nugetQuery);
+        $lastQuery = $this->buildLastQuery($request);
+        $xml = $this->nugetResultParser->parse($result,$lastQuery);
         return true;
     }
 
+    function buildLastQuery($request)
+    {
+        $lastQuery = array();
+
+        $val = $request->getParam("packageIds",null);
+        if($val!=null)$lastQuery["packageIds"]=$val;
+        $val = $request->getParam("versions",null);
+        if($val!=null)$lastQuery["versions"]=$val;
+        $val = $request->getParam("includePrerelease","false");
+        if($val!=null)$lastQuery["includePrerelease"]=$val;
+        $val = $request->getParam("includeAllVersions",null);
+        if($val!=null)$lastQuery["includeAllVersions"]=$val;
+        $val = $request->getParam("targetFrameworks",null);
+        if($val!=null)$lastQuery["targetFrameworks"]=$val;
+        $val = $request->getParam("versionConstraints",null);
+        if($val!=null)$lastQuery["versionConstraints"]=$val;
+        $val = $request->getParam("searchTerm",null);
+        if($val!=null)$lastQuery["searchTerm"]=$val;
+        $val = $request->getParam("\$filter",null);
+        if($val!=null)$lastQuery["\$filter"]=$val;
+        $val = $request->getParam("\$orderby",null);
+        if($val!=null)$lastQuery["\$orderby"]=$val;
+        $val = $request->getParam("id",null);
+        if($val!=null)$lastQuery["id"]=$val;
+        return $lastQuery;
+    }
 }

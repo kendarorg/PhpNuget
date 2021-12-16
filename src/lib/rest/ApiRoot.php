@@ -11,7 +11,7 @@ use lib\utils\PathUtils;
 use lib\utils\Properties;
 use lib\utils\StringUtils;
 
-class Root extends BaseHandler
+class ApiRoot extends BaseHandler
 {
     /**
      * @var NugetPackages

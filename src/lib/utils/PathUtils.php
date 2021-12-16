@@ -18,7 +18,7 @@ class PathUtils
      */
     public static function combine(){
         $args = func_get_args();
-        $realArgs = [];
+        $realArgs = array();
         foreach ($args as $arg){
             $arg = trim($arg,"\\/");
             if(strlen($arg)>0) {

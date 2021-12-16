@@ -26,4 +26,36 @@ class HttpUtils
         curl_close($ch);
         return $result;
     }
+
+    /**
+     * @param string $requestUri
+     * @param Properties $properties
+     * @return string
+     */
+    public static function currentUrl($requestUri = "",$properties) {
+        $pageURL = 'http';
+        $isHttps = false;
+        if ((array_key_exists("HTTPS",$_SERVER) && $_SERVER["HTTPS"] == "on") ||
+            (array_key_exists("HTTP_X_FORWARDED_PROTO", $_SERVER) && $_SERVER["HTTP_X_FORWARDED_PROTO"] = "https")) {
+            $pageURL .= "s";
+            $isHttps = true;
+        }
+
+        $pageURL .= "://";
+        if($requestUri==""){
+            $requestUri = $_SERVER["REQUEST_URI"];
+            if($properties->hasProperty("siteRoot")){
+                $requestUri = $properties->getProperty("siteRoot");
+            }
+        }
+        $requestUri = trim($requestUri,"\\/");
+        if ($_SERVER["SERVER_PORT"] != "80" && !$isHttps ) {
+            $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"]."/".$requestUri;
+        } else if ($_SERVER["SERVER_PORT"] != "433" && $isHttps ) {
+            $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"]."/".$requestUri;
+        } else {
+            $pageURL .= $_SERVER["SERVER_NAME"]."/".$requestUri;
+        }
+        return $pageURL;
+    }
 }
