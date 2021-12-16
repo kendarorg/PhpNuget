@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\rest;
+namespace lib\rest\utils;
 
 class NugetQuery
 {
@@ -61,6 +61,11 @@ class NugetQuery
      * @var bool
      */
     public $includePrereleaseSet;
+    /**
+     * @var bool
+     */
+    public $setupLatest;
+
 
 
 }

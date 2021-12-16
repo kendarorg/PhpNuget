@@ -153,6 +153,21 @@ class BaseHandler
     }
 
     /**
+     * @param string $content
+     * @param string $contentType
+     * @return void
+     */
+    public function answerString($content, $contentType)
+    {
+        http_response_code(200);
+        header('Content-Type: '.$contentType);
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        echo $content;
+    }
+
+    /**
      * @param mixed $object
      * @param string $prefix
      * @param string $postfix

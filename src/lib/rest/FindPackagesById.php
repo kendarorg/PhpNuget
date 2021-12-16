@@ -2,18 +2,17 @@
 
 namespace lib\rest;
 
-use lib\http\BaseHandler;
 use lib\http\Request;
 use lib\rest\utils\NugetQuery;
 use lib\rest\utils\NugetQueryHandler;
 use lib\rest\utils\NugetResultParser;
-use lib\rest\utils\Pagination;
 use lib\rest\utils\ResourcesLoader;
 use lib\utils\HttpUtils;
 use lib\utils\Properties;
 
-class Search extends BaseHandler
+class FindPackagesById
 {
+
     /**
      * @var ResourcesLoader
      */
@@ -40,47 +39,25 @@ class Search extends BaseHandler
         $this->nugetQueryHandler = $nugetQueryHandler;
         $this->nugetResultParser = $nugetResultParser;
     }
-
-    /**
-     * @param Request $request
-     * @param $top
-     * @param $verbs
-     * @return Pagination
-     */
-    private function getPagination($request,$top=10,$verbs = "all")
-    {
-        $pg = new Pagination();
-        $pg->Skip = $request->getInteger("\$skip",0);
-        $pg->Top = $request->getInteger("\$top",1000);
-        return $pg;
-    }
     /**
      * @param Request $request
      * @return bool
      */
     public function catchAll($request)
     {
+        $id = $request->getParam("id");
+        if($id!=null){
+            $id = trim($id,"'");
+        }
+        $query = "Id eq '".$id."' and Listed eq true orderby Id asc,Version asc";
         $nugetQuery = new NugetQuery();
-        $nugetQuery->pagination = $this->getPagination($request);
-        $nugetQuery->xmlAction = "Search";
+        $nugetQuery->query = $query;
+        $nugetQuery->setupLatest = true;
         $nugetQuery->count = $request->getBoolean("count",false);
         $nugetQuery->lineCount = strtolower($request->getParam("\$inlinecount", "none"))=="allpages";
         $nugetQuery->baseUrl = HttpUtils::currentUrl($this->properties->getProperty("siteRoot"),$this->properties);
-
-        $nugetQuery->searchTerm = $request->getParam("searchTerm", null);
-        $nugetQuery->targetFramework = $request->getParam("targetFramework", null);
-        $nugetQuery->includePrerelease = $request->getBoolean("includePrerelease", null);
-        $nugetQuery->includePrereleaseSet = $request->getParam("includePrerelease", null)!=null;
-        $nugetQuery->filter = $request->getParam("\$filter", null);
-
-        $nugetQuery->orderby = $request->getParam("\$orderby", null);
-
-        $nugetQuery->id = $request->getParam("id", null);
-        $nugetQuery->version = $request->getParam("version", null);
-
-
-
-        $result = $this->nugetQueryHandler->search($nugetQuery);
+        $nugetQuery->xmlAction = "FindPackagesById";
+        $result = $this->nugetQueryHandler->query($query);
         $lastQuery = $this->buildLastQuery($request);
         $xml = $this->nugetResultParser->parse($result,$lastQuery);
         $this->answerString($xml,"application/xml");

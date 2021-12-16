@@ -1,6 +1,8 @@
 <?php
 
-namespace lib\rest;
+namespace lib\rest\utils;
+
+use lib\rest\NetVersionHelper;
 
 class NugetResultParser
 {

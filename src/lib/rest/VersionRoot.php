@@ -4,6 +4,7 @@ namespace lib\rest;
 
 use lib\http\BaseHandler;
 use lib\http\Request;
+use lib\rest\utils\ResourcesLoader;
 use lib\utils\Properties;
 
 class VersionRoot extends BaseHandler

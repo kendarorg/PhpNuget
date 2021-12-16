@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\rest;
+namespace lib\rest\utils;
 
 use lib\utils\PathUtils;
 
@@ -14,7 +14,7 @@ class ResourcesLoader
     public function __construct($version)
     {
         $this->version = $version;
-        $this->path = PathUtils::combine(__DIR__,$version);
+        $this->path = PathUtils::combine(dirname(__DIR__),$version);
     }
 
     public function getResource($replacements,$source,$destination = null){

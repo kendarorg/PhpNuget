@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\rest;
+namespace lib\rest\utils;
 
 use lib\nuget\NugetPackages;
 
@@ -23,9 +23,28 @@ class NugetQueryHandler
      * @param NugetQuery $nugetQuery
      * @return NugetQueryResult
      */
-    public function query($nugetQuery){
+    public function search($nugetQuery){
         $result = new NugetQueryResult();
         $result->query = $this->setupQuery($nugetQuery);
+        if($result->query->count || $result->query->allpages){
+            $allRows = $this->nugetPackages->query($result->query->query);
+            $result->itemsCount = sizeof($allRows);
+            if(!$result->query->allpages){
+                return $result;
+            }
+        }
+        $result->data = $this->nugetPackages->query(
+            $nugetQuery->query,$nugetQuery->pagination->Top+1,$nugetQuery->pagination->Skip);
+        return $result;
+    }
+
+    /**
+     * @param NugetQuery $nugetQuery
+     * @return NugetQueryResult
+     */
+    public function query($nugetQuery){
+        $result = new NugetQueryResult();
+        $result->query = $nugetQuery;
         if($result->query->count || $result->query->allpages){
             $allRows = $this->nugetPackages->query($result->query->query);
             $result->itemsCount = sizeof($allRows);
