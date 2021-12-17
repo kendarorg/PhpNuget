@@ -5,6 +5,7 @@ namespace lib\db;
 use lib\db\parser\IdentifyResult;
 use lib\db\parser\Operator;
 use lib\db\parser\SortClause;
+use ReflectionClass;
 
 class QueryParser
 {
@@ -38,6 +39,11 @@ class QueryParser
         orderBy desc/asc FieldName
         *
     */
+    /**
+     * @var array|mixed
+     */
+    private mixed $parseResult;
+
     function _isStartString($char)
     {
         return $char == "'" || $char == "\"";
@@ -159,7 +165,7 @@ class QueryParser
         $isGroup = false;
         for (; $i < sizeof($splitted); $i++) {
             $s = $splitted[$i];
-            /*if($this->_isField($s)){
+            if($this->_isField($s)){
                 $o = new Operator();
                 $o->Type = "field";
                 //Fix for Chocolatey dirty search
@@ -168,7 +174,7 @@ class QueryParser
                 }
                 $o->Value = $s;
                 $temp[] = $o;
-            }else */
+            }else
             if ($this->_isString($s)) {
                 $o = new Operator();
                 $o->Type = "string";
@@ -229,8 +235,8 @@ class QueryParser
                 $o->Type = "number";
                 $o->Value = $s + 0;
                 $temp[] = $o;
-            } else if ($this->externalTypes != null && $this->externalTypes->IsExternal($s)) {
-                $o = $this->externalTypes->BuildToken($s);
+            } else if (($extId =$this->isExternalType($s))>=0) {
+                $o = $this->externalTypes[$extId]->buildToken($s);
                 if ($o == null) {
                     throw new Exception("Token '" . $s . "' not supported by external provider");
                 }
@@ -241,8 +247,8 @@ class QueryParser
                 $o->Value = "";
                 $temp[] = $o;
             } else {
-                //throw new ParserException("Token '".$s."' not supported parsing");
-                //Assume field
+                throw new \Exception("Token '".$s."' not supported parsing");
+                /*//Assume field
                 $o = new Operator();
                 $o->Type = "field";
                 //Fix for Chocolatey dirty search
@@ -250,7 +256,7 @@ class QueryParser
                     $s = "Id";
                 }
                 $o->Value = $s;
-                $temp[] = $o;
+                $temp[] = $o;*/
             }
             $prev = $temp[sizeof($temp) - 1];
         }
@@ -259,8 +265,19 @@ class QueryParser
         return $result;
     }
 
-    public function parse($queryString)
+    public function parse($queryString,$objet,$externalTypes=null)
     {
+        $this->externalTypes = $externalTypes;
+        $this->fields = array();
+        $ref = new ReflectionClass($objet);
+        foreach (get_class_vars(get_class($objet)) as $key=>$value){
+            $this->fields[] = strtolower($key);
+            //TODO
+            $type = $this->typeFromComment($ref,$key);
+
+
+        }
+
         $splitted = $this->tokenize($queryString);
         $notOperator = array();
         $operator = array();
@@ -478,5 +495,332 @@ class QueryParser
             }
         }
         return $andResult;
+    }
+
+    private function isExternalType($s)
+    {
+        if($this->externalTypes==null || sizeof($this->externalTypes)==0) return -1;
+        for ($i=0;$i<sizeof($this->externalTypes);$i++){
+            if($this->externalTypes[$i]->isExternal($s)){
+                return $i;
+            }
+        }
+        return -1;
+    }
+
+    public function execute($subject)
+    {
+        if($this->parseResult==null || sizeof($this->parseResult)==0){
+            return true;
+        }
+        $parseTreeItem = $this->parseResult[0];
+
+        $result = @$this->_doExecute($parseTreeItem,$subject);
+        return $result->Value;
+    }
+
+    private function _executeFunction($name,$params)
+    {
+        if($this->externalTypes!=null && $this->externalTypes->canHandle($name,$params)){
+            return $this->externalTypes->$name($params);
+        }
+        return $this->$name($params);
+    }
+
+    public function _doExecute($parseTreeItem,$subject)
+    {
+        $t = strtolower($parseTreeItem->Type);
+        $v = $parseTreeItem->Value;
+        $c = $parseTreeItem->Children;
+        switch($t){
+            case "string":
+            case "number":
+            case "boolean":
+                return $parseTreeItem;
+        }
+        if($t == "function"){
+            $params = array();
+            for($i=0;$i<sizeof($c);$i++){
+                $params[] = $this->_doExecute($c[$i],$subject);
+            }
+
+            $result = $this->_executeFunction($v,$params);
+        }else if($t == "group"){
+            $params = array();
+            for($i=0;$i<sizeof($c);$i++){
+                $params[] = $this->_doExecute($c[$i],$subject);
+            }
+            $params[]=true;
+            $result = $this->_executeFunction("doeq",$params);
+        }else if($t=="field"){
+            $fo = new Operator();
+            $fo->Type = "fieldinstance";
+            $fo->Value = $subject->$v;
+            $fo->Id = $v;
+            return $fo;
+        }else if($this->isExternalType($v)>=0){
+            return $parseTreeItem;
+        }else{
+            throw new ParserException("Token '".$t."' not supported excuting (2)");
+        }
+        return $result;
+    }
+
+
+
+    function substringof($args)
+    {
+        $res = $this->buildBool(contains(strtolower($args[0]->Value),strtolower($args[1]->Value)));
+        /*echo ($args[0]->Value)."\n";
+        echo ($args[1]->Value)."\n";
+        var_dump($res);
+        echo "===============\n";*/
+        return $res;
+    }
+
+    function doand($args)
+    {
+        for($i=0;$i<sizeof($args);$i++){
+            if(!$args[$i]->Value){
+                return $this->buildBool(false);
+            }
+        }
+        return $this->buildBool(true);
+    }
+
+    function door($args)
+    {
+        for($i=0;$i<sizeof($args);$i++){
+            if($args[$i]->Value){
+                return $this->buildBool(true);
+            }
+        }
+        return $this->buildBool(false);
+    }
+
+    function tolower($args)
+    {
+        return $this->buildItem(strtolower($args[0]->Value),$args[0]->Type,$args[0]->Id);
+    }
+
+    function toupper($args)
+    {
+        return $this->buildItem(strtoupper($args[0]->Value),$args[0]->Type,$args[0]->Id);
+    }
+
+    function startsWithInt($haystack, $needle)
+    {
+        return $needle === "" || strpos($haystack, $needle) === 0;
+    }
+    function endsWithInt($haystack, $needle)
+    {
+        return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
+    }
+
+    function startswith($args)
+    {
+        return $this->buildBool($this->startsWithInt($args[0]->Value,$args[1]->Value));
+    }
+
+    function endswith($args)
+    {
+        return $this->buildBool($this->endsWithInt($args[0]->Value,$args[1]->Value));
+    }
+
+    function dosubstringof($args)
+    {
+        $l=$args[0];
+        $r=$args[1];
+        $pos = stripos($r->Value, $l->Value);
+        if ($pos === false) {
+            return $this->buildBool(false);
+        } else {
+            return $this->buildBool(true);
+        }
+    }
+
+    function doeq($args)
+    {
+        $l=$args[0];
+        $r=$args[1];
+
+        if($l->Type=="string" || $r->Type=="string"){
+            return $this->buildBool(strtolower($l->Value)==strtolower($r->Value));
+        }
+
+        return $this->buildBool($l->Value == $r->Value);
+    }
+
+    function doneq($args)
+    {
+        $l=$args[0];
+        $r=$args[1];
+        return $this->buildBool($l->Value != $r->Value);
+    }
+
+    function done($args)
+    {
+        $l=$args[0];
+        $r=$args[1];
+        return $this->buildBool($l->Value != $r->Value);
+    }
+
+    function dogt($args)
+    {
+        $l=$args[0];
+        $r=$args[1];
+        return $this->buildBool($l->Value > $r->Value);
+    }
+
+    function dogte($args)
+    {
+        $l=$args[0];
+        $r=$args[1];
+        if($l->Value == $r->Value) return $this->buildBool(true);
+        return $this->buildBool($l->Value > $r->Value);
+    }
+
+    function dolt($args)
+    {
+        $l=$args[0];
+        $r=$args[1];
+        return $this->buildBool($l->Value < $r->Value);
+    }
+
+    function dolte($args)
+    {
+        $l=$args[0];
+        $r=$args[1];
+        if($l->Value == $r->Value) return $this->buildBool(true);
+        return $this->buildBool($l->Value < $r->Value);
+    }
+
+    function buildBool($value)
+    {
+        $o = new Operator();
+        $o->Type = "boolean";
+        $o->Value = false;
+        if($value==true || $value>=1 || $value=="true"){
+            $o->Value = true;
+        }
+        return $o;
+    }
+
+    function buildItem($value,$type,$id)
+    {
+        $o = new Operator();
+        $o->Type = strtolower($type);
+        $o->Value = $value;
+        $o->Id = $id;
+        return $o;
+    }
+
+    public function doSort($subject,$types)
+    {
+        $this->_types= $types;
+
+        if(sizeof($this->_sortClause)==0) return $subject;
+
+        usort($subject, array($this, "_doSort"));
+        return $subject;
+    }
+
+    /*
+	The comparison function must return an integer
+	less than, if the first argument is considered to be less then the second
+	equal to, if the first argument is considered to be equal to the second
+	greater than zero if the first argument is considered to be greater than the second.
+	*/
+    public function _doSort($f,$s)
+    {
+        $print = false;
+
+        for($i=0;$i<sizeof($this->_sortClause);$i++){
+            $so = $this->_sortClause[$i];
+            $row = $so->Field;
+            $asc = $so->Asc;
+            $type = $this->_types[$row];
+
+            $res = $this->_cmp($f->$row,$s->$row,$asc,$type);
+            if($res>0){
+                //if($print)echo $f->Title." ".$f->Version.">".$s->Title." ".$s->Version."\r\n";
+                return $asc?1:-1;
+            }else if($res<0){
+                //if($print)echo $f->Title." ".$f->Version."<".$s->Title." ".$s->Version."\r\n";
+                return $asc?-1:1;
+            }
+        }
+        //if($print)echo $f->Title." ".$f->Version."==".$s->Title." ".$f->Version."\r\n";
+        return 0;
+    }
+
+    /*
+    The comparison function must return an integer
+    less than, if the first argument is considered to be less then the second
+    equal to, if the first argument is considered to be equal to the second
+    greater than zero if the first argument is considered to be greater than the second.
+    */
+    public function _cmp($f,$s,$asc,$type)
+    {
+
+        if(($fId =$this->isExternalType($f))>=0 && ($sId =$this->isExternalType($s))>=0){
+            $ft = $this->externalTypes[$fId]->buildToken($f);
+            $st = $this->externalTypes[$sId]->buildToken($s);
+            $arg = array();
+            $arg[] = $ft;
+            $arg[] = $st;
+            if($this->externalTypes->dolt($arg)->Value)return -1;
+            if($this->externalTypes->dogt($arg)->Value) return 1;
+            return 0;
+        }
+        switch($type){
+            case("boolean"):
+            case("number"):
+                return $f>$s;
+            case("string"):
+            case("date"):
+                return strcasecmp($f,$s);
+        }
+
+        return 0;
+    }
+
+    public function doGroupBy($subject)
+    {
+        if(sizeof($this->_groupClause)==0) return $subject;
+        $result = array();
+        $keys = array();
+
+        foreach($subject as $item){
+            $k = "";
+            for($i=0;$i<sizeof($this->_groupClause);$i++){
+                $fld = $this->_groupClause[$i];
+                $k.="#".$item->$fld;
+            }
+            if(!array_key_exists($k,$keys)){
+                $keys[$k] = true;
+                $result[]=$item;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param ReflectionClass $ref
+     * @param string $key
+     * @return void
+     * @throws \ReflectionException
+     */
+    private function typeFromComment($ref, $key)
+    {
+        $output_array = array();
+        $property = $ref->getProperty($key);
+        $comment=$property->getDocComment()
+        $result = preg_match('/@var\s([a-zA-Z0-9\[\]]+)/im', $comment, $output_array);
+        if($result == 1 && $result!=false){
+            return $output_array[1];
+        }
+        return "string";
     }
 }

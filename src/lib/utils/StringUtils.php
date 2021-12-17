@@ -39,4 +39,14 @@ class StringUtils
             return trim(htmlspecialchars($hasMap));
         }
     }
+
+    public static function indexOf($mystring, $findme)
+    {
+        $pos = strpos($mystring, $findme);
+        if ($pos === false) {
+            return -1;
+        } else {
+            return $pos;
+        }
+    }
 }

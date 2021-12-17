@@ -2,6 +2,7 @@
 
 namespace lib\db;
 
+use lib\nuget\NugetVersionType;
 use PHPUnit\Framework\TestCase;
 
 class QueryParserTest extends TestCase
@@ -35,7 +36,7 @@ class QueryParserTest extends TestCase
         $target = new QueryParser();
         $query = "Id eq 'ID' and Listed eq true orderby Id asc,Version asc";
 
-        $result = $target->parse($query);
+        $result = $target->parse($query,new TestObject());
         $ser = json_encode($result);
         $this->assertEquals(
             '[{"Type":"function","Value":"doand","Id":null,"Children":['.
@@ -55,7 +56,7 @@ class QueryParserTest extends TestCase
         $target = new QueryParser();
         $query = "Id eq 'ID' and ( Listed eq true or Added neq 'test') orderby Id asc,Version asc";
 
-        $result = $target->parse($query);
+        $result = $target->parse($query,new TestObject());
         $ser = json_encode($result);
         $this->assertEquals(
             '[{"Type":"function","Value":"doand","Id":null,"Children":['.
@@ -69,6 +70,32 @@ class QueryParserTest extends TestCase
                         '{"Type":"function","Value":"doneq","Id":null,"Children":['.
                             '{"Type":"field","Value":"Added","Id":null,"Children":[]},'.
                             '{"Type":"string","Value":"test","Id":null,"Children":[]}]}]}]}]',
+            $ser);
+    }
+
+    public function testInvertedParse(): void
+    {
+
+        $target = new QueryParser();
+        $query = "22 eq Id";
+
+        $result = $target->parse($query,new TestObject());
+        $ser = json_encode($result);
+        $this->assertEquals(
+            '[{"Type":"function","Value":"doeq","Id":null,"Children":[{"Type":"number","Value":22,"Id":null,"Children":[]},{"Type":"field","Value":"Id","Id":null,"Children":[]}]}]',
+            $ser);
+    }
+
+    public function testUnknownType(): void
+    {
+
+        $target = new QueryParser();
+        $query = "22.77.5 eq Id";
+
+        $result = $target->parse($query,new TestObject(),[new NugetVersionType()]);
+        $ser = json_encode($result);
+        $this->assertEquals(
+            '[{"Type":"function","Value":"doeq","Id":null,"Children":[{"Type":"version","Value":"22.77.5","Id":null,"Children":[]},{"Type":"field","Value":"Id","Id":null,"Children":[]}]}]',
             $ser);
     }
 }

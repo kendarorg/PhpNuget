@@ -16,13 +16,22 @@ class BaseDb
     private $table;
 
     /**
+     * @var string[]
+     */
+    private $keys;
+    private $extraTypes;
+
+    /**
      * @param DbStorage $storage
      * @param string $table
+     * @param string[] $keys
      */
-    public function __construct($storage, $table)
+    public function __construct($storage, $table, $keys,$extraTypes)
     {
         $this->storage = $storage;
         $this->table = $table;
+        $this->keys = $keys;
+        $this->extraTypes = $extraTypes;
     }
 
     /**
@@ -32,6 +41,7 @@ class BaseDb
      * @return array
      */
     public function query($query,$limit = -1, $skip = 0){
+        $this->storage->query($query,$this->keys,$limit,$skip,$this->extraTypes);
         return [];
     }
 
