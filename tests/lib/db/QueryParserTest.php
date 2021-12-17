@@ -28,6 +28,7 @@ class QueryParserTest extends TestCase
             '["Id","eq","\'ID\'","and","Listed","eq","true","orderby","Id","asc","Version","asc"]',
             $ser);
     }
+
     public function testSimpleParse(): void
     {
 
@@ -37,7 +38,37 @@ class QueryParserTest extends TestCase
         $result = $target->parse($query);
         $ser = json_encode($result);
         $this->assertEquals(
-            '[{"Type":"function","Value":"doand","Id":null,"Children":[{"Type":"function","Value":"doeq","Id":null,"Children":[{"Type":"field","Value":"Id","Id":null,"Children":[]},{"Type":"string","Value":"ID","Id":null,"Children":[]}]},{"Type":"function","Value":"doeq","Id":null,"Children":[{"Type":"field","Value":"Listed","Id":null,"Children":[]},{"Type":"boolean","Value":true,"Id":null,"Children":[]}]}]}]',
+            '[{"Type":"function","Value":"doand","Id":null,"Children":['.
+                '{"Type":"function","Value":"doeq","Id":null,"Children":['.
+                    '{"Type":"field","Value":"Id","Id":null,"Children":[]},'.
+                    '{"Type":"string","Value":"ID","Id":null,"Children":[]}]},'.
+                '{"Type":"function","Value":"doeq","Id":null,"Children":['.
+                    '{"Type":"field","Value":"Listed","Id":null,"Children":[]},'.
+                    '{"Type":"boolean","Value":true,"Id":null,"Children":[]}]}]}]',
+            $ser);
+    }
+
+
+    public function testNestedParse(): void
+    {
+
+        $target = new QueryParser();
+        $query = "Id eq 'ID' and ( Listed eq true or Added neq 'test') orderby Id asc,Version asc";
+
+        $result = $target->parse($query);
+        $ser = json_encode($result);
+        $this->assertEquals(
+            '[{"Type":"function","Value":"doand","Id":null,"Children":['.
+                '{"Type":"function","Value":"doeq","Id":null,"Children":['.
+                    '{"Type":"field","Value":"Id","Id":null,"Children":[]},'.
+                    '{"Type":"string","Value":"ID","Id":null,"Children":[]}]},'.
+                    '{"Type":"function","Value":"door","Id":null,"Children":['.
+                        '{"Type":"function","Value":"doeq","Id":null,"Children":['.
+                            '{"Type":"field","Value":"Listed","Id":null,"Children":[]},'.
+                            '{"Type":"boolean","Value":true,"Id":null,"Children":[]}]},'.
+                        '{"Type":"function","Value":"doneq","Id":null,"Children":['.
+                            '{"Type":"field","Value":"Added","Id":null,"Children":[]},'.
+                            '{"Type":"string","Value":"test","Id":null,"Children":[]}]}]}]}]',
             $ser);
     }
 }
