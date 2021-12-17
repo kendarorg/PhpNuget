@@ -31,7 +31,7 @@ class NugetUser
      */
     public $md5Password;
     /**
-     * @var bool
+     * @var boolean
      */
     public $enabled;
     /**

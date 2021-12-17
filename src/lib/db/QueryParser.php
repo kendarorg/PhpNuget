@@ -816,10 +816,12 @@ class QueryParser
     {
         $output_array = array();
         $property = $ref->getProperty($key);
-        $comment=$property->getDocComment()
-        $result = preg_match('/@var\s([a-zA-Z0-9\[\]]+)/im', $comment, $output_array);
-        if($result == 1 && $result!=false){
-            return $output_array[1];
+        $comment=$property->getDocComment();
+        if($comment!=null && strlen($comment)>0) {
+            $result = preg_match('/@var\s([a-zA-Z0-9\[\]]+)/im', $comment, $output_array);
+            if ($result == 1 && $result != false) {
+                return $output_array[1];
+            }
         }
         return "string";
     }

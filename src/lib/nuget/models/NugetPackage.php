@@ -4,19 +4,43 @@ namespace lib\nuget\models;
 
 class NugetPackage
 {
+    /**
+     * @var boolean
+     */
     public $IsSymbols;
     public $Id;
+
+    /**
+     * @var number
+     */
     public $Version0;
+    /**
+     * @var number
+     */
     public $Version1;
+    /**
+     * @var number
+     */
     public $Version2;
+    /**
+     * @var number
+     */
     public $Version3;
+    /**
+     * @var number
+     */
     public $VersionBeta;
+
     public $Version;
     /**
-     * @var array
+     * @var string[]
      */
     public $Author;
     public $Copyright;
+
+    /**
+     * @var date
+     */
     public $Created;
 
     /**
@@ -24,23 +48,39 @@ class NugetPackage
      */
     public $Dependencies;
     public $Description;
+
+    /**
+     * @var number
+     */
     public $DownloadCount;
     //V1 ExternalPackageUrl
     //GEN GalleryDetailsUrl
     public $IconUrl;
     public $IsLatestVersion;
     /**
-     * @var bool
+     * @var boolean
      */
     public $Listed;
+
+    /**
+     * @var boolean
+     */
     public $IsAbsoluteLatestVersion;
     /**
      * @var bool
      */
     public $IsPreRelease;	//V1 Prerelease
+
+    /**
+     * @var date
+     */
     public $LastUpdated;
     public $PackageHash;
     public $PackageHashAlgorithm="sha256";
+
+    /**
+     * @var number
+     */
     public $PackageSize;
     public $ProjectUrl;
     //ReportAbuseUrl
