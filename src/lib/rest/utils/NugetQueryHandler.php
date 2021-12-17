@@ -60,7 +60,13 @@ class NugetQueryHandler
         return $result;
     }
 
-    private function append($query, $data, $linkWith="")
+    /**
+     * @param string $query
+     * @param string $data
+     * @param string $linkWith
+     * @return mixed|string
+     */
+    public function append($query, $data, $linkWith="")
     {
         if(strlen($query)==0) return $data;
         return $query." ".$linkWith." ".$data;

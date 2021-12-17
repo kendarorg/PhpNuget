@@ -40,20 +40,6 @@ class Search extends BaseHandler
         $this->nugetQueryHandler = $nugetQueryHandler;
         $this->nugetResultParser = $nugetResultParser;
     }
-
-    /**
-     * @param Request $request
-     * @param $top
-     * @param $verbs
-     * @return Pagination
-     */
-    private function getPagination($request,$top=10,$verbs = "all")
-    {
-        $pg = new Pagination();
-        $pg->Skip = $request->getInteger("\$skip",0);
-        $pg->Top = $request->getInteger("\$top",1000);
-        return $pg;
-    }
     /**
      * @param Request $request
      * @return bool
@@ -61,7 +47,7 @@ class Search extends BaseHandler
     public function catchAll($request)
     {
         $nugetQuery = new NugetQuery();
-        $nugetQuery->pagination = $this->getPagination($request);
+        $nugetQuery->pagination = (new Pagination())->buildFromRequest($request);
         $nugetQuery->xmlAction = "Search";
         $nugetQuery->count = $request->getBoolean("count",false);
         $nugetQuery->lineCount = strtolower($request->getParam("\$inlinecount", "none"))=="allpages";
@@ -81,36 +67,8 @@ class Search extends BaseHandler
 
 
         $result = $this->nugetQueryHandler->search($nugetQuery);
-        $lastQuery = $this->buildLastQuery($request);
-        $xml = $this->nugetResultParser->parse($result,$lastQuery);
+        $xml = $this->nugetResultParser->parse($result,$request);
         $this->answerString($xml,"application/xml");
         return true;
-    }
-
-    function buildLastQuery($request)
-    {
-        $lastQuery = array();
-
-        $val = $request->getParam("packageIds",null);
-        if($val!=null)$lastQuery["packageIds"]=$val;
-        $val = $request->getParam("versions",null);
-        if($val!=null)$lastQuery["versions"]=$val;
-        $val = $request->getParam("includePrerelease","false");
-        if($val!=null)$lastQuery["includePrerelease"]=$val;
-        $val = $request->getParam("includeAllVersions",null);
-        if($val!=null)$lastQuery["includeAllVersions"]=$val;
-        $val = $request->getParam("targetFrameworks",null);
-        if($val!=null)$lastQuery["targetFrameworks"]=$val;
-        $val = $request->getParam("versionConstraints",null);
-        if($val!=null)$lastQuery["versionConstraints"]=$val;
-        $val = $request->getParam("searchTerm",null);
-        if($val!=null)$lastQuery["searchTerm"]=$val;
-        $val = $request->getParam("\$filter",null);
-        if($val!=null)$lastQuery["\$filter"]=$val;
-        $val = $request->getParam("\$orderby",null);
-        if($val!=null)$lastQuery["\$orderby"]=$val;
-        $val = $request->getParam("id",null);
-        if($val!=null)$lastQuery["id"]=$val;
-        return $lastQuery;
     }
 }

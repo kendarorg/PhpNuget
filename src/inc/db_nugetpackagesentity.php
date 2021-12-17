@@ -1,22 +1,34 @@
 <?php
 
+function verifyNetFw($fw,$shortFw,$tf,$sep){
+    $output_array = array();
+    $result = preg_match('/\.'.$fw.'(\d)(?:\.(\d))?(?:\.(\d))?/', $tf, $output_array);
+    if($result == 1 && $result != false){
+        $toret = $sep.$shortFw;
+        if(sizeof($output_array)>=2){
+            $toret.=$output_array[1];
+        }
+        if(sizeof($output_array)>=3){
+            $toret.=$sep.$output_array[2];
+        }
+        if(sizeof($output_array)>=4){
+            $toret.=$sep.$output_array[3];
+        }
+        return $toret;
+    }
+    return null;
+}
+/**
+ * @param $tf  .netframework4.6.2 | natvie | xxxx
+ * @return string
+ */
 function translateNetVersion($tf)
 {
     $tf = strtolower($tf);
-    switch($tf){
-		case("native"): return "native";
-		case(".netframework4.6.1"): return "net461";
-		case(".netframework4.6"): return "net46";
-		case(".netframework4.5.2"): return "net452";
-		case(".netframework4.5.1"): return "net451";
-        case(".netframework4.5"): return "net45";
-        case(".netframework3.5"): return "net35";
-        case(".netframework4.0"): return "net40";
-        case(".netframework3.0"): return "net30";
-        case(".netframework2.0"): return "net20";
-        case(".netframework1.0"): return "net10";
-        default: return $tf;
-    }
+    $checkFw = verifyNetFw("netframework","net",$tf,"");
+    if($checkFw!=null) return $checkFw;
+
+    return trim($tf,".");
 }
 
 function buildSplitVersion($v){

@@ -16,15 +16,28 @@ class NugetResultParser
     private $entryTemplate;
 
     /**
-     * @param ResourcesLoader $resourcesLoader
+     * @var LastQueryBuilder
      */
-    public function __construct($resourcesLoader)
+    private $lastQueryBuilder;
+
+    /**
+     * @param ResourcesLoader $resourcesLoader
+     * @param LastQueryBuilder $lastQueryBuilder
+     */
+    public function __construct($resourcesLoader, $lastQueryBuilder)
     {
         $this->resourcesLoader = $resourcesLoader;
+        $this->lastQueryBuilder = $lastQueryBuilder;
     }
 
-    public function parse(NugetQueryResult $result, $lastQuery)
+    /**
+     * @param NugetQueryResult $result
+     * @param Request $request
+     * @return void
+     */
+    public function parse($result,$request)
     {
+        $lastQuery = $this->lastQueryBuilder->buildLastQuery($request);
         $query = $result->query;
         $pg = $query->pagination;
         $allRows = $result->data;
@@ -87,14 +100,12 @@ class NugetResultParser
         if ($e->Author == null) {
             $e->Author = "";
         }
-        $authors = explode(";", $e->Author);
+
         $author = "";
-        if (sizeof($authors) > 0) {
-            for ($i = 0; $i < sizeof($authors); $i++) {
-                $authors[$i] = htmlspecialchars($authors[$i]);
-            }
-            $author = "<name>" . implode("</name>\n<name>", $authors) . "</name>";
+        for ($i = 0; $i < sizeof($e->Author); $i++) {
+            $author.= "<name>".htmlspecialchars($e->Author[$i])."</name>";
         }
+
         //print_r($e);
         $baseUrl = trim($baseUrl, "\\/");
 
@@ -120,11 +131,7 @@ class NugetResultParser
         $t = $this->safeReplace("\${DB.PACKAGEHASHALGORITHM}", $e->PackageHashAlgorithm, $t);
         $t = $this->safeReplace("\${DB.PACKAGEHASH}", $e->PackageHash, $t);
 
-        if (is_string($e->Dependencies) && strlen($e->Dependencies) == 0) {
-            $t = str_replace("\${NUSPEC.DEPENDENCIES}", "", $t);
-        } else if (is_array($e->Dependencies)) {
-            $t = str_replace("\${NUSPEC.DEPENDENCIES}", $this->makeDepString($e->Dependencies), $t);
-        }
+        $t = str_replace("\${NUSPEC.DEPENDENCIES}", $this->makeDepString($e->Dependencies), $t);
         $t = $this->safeReplace("\${DB.DOWNLOADCOUNT}", $e->DownloadCount, $t);
         $t = $this->safeReplace("\${DB.UPDATED}", $e->Published, $t);
 
@@ -163,32 +170,32 @@ class NugetResultParser
 
     private function makeDepString($d)
     {
+        if($d==null)return "";
         $tora = array();
 
         //<d:Dependencies>Castle.Core:3.1.0:net40|Castle.Windsor:3.1.0:net40|Common.Logging:2.0.0:net40|Quartz:2.0.1:net40|Castle.Core:2.1.0:net20|Castle.Windsor:2.1.0:net20|Common.Logging:1.0.0:net20|Quartz:1.0.1:net20</d:Dependencies>
-        if(is_array($d)){
-            for($i=0;$i<sizeof($d);$i++){
-                $sd = $d[$i];
-                if($sd->IsGroup){
-                    $fw= NetVersionHelper::translateNetVersion($sd->TargetFramework);
-                    //if(strpos($fw,"+")===FALSE) {
-                    for($j=0;$j<sizeof($sd->Dependencies);$j++){
-                        $sdd = $sd->Dependencies[$j];
-                        $tora[]=($sdd->Id.":".$sdd->Version.":".$fw);
-                    }
-                    /*}else{
-                        $fws = explode("+",$fw);
-                        for($k=0;$k<sizeof($fws);$k++){
-                            $subfw = $fws[$k]
-                            for($j=0;$j<sizeof($sd->Dependencies);$j++){
-                                $sdd = $sd->Dependencies[$j];
-                                $tora[]=($sdd->Id.":".$sdd->Version.":".$subfw);
-                            }
-                        }
-                    }*/
-                }else{
-                    $tora[]=($sd->Id.":".$sd->Version.":");
+
+        for($i=0;$i<sizeof($d);$i++){
+            $sd = $d[$i];
+            if($sd->IsGroup){
+                $fw= NetVersionHelper::translateNetVersion($sd->TargetFramework);
+                //if(strpos($fw,"+")===FALSE) {
+                for($j=0;$j<sizeof($sd->Dependencies);$j++){
+                    $sdd = $sd->Dependencies[$j];
+                    $tora[]=($sdd->Id.":".$sdd->Version.":".$fw);
                 }
+                /*}else{
+                    $fws = explode("+",$fw);
+                    for($k=0;$k<sizeof($fws);$k++){
+                        $subfw = $fws[$k]
+                        for($j=0;$j<sizeof($sd->Dependencies);$j++){
+                            $sdd = $sd->Dependencies[$j];
+                            $tora[]=($sdd->Id.":".$sdd->Version.":".$subfw);
+                        }
+                    }
+                }*/
+            }else{
+                $tora[]=($sd->Id.":".$sd->Version.":");
             }
         }
         //print_r($tora);die();

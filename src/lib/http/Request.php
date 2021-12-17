@@ -61,7 +61,7 @@ class Request
      * @return bool
      */
     public function getBoolean($value, $default =false){
-        $res = strtolower($this->getParam($value,$default?"true":"false"));
+        $res = trim(strtolower($this->getParam($value,$default?"true":"false")));
         return $res=="true";
     }
 
@@ -71,7 +71,7 @@ class Request
      * @return integer
      */
     public function getInteger($value, $default =-i){
-        $res = strtolower($this->getParam($value,$default.""));
+        $res = trim(strtolower($this->getParam($value,$default."")));
         return intval($res);
     }
 
@@ -99,8 +99,8 @@ class Request
     public function getParamString($value, $default = null)
     {
         $value = strtolower($value);
-        if (isset($this->extraData[$value])) return $this->extraData[$value];
-        if (isset($this->requestData[$value])) return $this->requestData[$value];
+        if (isset($this->extraData[$value])) return trim($this->extraData[$value]);
+        if (isset($this->requestData[$value])) return trim($this->requestData[$value]);
         return $default;
     }
 

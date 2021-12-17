@@ -7,6 +7,7 @@ use lib\nuget\models\NugetUser;
 
 class NugetUsers extends BaseDb
 {
+
     /**
      * @param DbStorage $dbStorage
      */
