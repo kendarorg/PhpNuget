@@ -1,6 +1,6 @@
 <?php
 
-
+namespace api\v1;
 
 /*require_once(dirname(__FILE__)."/../../root.php");
 require_once(__ROOT__."/settings.php");
