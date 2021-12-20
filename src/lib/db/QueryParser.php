@@ -306,32 +306,44 @@ class QueryParser
         $result = array();
         $obClause = array();
         $gbClause = array();
-        $do = true;
-        for ($i = 0; $i < sizeof($identified) && $do; $i++) {
+        $isOrderBy = false;
+        $isGroupBy = false;
+        for ($i = 0; $i < sizeof($identified); $i++) {
             $val = $identified[$i];
             $t = strtolower($val->Type);
             $v = strtolower($val->Value);
 
+            if ($t == "groupby" && $v == "groupby") {
+                $i++;
+                for (; $i < sizeof($identified); $i++) {
+                    $val = $identified[$i];
+                    $t = strtolower($val->Type);
+                    $v = strtolower($val->Value);
+                    if ($t == "orderby" && $v == "orderby") {
+                        $i--;
+                        break;
+                    } else {
+                        $gbClause[] = $identified[$i];
+                    }
+                }
+                continue;
+            }
             if ($t == "orderby" && $v == "orderby") {
                 $i++;
-                for (; $i < sizeof($identified) && $do; $i++) {
+                for (; $i < sizeof($identified); $i++) {
                     $val = $identified[$i];
                     $t = strtolower($val->Type);
                     $v = strtolower($val->Value);
                     if ($t == "groupby" && $v == "groupby") {
-                        $i++;
-                        for (; $i < sizeof($identified); $i++) {
-                            $gbClause[] = $identified[$i];
-                        }
-                        $do = false;
+                        $i--;
+                        break;
                     } else {
                         $obClause[] = $identified[$i];
                     }
                 }
-                $do = false;
-            } else {
-                $result[] = $val;
+                continue;
             }
+            $result[] = $val;
         }
 
         if (sizeof($obClause) > 0) {
@@ -783,6 +795,8 @@ class QueryParser
         if(sizeof($this->_groupClause)==0) return $subject;
         $result = array();
         $keys = array();
+        $counters = array();
+        $countersIndex = array();
 
         foreach($subject as $item){
             $k = "";
@@ -793,7 +807,15 @@ class QueryParser
             if(!array_key_exists($k,$keys)){
                 $keys[$k] = true;
                 $result[]=$item;
+                $counters[]=1;
+                $countersIndex[$k]=sizeof($counters)-1;
+            }else{
+                $counters[$countersIndex[$k]]++;
             }
+        }
+
+        for($i=0;$i<sizeof($result);$i++){
+            $result[$i]->count = $counters[$i];
         }
 
         return $result;
