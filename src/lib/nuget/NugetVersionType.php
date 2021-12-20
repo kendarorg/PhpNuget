@@ -125,7 +125,6 @@ class NugetVersionType extends SpecialFieldType
             $aCur = intval($aVersion[$i]);
             $bCur = intval($bVersion[$i]);
             if($this->_isInteger($aCur) && $this->_isInteger($bCur)){
-                $res = $aCur-$bCur;
                 if($aCur==$bCur) continue;
                 return ($aCur < $bCur) ? -1 : 1;
             }else if(!$this->_isInteger($aCur) && $this->_isInteger($bCur)){
