@@ -35,6 +35,21 @@ class FileDbStorageSelectTest extends TestCase
         $this->assertEquals("Pack1",$result[0]->Id);
     }
 
+    public function testWithParenthesis(){
+        $items = array();
+        $items[] = $this->utils->buildNewItem("Pack1","1.0.0.0");
+        $items[] = $this->utils->buildNewItem("Pack2","1.0.0.0");
+        $queryParser = new QueryParser();
+        $properties = new Properties(null);
+        $query = "(Id eq 'Pack1') and true";
+
+        $target = new FileDbStorage($properties,$queryParser,$items);
+        $result = $target->query($query,array(),-1,0,[new NugetVersionType()],new NugetPackage());
+
+        $this->assertEquals(1,sizeof($result));
+        $this->assertEquals("Pack1",$result[0]->Id);
+    }
+
     public function testVersion(){
         $items = array();
         $items[] = $this->utils->buildNewItem("Pack1","1.0.0.0");

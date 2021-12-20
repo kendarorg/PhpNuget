@@ -1,7 +1,9 @@
 <?php
 
-namespace lib\db;
+namespace lib\db\queryparser;
 
+use lib\db\QueryParser;
+use lib\db\TestObject;
 use PHPUnit\Framework\TestCase;
 
 class QueryExecuteTest extends TestCase
