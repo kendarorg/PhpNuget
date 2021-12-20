@@ -2,9 +2,9 @@
 
 namespace lib\nuget;
 
-use lib\db\InternalTypeBuilder;
+use lib\db\parser\InternalTypeBuilder;
 use lib\db\parser\Operator;
-use lib\db\SpecialFieldType;
+use lib\db\utils\SpecialFieldType;
 use lib\utils\StringUtils;
 
 class NugetVersionType extends SpecialFieldType

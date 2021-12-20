@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\db;
+namespace lib\db\utils;
 
 class SpecialFieldType
 {

@@ -2,7 +2,7 @@
 
 namespace lib\nuget;
 
-use lib\db\InternalTypeBuilder;
+use lib\db\parser\InternalTypeBuilder;
 use PHPUnit\Framework\TestCase;
 
 class NugetVersionTypeTest extends TestCase

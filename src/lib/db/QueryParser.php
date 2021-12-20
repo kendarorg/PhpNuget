@@ -3,6 +3,7 @@
 namespace lib\db;
 
 use lib\db\parser\IdentifyResult;
+use lib\db\parser\InternalTypeBuilder;
 use lib\db\parser\Operator;
 use lib\db\parser\SortClause;
 use ReflectionClass;
