@@ -45,6 +45,7 @@ class QueryParser
     private mixed $parseResult;
     private $_types;
     private array $fields;
+    private array $fieldsMatch;
 
     function _isStartString($char)
     {
@@ -271,10 +272,12 @@ class QueryParser
     {
         $this->externalTypes = $externalTypes;
         $this->fields = array();
+        $this->fieldsMatch = array();
         $this->_types = array();
         $ref = new ReflectionClass($objet);
         foreach (get_class_vars(get_class($objet)) as $key=>$value){
             $this->fields[] = strtolower($key);
+            $this->fieldsMatch[strtolower($key)]=$key;
             $this->_types[strtolower($key)] = $this->typeFromComment($ref,$key);
         }
 
@@ -571,7 +574,7 @@ class QueryParser
 
     function substringof($args)
     {
-        $res = $this->buildBool(contains(strtolower($args[0]->Value),strtolower($args[1]->Value)));
+        $res = InternalTypeBuilder::buildBool(contains(strtolower($args[0]->Value),strtolower($args[1]->Value)));
         /*echo ($args[0]->Value)."\n";
         echo ($args[1]->Value)."\n";
         var_dump($res);
@@ -583,30 +586,30 @@ class QueryParser
     {
         for($i=0;$i<sizeof($args);$i++){
             if(!$args[$i]->Value){
-                return $this->buildBool(false);
+                return InternalTypeBuilder::buildBool(false);
             }
         }
-        return $this->buildBool(true);
+        return InternalTypeBuilder::buildBool(true);
     }
 
     function door($args)
     {
         for($i=0;$i<sizeof($args);$i++){
             if($args[$i]->Value){
-                return $this->buildBool(true);
+                return InternalTypeBuilder::buildBool(true);
             }
         }
-        return $this->buildBool(false);
+        return InternalTypeBuilder::buildBool(false);
     }
 
     function tolower($args)
     {
-        return $this->buildItem(strtolower($args[0]->Value),$args[0]->Type,$args[0]->Id);
+        return InternalTypeBuilder::buildItem(strtolower($args[0]->Value),$args[0]->Type,$args[0]->Id);
     }
 
     function toupper($args)
     {
-        return $this->buildItem(strtoupper($args[0]->Value),$args[0]->Type,$args[0]->Id);
+        return InternalTypeBuilder::buildItem(strtoupper($args[0]->Value),$args[0]->Type,$args[0]->Id);
     }
 
     function startsWithInt($haystack, $needle)
@@ -620,12 +623,12 @@ class QueryParser
 
     function startswith($args)
     {
-        return $this->buildBool($this->startsWithInt($args[0]->Value,$args[1]->Value));
+        return InternalTypeBuilder::buildBool($this->startsWithInt($args[0]->Value,$args[1]->Value));
     }
 
     function endswith($args)
     {
-        return $this->buildBool($this->endsWithInt($args[0]->Value,$args[1]->Value));
+        return InternalTypeBuilder::buildBool($this->endsWithInt($args[0]->Value,$args[1]->Value));
     }
 
     function dosubstringof($args)
@@ -634,9 +637,9 @@ class QueryParser
         $r=$args[1];
         $pos = stripos($r->Value, $l->Value);
         if ($pos === false) {
-            return $this->buildBool(false);
+            return InternalTypeBuilder::buildBool(false);
         } else {
-            return $this->buildBool(true);
+            return InternalTypeBuilder::buildBool(true);
         }
     }
 
@@ -646,82 +649,67 @@ class QueryParser
         $r=$args[1];
 
         if($l->Type=="string" || $r->Type=="string"){
-            return $this->buildBool(strtolower($l->Value)==strtolower($r->Value));
+            return InternalTypeBuilder::buildBool(strtolower($l->Value)==strtolower($r->Value));
         }
 
-        return $this->buildBool($l->Value == $r->Value);
+        return InternalTypeBuilder::buildBool($l->Value == $r->Value);
     }
 
     function doneq($args)
     {
         $l=$args[0];
         $r=$args[1];
-        return $this->buildBool($l->Value != $r->Value);
+        return InternalTypeBuilder::buildBool($l->Value != $r->Value);
     }
 
     function done($args)
     {
         $l=$args[0];
         $r=$args[1];
-        return $this->buildBool($l->Value != $r->Value);
+        return InternalTypeBuilder::buildBool($l->Value != $r->Value);
     }
 
     function dogt($args)
     {
         $l=$args[0];
         $r=$args[1];
-        return $this->buildBool($l->Value > $r->Value);
+        return InternalTypeBuilder::buildBool($l->Value > $r->Value);
     }
 
     function dogte($args)
     {
         $l=$args[0];
         $r=$args[1];
-        if($l->Value == $r->Value) return $this->buildBool(true);
-        return $this->buildBool($l->Value > $r->Value);
+        if($l->Value == $r->Value) return InternalTypeBuilder::buildBool(true);
+        return InternalTypeBuilder::buildBool($l->Value > $r->Value);
     }
 
     function dolt($args)
     {
         $l=$args[0];
         $r=$args[1];
-        return $this->buildBool($l->Value < $r->Value);
+        return InternalTypeBuilder::buildBool($l->Value < $r->Value);
     }
 
     function dolte($args)
     {
         $l=$args[0];
         $r=$args[1];
-        if($l->Value == $r->Value) return $this->buildBool(true);
-        return $this->buildBool($l->Value < $r->Value);
+        if($l->Value == $r->Value) return InternalTypeBuilder::buildBool(true);
+        return InternalTypeBuilder::buildBool($l->Value < $r->Value);
     }
 
-    function buildBool($value)
-    {
-        $o = new Operator();
-        $o->Type = "boolean";
-        $o->Value = false;
-        if($value==true || $value>=1 || $value=="true"){
-            $o->Value = true;
-        }
-        return $o;
-    }
 
-    function buildItem($value,$type,$id)
-    {
-        $o = new Operator();
-        $o->Type = strtolower($type);
-        $o->Value = $value;
-        $o->Id = $id;
-        return $o;
-    }
 
-    public function doSort($subject)
+    public function doSort(&$subject)
     {
 
         if(sizeof($this->_sortClause)==0) return $subject;
 
+        //throw new \Exception(json_encode($subject));
         usort($subject, array($this, "_doSort"));
+
+
         return $subject;
     }
 
@@ -735,21 +723,26 @@ class QueryParser
     {
         $print = false;
 
+
         for($i=0;$i<sizeof($this->_sortClause);$i++){
             $so = $this->_sortClause[$i];
-            $row = $so->Field;
+            $row = $so->Field;//$this->fieldsMatch[];
             $asc = $so->Asc;
             $type = $this->_types[strtolower($row)];
+            $realRow = $this->fieldsMatch[strtolower($row)];
 
-            $res = $this->_cmp($f->$row,$s->$row,$asc,$type);
+            $res = $this->_cmp($f->$realRow,$s->$realRow,$asc,$type);
             if($res>0){
+
                 //if($print)echo $f->Title." ".$f->Version.">".$s->Title." ".$s->Version."\r\n";
                 return $asc?1:-1;
             }else if($res<0){
+                //throw new \Exception("AA");
                 //if($print)echo $f->Title." ".$f->Version."<".$s->Title." ".$s->Version."\r\n";
                 return $asc?-1:1;
             }
         }
+
         //if($print)echo $f->Title." ".$f->Version."==".$s->Title." ".$f->Version."\r\n";
         return 0;
     }
@@ -769,8 +762,8 @@ class QueryParser
             $arg = array();
             $arg[] = $ft;
             $arg[] = $st;
-            if($this->externalTypes->dolt($arg)->Value)return -1;
-            if($this->externalTypes->dogt($arg)->Value) return 1;
+            if($this->externalTypes[$sId]->dolt($arg)->Value) return -1;
+            if($this->externalTypes[$sId]->dogt($arg)->Value) return 1;
             return 0;
         }
         switch($type){

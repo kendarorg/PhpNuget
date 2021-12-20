@@ -64,13 +64,29 @@ class FileDbStorageOrderTest extends TestCase
         $this->assertEquals("Pack2",$result[0]->Id);
     }
 
-    public function testVersionAsc(){
+    public function testVersionAscOrdered(){
         $items = array();
         $items[] = $this->utils->buildNewItem("Pack1","1.0.0.0");
         $items[] = $this->utils->buildNewItem("Pack2","1.0.0.1");
         $queryParser = new QueryParser();
         $properties = new Properties(null);
-        $query = "orderby version desc'";
+        $query = "orderby version asc";
+
+        $target = new FileDbStorage($properties,$queryParser,$items);
+        $result = $target->query($query,array(),-1,0,[new NugetVersionType()],new NugetPackage());
+
+        $this->assertEquals(2,sizeof($result));
+        $this->assertEquals("Pack1",$result[0]->Id);
+        $this->assertEquals("Pack2",$result[1]->Id);
+    }
+
+    public function testVersionAsc(){
+        $items = array();
+        $items[] = $this->utils->buildNewItem("Pack1","1.0.0.1");
+        $items[] = $this->utils->buildNewItem("Pack2","1.0.0.0");
+        $queryParser = new QueryParser();
+        $properties = new Properties(null);
+        $query = "orderby version asc";
 
         $target = new FileDbStorage($properties,$queryParser,$items);
         $result = $target->query($query,array(),-1,0,[new NugetVersionType()],new NugetPackage());
@@ -78,6 +94,38 @@ class FileDbStorageOrderTest extends TestCase
         $this->assertEquals(2,sizeof($result));
         $this->assertEquals("Pack2",$result[0]->Id);
         $this->assertEquals("Pack1",$result[1]->Id);
+    }
+
+    public function testVersionDesc(){
+        $items = array();
+        $items[] = $this->utils->buildNewItem("Pack2","1.0.0.0");
+        $items[] = $this->utils->buildNewItem("Pack1","1.0.0.1");
+        $queryParser = new QueryParser();
+        $properties = new Properties(null);
+        $query = "orderby version desc";
+
+        $target = new FileDbStorage($properties,$queryParser,$items);
+        $result = $target->query($query,array(),-1,0,[new NugetVersionType()],new NugetPackage());
+
+        $this->assertEquals(2,sizeof($result));
+        $this->assertEquals("Pack1",$result[0]->Id);
+        $this->assertEquals("Pack2",$result[1]->Id);
+    }
+
+    public function testVersionDescOrdered(){
+        $items = array();
+        $items[] = $this->utils->buildNewItem("Pack1","1.0.0.1");
+        $items[] = $this->utils->buildNewItem("Pack2","1.0.0.0");
+        $queryParser = new QueryParser();
+        $properties = new Properties(null);
+        $query = "orderby version desc";
+
+        $target = new FileDbStorage($properties,$queryParser,$items);
+        $result = $target->query($query,array(),-1,0,[new NugetVersionType()],new NugetPackage());
+
+        $this->assertEquals(2,sizeof($result));
+        $this->assertEquals("Pack1",$result[0]->Id);
+        $this->assertEquals("Pack2",$result[1]->Id);
     }
 
 }

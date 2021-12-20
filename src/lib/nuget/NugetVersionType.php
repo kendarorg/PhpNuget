@@ -2,6 +2,7 @@
 
 namespace lib\nuget;
 
+use lib\db\InternalTypeBuilder;
 use lib\db\parser\Operator;
 use lib\db\SpecialFieldType;
 use lib\utils\StringUtils;
@@ -86,20 +87,22 @@ class NugetVersionType extends SpecialFieldType
     private function _compare($l,$r)
     {
         $la= array();
-        $tmp = indexOf($l,"-");
+        $tmp = StringUtils::indexOf($l,"-");
         if($tmp>0){
             $la[] = substr($l,0,$tmp);
             $la[] = substr($l,$tmp+1);
         }else{
             $la[] = $l;
+            $la[] = '';
         }
         $ra= array();
-        $tmp = indexOf($r,"-");
+        $tmp = StringUtils::indexOf($r,"-");
         if($tmp>0){
             $ra[] = substr($r,0,$tmp);
             $ra[] = substr($r,$tmp+1);
         }else{
             $ra[] = $r;
+            $ra[] = '';
         }
         $numericCompare = $this->_compareNumericVersion($la[0],$ra[0]);
 
@@ -119,14 +122,15 @@ class NugetVersionType extends SpecialFieldType
         $aVersion = explode(".",strtolower($l));
         $bVersion = explode(".",strtolower($r));
         for($i=0;$i<sizeof($aVersion) && $i<sizeof($bVersion);$i++){
-            $aCur = $aVersion[$i];
-            $bCur = $bVersion[$i];
-            if($this->_isInteger($aCur)&&$this->_isInteger($bCur)){
-                $res = $aVersion[$i]-$bVersion[$i];
-                if($res!=0) return $res;
-            }else if(!$this->_isInteger($aCur)&&$this->_isInteger($bCur)){
+            $aCur = intval($aVersion[$i]);
+            $bCur = intval($bVersion[$i]);
+            if($this->_isInteger($aCur) && $this->_isInteger($bCur)){
+                $res = $aCur-$bCur;
+                if($aCur==$bCur) continue;
+                return ($aCur < $bCur) ? -1 : 1;
+            }else if(!$this->_isInteger($aCur) && $this->_isInteger($bCur)){
                 return 1;
-            }else if($this->_isInteger($aCur)&&!$this->_isInteger($bCur)){
+            }else if($this->_isInteger($aCur) && !$this->_isInteger($bCur)){
                 return -1;
             }
         }
@@ -136,38 +140,38 @@ class NugetVersionType extends SpecialFieldType
         return 0;
     }
 
-    public function dogt($args)
+    public function dolt($args)
     {
         $l=$args[0];
         $r=$args[1];
-        if($l==null && $r!=null) return BuildBool(false);
-        if($r==null && $l!=null) return BuildBool(true);
-        return BuildBool($this->_compare($l->Value,$r->Value)>0);
+        if($l==null && $r!=null) return InternalTypeBuilder::buildBool(false);
+        if($r==null && $l!=null) return InternalTypeBuilder::buildBool(true);
+        return InternalTypeBuilder::buildBool($this->_compare($l->Value,$r->Value)<0);
     }
 
     public function dogte($args)
     {
         $l=$args[0];
         $r=$args[1];
-        if($l->Value == $r->Value) return BuildBool(true);
+        if($l->Value == $r->Value) return InternalTypeBuilder::buildBool(true);
         return $this->dogt($args);
     }
 
-    public function dolt($args)
+    public function dogt($args)
     {
         $l=$args[0];
         $r=$args[1];
 
-        if($l==null && $r!=null) return BuildBool(true);
-        if($r==null && $l!=null) return BuildBool(false);
-        return BuildBool($this->_compare($l->Value,$r->Value)<0);
+        if($l==null && $r!=null) return InternalTypeBuilder::buildBool(true);
+        if($r==null && $l!=null) return InternalTypeBuilder::buildBool(false);
+        return InternalTypeBuilder::buildBool($this->_compare($l->Value,$r->Value)>0);
     }
 
     public function dolte($args)
     {
         $l=$args[0];
         $r=$args[1];
-        if($l->Value == $r->Value) return BuildBool(true);
+        if($l->Value == $r->Value) return InternalTypeBuilder::buildBool(true);
         return $this->dolt($args);
     }
 
@@ -183,7 +187,7 @@ class NugetVersionType extends SpecialFieldType
             $r = serialize($args[0]->Value);
             $l = $args[0]->Value;
         }else {
-            return BuildBool(false);
+            return InternalTypeBuilder::buildBool(false);
         }
 
         return contains($l,$r);

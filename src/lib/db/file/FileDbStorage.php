@@ -49,7 +49,7 @@ class FileDbStorage extends DbStorage
                 $toSort[] = $item;
             }
         }
-        $toSort = $this->queryParser->doSort($toSort);
+        $this->queryParser->doSort($toSort);
         $toSort = $this->queryParser->doGroupBy($toSort);
 
         return $toSort;
