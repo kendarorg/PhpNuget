@@ -478,3 +478,7 @@ now IIS is serving PHP now in next tutorial i will show you how to set up MySQL 
 	* Added interface to edit packages
 	* Added mod_rewrite support via .htaccess
 	* Simplified the whole structure of the program
+
+## TODO
+
+https://devblogs.microsoft.com/nuget/improved-search-syntax/

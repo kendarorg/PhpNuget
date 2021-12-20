@@ -252,15 +252,6 @@ class QueryParser
                 $temp[] = $o;
             } else {
                 throw new \Exception("Token '".$s."' not supported parsing");
-                /*//Assume field
-                $o = new Operator();
-                $o->Type = "field";
-                //Fix for Chocolatey dirty search
-                if (strcmp($s, "id") == 0) {
-                    $s = "Id";
-                }
-                $o->Value = $s;
-                $temp[] = $o;*/
             }
             $prev = $temp[sizeof($temp) - 1];
         }
