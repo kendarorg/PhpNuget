@@ -108,9 +108,9 @@ class NugetVersionType extends SpecialFieldType
 
         if($numericCompare!=0) return $numericCompare;
 
-        if(sizeof($la)>sizeof($ra)){
+        if($la[1]!=''&&$ra[1]==''){
             return -1;
-        }else if(sizeof($la)<sizeof($ra)){
+        }else if($la[1]=='' && $ra[1]!=''){
             return 1;
         }
 
@@ -191,14 +191,4 @@ class NugetVersionType extends SpecialFieldType
 
         return contains($l,$r);
     }
-    /*
-    public function BuildValue($id,$value)
-    {
-        echo $value;
-        $fo = new Operator();
-        $fo->Type = "fieldinstance";
-        $fo->Value = $value;
-        $fo->Id = $id;
-        return $fo;
-    }*/
 }
