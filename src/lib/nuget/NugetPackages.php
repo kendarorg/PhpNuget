@@ -4,6 +4,7 @@ namespace lib\nuget;
 
 use lib\db\BaseDb;
 use lib\db\DbStorage;
+use lib\nuget\models\NugetPackage;
 
 class NugetPackages extends BaseDb
 {
@@ -12,6 +13,7 @@ class NugetPackages extends BaseDb
      */
     public function __construct($dbStorage)
     {
-        parent::__construct($dbStorage,"packages");
+        $keys=array();
+        parent::__construct($dbStorage,"packages", $keys,[new NugetVersionType()],new NugetPackage());
     }
 }

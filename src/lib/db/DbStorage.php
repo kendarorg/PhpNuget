@@ -11,7 +11,7 @@ class DbStorage
      * @param integer $skip
      * @return array
      */
-    public function query($query,$keys, $limit = -1, $skip = 0,$extraTypes){
+    public function query($query, $keys, $limit, $skip,$extraTypes,$dataType){
         throw new \Exception();
     }
 }

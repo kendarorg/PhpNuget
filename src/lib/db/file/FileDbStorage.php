@@ -18,13 +18,19 @@ class FileDbStorage extends DbStorage
     private  $queryParser;
 
     /**
+     * @var array
+     */
+    private $items = array();
+
+    /**
      * @param Properties $properties
      * @param QueryParser $queryParser
      */
-    public function __construct($properties,$queryParser)
+    public function __construct($properties,$queryParser,$items = null)
     {
         $this->properties = $properties;
         $this->queryParser = $queryParser;
+        $this->items = $items;
     }
 
     /**
@@ -34,19 +40,17 @@ class FileDbStorage extends DbStorage
      * @param integer $skip
      * @return array
      */
-    public function query($query, $keys, $limit = -1, $skip = 0,$extraTypes = null)
+    public function query($query, $keys, $limit, $skip,$extraTypes,$dataType)
     {
-        $allRows = array();
-
         $toSort=[];
-        $this->queryParser->parse($query,$extraTypes);
-        foreach($allRows as $item){
+        $this->queryParser->parse($query,$dataType,$extraTypes);
+        foreach($this->items as $item){
             if($this->queryParser->execute($item)){
                 $toSort[] = $item;
             }
         }
-        $toSort = $this->queryParser->DoSort($toSort);
-        $toSort = $this->queryParser->DoGroupBy($toSort);
+        $toSort = $this->queryParser->doSort($toSort);
+        $toSort = $this->queryParser->doGroupBy($toSort);
 
         return $toSort;
     }

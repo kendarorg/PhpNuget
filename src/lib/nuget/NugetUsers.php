@@ -2,6 +2,7 @@
 
 namespace lib\nuget;
 
+use lib\db\BaseDb;
 use lib\db\DbStorage;
 use lib\nuget\models\NugetUser;
 
@@ -13,6 +14,7 @@ class NugetUsers extends BaseDb
      */
     public function __construct($dbStorage)
     {
-        parent::__construct($dbStorage,"users");
+        $keys=array();
+        parent::__construct($dbStorage,"users",$keys,array(), new NugetUser());
     }
 }

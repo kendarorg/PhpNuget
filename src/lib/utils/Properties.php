@@ -14,9 +14,11 @@ class Properties
      */
     public function __construct($fileName)
     {
-        $content = file_get_contents($fileName);
-        $properties = json_decode($content,true);
-        ArrayUtils::mergeLowerCase($this->properties,$properties);
+        if($fileName!=null) {
+            $content = file_get_contents($fileName);
+            $properties = json_decode($content, true);
+            ArrayUtils::mergeLowerCase($this->properties, $properties);
+        }
     }
 
     /**

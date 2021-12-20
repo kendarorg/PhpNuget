@@ -43,6 +43,8 @@ class QueryParser
      * @var array|mixed
      */
     private mixed $parseResult;
+    private $_types;
+    private array $fields;
 
     function _isStartString($char)
     {
@@ -269,13 +271,11 @@ class QueryParser
     {
         $this->externalTypes = $externalTypes;
         $this->fields = array();
+        $this->_types = array();
         $ref = new ReflectionClass($objet);
         foreach (get_class_vars(get_class($objet)) as $key=>$value){
             $this->fields[] = strtolower($key);
-            //TODO
-            $type = $this->typeFromComment($ref,$key);
-
-
+            $this->_types[strtolower($key)] = $this->typeFromComment($ref,$key);
         }
 
         $splitted = $this->tokenize($queryString);
@@ -521,8 +521,9 @@ class QueryParser
 
     private function _executeFunction($name,$params)
     {
-        if($this->externalTypes!=null && $this->externalTypes->canHandle($name,$params)){
-            return $this->externalTypes->$name($params);
+        $extId =$this->isExternalType($name);
+        if($extId>=0 && $this->externalTypes[$extId]->canHandle($name,$params)){
+            return $this->externalTypes[$extId]->$name($params);
         }
         return $this->$name($params);
     }
@@ -715,9 +716,8 @@ class QueryParser
         return $o;
     }
 
-    public function doSort($subject,$types)
+    public function doSort($subject)
     {
-        $this->_types= $types;
 
         if(sizeof($this->_sortClause)==0) return $subject;
 
@@ -739,7 +739,7 @@ class QueryParser
             $so = $this->_sortClause[$i];
             $row = $so->Field;
             $asc = $so->Asc;
-            $type = $this->_types[$row];
+            $type = $this->_types[strtolower($row)];
 
             $res = $this->_cmp($f->$row,$s->$row,$asc,$type);
             if($res>0){
