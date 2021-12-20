@@ -1,10 +1,11 @@
 <?php
 
-namespace lib\db;
+namespace lib\nuget;
 
 use lib\db\file\FileDbStorage;
+use lib\db\FileDbStorageTestUtils;
+use lib\db\QueryParser;
 use lib\nuget\models\NugetPackage;
-use lib\nuget\NugetVersionType;
 use lib\utils\Properties;
 use PHPUnit\Framework\TestCase;
 
