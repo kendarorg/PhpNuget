@@ -2,6 +2,10 @@
 
 namespace lib\utils;
 
+use JsonSchema\Exception\InvalidArgumentException;
+use ReflectionClass;
+use ReflectionProperty;
+
 /**
  * Part of JsonMapper
  *
@@ -632,7 +636,6 @@ class JsonMapper
         if ($accessor instanceof ReflectionProperty) {
             $accessor->setValue($object, $value);
         } else {
-            //setter method
             $accessor->invoke($object, $value);
         }
     }
