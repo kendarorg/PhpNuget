@@ -21,7 +21,7 @@ class FileDbStorage extends DbStorage
             $data = json_decode($content);
             foreach ($data as $row) {
                 $this->items[] = $mapper->map(
-                    json_decode($row),
+                    $row,
                     $this->dataType
                 );
             }
@@ -98,7 +98,7 @@ class FileDbStorage extends DbStorage
      * @param int $count
      * @return array|mixed
      */
-    public function queryAndCount($query, $limit, $skip, &$count)
+    public function queryAndCount($query, &$count, $limit, $skip)
     {
         $count = 0;
         $toSort = [];
@@ -144,6 +144,8 @@ class FileDbStorage extends DbStorage
         $dbRoot = $this->properties->getProperty("databaseRoot");
         $dbFile = PathUtils::combine($dbRoot, $this->table . ".json");
         $realItems = array();
+        $this->loadData();
+        $updated =false;
         foreach ($this->items as $realItem){
             $found = sizeof($byKey);
             foreach ($byKey as $key => $value){
@@ -154,9 +156,13 @@ class FileDbStorage extends DbStorage
             }
             if($found==0){
                 $realItems[] = $item;
+                $updated = true;
             }else{
                 $realItems[] = $realItem;
             }
+        }
+        if(!$updated){
+            $realItems[] = $item;
         }
 
         $data = json_encode($realItems, true);
@@ -174,6 +180,7 @@ class FileDbStorage extends DbStorage
         $dbFile = PathUtils::combine($dbRoot, $this->table . ".json");
 
         $realItems = array();
+        $this->loadData();
         foreach ($this->items as $realItem){
             $found = sizeof($byKey);
             foreach ($byKey as $key => $value){

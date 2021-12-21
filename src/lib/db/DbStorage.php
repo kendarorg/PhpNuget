@@ -73,7 +73,7 @@ class DbStorage
      * @param int $count
      * @return array|mixed
      */
-    public function queryAndCount($query, $limit, $skip, &$count)
+    public function queryAndCount($query, &$count, $limit, $skip)
     {
         throw new \Exception();
     }

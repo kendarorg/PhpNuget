@@ -7,100 +7,158 @@ class NugetPackage
     /**
      * @var boolean
      */
-    public $IsSymbols;
+    public $IsSymbols = false;
     public $Id;
 
     /**
-     * @var number
+     * @var integer
      */
-    public $Version0;
+    public $Version0 = 0;
     /**
-     * @var number
+     * @var integer
      */
-    public $Version1;
+    public $Version1 = 0;
     /**
-     * @var number
+     * @var integer
      */
-    public $Version2;
+    public $Version2 = 0;
     /**
-     * @var number
+     * @var integer
      */
-    public $Version3;
+    public $Version3 = 0;
     /**
-     * @var number
+     * @var string
      */
-    public $VersionBeta;
+    public $VersionBeta = "";
 
+    /**
+     * @var string
+     */
     public $Version;
     /**
      * @var string[]
      */
-    public $Author;
-    public $Copyright;
+    public $Author = array();
 
     /**
-     * @var date
+     * @var string
      */
-    public $Created;
+    public $Copyright = "";
+
+    /**
+     * @var string
+     */
+    public $Created = "";
 
     /**
      * @var NugetDependency[]
      */
-    public $Dependencies;
-    public $Description;
+    public $Dependencies = array();
 
     /**
-     * @var number
+     * @var string
      */
-    public $DownloadCount;
+    public $Description = "";
+
+    /**
+     * @var integer
+     */
+    public $DownloadCount = 0;
     //V1 ExternalPackageUrl
     //GEN GalleryDetailsUrl
-    public $IconUrl;
-    public $IsLatestVersion;
-    /**
-     * @var boolean
-     */
-    public $Listed;
 
     /**
-     * @var boolean
+     * @var string
      */
-    public $IsAbsoluteLatestVersion;
+    public $IconUrl = "";
+
     /**
      * @var bool
      */
-    public $IsPreRelease;	//V1 Prerelease
+    public $IsLatestVersion = false;
+    /**
+     * @var boolean
+     */
+    public $Listed =true;
 
     /**
-     * @var date
+     * @var boolean
      */
-    public $LastUpdated;
-    public $PackageHash;
+    public $IsAbsoluteLatestVersion = false;
+    /**
+     * @var bool
+     */
+    public $IsPreRelease = false;	//V1 Prerelease
+
+    /**
+     * @var bool
+     */
+    public $LastUpdated = false;
+    /**
+     * @var string
+     */
+    public $PackageHash = "";
+    /**
+     * @var string
+     */
     public $PackageHashAlgorithm="sha256";
 
     /**
-     * @var number
+     * @var integer
      */
-    public $PackageSize;
-    public $ProjectUrl;
+    public $PackageSize = 0;
+    /**
+     * @var string
+     */
+    public $ProjectUrl = "";
     //ReportAbuseUrl
-    public $ReleaseNotes;
+    /**
+     * @var string
+     */
+    public $ReleaseNotes = "";
     /**
      * @var bool
      */
-    public $RequireLicenseAcceptance;
-    public $Summary;
-    public $Title;
-    public $VersionDownloadCount;
+    public $RequireLicenseAcceptance = false;
+    /**
+     * @var string
+     */
+    public $Summary = "";
+    /**
+     * @var string
+     */
+    public $Title = "";
+    /**
+     * @var int
+     */
+    public $VersionDownloadCount = 0;
     //$MinClientVersion
-    public $Tags;
-    public $LicenseUrl;
-    public $LicenseNames;
-    public $LicenseReportUrl;
-    public $TargetFramework;
-    public $Owners;
+    /**
+     * @var string
+     */
+    public $Tags = "";
+    /**
+     * @var string
+     */
+    public $LicenseUrl = "";
+    /**
+     * @var string
+     */
+    public $LicenseNames = "";
+    /**
+     * @var string
+     */
+    public $LicenseReportUrl = "";
+    /**
+     * @var string
+     */
+    public $TargetFramework = "";
     /**
      * @var string[]
      */
-    public $References;
+    public $Owners =array();
+    /**
+     * @var string[]
+     */
+    public $References = array();
 }

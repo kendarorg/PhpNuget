@@ -5,6 +5,7 @@ namespace lib\nuget;
 use lib\db\BaseDb;
 use lib\db\DbStorage;
 use lib\nuget\models\NugetPackage;
+use lib\utils\StringUtils;
 
 class NugetPackages extends BaseDb
 {
@@ -29,7 +30,7 @@ class NugetPackages extends BaseDb
     {
         $data = parent::query($query, $limit, $skip);
         for ($i = 0; $i < sizeof($data); $i++) {
-            $this->postQuery($data);
+            $this->postQuery($data[$i]);
         }
         return $data;
     }
@@ -41,9 +42,9 @@ class NugetPackages extends BaseDb
      * @param integer $skip
      * @return array
      */
-    public function queryAndCount($query, $limit = -1, $skip = 0, &$count)
+    public function queryAndCount($query, &$count, $limit = -1, $skip = 0)
     {
-        $data = parent::queryAndCount($query, $limit, $skip, $count);
+        $data = parent::queryAndCount($query, $count, $limit, $skip);
         for ($i = 0; $i < sizeof($data); $i++) {
             $this->postQuery($data[$i]);
         }
@@ -63,7 +64,7 @@ class NugetPackages extends BaseDb
 
     private function postQuery(&$row)
     {
-        if (ends_with(strtolower($row->IconUrl), strtolower("packagedefaulticon-50x50.png"))) {
+        if (StringUtils::endsWith(strtolower($row->IconUrl), strtolower("packagedefaulticon-50x50.png"))) {
             $row->IconUrl = UrlUtils::CurrentUrl(Settings::$SiteRoot . "content/packagedefaulticon-50x50.png");
         }
     }

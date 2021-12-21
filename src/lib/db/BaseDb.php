@@ -70,9 +70,9 @@ class BaseDb
      * @param integer $skip
      * @return array
      */
-    public function queryAndCount($query, $limit = -1, $skip = 0, &$count)
+    public function queryAndCount($query, &$count, $limit = -1, $skip = 0)
     {
-        return $this->storage->queryAndCount($query, $limit, $skip, $count);
+        return $this->storage->queryAndCount($query, $count, $limit, $skip);
     }
 
     /**
@@ -85,7 +85,7 @@ class BaseDb
         $args = array();
         foreach ($this->keys as $key) {
             $byKey[$key] = $item->$key;
-            $args = $byKey[$key];
+            $args[] = $byKey[$key];
         }
 
         $query = $this->buildByKeyQuery($args);
@@ -106,7 +106,7 @@ class BaseDb
             $keyValues = $args;
         }
         $byKey = array();
-        for ($i = 0; $i < sizoef($this->keys); $i++) {
+        for ($i = 0; $i < sizeof($this->keys); $i++) {
             $key = $this->keys[$i];
             $value = $keyValues[$i];
             if (is_string($value)) {
@@ -125,7 +125,8 @@ class BaseDb
      */
     public function getByKey()
     {
-        $query = $this->buildByKeyQuery(func_get_args());
+        $args = $this->cleanArgs(func_get_args());
+        $query = $this->buildByKeyQuery($args);
         $foundedUsers = $this->query($query, 1);
         if (sizeof($foundedUsers) == 0) {
             return null;
@@ -139,7 +140,7 @@ class BaseDb
     public function delete()
     {
         $byKey = array();
-        $args = func_get_args();
+        $args = $this->cleanArgs(func_get_args());
         for ($i=0;$i<sizeof($this->keys);$i++) {
             $key = $this->keys[$i];
             $byKey[$key] = $args[$i];
@@ -147,5 +148,13 @@ class BaseDb
 
         $query = $this->buildByKeyQuery(func_get_args());
         $this->storage->delete($byKey,$query);
+    }
+
+    private function cleanArgs($args)
+    {
+        if(is_array($args[0])){
+            return $args[0];
+        }
+        return $args;
     }
 }
