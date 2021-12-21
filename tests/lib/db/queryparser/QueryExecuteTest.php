@@ -2,6 +2,7 @@
 
 namespace lib\db\queryparser;
 
+use lib\db\file\FileDbExecutor;
 use lib\db\QueryParser;
 use lib\db\TestObject;
 use PHPUnit\Framework\TestCase;
@@ -15,7 +16,8 @@ class QueryExecuteTest extends TestCase
         $item = new TestObject();
         $target->parse($query, $item);
         $item->Id = "TEST";
-        $this->assertTrue($target->execute($item));
+        $executor = $target->setupExecutor(new FileDbExecutor());
+        $this->assertTrue($executor->execute($item));
     }
 
     public function testNoMatch(): void
@@ -25,7 +27,8 @@ class QueryExecuteTest extends TestCase
         $item = new TestObject();
         $target->parse($query, $item);
         $item->Id = "NONE";
-        $this->assertFalse($target->execute($item));
+        $executor = $target->setupExecutor(new FileDbExecutor());
+        $this->assertFalse($executor->execute($item));
     }
 
     public function testComplex(): void
@@ -37,6 +40,7 @@ class QueryExecuteTest extends TestCase
         $item->Id = "TEST";
         $item->Added =true;
         $item->Listed = false;
-        $this->assertTrue($target->execute($item));
+        $executor = $target->setupExecutor(new FileDbExecutor());
+        $this->assertTrue($executor->execute($item));
     }
 }

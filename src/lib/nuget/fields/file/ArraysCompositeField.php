@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\nuget\fields;
+namespace lib\nuget\fields\file;
 
 use lib\db\parser\InternalTypeBuilder;
 use lib\db\utils;

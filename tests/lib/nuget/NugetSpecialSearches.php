@@ -5,8 +5,8 @@ namespace lib\nuget;
 use lib\db\file\FileDbStorage;
 use lib\db\FileDbStorageTestUtils;
 use lib\db\QueryParser;
-use lib\nuget\fields\ArraysCompositeField;
-use lib\nuget\fields\NugetVersionType;
+use lib\nuget\fields\file\ArraysCompositeField;
+use lib\nuget\fields\file\NugetVersionType;
 use lib\nuget\models\NugetPackage;
 use lib\utils\Properties;
 use PHPUnit\Framework\TestCase;
@@ -32,7 +32,8 @@ class NugetSpecialSearches extends TestCase
         $query = "Author eq 'a'";
 
         $target = new FileDbStorage($properties, $queryParser, $items);
-        $target->initialize(array(), [new NugetVersionType(),new ArraysCompositeField()], new NugetPackage());
+        $target->initialize(array(), [new NugetVersionType(),new ArraysCompositeField()],
+            new NugetPackage(),new DependencyCompositeField());
 
         $result = $target->query($query, -1, 0);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\nuget\fields;
+namespace lib\nuget\fields\file;
 
 use lib\db\parser\InternalTypeBuilder;
 use lib\db\parser\Operator;
@@ -54,13 +54,14 @@ class NugetVersionType extends SpecialFieldType
             if($tr=="version") return true;
         }
 
-        if($name == "substringof"){
+        /* WHY THE HECK THIS //TODO
+         * if($name == "substringof"){
             if($tl=="field" && strtolower($params[0]->Value)=="dependencies"){
                 return true;
             }else if($tr=="field" && strtolower($params[1]->Value)=="dependencies"){
                 return true;
             }
-        }
+        }*/
         return false;
     }
 

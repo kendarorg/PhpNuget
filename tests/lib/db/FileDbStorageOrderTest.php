@@ -4,7 +4,7 @@ namespace lib\db;
 
 use lib\db\file\FileDbStorage;
 use lib\db\FileDbStorageBase;
-use lib\nuget\fields\NugetVersionType;
+use lib\nuget\fields\file\NugetVersionType;
 use lib\nuget\models\NugetPackage;
 use lib\utils\Properties;
 use PHPUnit\Framework\TestCase;

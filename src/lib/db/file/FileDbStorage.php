@@ -39,8 +39,9 @@ class FileDbStorage extends DbStorage
         $toSort = [];
         $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
         $this->loadData();
+        $executor = $this->queryParser->setupExecutor(new FileDbExecutor());
         foreach ($this->items as $item) {
-            if ($this->queryParser->execute($item)) {
+            if ($executor->execute($item,$this)) {
                 if ($this->queryParser->hasGroupBy() || $this->queryParser->hasOrderBy()) {
                     $toSort[] = $item;
                 } else {
@@ -60,8 +61,8 @@ class FileDbStorage extends DbStorage
             }
         }
         if ($this->queryParser->hasGroupBy() || $this->queryParser->hasOrderBy()) {
-            $this->queryParser->doSort($toSort);
-            return array_slice($this->queryParser->doGroupBy($toSort), $skip, ($limit == -1 ? null : $limit));
+            $executor->doSort($toSort);
+            return array_slice($executor->doGroupBy($toSort), $skip, ($limit == -1 ? null : $limit));
         }
         return $toSort;
     }
@@ -77,7 +78,7 @@ class FileDbStorage extends DbStorage
         $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
         $this->loadData();
         foreach ($this->items as $item) {
-            if ($this->queryParser->execute($item)) {
+            if ($this->queryParser->execute($item,$this)) {
                 $count++;
                 if ($this->queryParser->hasGroupBy()) {
                     $toSort[] = $item;
@@ -105,7 +106,7 @@ class FileDbStorage extends DbStorage
         $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
         $this->loadData();
         foreach ($this->items as $item) {
-            if ($this->queryParser->execute($item)) {
+            if ($this->queryParser->execute($item,$this)) {
                 if ($this->queryParser->hasGroupBy() || $this->queryParser->hasOrderBy()) {
                     $toSort[] = $item;
                 } else {
