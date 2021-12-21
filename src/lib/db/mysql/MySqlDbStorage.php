@@ -9,14 +9,24 @@ use lib\utils\Properties;
 class MySqlDbStorage extends DbStorage
 {
 
-    /*public function query($query, $limit = -1, $skip = 0)
+    public function query($query, $limit = -1, $skip = 0)
     {
         $toSort = [];
-        $parseResult = $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
-        $query = $this->queryParser->translateToSql($parseResult);
+        $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
+        $this->loadData();
+        $executor = $this->queryParser->setupExecutor(new FileDbExecutor());
+        $sqlQuery = "SELECT * FROM (".$executor->execute(new Object()).") ";
 
-        foreach ($this->items as $item) {
-            if ($this->queryParser->execute($item)) {
+        $orderBy = $executor->doSort($toSort);
+        $groupBy = $executor->doGroupBy($toSort);
+        $query = $sqlQuery." ".$orderBy." ".$groupBy;
+        if($skip >0){
+            $query.=" offset ".$skip;
+        }
+        if($limit >0){
+            $query.=" limit ".$limit;
+        }
+
         return $toSort;
-    }*/
+    }
 }
