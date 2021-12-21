@@ -15,6 +15,8 @@ class FileDbStorageCRUDTest extends TestCase
     private FileDbStorageTestUtils $utils;
     private $path;
     private $rootPath;
+    private $queryParser;
+    private $properties;
 
     public function __construct(?string $name = null, array $data = [], $dataName = '')
     {
@@ -30,15 +32,15 @@ class FileDbStorageCRUDTest extends TestCase
             unlink($this->path);
         }
         file_put_contents($this->path,"[]");
+        $this->queryParser = new QueryParser();
+        $this->properties = new Properties(null);
+        $this->properties->setProperty("databaseRoot",$this->rootPath);
     }
 
     public function testShouldAddData(){
         $this->resetDb();
-        $queryParser = new QueryParser();
-        $properties = new Properties(null);
-        $properties->setProperty("databaseRoot",$this->rootPath);
 
-        $storage = new FileDbStorage($properties, $queryParser);
+        $storage = new FileDbStorage($this->properties, $this->queryParser);
         $target = new NugetPackages($storage);
 
         $package = new NugetPackage();
@@ -50,10 +52,74 @@ class FileDbStorageCRUDTest extends TestCase
         $this->assertTrue(file_exists($this->path));
         $this->assertTrue(filesize($this->path)>10);
 
-        $storage = new FileDbStorage($properties, $queryParser);
+        $storage = new FileDbStorage($this->properties, $this->queryParser);
         $target = new NugetPackages($storage);
 
         $result = $target->getByKey("Pack","1.0.0");
         $this->assertNotNull($result);
+    }
+
+    public function testShouldRemoveData(){
+        $this->resetDb();
+
+        $storage = new FileDbStorage($this->properties, $this->queryParser);
+        $target = new NugetPackages($storage);
+
+        $package = new NugetPackage();
+        $package->Id="Pack";
+        $package->Version = "1.0.0";
+        $target->update($package);
+
+        $package = new NugetPackage();
+        $package->Id="Pack2";
+        $package->Version = "1.0.0";
+        $target->update($package);
+
+
+        $storage = new FileDbStorage($this->properties, $this->queryParser);
+        $target = new NugetPackages($storage);
+
+        $target->delete("Pack","1.0.0");
+
+        $storage = new FileDbStorage($this->properties, $this->queryParser);
+        $target = new NugetPackages($storage);
+
+        $result = $target->getByKey("Pack","1.0.0");
+        $this->assertNull($result);
+    }
+
+    public function testShouldUpdateData(){
+        $this->resetDb();
+
+        $storage = new FileDbStorage($this->properties, $this->queryParser);
+        $target = new NugetPackages($storage);
+
+        $package = new NugetPackage();
+        $package->Id="Pack";
+        $package->Version = "1.0.0";
+        $package->Description = "description";
+        $target->update($package);
+
+        $package = new NugetPackage();
+        $package->Id="Pack2";
+        $package->Version = "1.0.0";
+        $target->update($package);
+
+
+        $storage = new FileDbStorage($this->properties, $this->queryParser);
+        $target = new NugetPackages($storage);
+
+        $package = new NugetPackage();
+        $package->Id="Pack";
+        $package->Version = "1.0.0";
+        $package->Description = "changed";
+        $target->update($package);
+
+        $storage = new FileDbStorage($this->properties, $this->queryParser);
+        $target = new NugetPackages($storage);
+
+        $result = $target->getByKey("Pack","1.0.0");
+        $this->assertNotNull($result);
+        $this->assertEquals("changed",$result->Description);
     }
 }
