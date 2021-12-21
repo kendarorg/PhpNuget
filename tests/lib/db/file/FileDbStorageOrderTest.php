@@ -1,9 +1,9 @@
 <?php
 
-namespace lib\db;
+namespace lib\db\file;
 
-use lib\db\file\FileDbStorage;
 use lib\db\FileDbStorageBase;
+use lib\db\QueryParser;
 use lib\nuget\fields\file\NugetVersionType;
 use lib\nuget\models\NugetPackage;
 use lib\utils\Properties;

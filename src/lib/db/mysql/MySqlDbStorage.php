@@ -3,6 +3,7 @@
 namespace lib\db\file;
 
 use lib\db\DbStorage;
+use lib\db\mysql\MySqlDbExecutor;
 use lib\db\QueryParser;
 use lib\utils\Properties;
 
@@ -14,7 +15,7 @@ class MySqlDbStorage extends DbStorage
         $toSort = [];
         $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
         $this->loadData();
-        $executor = $this->queryParser->setupExecutor(new FileDbExecutor());
+        $executor = $this->queryParser->setupExecutor(new MySqlDbExecutor());
         $sqlQuery = "SELECT * FROM (".$executor->execute(new Object()).") ";
 
         $orderBy = $executor->doSort($toSort);

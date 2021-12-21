@@ -2,7 +2,7 @@
 
 namespace lib\db\queryparser;
 
-use lib\db\FileDbStorageTestUtils;
+use lib\db\file\FileDbStorageTestUtils;
 use lib\db\QueryParser;
 use lib\db\TestObject;
 use PHPUnit\Framework\TestCase;

@@ -54,9 +54,11 @@ class Executor
         $c = $parseTreeItem->Children;
         switch($t){
             case "string":
+                return $this->makeString($parseTreeItem);
             case "number":
+                return $this->makeNumber($parseTreeItem);
             case "boolean":
-                return $parseTreeItem;
+                return $this->makeBoolean($parseTreeItem);
         }
         if($t == "function"){
             $params = array();
@@ -113,6 +115,26 @@ class Executor
                 }
             }
         }
-        return $this->$name($params);
+        return $this->executeFunctionInt($name,$params);
+    }
+
+    protected function executeFunctionInt($name, $params)
+    {
+        return null;
+    }
+
+    protected function makeString($parseTreeItem)
+    {
+        return $parseTreeItem;
+    }
+
+    private function makeNumber($parseTreeItem)
+    {
+        return $parseTreeItem;
+    }
+
+    private function makeBoolean($parseTreeItem)
+    {
+        return $parseTreeItem;
     }
 }

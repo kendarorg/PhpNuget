@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\db;
+namespace lib\db\file;
 
 use lib\nuget\models\NugetPackage;
 use lib\nuget\NugetUtils;
