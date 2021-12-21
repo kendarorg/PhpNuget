@@ -23,21 +23,22 @@ class ChocolateyIdTest extends TestCase
      * Lowercase id
      * @return void
      */
-    public function testId(){
+    public function testId()
+    {
         $items = array();
-        $items[] = $this->utils->buildNewItem("Pack1","1.0.0.0");
-        $items[] = $this->utils->buildNewItem("Pack2","1.0.0.0");
+        $items[] = $this->utils->buildNewItem("Pack1", "1.0.0.0");
+        $items[] = $this->utils->buildNewItem("Pack2", "1.0.0.0");
         $queryParser = new QueryParser();
         $properties = new Properties(null);
         $query = "id eq 'Pack1'";
 
-        $target  = $target = new FileDbStorage($properties,$queryParser,$items);
-$target->initialize(array(),[new NugetVersionType()],new NugetPackage());
+        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
-        $result = $target->query($query,array(),-1,0);
+        $result = $target->query($query, -1, 0);
 
-        $this->assertEquals(1,sizeof($result));
-        $this->assertEquals("Pack1",$result[0]->Id);
+        $this->assertEquals(1, sizeof($result));
+        $this->assertEquals("Pack1", $result[0]->Id);
     }
 
 }

@@ -782,6 +782,14 @@ class QueryParser
         return 0;
     }
 
+    public function hasGroupBy(){
+        return sizeof($this->_groupClause)>0;
+    }
+
+    public function hasOrderBy(){
+        return sizeof($this->_sortClause)>0;
+    }
+
     public function doGroupBy($subject)
     {
         if(sizeof($this->_groupClause)==0) return $subject;

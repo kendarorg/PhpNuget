@@ -14,6 +14,8 @@ class NugetPackages extends BaseDb
     public function __construct($dbStorage)
     {
         $keys=array();
-        parent::__construct($dbStorage,"packages", $keys,[new NugetVersionType()],new NugetPackage());
+        $extraTypes = [new NugetVersionType()];
+        $object = new NugetPackage();
+        parent::__construct($dbStorage,"packages", $keys,$extraTypes,$object);
     }
 }

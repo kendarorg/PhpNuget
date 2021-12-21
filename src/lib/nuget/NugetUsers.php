@@ -15,6 +15,8 @@ class NugetUsers extends BaseDb
     public function __construct($dbStorage)
     {
         $keys=array();
-        parent::__construct($dbStorage,"users",$keys,array(), new NugetUser());
+        $extraTypes = array();
+        $object = new NugetUser();
+        parent::__construct($dbStorage,"packages", $keys,$extraTypes,$object);
     }
 }

@@ -9,22 +9,22 @@ class BaseDb
     /**
      * @var DbStorage
      */
-    private $storage;
+    protected $storage;
     /**
      * @var string
      */
-    private $table;
+    protected $table;
 
     /**
      * @var string[]
      */
-    private $keys;
-    private $extraTypes;
+    protected $keys;
+    protected $extraTypes;
 
     /**
      * @var mixed
      */
-    private $dataType;
+    protected $dataType;
 
     /**
      * @param DbStorage $storage
@@ -49,8 +49,17 @@ class BaseDb
      * @return array
      */
     public function query($query,$limit = -1, $skip = 0){
-        $this->storage->query($query,$this->keys,$limit);
-        return [];
+        return $this->storage->query($query,$limit,$skip);
+    }
+
+    /**
+     * @param string $query
+     * @param integer $limit
+     * @param integer $skip
+     * @return array
+     */
+    public function count($query){
+        return $this->storage->count($query);
     }
 
     /**
@@ -60,8 +69,8 @@ class BaseDb
      * @param integer $skip
      * @return array
      */
-    public function queryAndCount($query,&$count,$limit = -1, $skip = 0){
-        return [];
+    public function queryAndCount($query,$limit = -1, $skip = 0,&$count){
+        return $this->storage->queryAndCount($query,$limit,$skip,$count);
     }
 
     /**

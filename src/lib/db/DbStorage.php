@@ -49,4 +49,24 @@ class DbStorage
     public function query($query,$limit=-1, $skip=0){
         throw new \Exception();
     }
+
+    /**
+     * @param string $query
+     * @return integer
+     */
+    public function count($query){
+        throw new \Exception();
+    }
+
+    /**
+     * @param string $query
+     * @param int $limit
+     * @param int $skip
+     * @param int $count
+     * @return array|mixed
+     */
+    public function queryAndCount( $query,  $limit,  $skip, &$count)
+    {
+        throw new \Exception();
+    }
 }
