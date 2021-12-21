@@ -3,11 +3,11 @@
 namespace lib\db;
 
 use lib\db\file\FileDbStorage;
+use lib\db\FileDbStorageBase;
+use lib\nuget\fields\NugetVersionType;
 use lib\nuget\models\NugetPackage;
-use lib\nuget\NugetVersionType;
 use lib\utils\Properties;
 use PHPUnit\Framework\TestCase;
-use lib\db\FileDbStorageBase;
 
 class FileDbStorageGroupByTest extends TestCase
 {

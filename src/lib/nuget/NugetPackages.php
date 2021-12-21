@@ -4,6 +4,8 @@ namespace lib\nuget;
 
 use lib\db\BaseDb;
 use lib\db\DbStorage;
+use lib\nuget\fields\ArraysCompositeField;
+use lib\nuget\fields\NugetVersionType;
 use lib\nuget\models\NugetPackage;
 use lib\utils\StringUtils;
 

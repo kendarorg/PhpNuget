@@ -1,9 +1,10 @@
 <?php
 
-namespace lib\nuget;
+namespace lib\nuget\fields;
 
 use lib\db\parser\InternalTypeBuilder;
 use lib\db\utils;
+use function contains;
 
 class ArraysCompositeField extends utils\SpecialFieldType
 {

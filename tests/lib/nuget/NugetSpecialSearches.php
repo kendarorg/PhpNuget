@@ -5,8 +5,9 @@ namespace lib\nuget;
 use lib\db\file\FileDbStorage;
 use lib\db\FileDbStorageTestUtils;
 use lib\db\QueryParser;
+use lib\nuget\fields\ArraysCompositeField;
+use lib\nuget\fields\NugetVersionType;
 use lib\nuget\models\NugetPackage;
-use lib\utils\PathUtils;
 use lib\utils\Properties;
 use PHPUnit\Framework\TestCase;
 

@@ -506,10 +506,11 @@ class QueryParser
 
     private function isExternalType($s)
     {
-        if($this->externalTypes==null || sizeof($this->externalTypes)==0) return -1;
-        for ($i=0;$i<sizeof($this->externalTypes);$i++){
-            if($this->externalTypes[$i]->isExternal($s)){
-                return $i;
+        if($this->externalTypes!=null) {
+            for ($i = 0; $i < sizeof($this->externalTypes); $i++) {
+                if ($this->externalTypes[$i]->isExternal($s)) {
+                    return $i;
+                }
             }
         }
         return -1;
@@ -530,6 +531,9 @@ class QueryParser
     {
         if($this->externalTypes!=null) {
             foreach ($this->externalTypes as $type) {
+                if($type->canHandle($name,$params)){
+                    return $type->$name($params);
+                }
                 if ($type->isComposite($params)){
                     return $type->$name($params);
                 }

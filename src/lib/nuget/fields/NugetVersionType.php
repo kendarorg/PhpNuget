@@ -1,11 +1,12 @@
 <?php
 
-namespace lib\nuget;
+namespace lib\nuget\fields;
 
 use lib\db\parser\InternalTypeBuilder;
 use lib\db\parser\Operator;
 use lib\db\utils\SpecialFieldType;
 use lib\utils\StringUtils;
+use function contains;
 
 class NugetVersionType extends SpecialFieldType
 {

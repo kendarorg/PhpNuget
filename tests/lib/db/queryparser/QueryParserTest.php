@@ -4,7 +4,7 @@ namespace lib\db\queryparser;
 
 use lib\db\QueryParser;
 use lib\db\TestObject;
-use lib\nuget\NugetVersionType;
+use lib\nuget\fields\NugetVersionType;
 use PHPUnit\Framework\TestCase;
 
 class QueryParserTest extends TestCase
