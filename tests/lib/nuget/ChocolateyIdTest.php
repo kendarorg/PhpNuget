@@ -31,8 +31,10 @@ class ChocolateyIdTest extends TestCase
         $properties = new Properties(null);
         $query = "id eq 'Pack1'";
 
-        $target = new FileDbStorage($properties,$queryParser,$items);
-        $result = $target->query($query,array(),-1,0,[new NugetVersionType()],new NugetPackage());
+        $target  = $target = new FileDbStorage($properties,$queryParser,$items);
+$target->initialize(array(),[new NugetVersionType()],new NugetPackage());
+
+        $result = $target->query($query,array(),-1,0);
 
         $this->assertEquals(1,sizeof($result));
         $this->assertEquals("Pack1",$result[0]->Id);

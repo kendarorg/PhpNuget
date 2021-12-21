@@ -33,11 +33,13 @@ class BaseDb
      */
     public function __construct($storage, $table, $keys,$extraTypes,$dataType)
     {
+        $storage->initialize($keys,$extraTypes,$dataType);
         $this->storage = $storage;
         $this->table = $table;
         $this->keys = $keys;
         $this->extraTypes = $extraTypes;
         $this->dataType = $dataType;
+
     }
 
     /**
@@ -47,7 +49,7 @@ class BaseDb
      * @return array
      */
     public function query($query,$limit = -1, $skip = 0){
-        $this->storage->query($query,$this->keys,$limit,$skip,$this->extraTypes,$this->dataType);
+        $this->storage->query($query,$this->keys,$limit);
         return [];
     }
 
