@@ -13,7 +13,7 @@ class DbStorage
     /**
      * @var QueryParser
      */
-    protected  $queryParser;
+    protected $queryParser;
 
     /**
      * @var array
@@ -27,14 +27,15 @@ class DbStorage
      * @param Properties $properties
      * @param QueryParser $queryParser
      */
-    public function __construct($properties,$queryParser,$items = null)
+    public function __construct($properties, $queryParser, $items = null)
     {
         $this->properties = $properties;
         $this->queryParser = $queryParser;
         $this->items = $items;
     }
 
-    public function initialize($keys,$extraTypes,$dataType){
+    public function initialize($keys, $extraTypes, $dataType)
+    {
         $this->keys = $keys;
         $this->extraTypes = $extraTypes;
         $this->dataType = $dataType;
@@ -46,7 +47,8 @@ class DbStorage
      * @param integer $skip
      * @return array
      */
-    public function query($query,$limit=-1, $skip=0){
+    public function query($query, $limit = -1, $skip = 0)
+    {
         throw new \Exception();
     }
 
@@ -54,7 +56,8 @@ class DbStorage
      * @param string $query
      * @return integer
      */
-    public function count($query){
+    public function count($query)
+    {
         throw new \Exception();
     }
 
@@ -65,7 +68,27 @@ class DbStorage
      * @param int $count
      * @return array|mixed
      */
-    public function queryAndCount( $query,  $limit,  $skip, &$count)
+    public function queryAndCount($query, $limit, $skip, &$count)
+    {
+        throw new \Exception();
+    }
+
+    /**
+     * @param mixed $item
+     * @param bool $param
+     * @return void
+     */
+    public function save($item, $add)
+    {
+        throw new \Exception();
+    }
+
+    /**
+     * @param array $foundedUsers
+     * @param string|null $query
+     * @return void
+     */
+    public function delete($foundedUsers, $query)
     {
         throw new \Exception();
     }
