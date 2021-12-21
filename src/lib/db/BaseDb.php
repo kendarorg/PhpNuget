@@ -82,11 +82,14 @@ class BaseDb
     public function update($item)
     {
         $byKey = array();
+        $args = array();
         foreach ($this->keys as $key) {
-            $byKey[] = $item->$key;
+            $byKey[$key] = $item->$key;
+            $args = $byKey[$key];
         }
-        $foundedUser = $this->getByKey($byKey);
-        $this->storage->save($item, $this->buildByKeyQuery($byKey),$foundedUser == null);
+
+        $query = $this->buildByKeyQuery($args);
+        $this->storage->save($byKey, $query,$item);
     }
 
     /**
@@ -135,10 +138,14 @@ class BaseDb
      */
     public function delete()
     {
-        $query = $this->buildByKeyQuery(func_get_args());
-        $foundedUsers = $this->query($query, 1);
-        if ($foundedUsers == null) return;
+        $byKey = array();
+        $args = func_get_args();
+        for ($i=0;$i<sizeof($this->keys);$i++) {
+            $key = $this->keys[$i];
+            $byKey[$key] = $args[$i];
+        }
 
-        $this->storage->delete($foundedUsers, $query);
+        $query = $this->buildByKeyQuery(func_get_args());
+        $this->storage->delete($byKey,$query);
     }
 }

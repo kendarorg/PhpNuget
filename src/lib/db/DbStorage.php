@@ -83,7 +83,7 @@ class DbStorage
      * @param bool $param
      * @return void
      */
-    public function save($item,$query, $add)
+    public function save($byKey, $query,$item)
     {
         throw new \Exception();
     }
@@ -93,7 +93,7 @@ class DbStorage
      * @param string|null $query
      * @return void
      */
-    public function delete($foundedUsers, $query)
+    public function delete($byKey,$query)
     {
         throw new \Exception();
     }

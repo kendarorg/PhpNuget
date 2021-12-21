@@ -139,16 +139,27 @@ class FileDbStorage extends DbStorage
      * @param bool $param
      * @return void
      */
-    public function save($item,$query, $add)
+    public function save($byKey, $query,$item)
     {
         $dbRoot = $this->properties->getProperty("databaseRoot");
         $dbFile = PathUtils::combine($dbRoot, $this->table . ".json");
-        if ($add) {
-            $this->items[] = $add;
-        } else {
-            //Find item, update it
+        $realItems = array();
+        foreach ($this->items as $realItem){
+            $found = sizeof($byKey);
+            foreach ($byKey as $key => $value){
+                $realValue = $realItem->$key;
+                if($realValue==$value){
+                    $found --;
+                }
+            }
+            if($found==0){
+                $realItems[] = $item;
+            }else{
+                $realItems[] = $realItem;
+            }
         }
-        $data = json_encode($this->items, true);
+
+        $data = json_encode($realItems, true);
         file_put_contents($dbFile, $data);
     }
 
@@ -157,14 +168,26 @@ class FileDbStorage extends DbStorage
      * @param string|null $query
      * @return void
      */
-    public function delete($foundedUsers, $query)
+    public function delete($byKey,$query)
     {
         $dbRoot = $this->properties->getProperty("databaseRoot");
         $dbFile = PathUtils::combine($dbRoot, $this->table . ".json");
 
-        //Find item, delete it
+        $realItems = array();
+        foreach ($this->items as $realItem){
+            $found = sizeof($byKey);
+            foreach ($byKey as $key => $value){
+                $realValue = $realItem->$key;
+                if($realValue==$value){
+                    $found --;
+                }
+            }
+            if($found!=0){
+                $realItems[] = $realItem;
+            }
+        }
 
-        $data = json_encode($this->items, true);
+        $data = json_encode($realItems, true);
         file_put_contents($dbFile, $data);
     }
 }
