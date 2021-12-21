@@ -4,10 +4,30 @@ namespace lib\db\file;
 
 use lib\db\DbStorage;
 use lib\db\QueryParser;
+use lib\utils\JsonMapper;
+use lib\utils\PathUtils;
 use lib\utils\Properties;
 
 class FileDbStorage extends DbStorage
 {
+    private function loadData()
+    {
+        $dbRoot = $this->properties->getProperty("databaseRoot");
+        $dbFile = PathUtils::combine($dbRoot, $this->table . ".json");
+        if (file_exists($dbFile) && ($this->items == null || sizeof($this->items) == 0)) {
+            $mapper = new JsonMapper();
+            $this->items = array();
+            $content = file_get_contents($dbFile);
+            $data = json_decode($content);
+            foreach ($data as $row) {
+                $this->items[] = $mapper->map(
+                    json_decode($row),
+                    $this->dataType
+                );
+            }
+        }
+    }
+
     /**
      * @param string $query
      * @param integer $limit
@@ -18,6 +38,7 @@ class FileDbStorage extends DbStorage
     {
         $toSort = [];
         $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
+        $this->loadData();
         foreach ($this->items as $item) {
             if ($this->queryParser->execute($item)) {
                 if ($this->queryParser->hasGroupBy() || $this->queryParser->hasOrderBy()) {
@@ -54,6 +75,7 @@ class FileDbStorage extends DbStorage
         $toSort = [];
         $count = 0;
         $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
+        $this->loadData();
         foreach ($this->items as $item) {
             if ($this->queryParser->execute($item)) {
                 $count++;
@@ -81,6 +103,7 @@ class FileDbStorage extends DbStorage
         $count = 0;
         $toSort = [];
         $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
+        $this->loadData();
         foreach ($this->items as $item) {
             if ($this->queryParser->execute($item)) {
                 if ($this->queryParser->hasGroupBy() || $this->queryParser->hasOrderBy()) {
@@ -118,7 +141,15 @@ class FileDbStorage extends DbStorage
      */
     public function save($item, $add)
     {
-        throw new \Exception();
+        $dbRoot = $this->properties->getProperty("databaseRoot");
+        $dbFile = PathUtils::combine($dbRoot, $this->table . ".json");
+        if ($add) {
+            $this->items[] = $add;
+        } else {
+            //Find item, update it
+        }
+        $data = json_encode($this->items, true);
+        file_put_contents($dbFile, $data);
     }
 
     /**
@@ -128,6 +159,12 @@ class FileDbStorage extends DbStorage
      */
     public function delete($foundedUsers, $query)
     {
-        throw new \Exception();
+        $dbRoot = $this->properties->getProperty("databaseRoot");
+        $dbFile = PathUtils::combine($dbRoot, $this->table . ".json");
+
+        //Find item, delete it
+
+        $data = json_encode($this->items, true);
+        file_put_contents($dbFile, $data);
     }
 }

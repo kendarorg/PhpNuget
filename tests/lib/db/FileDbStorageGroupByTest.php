@@ -29,7 +29,7 @@ class FileDbStorageGroupByTest extends TestCase
         $properties = new Properties(null);
         $query = "Id groupby Id";
 
-        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target = new FileDbStorage($properties, $queryParser, $items);
         $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);
@@ -49,7 +49,7 @@ class FileDbStorageGroupByTest extends TestCase
         $properties = new Properties(null);
         $query = "Id groupby Id ASC orderby id asc";
 
-        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target = new FileDbStorage($properties, $queryParser, $items);
         $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);
@@ -69,7 +69,7 @@ class FileDbStorageGroupByTest extends TestCase
         $properties = new Properties(null);
         $query = "Id,version groupby Id ASC orderby Id asc, version desc";
 
-        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target = new FileDbStorage($properties, $queryParser, $items);
         $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);

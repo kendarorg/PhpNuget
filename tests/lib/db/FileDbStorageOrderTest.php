@@ -28,7 +28,7 @@ class FileDbStorageOrderTest extends TestCase
         $properties = new Properties(null);
         $query = "Orderby Id ASC";
 
-        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target = new FileDbStorage($properties, $queryParser, $items);
         $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);
@@ -46,7 +46,7 @@ class FileDbStorageOrderTest extends TestCase
         $properties = new Properties(null);
         $query = "Orderby Id desc";
 
-        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target = new FileDbStorage($properties, $queryParser, $items);
         $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);
@@ -64,7 +64,7 @@ class FileDbStorageOrderTest extends TestCase
         $properties = new Properties(null);
         $query = "Orderby Id desc";
 
-        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target = new FileDbStorage($properties, $queryParser, $items);
         $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);
@@ -82,7 +82,7 @@ class FileDbStorageOrderTest extends TestCase
         $properties = new Properties(null);
         $query = "orderby version asc";
 
-        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target = new FileDbStorage($properties, $queryParser, $items);
         $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);
@@ -101,7 +101,7 @@ class FileDbStorageOrderTest extends TestCase
         $properties = new Properties(null);
         $query = "orderby version asc";
 
-        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target = new FileDbStorage($properties, $queryParser, $items);
         $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);
@@ -120,7 +120,7 @@ class FileDbStorageOrderTest extends TestCase
         $properties = new Properties(null);
         $query = "orderby version desc";
 
-        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target = new FileDbStorage($properties, $queryParser, $items);
         $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);
@@ -139,7 +139,7 @@ class FileDbStorageOrderTest extends TestCase
         $properties = new Properties(null);
         $query = "orderby version desc";
 
-        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target = new FileDbStorage($properties, $queryParser, $items);
         $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);

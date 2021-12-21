@@ -29,7 +29,7 @@ class FileDbStorageSelectTest extends TestCase
         $properties = new Properties(null);
         $query = "Id eq 'Pack1'";
 
-        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target = new FileDbStorage($properties, $queryParser, $items);
         $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);
@@ -47,7 +47,7 @@ class FileDbStorageSelectTest extends TestCase
         $properties = new Properties(null);
         $query = "(Id eq 'Pack1') and true";
 
-        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target = new FileDbStorage($properties, $queryParser, $items);
         $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);
@@ -66,7 +66,7 @@ class FileDbStorageSelectTest extends TestCase
         $properties = new Properties(null);
         $query = "Version eq '1.0.0.0'";
 
-        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target = new FileDbStorage($properties, $queryParser, $items);
         $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);
@@ -86,7 +86,7 @@ class FileDbStorageSelectTest extends TestCase
         $properties = new Properties(null);
         $query = "Version gte '1.0.0.1'";
 
-        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target = new FileDbStorage($properties, $queryParser, $items);
         $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);

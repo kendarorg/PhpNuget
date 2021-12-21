@@ -33,7 +33,7 @@ class BaseDb
      */
     public function __construct($storage, $table, $keys, $extraTypes, $dataType)
     {
-        $storage->initialize($keys, $extraTypes, $dataType);
+        $storage->initialize($keys, $extraTypes, $dataType,$table);
         $this->storage = $storage;
         $this->table = $table;
         $this->keys = $keys;

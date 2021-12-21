@@ -22,6 +22,10 @@ class DbStorage
     protected $keys;
     protected $extraTypes;
     protected $dataType;
+    /**
+     * @var mixed|null
+     */
+    protected mixed $table;
 
     /**
      * @param Properties $properties
@@ -34,11 +38,12 @@ class DbStorage
         $this->items = $items;
     }
 
-    public function initialize($keys, $extraTypes, $dataType)
+    public function initialize($keys, $extraTypes, $dataType,$table = null)
     {
         $this->keys = $keys;
         $this->extraTypes = $extraTypes;
         $this->dataType = $dataType;
+        $this->table = $table;
     }
 
     /**

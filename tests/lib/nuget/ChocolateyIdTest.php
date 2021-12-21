@@ -32,7 +32,7 @@ class ChocolateyIdTest extends TestCase
         $properties = new Properties(null);
         $query = "id eq 'Pack1'";
 
-        $target = $target = new FileDbStorage($properties, $queryParser, $items);
+        $target = new FileDbStorage($properties, $queryParser, $items);
         $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);

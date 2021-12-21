@@ -20,6 +20,9 @@ class PathUtils
         $args = func_get_args();
         $realArgs = array();
         foreach ($args as $arg){
+            if($arg==null){
+                continue;
+            }
             $arg = trim($arg,"\\/");
             if(strlen($arg)>0) {
                 $realArgs[] = $arg;
