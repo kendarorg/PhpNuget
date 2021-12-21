@@ -69,6 +69,22 @@ class ArraysCompositeField extends utils\SpecialFieldType
         return $this->buildRealVals($args,function($l,$r){
             return contains ($l,$r);});
     }
-
-
+    function startswith($args)
+    {
+        return $this->buildRealVals($args,function($l,$r){
+            return $this->startsWithInt($l,$r);});
+    }
+    function endswith($args)
+    {
+        return $this->buildRealVals($args,function($l,$r){
+            return $this->endsWithInt($l,$r);});
+    }
+    function startsWithInt($haystack, $needle)
+    {
+        return $needle === "" || strpos($haystack, $needle) === 0;
+    }
+    function endsWithInt($haystack, $needle)
+    {
+        return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
+    }
 }
