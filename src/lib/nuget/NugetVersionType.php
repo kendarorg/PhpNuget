@@ -9,9 +9,23 @@ use lib\utils\StringUtils;
 
 class NugetVersionType extends SpecialFieldType
 {
-    public function isExternal($token)
+    public function isComposite(){
+        $args = func_get_args();
+        if(is_array($args[0])){
+            $args = $args[0];
+        }
+        foreach ($args as $arg){
+            $id = strtolower($arg->Id);
+            if( "version"==$id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function isExternal()
     {
-        return $this->_isVersion($token);
+        return $this->_isVersion(func_get_args()[0]);
     }
 
     public function buildToken($token)
@@ -51,6 +65,7 @@ class NugetVersionType extends SpecialFieldType
 
     private function _isVersion($token)
     {
+        if(!is_string($token))return false;
         $token = trim($token,"'");
         if(strlen($token)==0)return false;
 
@@ -190,5 +205,17 @@ class NugetVersionType extends SpecialFieldType
         }
 
         return contains($l,$r);
+    }
+
+    public function doeq($args){
+        $l=$args[0];
+        $r=$args[1];
+        return InternalTypeBuilder::buildBool($l->Value == $r->Value);
+    }
+
+    public function doneq($args){
+        $l=$args[0];
+        $r=$args[1];
+        return InternalTypeBuilder::buildBool($l->Value != $r->Value);
     }
 }

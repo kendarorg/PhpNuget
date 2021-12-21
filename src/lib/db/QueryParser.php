@@ -528,9 +528,12 @@ class QueryParser
 
     private function _executeFunction($name,$params)
     {
-        $extId =$this->isExternalType($name);
-        if($extId>=0 && $this->externalTypes[$extId]->canHandle($name,$params)){
-            return $this->externalTypes[$extId]->$name($params);
+        if($this->externalTypes!=null) {
+            foreach ($this->externalTypes as $type) {
+                if ($type->isComposite($params)){
+                    return $type->$name($params);
+                }
+            }
         }
         return $this->$name($params);
     }
@@ -549,9 +552,11 @@ class QueryParser
         if($t == "function"){
             $params = array();
             for($i=0;$i<sizeof($c);$i++){
+
                 $params[] = $this->_doExecute($c[$i],$subject);
             }
 
+            //$v = the function name
             $result = $this->_executeFunction($v,$params);
         }else if($t == "group"){
             $params = array();

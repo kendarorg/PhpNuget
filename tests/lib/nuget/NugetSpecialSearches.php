@@ -2,8 +2,10 @@
 
 namespace lib\nuget;
 
+use lib\db\file\FileDbStorage;
 use lib\db\FileDbStorageTestUtils;
 use lib\db\QueryParser;
+use lib\nuget\models\NugetPackage;
 use lib\utils\PathUtils;
 use lib\utils\Properties;
 use PHPUnit\Framework\TestCase;
@@ -11,10 +13,6 @@ use PHPUnit\Framework\TestCase;
 class NugetSpecialSearches extends TestCase
 {
     private FileDbStorageTestUtils $utils;
-    private $path;
-    private $rootPath;
-    private $queryParser;
-    private $properties;
 
     public function __construct(?string $name = null, array $data = [], $dataName = '')
     {
@@ -22,22 +20,23 @@ class NugetSpecialSearches extends TestCase
         $this->utils = new FileDbStorageTestUtils();
     }
 
-    private function resetDb(){
-        $this->path = dirname(dirname(__DIR__));
-        $this->rootPath = PathUtils::combine($this->path,"data");
-        $this->path = PathUtils::combine($this->path,"data","packages.json");
-        if(file_exists($this->path)){
-            unlink($this->path);
-        }
-        file_put_contents($this->path,"[]");
-        $this->queryParser = new QueryParser();
-        $this->properties = new Properties(null);
-        $this->properties->setProperty("databaseRoot",$this->rootPath);
-    }
-
-    public function testShouldAddData()
+    public function testBasic()
     {
-        $this->resetDb();
+        $items = array();
+        $items[] = $item1 =$this->utils->buildNewItem("Pack1", "1.0.0.0");
+        $items[] = $item2 = $this->utils->buildNewItem("Pack2", "1.0.0.0");
+        $item1->Author = ["a","b"];
+        $queryParser = new QueryParser();
+        $properties = new Properties(null);
+        $query = "Author eq 'a'";
+
+        $target = new FileDbStorage($properties, $queryParser, $items);
+        $target->initialize(array(), [new NugetVersionType(),new ArraysCompositeField()], new NugetPackage());
+
+        $result = $target->query($query, -1, 0);
+
+        $this->assertEquals(1, sizeof($result));
+        $this->assertEquals("Pack1", $result[0]->Id);
     }
 
 }
