@@ -86,7 +86,7 @@ class BaseDb
             $byKey[] = $item->$key;
         }
         $foundedUser = $this->getByKey($byKey);
-        $this->storage->save($item, $foundedUser == null);
+        $this->storage->save($item, $this->buildByKeyQuery($byKey),$foundedUser == null);
     }
 
     /**

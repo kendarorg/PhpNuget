@@ -83,7 +83,7 @@ class DbStorage
      * @param bool $param
      * @return void
      */
-    public function save($item, $add)
+    public function save($item,$query, $add)
     {
         throw new \Exception();
     }

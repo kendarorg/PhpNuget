@@ -139,7 +139,7 @@ class FileDbStorage extends DbStorage
      * @param bool $param
      * @return void
      */
-    public function save($item, $add)
+    public function save($item,$query, $add)
     {
         $dbRoot = $this->properties->getProperty("databaseRoot");
         $dbFile = PathUtils::combine($dbRoot, $this->table . ".json");
