@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 class JsonMapperTest extends TestCase
 {
 
-    public function checkDeserialization(): void
+    public function testDeserialization(): void
     {
         $objectInstance = new NugetPackage();
         $jsonData = '{"Id":"test","Author":["a","b"],"Dependencies":[{"Id":"dep"}]}';
@@ -21,7 +21,7 @@ class JsonMapperTest extends TestCase
         );
         $this->assertEquals(1,sizeof($result->Dependencies));
         $this->assertTrue($result->Dependencies[0] instanceof NugetDependency);
-        $this->assertEquals(1,sizeof($result->Author));
+        $this->assertEquals(2,sizeof($result->Author));
         $this->assertEquals("a",$result->Author[0]);
     }
 
