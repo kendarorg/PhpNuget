@@ -36,7 +36,7 @@ class NugetUtils
         return trim($tf,".");
     }
 
-    public function buildSplitVersion($v){
+    public static function buildSplitVersion($v){
 
         $blocks= explode("-",$v);
         $beta = sizeof($blocks)>=2?join("-",array_slice($blocks,1)):"";
@@ -47,11 +47,11 @@ class NugetUtils
         }
 
         $newData = array();
-        $newData[] = ($number[0]);
-        $newData[] = ($number[1]);
-        $newData[] = ($number[2]);
-        $newData[] =($number[3]);
-        $newData[] = ($beta);
+        $newData[] = trim($number[0],"'");
+        $newData[] = trim($number[1],"'");
+        $newData[] = trim($number[2],"'");
+        $newData[] =trim($number[3],"'");
+        $newData[] = trim($beta,"'");
         return $newData;
     }
 

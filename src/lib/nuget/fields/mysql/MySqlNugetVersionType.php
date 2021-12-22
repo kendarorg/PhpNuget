@@ -5,6 +5,7 @@ namespace lib\nuget\fields\file;
 use lib\db\parser\InternalTypeBuilder;
 use lib\db\parser\Operator;
 use lib\db\utils\SpecialFieldType;
+use lib\nuget\NugetUtils;
 use lib\utils\StringUtils;
 use function contains;
 
@@ -99,44 +100,72 @@ class MySqlNugetVersionType extends SpecialFieldType
         return preg_match('/^([0-9])+$/i',$operator);
     }
 
+    private function buildCompare($args,$sign,$flipped){
+        $l=$args[0];
+        $r=$args[1];
+        if($r->Type=="fieldinstance"){
+            $t=$r;
+            $l=$r;
+            $r=$t;
+        }
+        $lv = $l->Id;
+        $rv = NugetUtils::buildSplitVersion($r->Value);
+        $partial = array();
+        $partial[] = "(".$lv."0".$sign.$rv[0].")";
+        $partial[] = "(".$lv."0=".$rv[0]." AND ".$lv."1".$sign.$rv[1].")";
+        $partial[] = "(".$lv."0=".$rv[0]." AND ".$lv."1=".$rv[1]." AND ".$lv."2".$sign.$rv[2].")";
+        $partial[] = "(".$lv."0=".$rv[0]." AND ".$lv."1=".$rv[1]." AND ".$lv."2=".$rv[2]." AND ".$lv."3".$sign.$rv[3].")";
+        $partial[] = "(".$lv."0=".$rv[0]." AND ".$lv."1=".$rv[1]." AND ".$lv."2=".$rv[2]." AND ".$lv."3=".$rv[3].
+            "AND LENGTH(".$lv."Beta)".$flipped."LENGTH('".$rv[4]."') AND ".$lv."Beta".$sign."'".$rv[4]."'".")";
+        //v0 >0 || v0=0 && v1 >1 ||v0=0 && v1=1 && v2>2||v0=0 && v1=1 && v2=2 && v3>3||
+        //v0=0 && v1=1 && v2=2 && v3=3 && LENGTH(vb)<LENGTH(b) && vb>b
+        return InternalTypeBuilder::buildItem(join(" OR ",$partial),"query","id");
+    }
+
     public function dolt($args)
     {
-        $l=$args[0];
+        /*$l=$args[0];
         $r=$args[1];
         $lv = ($l->Type=="fieldinstance")?$l->Id:$l->Value;
         $rv = ($r->Type=="fieldinstance")?$r->Id:$r->Value;
         $v = "SEMVER_LT(".$lv.",".$rv.")";
-        return InternalTypeBuilder::buildItem($v,"query","id");
+        return InternalTypeBuilder::buildItem($v,"query","id");*/
+        return $this->buildCompare($args,"<",">");
     }
 
     public function dogte($args)
     {
-        $l=$args[0];
+        /*$l=$args[0];
         $r=$args[1];
         $lv = ($l->Type=="fieldinstance")?$l->Id:$l->Value;
         $rv = ($r->Type=="fieldinstance")?$r->Id:$r->Value;
         $v = "SEMVER_GTE(".$lv.",".$rv.")";
-        return InternalTypeBuilder::buildItem($v,"query","id");
+        return InternalTypeBuilder::buildItem($v,"query","id");*/
+        return $this->buildCompare($args,">=","<=");
     }
 
     public function dogt($args)
     {
-        $l=$args[0];
+        /*$l=$args[0];
         $r=$args[1];
         $lv = ($l->Type=="fieldinstance")?$l->Id:$l->Value;
         $rv = ($r->Type=="fieldinstance")?$r->Id:$r->Value;
         $v = "(SEMVER_GTE(".$lv.",".$rv.") AND ".$lv."!=".$rv.")";
-        return InternalTypeBuilder::buildItem($v,"query","id");
+        return InternalTypeBuilder::buildItem($v,"query","id");*/
+
+        return $this->buildCompare($args,">","<");
     }
 
     public function dolte($args)
     {
-        $l=$args[0];
+        /*$l=$args[0];
         $r=$args[1];
         $lv = ($l->Type=="fieldinstance")?$l->Id:$l->Value;
         $rv = ($r->Type=="fieldinstance")?$r->Id:$r->Value;
         $v = "(SEMVER_LT(".$lv.",".$rv.") OR ".$lv."=".$rv.")";
-        return InternalTypeBuilder::buildItem($v,"query","id");
+        return InternalTypeBuilder::buildItem($v,"query","id");*/
+
+        return $this->buildCompare($args,"<=",">=");
     }
 
     public function substringof($args)
@@ -172,6 +201,7 @@ class MySqlNugetVersionType extends SpecialFieldType
             "Version1 ".$direction.", ".
             "Version2 ".$direction.", ".
             "Version3 ".$direction.", ".
+            "LENGTH(VersionBeta) ".$direction.", ".
             "VersionBeta ".$direction;
     }
 }
