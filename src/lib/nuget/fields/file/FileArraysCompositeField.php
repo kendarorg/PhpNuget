@@ -23,25 +23,6 @@ class FileArraysCompositeField extends utils\SpecialFieldType
         return false;
     }
 
-    private function compareRealVals($args,$lambda){
-        $l=$args[0];
-        $r=$args[1];
-        if($l->Value==null)return false;
-        if($r->Value==null)return false;
-        if(is_array($r->Value)){
-            $t = $l;
-            $l = $r;
-            $r = $l;
-        }
-        if($r->Value==null || strlen($r->Value)==0)return false;
-        foreach ($l->Value as $val){
-            if($lambda(strtolower($val),strtolower($r->Value))){
-                return InternalTypeBuilder::buildBool(true);
-            }
-        }
-        return InternalTypeBuilder::buildBool(false);
-    }
-
     public function doeq($args){
         return $this->buildRealVals($args,function($l,$r){ return $l==$r;});
     }

@@ -130,4 +130,32 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $this->assertNotNull($result);
         $this->assertEquals("Version!='1.0.0.1'",$result);
     }
+
+    public function testVersionOrder()
+    {
+        $target = new QueryParser();
+        $query = "orderby version asc";
+        $item = new TestObject();
+        $target->parse($query, $item,[new MySqlNugetVersionType()]);
+
+        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $result = $executor->execute($item);
+        $orderBy = $executor->doSort($toSort);
+        $this->assertNotNull($orderBy);
+        $this->assertEquals("Version ASC",$orderBy);
+    }
+
+    public function testGroupBy()
+    {
+        $target = new QueryParser();
+        $query = "Groupby Id";
+        $item = new TestObject();
+        $target->parse($query, $item,[new MySqlNugetVersionType()]);
+        $toSort = array();
+        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $result = $executor->execute($item);
+        $orderBy = $executor->doGroupBy($toSort);
+        $this->assertNotNull($orderBy);
+        $this->assertEquals("Id",$orderBy);
+    }
 }

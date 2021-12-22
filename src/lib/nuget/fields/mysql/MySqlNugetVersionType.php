@@ -98,63 +98,6 @@ class MySqlNugetVersionType extends SpecialFieldType
     {
         return preg_match('/^([0-9])+$/i',$operator);
     }
-    // _compare(a,b) <0   => a<b
-    // _compare(a,b) >0   => a>b
-    // _compare(a,b) =0   => a=b
-    private function _compare($l,$r)
-    {
-        $la= array();
-        $tmp = StringUtils::indexOf($l,"-");
-        if($tmp>0){
-            $la[] = substr($l,0,$tmp);
-            $la[] = substr($l,$tmp+1);
-        }else{
-            $la[] = $l;
-            $la[] = '';
-        }
-        $ra= array();
-        $tmp = StringUtils::indexOf($r,"-");
-        if($tmp>0){
-            $ra[] = substr($r,0,$tmp);
-            $ra[] = substr($r,$tmp+1);
-        }else{
-            $ra[] = $r;
-            $ra[] = '';
-        }
-        $numericCompare = $this->_compareNumericVersion($la[0],$ra[0]);
-
-        if($numericCompare!=0) return $numericCompare;
-
-        if($la[1]!=''&&$ra[1]==''){
-            return -1;
-        }else if($la[1]=='' && $ra[1]!=''){
-            return 1;
-        }
-
-        return strcasecmp ($la[1],$ra[1]);
-    }
-
-    private function _compareNumericVersion($l,$r)
-    {
-        $aVersion = explode(".",strtolower($l));
-        $bVersion = explode(".",strtolower($r));
-        for($i=0;$i<sizeof($aVersion) && $i<sizeof($bVersion);$i++){
-            $aCur = intval($aVersion[$i]);
-            $bCur = intval($bVersion[$i]);
-            if($this->_isInteger($aCur) && $this->_isInteger($bCur)){
-                if($aCur==$bCur) continue;
-                return ($aCur < $bCur) ? -1 : 1;
-            }else if(!$this->_isInteger($aCur) && $this->_isInteger($bCur)){
-                return 1;
-            }else if($this->_isInteger($aCur) && !$this->_isInteger($bCur)){
-                return -1;
-            }
-        }
-
-        if(sizeof($aVersion)<sizeof($bVersion)) return -1;
-        if(sizeof($aVersion)>sizeof($bVersion)) return 1;
-        return 0;
-    }
 
     public function dolt($args)
     {
