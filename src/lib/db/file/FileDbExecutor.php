@@ -211,13 +211,6 @@ class FileDbExecutor extends Executor
         return InternalTypeBuilder::buildBool($l->Value != $r->Value);
     }
 
-    function done($args)
-    {
-        $l = $args[0];
-        $r = $args[1];
-        return InternalTypeBuilder::buildBool($l->Value != $r->Value);
-    }
-
     function dogt($args)
     {
         $l = $args[0];

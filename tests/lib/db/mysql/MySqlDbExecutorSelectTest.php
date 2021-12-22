@@ -20,7 +20,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $query = "Id eq 'Pack1'";
         $item = new TestObject();
         $target->parse($query, $item);
-        $item->Id = "TEST";
+        
         $executor = $target->setupExecutor(new MySqlDbExecutor());
         $result = $executor->execute($item);
         $this->assertNotNull($result);
@@ -33,7 +33,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $query = "(Id eq 'Pack1') and true";
         $item = new TestObject();
         $target->parse($query, $item);
-        $item->Id = "TEST";
+        
         $executor = $target->setupExecutor(new MySqlDbExecutor());
         $result = $executor->execute($item);
         $this->assertNotNull($result);
@@ -46,10 +46,88 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $query = "Version eq '1.0.0.0'";
         $item = new TestObject();
         $target->parse($query, $item,[new MySqlNugetVersionType()]);
-        $item->Id = "TEST";
+        
         $executor = $target->setupExecutor(new MySqlDbExecutor());
         $result = $executor->execute($item);
         $this->assertNotNull($result);
-        $this->assertEquals("(Id='Pack1' and true)",$result);
+        $this->assertEquals("Version='1.0.0.0'",$result);
+    }
+
+    public function testVersionCompareGte()
+    {
+        $target = new QueryParser();
+        $query = "Version gte '1.0.0.1'";
+        $item = new TestObject();
+        $target->parse($query, $item,[new MySqlNugetVersionType()]);
+        
+        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $result = $executor->execute($item);
+        $this->assertNotNull($result);
+        $this->assertEquals("SEMVER_GTE(Version,'1.0.0.1')",$result);
+    }
+
+    public function testVersionCompareLte()
+    {
+        $target = new QueryParser();
+        $query = "Version lte '1.0.0.1'";
+        $item = new TestObject();
+        $target->parse($query, $item,[new MySqlNugetVersionType()]);
+        
+        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $result = $executor->execute($item);
+        $this->assertNotNull($result);
+        $this->assertEquals("(SEMVER_LT(Version,'1.0.0.1') OR Version='1.0.0.1')",$result);
+    }
+
+    public function testVersionCompareLt()
+    {
+        $target = new QueryParser();
+        $query = "Version lt '1.0.0.1'";
+        $item = new TestObject();
+        $target->parse($query, $item,[new MySqlNugetVersionType()]);
+
+        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $result = $executor->execute($item);
+        $this->assertNotNull($result);
+        $this->assertEquals("SEMVER_LT(Version,'1.0.0.1')",$result);
+    }
+
+    public function testVersionCompareGt()
+    {
+        $target = new QueryParser();
+        $query = "Version gt '1.0.0.1'";
+        $item = new TestObject();
+        $target->parse($query, $item,[new MySqlNugetVersionType()]);
+
+        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $result = $executor->execute($item);
+        $this->assertNotNull($result);
+        $this->assertEquals("(SEMVER_GTE(Version,'1.0.0.1') AND Version!='1.0.0.1')",$result);
+    }
+
+    public function testVersionCompareEq()
+    {
+        $target = new QueryParser();
+        $query = "Version eq '1.0.0.1'";
+        $item = new TestObject();
+        $target->parse($query, $item,[new MySqlNugetVersionType()]);
+
+        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $result = $executor->execute($item);
+        $this->assertNotNull($result);
+        $this->assertEquals("Version='1.0.0.1'",$result);
+    }
+
+    public function testVersionCompareNeq()
+    {
+        $target = new QueryParser();
+        $query = "Version neq '1.0.0.1'";
+        $item = new TestObject();
+        $target->parse($query, $item,[new MySqlNugetVersionType()]);
+
+        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $result = $executor->execute($item);
+        $this->assertNotNull($result);
+        $this->assertEquals("Version!='1.0.0.1'",$result);
     }
 }

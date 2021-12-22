@@ -160,64 +160,66 @@ class MySqlNugetVersionType extends SpecialFieldType
     {
         $l=$args[0];
         $r=$args[1];
-        if($l==null && $r!=null) return InternalTypeBuilder::buildBool(false);
-        if($r==null && $l!=null) return InternalTypeBuilder::buildBool(true);
-        return InternalTypeBuilder::buildBool($this->_compare($l->Value,$r->Value)<0);
+        $lv = ($l->Type=="fieldinstance")?$l->Id:$l->Value;
+        $rv = ($r->Type=="fieldinstance")?$r->Id:$r->Value;
+        $v = "SEMVER_LT(".$lv.",".$rv.")";
+        return InternalTypeBuilder::buildItem($v,"query","id");
     }
 
     public function dogte($args)
     {
         $l=$args[0];
         $r=$args[1];
-        if($l->Value == $r->Value) return InternalTypeBuilder::buildBool(true);
-        return $this->dogt($args);
+        $lv = ($l->Type=="fieldinstance")?$l->Id:$l->Value;
+        $rv = ($r->Type=="fieldinstance")?$r->Id:$r->Value;
+        $v = "SEMVER_GTE(".$lv.",".$rv.")";
+        return InternalTypeBuilder::buildItem($v,"query","id");
     }
 
     public function dogt($args)
     {
         $l=$args[0];
         $r=$args[1];
-
-        if($l==null && $r!=null) return InternalTypeBuilder::buildBool(true);
-        if($r==null && $l!=null) return InternalTypeBuilder::buildBool(false);
-        return InternalTypeBuilder::buildBool($this->_compare($l->Value,$r->Value)>0);
+        $lv = ($l->Type=="fieldinstance")?$l->Id:$l->Value;
+        $rv = ($r->Type=="fieldinstance")?$r->Id:$r->Value;
+        $v = "(SEMVER_GTE(".$lv.",".$rv.") AND ".$lv."!=".$rv.")";
+        return InternalTypeBuilder::buildItem($v,"query","id");
     }
 
     public function dolte($args)
     {
         $l=$args[0];
         $r=$args[1];
-        if($l->Value == $r->Value) return InternalTypeBuilder::buildBool(true);
-        return $this->dolt($args);
+        $lv = ($l->Type=="fieldinstance")?$l->Id:$l->Value;
+        $rv = ($r->Type=="fieldinstance")?$r->Id:$r->Value;
+        $v = "(SEMVER_LT(".$lv.",".$rv.") OR ".$lv."=".$rv.")";
+        return InternalTypeBuilder::buildItem($v,"query","id");
     }
 
     public function substringof($args)
     {
-        $l=null;
-        $r=null;
-
-        if(is_array($args[1]->Value)){
-            $l = $args[0]->Value;
-            $r = serialize($args[1]->Value);
-        }else if(is_array($args[0]->Value)){
-            $r = serialize($args[0]->Value);
-            $l = $args[0]->Value;
-        }else {
-            return InternalTypeBuilder::buildBool(false);
-        }
-
-        return contains($l,$r);
+        $l=$args[0];
+        $r=$args[1];
+        $lv = ($l->Type=="fieldinstance")?$l->Id:$l->Value;
+        $rv = ($r->Type=="fieldinstance")?$r->Id:$r->Value;
+        $v = $rv." LIKE '%".trim($lv,"'")."%'";
     }
 
     public function doeq($args){
         $l=$args[0];
         $r=$args[1];
-        return InternalTypeBuilder::buildBool($l->Value == $r->Value);
+        $lv = ($l->Type=="fieldinstance")?$l->Id:$l->Value;
+        $rv = ($r->Type=="fieldinstance")?$r->Id:$r->Value;
+        $v = $lv."=".$rv;
+        return InternalTypeBuilder::buildItem($v,"query","id");
     }
 
     public function doneq($args){
         $l=$args[0];
         $r=$args[1];
-        return InternalTypeBuilder::buildBool($l->Value != $r->Value);
+        $lv = ($l->Type=="fieldinstance")?$l->Id:$l->Value;
+        $rv = ($r->Type=="fieldinstance")?$r->Id:$r->Value;
+        $v = $lv."!=".$rv;
+        return InternalTypeBuilder::buildItem($v,"query","id");
     }
 }

@@ -716,13 +716,6 @@ class ObjectSearch
 		return BuildBool($l->Value != $r->Value);
 	}
 	
-	function done($args)
-	{
-		$l=$args[0];
-		$r=$args[1];
-		return BuildBool($l->Value != $r->Value);
-	}
-	
 	function dogt($args)
 	{
 		$l=$args[0];
