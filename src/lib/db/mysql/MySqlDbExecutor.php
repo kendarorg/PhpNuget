@@ -93,7 +93,7 @@ class MySqlDbExecutor extends Executor
     public function doSort(&$subject)
     {
 
-        if(sizeof($this->_sortClause)==0) return $subject;
+        if(sizeof($this->_sortClause)==0) return "";
 
         $print = false;
 

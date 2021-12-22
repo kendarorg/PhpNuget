@@ -47,7 +47,7 @@ class MySqlDbStorage extends DbStorage
         $toSort = [];
         $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
         $executor = $this->queryParser->setupExecutor(new MySqlDbExecutor($this->mysqli));
-        $sqlQuery = $executor->execute(new Object());
+        $sqlQuery = $executor->execute(null);
         $what = "*";
         if($this->queryParser->hasGroupBy()){
             $fields = ["count(*) as count"];
@@ -84,7 +84,7 @@ class MySqlDbStorage extends DbStorage
         $toSort = [];
         $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
         $executor = $this->queryParser->setupExecutor(new MySqlDbExecutor($this->mysqli));
-        $sqlQuery = $executor->execute(new Object());
+        $sqlQuery = $executor->execute(null);
         $what = "*";
         if($this->queryParser->hasGroupBy()){
             $fields = ["count(*) as count"];
