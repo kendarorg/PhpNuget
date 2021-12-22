@@ -142,7 +142,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $result = $executor->execute($item);
         $orderBy = $executor->doSort($toSort);
         $this->assertNotNull($orderBy);
-        $this->assertEquals("Version ASC",$orderBy);
+        $this->assertEquals("Version0 ASC, Version1 ASC, Version2 ASC, Version3 ASC, VersionBeta ASC",$orderBy);
     }
 
     public function testGroupBy()

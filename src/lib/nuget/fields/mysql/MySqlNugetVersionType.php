@@ -165,4 +165,13 @@ class MySqlNugetVersionType extends SpecialFieldType
         $v = $lv."!=".$rv;
         return InternalTypeBuilder::buildItem($v,"query","id");
     }
+
+    public function dosort($name,$asc){
+        $direction = $asc?"ASC":"DESC";
+        return "Version0 ".$direction.", ".
+            "Version1 ".$direction.", ".
+            "Version2 ".$direction.", ".
+            "Version3 ".$direction.", ".
+            "VersionBeta ".$direction;
+    }
 }

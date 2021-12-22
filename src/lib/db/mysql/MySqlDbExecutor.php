@@ -100,6 +100,21 @@ class MySqlDbExecutor extends Executor
                     $row = $real;
                 }
             }
+            if($this->externalTypes!=null) {
+                $compo = null;
+                $toSeek = InternalTypeBuilder::buildItem("","field",$so->Field);
+                foreach ($this->externalTypes as $type) {
+                    if ($type->isComposite($toSeek)){
+                        $compo=$type;
+                        break;
+                    }
+                }
+                if($compo!=null){
+                    $result[] = $compo->dosort($row,$so->Asc);
+                    break;
+                }
+            }
+
             $how = $so->Asc?"ASC":"DESC";
             $result[] = $row." ".$how;
         }

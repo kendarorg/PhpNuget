@@ -39,4 +39,8 @@ class SpecialFieldType
     {
         return false;
     }
+
+    public function dosort($name,$asc){
+        return null;
+    }
 }
