@@ -40,8 +40,16 @@ class MySqlDbStorage extends DbStorage
         $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
         $executor = $this->queryParser->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $sqlQuery = $executor->execute(new Object());
+        $what = "*";
+        if($this->queryParser->hasGroupBy()){
+            $fields = ["count(*) as count"];
+            foreach ($this->queryParser->_groupClause as $gc){
+                $fields[]=$gc;
+            }
+            $what = join(",",$fields);
+        }
 
-        $sqlQuery = "SELECT * FROM (SELECT * FROM ".$this->table." ".$sqlQuery.") ";
+        $sqlQuery = "SELECT * FROM (SELECT ".$what." FROM ".$this->table." ".$sqlQuery.") ";
 
         $orderBy = $executor->doSort($toSort);
         $groupBy = $executor->doGroupBy($toSort);

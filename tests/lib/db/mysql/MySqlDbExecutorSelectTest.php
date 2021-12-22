@@ -158,7 +158,6 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $target->parse($query, $item,[new MySqlNugetVersionType()]);
 
         $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
-        $result = $executor->execute($item);
         $orderBy = $executor->doSort($toSort);
         $this->assertNotNull($orderBy);
         $this->assertEquals(" ORDER BY Version0 ASC, Version1 ASC, Version2 ASC, Version3 ASC, LENGTH(VersionBeta) ASC, VersionBeta ASC",$orderBy);
@@ -172,7 +171,6 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $target->parse($query, $item,[new MySqlNugetVersionType()]);
         $toSort = array();
         $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
-        $result = $executor->execute($item);
         $orderBy = $executor->doGroupBy($toSort);
         $this->assertNotNull($orderBy);
         $this->assertEquals(" GROUP BY Id",$orderBy);
