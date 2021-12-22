@@ -126,7 +126,11 @@ class MySqlDbExecutor extends Executor
     {
         $vals = array();
         foreach ($params as $param){
-            $vals[]=$param->Value;
+            if($param->Type=="fieldinstance"){
+                $vals[]=$param->Id;
+            }else{
+                $vals[]=$param->Value;
+            }
         }
         switch($name){
             case("doand"):
@@ -177,18 +181,20 @@ class MySqlDbExecutor extends Executor
     protected function makeString($parseTreeItem)
     {
         $v = $parseTreeItem->Value;
-        return "'".$v."'";
+        return InternalTypeBuilder::buildItem("'".$v."'","query","id");
     }
 
     protected function makeNumber($parseTreeItem)
     {
         $v = $parseTreeItem->Value;
-        return $v;
+        return InternalTypeBuilder::buildItem($v,"query","id");
     }
 
     protected function makeBoolean($parseTreeItem)
     {
         $v = $parseTreeItem->Value;
-        return $v==false?"false":"true";
+        $v=  ($v==false)?"false":"true";
+
+        return InternalTypeBuilder::buildItem($v,"query","id");
     }
 }

@@ -6,7 +6,7 @@ use lib\db\parser\InternalTypeBuilder;
 use lib\db\utils;
 use function contains;
 
-class ArraysCompositeField extends utils\SpecialFieldType
+class FileArraysCompositeField extends utils\SpecialFieldType
 {
     public function isComposite(){
         $args = func_get_args();

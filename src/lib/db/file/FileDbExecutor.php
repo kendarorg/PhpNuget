@@ -252,9 +252,4 @@ class FileDbExecutor extends Executor
     {
         return $this->$name($params);
     }
-
-    protected function makeString(mixed $v)
-    {
-        return null;
-    }
 }

@@ -5,7 +5,7 @@ namespace lib\nuget;
 use lib\db\file\FileDbStorage;
 use lib\db\file\FileDbStorageTestUtils;
 use lib\db\QueryParser;
-use lib\nuget\fields\file\NugetVersionType;
+use lib\nuget\fields\file\FileNugetVersionType;
 use lib\nuget\models\NugetPackage;
 use lib\utils\Properties;
 use PHPUnit\Framework\TestCase;
@@ -34,7 +34,7 @@ class ChocolateyIdTest extends TestCase
         $query = "id eq 'Pack1'";
 
         $target = new FileDbStorage($properties, $queryParser, $items);
-        $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
+        $target->initialize(array(), [new FileNugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);
 

@@ -4,7 +4,7 @@ namespace lib\nuget\fields\file;
 
 use lib\db\utils\SpecialFieldType;
 
-class DependencyCompositeField extends SpecialFieldType
+class FileDependencyCompositeField extends SpecialFieldType
 {
     public function isComposite(){
         $args = func_get_args();

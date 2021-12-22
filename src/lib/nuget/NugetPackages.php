@@ -4,9 +4,9 @@ namespace lib\nuget;
 
 use lib\db\BaseDb;
 use lib\db\DbStorage;
-use lib\nuget\fields\file\ArraysCompositeField;
-use lib\nuget\fields\file\DependencyCompositeField;
-use lib\nuget\fields\file\NugetVersionType;
+use lib\nuget\fields\file\FileArraysCompositeField;
+use lib\nuget\fields\file\FileDependencyCompositeField;
+use lib\nuget\fields\file\FileNugetVersionType;
 use lib\nuget\models\NugetPackage;
 use lib\utils\StringUtils;
 
@@ -18,7 +18,7 @@ class NugetPackages extends BaseDb
     public function __construct($dbStorage)
     {
         $keys = ["Id", "Version"];
-        $extraTypes = [new NugetVersionType(), new ArraysCompositeField(), new DependencyCompositeField()];
+        $extraTypes = [new FileNugetVersionType(), new FileArraysCompositeField(), new FileDependencyCompositeField()];
         $object = new NugetPackage();
         parent::__construct($dbStorage, "packages", $keys, $extraTypes, $object);
     }

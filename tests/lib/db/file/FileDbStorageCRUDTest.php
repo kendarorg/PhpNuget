@@ -24,7 +24,7 @@ class FileDbStorageCRUDTest extends TestCase
     }
 
     private function resetDb(){
-        $this->path = dirname(dirname(__DIR__));
+        $this->path = dirname(dirname(dirname(__DIR__)));
         $this->rootPath = PathUtils::combine($this->path,"data");
         $this->path = PathUtils::combine($this->path,"data","packages.json");
         if(file_exists($this->path)){

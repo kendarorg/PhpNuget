@@ -4,7 +4,7 @@ namespace lib\db\file;
 
 use lib\db\FileDbStorageBase;
 use lib\db\QueryParser;
-use lib\nuget\fields\file\NugetVersionType;
+use lib\nuget\fields\file\FileNugetVersionType;
 use lib\nuget\models\NugetPackage;
 use lib\utils\Properties;
 use PHPUnit\Framework\TestCase;
@@ -30,7 +30,7 @@ class FileDbStorageGroupByTest extends TestCase
         $query = "Id groupby Id";
 
         $target = new FileDbStorage($properties, $queryParser, $items);
-        $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
+        $target->initialize(array(), [new FileNugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);
 
@@ -50,7 +50,7 @@ class FileDbStorageGroupByTest extends TestCase
         $query = "Id groupby Id ASC orderby id asc";
 
         $target = new FileDbStorage($properties, $queryParser, $items);
-        $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
+        $target->initialize(array(), [new FileNugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);
 
@@ -70,7 +70,7 @@ class FileDbStorageGroupByTest extends TestCase
         $query = "Id,version groupby Id ASC orderby Id asc, version desc";
 
         $target = new FileDbStorage($properties, $queryParser, $items);
-        $target->initialize(array(), [new NugetVersionType()], new NugetPackage());
+        $target->initialize(array(), [new FileNugetVersionType()], new NugetPackage());
 
         $result = $target->query($query, -1, 0);
 

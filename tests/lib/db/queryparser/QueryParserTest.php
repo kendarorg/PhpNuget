@@ -4,7 +4,7 @@ namespace lib\db\queryparser;
 
 use lib\db\QueryParser;
 use lib\db\TestObject;
-use lib\nuget\fields\file\NugetVersionType;
+use lib\nuget\fields\file\FileNugetVersionType;
 use PHPUnit\Framework\TestCase;
 
 class QueryParserTest extends TestCase
@@ -94,10 +94,10 @@ class QueryParserTest extends TestCase
         $target = new QueryParser();
         $query = "22.77.5 eq Id";
 
-        $result = $target->parse($query,new TestObject(),[new NugetVersionType()]);
+        $result = $target->parse($query,new TestObject(),[new FileNugetVersionType()]);
         $ser = json_encode($result);
         $this->assertEquals(
-            '[{"Type":"function","Value":"doeq","Id":null,"Children":[{"Type":"version","Value":"22.77.5","Id":null,"Children":[]},{"Type":"field","Value":"Id","Id":null,"Children":[]}]}]',
+            '[{"Type":"function","Value":"doeq","Id":null,"Children":[{"Type":"mixed","Value":"22.77.5","Id":null,"Children":[]},{"Type":"field","Value":"Id","Id":null,"Children":[]}]}]',
             $ser);
     }
 }

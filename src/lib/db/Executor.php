@@ -128,12 +128,12 @@ class Executor
         return $parseTreeItem;
     }
 
-    private function makeNumber($parseTreeItem)
+    protected function makeNumber($parseTreeItem)
     {
         return $parseTreeItem;
     }
 
-    private function makeBoolean($parseTreeItem)
+    protected function makeBoolean($parseTreeItem)
     {
         return $parseTreeItem;
     }

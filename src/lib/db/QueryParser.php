@@ -239,19 +239,22 @@ class QueryParser
                 $o->Type = "number";
                 $o->Value = $s + 0;
                 $temp[] = $o;
-            } else if (($extId =$this->isExternalType($s))>=0) {
+            /*} else if (($extId =$this->isExternalType($s))>=0) {
                 $o = $this->externalTypes[$extId]->buildToken($s);
                 if ($o == null) {
                     throw new Exception("Token '" . $s . "' not supported by external provider");
                 }
                 $temp[] = $o;
-            } else if (strtolower($s) == "null") {
+            */} else if (strtolower($s) == "null") {
                 $o = new Operator();
                 $o->Type = "string";
                 $o->Value = "";
                 $temp[] = $o;
             } else {
-                throw new \Exception("Token '".$s."' not supported parsing");
+                $o = new Operator();
+                $o->Type = "mixed";
+                $o->Value = $s;
+                $temp[] = $o;
             }
             $prev = $temp[sizeof($temp) - 1];
         }
@@ -467,7 +470,7 @@ class QueryParser
 
             $v = strtolower($o->Value);
             $t = strtolower($o->Type);
-            if($v==$operator && $t!="string" ){
+            if($v==$operator && $t!="string" && $t!="mixed"){
                 //Seek last logical operator
                 $popped = array_pop($andResult);
                 $lastEnd = $i;
@@ -504,6 +507,7 @@ class QueryParser
         return $andResult;
     }
 
+    /*
     private function isExternalType($s)
     {
         if($this->externalTypes!=null) {
@@ -514,7 +518,7 @@ class QueryParser
             }
         }
         return -1;
-    }
+    }*/
 
 
 

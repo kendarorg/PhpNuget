@@ -8,7 +8,7 @@ use lib\db\utils\SpecialFieldType;
 use lib\utils\StringUtils;
 use function contains;
 
-class NugetVersionType extends SpecialFieldType
+class FileNugetVersionType extends SpecialFieldType
 {
     public function isComposite(){
         $args = func_get_args();
