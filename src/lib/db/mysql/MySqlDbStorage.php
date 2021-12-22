@@ -39,7 +39,9 @@ class MySqlDbStorage extends DbStorage
         $toSort = [];
         $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
         $executor = $this->queryParser->setupExecutor(new MySqlDbExecutor($this->mysqli));
-        $sqlQuery = "SELECT * FROM (".$executor->execute(new Object()).") ";
+        $sqlQuery = $executor->execute(new Object());
+
+        $sqlQuery = "SELECT * FROM (SELECT * FROM ".$this->table." ".$sqlQuery.") ";
 
         $orderBy = $executor->doSort($toSort);
         $groupBy = $executor->doGroupBy($toSort);

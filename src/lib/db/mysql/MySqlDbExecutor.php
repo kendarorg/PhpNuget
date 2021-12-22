@@ -151,4 +151,17 @@ class MySqlDbExecutor extends Executor
         if(sizeof($result)==0)return "";
         return " GROUP BY ".join(",",$result);
     }
+
+    public function execute($subject)
+    {
+        $result = parent::execute($subject);
+        if(is_bool($result)){
+            $result = "";
+        }
+        $result = trim($result);
+        if($result !="" ){
+            $result = " WHERE ".$result;
+        }
+        return $result;
+    }
 }

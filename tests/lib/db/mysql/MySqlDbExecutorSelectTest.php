@@ -32,7 +32,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $this->assertNotNull($result);
-        $this->assertEquals("Id='Pack1'",$result);
+        $this->assertEquals(" WHERE Id='Pack1'",$result);
     }
 
     public function testWithParenthesis(): void
@@ -45,7 +45,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $this->assertNotNull($result);
-        $this->assertEquals("(Id='Pack1' and true)",$result);
+        $this->assertEquals(" WHERE (Id='Pack1' and true)",$result);
     }
 
     public function testVersion(): void
@@ -58,7 +58,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $this->assertNotNull($result);
-        $this->assertEquals("Version='1.0.0.0'",$result);
+        $this->assertEquals(" WHERE Version='1.0.0.0'",$result);
     }
 
     public function testVersionCompareGte()
@@ -72,7 +72,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $result = $executor->execute($item);
         $this->assertNotNull($result);
         //$this->assertEquals("SEMVER_GTE(Version,'1.0.0.1')",$result);
-        $this->assertEquals("(Version0>=1) OR (Version0=1 AND Version1>=0) OR (Version0=1 AND Version1=0 AND Version2>=0) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3>=1) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3=1AND LENGTH(VersionBeta)<=LENGTH('') AND VersionBeta>='')",
+        $this->assertEquals(" WHERE (Version0>=1) OR (Version0=1 AND Version1>=0) OR (Version0=1 AND Version1=0 AND Version2>=0) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3>=1) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3=1AND LENGTH(VersionBeta)<=LENGTH('') AND VersionBeta>='')",
             $result);
     }
 
@@ -87,7 +87,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $result = $executor->execute($item);
         $this->assertNotNull($result);
         //$this->assertEquals("(SEMVER_LT(Version,'1.0.0.1') OR Version='1.0.0.1')",$result);
-        $this->assertEquals("(Version0<=1) OR (Version0=1 AND Version1<=0) OR (Version0=1 AND Version1=0 AND Version2<=0) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3<=1) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3=1AND LENGTH(VersionBeta)>=LENGTH('') AND VersionBeta<='')",
+        $this->assertEquals(" WHERE (Version0<=1) OR (Version0=1 AND Version1<=0) OR (Version0=1 AND Version1=0 AND Version2<=0) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3<=1) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3=1AND LENGTH(VersionBeta)>=LENGTH('') AND VersionBeta<='')",
             $result);
 
     }
@@ -103,7 +103,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $result = $executor->execute($item);
         $this->assertNotNull($result);
         //$this->assertEquals("SEMVER_LT(Version,'1.0.0.1')",$result);
-        $this->assertEquals("(Version0<1) OR (Version0=1 AND Version1<0) OR (Version0=1 AND Version1=0 AND Version2<0) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3<1) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3=1AND LENGTH(VersionBeta)>LENGTH('') AND VersionBeta<'')",
+        $this->assertEquals(" WHERE (Version0<1) OR (Version0=1 AND Version1<0) OR (Version0=1 AND Version1=0 AND Version2<0) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3<1) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3=1AND LENGTH(VersionBeta)>LENGTH('') AND VersionBeta<'')",
             $result);
     }
 
@@ -118,7 +118,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $result = $executor->execute($item);
         $this->assertNotNull($result);
         //$this->assertEquals("(SEMVER_GTE(Version,'1.0.0.1') AND Version!='1.0.0.1')",$result);
-        $this->assertEquals("(Version0>1) OR (Version0=1 AND Version1>0) OR (Version0=1 AND Version1=0 AND Version2>0) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3>1) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3=1AND LENGTH(VersionBeta)<LENGTH('') AND VersionBeta>'')",
+        $this->assertEquals(" WHERE (Version0>1) OR (Version0=1 AND Version1>0) OR (Version0=1 AND Version1=0 AND Version2>0) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3>1) OR (Version0=1 AND Version1=0 AND Version2=0 AND Version3=1AND LENGTH(VersionBeta)<LENGTH('') AND VersionBeta>'')",
             $result);
 
 
@@ -134,7 +134,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $this->assertNotNull($result);
-        $this->assertEquals("Version='1.0.0.1'",$result);
+        $this->assertEquals(" WHERE Version='1.0.0.1'",$result);
     }
 
     public function testVersionCompareNeq()
@@ -147,7 +147,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $this->assertNotNull($result);
-        $this->assertEquals("Version!='1.0.0.1'",$result);
+        $this->assertEquals(" WHERE Version!='1.0.0.1'",$result);
     }
 
     public function testVersionOrder()
