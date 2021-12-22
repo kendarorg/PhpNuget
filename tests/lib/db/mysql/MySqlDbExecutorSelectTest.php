@@ -2,18 +2,26 @@
 
 namespace lib\db\mysql;
 
-use lib\db\file\FileDbExecutor;
-use lib\db\file\FileDbStorage;
 use lib\db\QueryParser;
 use lib\db\TestObject;
-use lib\nuget\fields\file\FileNugetVersionType;
 use lib\nuget\fields\file\MySqlNugetVersionType;
-use lib\nuget\models\NugetPackage;
-use lib\utils\Properties;
 use PHPUnit\Framework\TestCase;
 
 class MySqlDbExecutorSelectTest  extends TestCase
 {
+    private $mysqli;
+
+    public function __construct(?string $name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        $this->mysqli = new class {
+            public function real_escape_string($msg)
+            {
+                return str_replace("'","", $msg);
+            }
+        };
+    }
+
     public function testBasic(): void
     {
         $target = new QueryParser();
@@ -21,7 +29,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $item = new TestObject();
         $target->parse($query, $item);
         
-        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $this->assertNotNull($result);
         $this->assertEquals("Id='Pack1'",$result);
@@ -34,7 +42,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $item = new TestObject();
         $target->parse($query, $item);
         
-        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $this->assertNotNull($result);
         $this->assertEquals("(Id='Pack1' and true)",$result);
@@ -47,7 +55,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $item = new TestObject();
         $target->parse($query, $item,[new MySqlNugetVersionType()]);
         
-        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $this->assertNotNull($result);
         $this->assertEquals("Version='1.0.0.0'",$result);
@@ -60,7 +68,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $item = new TestObject();
         $target->parse($query, $item,[new MySqlNugetVersionType()]);
         
-        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $this->assertNotNull($result);
         //$this->assertEquals("SEMVER_GTE(Version,'1.0.0.1')",$result);
@@ -75,7 +83,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $item = new TestObject();
         $target->parse($query, $item,[new MySqlNugetVersionType()]);
         
-        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $this->assertNotNull($result);
         //$this->assertEquals("(SEMVER_LT(Version,'1.0.0.1') OR Version='1.0.0.1')",$result);
@@ -91,7 +99,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $item = new TestObject();
         $target->parse($query, $item,[new MySqlNugetVersionType()]);
 
-        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $this->assertNotNull($result);
         //$this->assertEquals("SEMVER_LT(Version,'1.0.0.1')",$result);
@@ -106,7 +114,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $item = new TestObject();
         $target->parse($query, $item,[new MySqlNugetVersionType()]);
 
-        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $this->assertNotNull($result);
         //$this->assertEquals("(SEMVER_GTE(Version,'1.0.0.1') AND Version!='1.0.0.1')",$result);
@@ -123,7 +131,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $item = new TestObject();
         $target->parse($query, $item,[new MySqlNugetVersionType()]);
 
-        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $this->assertNotNull($result);
         $this->assertEquals("Version='1.0.0.1'",$result);
@@ -136,7 +144,7 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $item = new TestObject();
         $target->parse($query, $item,[new MySqlNugetVersionType()]);
 
-        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $this->assertNotNull($result);
         $this->assertEquals("Version!='1.0.0.1'",$result);
@@ -149,11 +157,11 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $item = new TestObject();
         $target->parse($query, $item,[new MySqlNugetVersionType()]);
 
-        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $orderBy = $executor->doSort($toSort);
         $this->assertNotNull($orderBy);
-        $this->assertEquals("Version0 ASC, Version1 ASC, Version2 ASC, Version3 ASC, LENGTH(VersionBeta) ASC, VersionBeta ASC",$orderBy);
+        $this->assertEquals(" ORDER BY Version0 ASC, Version1 ASC, Version2 ASC, Version3 ASC, LENGTH(VersionBeta) ASC, VersionBeta ASC",$orderBy);
     }
 
     public function testGroupBy()
@@ -163,10 +171,10 @@ class MySqlDbExecutorSelectTest  extends TestCase
         $item = new TestObject();
         $target->parse($query, $item,[new MySqlNugetVersionType()]);
         $toSort = array();
-        $executor = $target->setupExecutor(new MySqlDbExecutor());
+        $executor = $target->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $result = $executor->execute($item);
         $orderBy = $executor->doGroupBy($toSort);
         $this->assertNotNull($orderBy);
-        $this->assertEquals("Id",$orderBy);
+        $this->assertEquals(" GROUP BY Id",$orderBy);
     }
 }

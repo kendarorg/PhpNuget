@@ -9,18 +9,41 @@ use lib\utils\Properties;
 
 class MySqlDbStorage extends DbStorage
 {
+    private  $dbHost;
+    /**
+     * @var int
+     */
+    private  $dbPort;
+    private  $dbName;
+    private  $dbUser;
+    private  $dbPassword;
+    private mysqli $mysqli;
+
+    /**
+     * @param Properties $properties
+     * @param QueryParser $queryParser
+     */
+    public function __construct($properties, $queryParser, $items = null)
+    {
+        parent::__construct($properties, $queryParser, $items);
+        $this->dbHost = $properties->getProperty("db.host");
+        $this->dbPort = intval($properties->getProperty("db.port",3275));
+        $this->dbName = $properties->getProperty("db.name");
+        $this->dbUser = $properties->getProperty("db.user");
+        $this->dbPassword = $properties->getProperty("db.password");
+        $this->mysqli = new mysqli($this->dbHost, $this->dbUser, $this->dbPassword, $this->dbName);
+    }
 
     public function query($query, $limit = -1, $skip = 0)
     {
         $toSort = [];
         $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
-        $this->loadData();
-        $executor = $this->queryParser->setupExecutor(new MySqlDbExecutor());
+        $executor = $this->queryParser->setupExecutor(new MySqlDbExecutor($this->mysqli));
         $sqlQuery = "SELECT * FROM (".$executor->execute(new Object()).") ";
 
         $orderBy = $executor->doSort($toSort);
         $groupBy = $executor->doGroupBy($toSort);
-        $query = $sqlQuery." ".$orderBy." ".$groupBy;
+        $query = $sqlQuery." ".$groupBy." ".$orderBy;
         if($skip >0){
             $query.=" offset ".$skip;
         }

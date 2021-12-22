@@ -7,6 +7,12 @@ use lib\db\parser\InternalTypeBuilder;
 
 class MySqlDbExecutor extends Executor
 {
+    private $mysqli;
+
+    public function __construct($mysqli)
+    {
+        $this->mysqli = $mysqli;
+    }
 
     protected function executeFunctionInt($name, $params)
     {
@@ -66,13 +72,13 @@ class MySqlDbExecutor extends Executor
 
     protected function makeString($parseTreeItem)
     {
-        $v = $parseTreeItem->Value;
+        $v = $this->mysqli->real_escape_string($parseTreeItem->Value);
         return InternalTypeBuilder::buildItem("'".$v."'","query","id");
     }
 
     protected function makeNumber($parseTreeItem)
     {
-        $v = $parseTreeItem->Value;
+        $v = $this->mysqli->real_escape_string($parseTreeItem->Value);
         return InternalTypeBuilder::buildItem($v,"query","id");
     }
 
@@ -119,8 +125,8 @@ class MySqlDbExecutor extends Executor
             $result[] = $row." ".$how;
         }
 
-
-        return join(",",$result);
+        if(sizeof($result)==0)return "";
+        return " ORDER BY ".join(",",$result);
     }
 
 
@@ -142,6 +148,7 @@ class MySqlDbExecutor extends Executor
         }
 
 
-        return join(",",$result);
+        if(sizeof($result)==0)return "";
+        return " GROUP BY ".join(",",$result);
     }
 }
