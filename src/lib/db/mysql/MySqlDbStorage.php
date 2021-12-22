@@ -17,13 +17,17 @@ class MySqlDbStorage extends DbStorage
     private  $dbName;
     private  $dbUser;
     private  $dbPassword;
-    private mysqli $mysqli;
+    private  $mysqli;
+    /**
+     * @var null
+     */
+    private $converter;
 
     /**
      * @param Properties $properties
      * @param QueryParser $queryParser
      */
-    public function __construct($properties, $queryParser, $items = null)
+    public function __construct($properties, $queryParser, $items = null,$mysqli = null,$converter = null)
     {
         parent::__construct($properties, $queryParser, $items);
         $this->dbHost = $properties->getProperty("db.host");
@@ -31,7 +35,11 @@ class MySqlDbStorage extends DbStorage
         $this->dbName = $properties->getProperty("db.name");
         $this->dbUser = $properties->getProperty("db.user");
         $this->dbPassword = $properties->getProperty("db.password");
-        $this->mysqli = new mysqli($this->dbHost, $this->dbUser, $this->dbPassword, $this->dbName);
+        $this->mysqli = $mysqli;
+        if ($this->mysqli->connect_error) {
+            throw new \Exception("Unable to connect to db");
+        }
+        $this->converter = $converter;
     }
 
     public function query($query, $limit = -1, $skip = 0)
@@ -61,6 +69,72 @@ class MySqlDbStorage extends DbStorage
             $query.=" limit ".$limit;
         }
 
+        $result = $this->mysqli->query($query);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $toSort[] = $this->converter->fromAssoc($row);
+            }
+        }
+
         return $toSort;
+    }
+    public function count($query)
+    {
+        $toSort = [];
+        $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
+        $executor = $this->queryParser->setupExecutor(new MySqlDbExecutor($this->mysqli));
+        $sqlQuery = $executor->execute(new Object());
+        $what = "*";
+        if($this->queryParser->hasGroupBy()){
+            $fields = ["count(*) as count"];
+            foreach ($this->queryParser->_groupClause as $gc){
+                $fields[]=$gc;
+            }
+            $what = join(",",$fields);
+        }
+        $orderBy = $executor->doSort($toSort);
+        $groupBy = $executor->doGroupBy($toSort);
+        $query = $sqlQuery." ".$groupBy." ".$orderBy;
+
+        $sqlQuery = "SELECT count(*) as countResult FROM (SELECT ".$what." FROM ".$this->table." ".$query.") ";
+
+        $result = $this->mysqli->query($sqlQuery);
+        $row = $result->fetch_assoc();
+        return $row['countResult'];
+    }
+    /**
+     * @param string $query
+     * @param int $limit
+     * @param int $skip
+     * @param int $count
+     * @return array|mixed
+     */
+    public function queryAndCount($query, &$count, $limit, $skip)
+    {
+        $count = $this->count($query);
+        return $this->query($query,$limit,$skip);
+    }
+    /**
+     * @param mixed $item
+     * @param bool $param
+     * @return void
+     */
+    public function save($byKey, $query,$item)
+    {
+        $data = $this->query($query);
+        $update = sizeof($data)>0;
+        $assocItem = $this->converter->toAssoc($item);
+        //UPDATE table_name SET column1 = value1, column2 = value2, ...WHERE condition
+        //INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
+    }
+    /**
+     * @param array $foundedUsers
+     * @param string|null $query
+     * @return void
+     */
+    public function delete($byKey,$query)
+    {
+
     }
 }
