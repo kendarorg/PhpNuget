@@ -76,7 +76,7 @@ class MySqlDbStorage extends DbStorage
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                $toSort[] = $this->converter->fromAssoc($row);
+                $toSort[] = $this->converter->fromAssoc($row,$this->dataType);
             }
         }
 
@@ -128,8 +128,47 @@ class MySqlDbStorage extends DbStorage
         $data = $this->query($query);
         $update = sizeof($data)>0;
         $assocItem = $this->converter->toAssoc($item);
-        //UPDATE table_name SET column1 = value1, column2 = value2, ...WHERE condition
-        //INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
+        $cols = array();
+        if($update){
+            $keys = array();
+            foreach ($assocItem as $key=>$value){
+                if(array_key_exists($key,$keys))continue;
+                if($value==null) continue;
+                if(is_string($value)){
+                    $cols[] = $key."='".$value."'";
+                }else if(is_bool($value)){
+                    $cols[] = $key."=".($value?"true":"false");
+                }else{
+                    $cols[] = $key."=".$value;
+                }
+            }
+            foreach ($byKey as $key=>$value){
+                if(is_string($value)){
+                    $keys[] = $key."='".$value."'";
+                }else if(is_bool($value)){
+                    $keys[] = $key."=".($value?"true":"false");
+                }else{
+                    $keys[] = $key."=".$value;
+                }
+            }
+            $query = "UPDATE ".$this->table." SET ".join(",",$cols)." WHERE ".join(" AND ",$keys);
+            $this->mysqli->query($query);
+        }else{
+            $vals = array();
+            foreach ($assocItem as $key=>$value){
+                if($value==null) continue;
+                $vals[] = $key;
+                if(is_string($value)){
+                    $cols[] = "'".$value."'";
+                }else if(is_bool($value)){
+                    $cols[] = ($value?"true":"false");
+                }else{
+                    $cols[] = $value;
+                }
+            }
+            $query = "INSERT INTO ".$this->table." (".join(",",$cols).") VALUES (".join(",",$vals).")";
+            $this->mysqli->query($query);
+        }
     }
     /**
      * @param array $foundedUsers
@@ -138,6 +177,17 @@ class MySqlDbStorage extends DbStorage
      */
     public function delete($byKey,$query)
     {
-
+        $keys = array();
+        foreach ($byKey as $key=>$value){
+            if(is_string($value)){
+                $keys[] = $key."='".$value."'";
+            }else if(is_bool($value)){
+                $keys[] = $key."=".($value?"true":"false");
+            }else{
+                $keys[] = $key."=".$value;
+            }
+        }
+        $query = "DELETE FROM ".$this->table." WHERE ".join(" AND ",$keys);
+        $this->mysqli->query($query);
     }
 }

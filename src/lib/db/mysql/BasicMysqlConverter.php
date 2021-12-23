@@ -4,6 +4,8 @@ namespace lib\db\mysql;
 
 use lib\nuget\models\NugetPackage;
 use lib\utils\JsonMapper;
+use ReflectionClass;
+use ReflectionProperty;
 
 class BasicMysqlConverter
 {
@@ -16,12 +18,15 @@ class BasicMysqlConverter
      */
     protected array $arrays =[];
 
-    public function fromAssoc($data)
+    public function fromAssoc($data,$result)
     {
-        $result = new NugetPackage();
+        $reflect = new ReflectionClass($data);
+        $vars = $reflect->getProperties(ReflectionProperty::IS_PRIVATE ||ReflectionProperty::IS_PUBLIC || ReflectionProperty::IS_PROTECTED);
         $mapper = new JsonMapper();
 
-        foreach ($data as $key => $value) {
+        foreach ($vars as $privateVar) {
+            $key = $privateVar->getName();
+            $value = $data[$key];
             if (in_array($key, $this->arrays)) {
                 $result->$key = json_decode($value);
             } else if (isset( $this->objects[$key])) {
@@ -39,7 +44,7 @@ class BasicMysqlConverter
     public function toAssoc($data)
     {
         $reflect = new ReflectionClass($data);
-        $vars = $reflect->getProperties(ReflectionProperty::IS_PRIVATE || ReflectionProperty::IS_PROTECTED);
+        $vars = $reflect->getProperties(ReflectionProperty::IS_PRIVATE ||ReflectionProperty::IS_PUBLIC || ReflectionProperty::IS_PROTECTED);
 
         $result = array();
         foreach ($vars as $privateVar) {
@@ -51,6 +56,11 @@ class BasicMysqlConverter
                 $result[$key] = $value;
             }
         }
+        $this->extraAssoc($result,$data);
         return $result;
+    }
+
+    public function extraAssoc(&$result,$data){
+
     }
 }
