@@ -1,7 +1,6 @@
 <?php
 require_once(dirname(__DIR__)."/vendor/autoload.php");
 
-use lib\http\Request;
 use lib\OminousFactory;
 
 $version = "v1";
@@ -21,15 +20,15 @@ $nugetDownloads = OminousFactory::getObject("nugetDownloads");
 
 $handler = null;
 if($action=="findpackagesbyd"){
-    $handler = new \lib\rest\FindPackagesById($resourcesLoader, $properties, $nugetQueryHandler,$nugetResultParser);
+    $handler = new \lib\rest\commons\FindPackagesById($resourcesLoader, $properties, $nugetQueryHandler,$nugetResultParser);
 } else if($action=="single"){
-    $handler = new \lib\rest\FindSingle($resourcesLoader, $properties, $nugetQueryHandler,$nugetResultParser);
+    $handler = new \lib\rest\commons\FindSingle($resourcesLoader, $properties, $nugetQueryHandler,$nugetResultParser);
 } else if($action=="metadata"){
-    $handler = new \lib\rest\Metadata($version);
+    $handler = new \lib\rest\commons\Metadata($version);
 } else if($action=="search"){
-    $handler = new \lib\rest\Search($resourcesLoader, $properties, $nugetQueryHandler,$nugetResultParser);
+    $handler = new \lib\rest\commons\Search($resourcesLoader, $properties, $nugetQueryHandler,$nugetResultParser);
 } else{
-    $handler = new \lib\rest\ApiRoot($properties,$nugetPackages,$nugetUsers,$nugetDownloads);
+    $handler = new \lib\rest\commons\ApiRoot($properties,$nugetPackages,$nugetUsers,$nugetDownloads);
 }
 
 $handler->handle();

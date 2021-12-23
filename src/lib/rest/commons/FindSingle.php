@@ -1,7 +1,8 @@
 <?php
 
-namespace lib\rest;
+namespace lib\rest\commons;
 
+use lib\http\BaseHandler;
 use lib\http\Request;
 use lib\rest\utils\NugetQuery;
 use lib\rest\utils\NugetQueryHandler;
@@ -11,9 +12,8 @@ use lib\rest\utils\ResourcesLoader;
 use lib\utils\HttpUtils;
 use lib\utils\Properties;
 
-class FindPackagesById
+class FindSingle extends BaseHandler
 {
-
     /**
      * @var ResourcesLoader
      */
@@ -40,6 +40,7 @@ class FindPackagesById
         $this->nugetQueryHandler = $nugetQueryHandler;
         $this->nugetResultParser = $nugetResultParser;
     }
+
     /**
      * @param Request $request
      * @return bool
@@ -47,7 +48,8 @@ class FindPackagesById
     public function catchAll($request)
     {
         $id = $request->getParam("id");
-        $query = "Id eq '".$id."' and Listed eq true orderby Id asc,Version asc";
+        $version= $request->getParam("version");
+        $query = "Id eq '".$id."' and Version eq '".$version."'";
         $nugetQuery = new NugetQuery();
         $nugetQuery->query = $query;
         $nugetQuery->pagination = (new Pagination())->buildFromRequest($request);
@@ -55,7 +57,7 @@ class FindPackagesById
         $nugetQuery->count = $request->getBoolean("count",false);
         $nugetQuery->lineCount = strtolower($request->getParam("\$inlinecount", "none"))=="allpages";
         $nugetQuery->baseUrl = HttpUtils::currentUrl("",$this->properties);
-        $nugetQuery->xmlAction = "FindPackagesById";
+        $nugetQuery->xmlAction = "FindSingle";
         $result = $this->nugetQueryHandler->query($query);
         $xml = $this->nugetResultParser->parse($result,$request);
         $this->answerString($xml,"application/xml");

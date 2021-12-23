@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\rest;
+namespace lib\rest\commons;
 
 use lib\http\BaseHandler;
 use lib\http\Request;

@@ -1,8 +1,7 @@
 <?php
 
-namespace lib\rest;
+namespace lib\rest\commons;
 
-use lib\http\BaseHandler;
 use lib\http\Request;
 use lib\rest\utils\NugetQuery;
 use lib\rest\utils\NugetQueryHandler;
@@ -12,8 +11,9 @@ use lib\rest\utils\ResourcesLoader;
 use lib\utils\HttpUtils;
 use lib\utils\Properties;
 
-class Search extends BaseHandler
+class FindPackagesById
 {
+
     /**
      * @var ResourcesLoader
      */
@@ -46,27 +46,17 @@ class Search extends BaseHandler
      */
     public function catchAll($request)
     {
+        $id = $request->getParam("id");
+        $query = "Id eq '".$id."' and Listed eq true orderby Id asc,Version asc";
         $nugetQuery = new NugetQuery();
+        $nugetQuery->query = $query;
         $nugetQuery->pagination = (new Pagination())->buildFromRequest($request);
-        $nugetQuery->xmlAction = "Search";
+        $nugetQuery->setupLatest = true;
         $nugetQuery->count = $request->getBoolean("count",false);
         $nugetQuery->lineCount = strtolower($request->getParam("\$inlinecount", "none"))=="allpages";
         $nugetQuery->baseUrl = HttpUtils::currentUrl("",$this->properties);
-
-        $nugetQuery->searchTerm = $request->getParam("searchTerm", null);
-        $nugetQuery->targetFramework = $request->getParam("targetFramework", null);
-        $nugetQuery->includePrerelease = $request->getBoolean("includePrerelease", null);
-        $nugetQuery->includePrereleaseSet = $request->getParam("includePrerelease", null)!=null;
-        $nugetQuery->filter = $request->getParam("\$filter", null);
-
-        $nugetQuery->orderby = $request->getParam("\$orderby", null);
-
-        $nugetQuery->id = $request->getParam("id", null);
-        $nugetQuery->version = $request->getParam("version", null);
-
-
-
-        $result = $this->nugetQueryHandler->search($nugetQuery);
+        $nugetQuery->xmlAction = "FindPackagesById";
+        $result = $this->nugetQueryHandler->query($query);
         $xml = $this->nugetResultParser->parse($result,$request);
         $this->answerString($xml,"application/xml");
         return true;

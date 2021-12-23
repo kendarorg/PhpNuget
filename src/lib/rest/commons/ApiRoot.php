@@ -1,12 +1,13 @@
 <?php
 
-namespace lib\rest;
+namespace lib\rest\commons;
 
 use lib\http\BaseHandler;
 use lib\http\HandlerException;
 use lib\http\Request;
 use lib\nuget\NugetPackages;
 use lib\nuget\NugetUsers;
+use lib\rest\NugetDownloads;
 use lib\utils\PathUtils;
 use lib\utils\Properties;
 use lib\utils\StringUtils;

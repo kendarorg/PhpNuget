@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\rest;
+namespace lib\rest\v2;
 
 use lib\http\BaseHandler;
 use lib\http\HandlerException;

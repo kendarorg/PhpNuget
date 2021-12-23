@@ -3,7 +3,7 @@
 require_once(__DIR__."/vendor/autoload.php");
 
 use lib\OminousFactory;
-use lib\rest\ApiRoot;
+use lib\rest\commons\ApiRoot;
 
 $properties = OminousFactory::getObject("properties");
 $nugetPackages = OminousFactory::getObject("nugetPackages");

@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\rest;
+namespace lib\rest\commons;
 
 use lib\http\BaseHandler;
 use lib\http\Request;
@@ -12,7 +12,7 @@ use lib\rest\utils\ResourcesLoader;
 use lib\utils\HttpUtils;
 use lib\utils\Properties;
 
-class FindSingle extends BaseHandler
+class Search extends BaseHandler
 {
     /**
      * @var ResourcesLoader
@@ -40,25 +40,33 @@ class FindSingle extends BaseHandler
         $this->nugetQueryHandler = $nugetQueryHandler;
         $this->nugetResultParser = $nugetResultParser;
     }
-
     /**
      * @param Request $request
      * @return bool
      */
     public function catchAll($request)
     {
-        $id = $request->getParam("id");
-        $version= $request->getParam("version");
-        $query = "Id eq '".$id."' and Version eq '".$version."'";
         $nugetQuery = new NugetQuery();
-        $nugetQuery->query = $query;
         $nugetQuery->pagination = (new Pagination())->buildFromRequest($request);
-        $nugetQuery->setupLatest = true;
+        $nugetQuery->xmlAction = "Search";
         $nugetQuery->count = $request->getBoolean("count",false);
         $nugetQuery->lineCount = strtolower($request->getParam("\$inlinecount", "none"))=="allpages";
         $nugetQuery->baseUrl = HttpUtils::currentUrl("",$this->properties);
-        $nugetQuery->xmlAction = "FindSingle";
-        $result = $this->nugetQueryHandler->query($query);
+
+        $nugetQuery->searchTerm = $request->getParam("searchTerm", null);
+        $nugetQuery->targetFramework = $request->getParam("targetFramework", null);
+        $nugetQuery->includePrerelease = $request->getBoolean("includePrerelease", null);
+        $nugetQuery->includePrereleaseSet = $request->getParam("includePrerelease", null)!=null;
+        $nugetQuery->filter = $request->getParam("\$filter", null);
+
+        $nugetQuery->orderby = $request->getParam("\$orderby", null);
+
+        $nugetQuery->id = $request->getParam("id", null);
+        $nugetQuery->version = $request->getParam("version", null);
+
+
+
+        $result = $this->nugetQueryHandler->search($nugetQuery);
         $xml = $this->nugetResultParser->parse($result,$request);
         $this->answerString($xml,"application/xml");
         return true;
