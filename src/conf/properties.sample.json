@@ -6,5 +6,6 @@
   "db.host": "localhost",
   "db.port": 3275,
   "db.user": "phpnuget",
-  "db.password": "phpnuget"
+  "db.password": "phpnuget",
+  "dbtype": "file" /* MYSQL */
 }

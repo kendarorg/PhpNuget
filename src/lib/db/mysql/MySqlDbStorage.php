@@ -40,6 +40,9 @@ class MySqlDbStorage extends DbStorage
             throw new \Exception("Unable to connect to db");
         }
         $this->converter = $converter;
+        if($converter == null){
+            $this->converter = new BasicMysqlConverter();
+        }
     }
 
     public function query($query, $limit = -1, $skip = 0)

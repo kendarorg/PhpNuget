@@ -1,21 +1,21 @@
 <?php
-
+require_once(dirname(__DIR__)."/vendor/autoload.php");
+use lib\OminousFactory;
 $version = "v2";
-$action = null;
-if(isset($_REQUEST["action"])){
-    $action = trim(strtolower($_REQUEST["action"]));
-}
+$request = new \lib\http\Request();
+$action = trim(strtolower($request->getParam("action","")));
 
-$fileName = dirname(dirname(dirname(__DIR__))).DIRECTORY_SEPARATOR."properties.json";
-$properties = new \lib\utils\Properties($fileName);
-$dbStorage = new \lib\db\file\FileDbStorage($properties);
-$nugetPackages = new \lib\nuget\NugetPackages($dbStorage);
-$resourcesLoader = new \lib\rest\utils\ResourcesLoader($version);
-$nugetQueryHandler = new \lib\rest\utils\NugetQueryHandler($nugetPackages);
-$lastQueryBuilder = new \lib\rest\utils\LastQueryBuilder();
-$nugetResultParser = new \lib\rest\utils\NugetResultParser($resourcesLoader,$lastQueryBuilder);
-$nugetUsers = new \lib\nuget\NugetUsers($dbStorage);
-$nugetDownloads = new \lib\nuget\NugetDownloads();
+OminousFactory::setObject("resourcesLoaderVersion",$version);
+
+$properties = OminousFactory::getObject("properties");
+$nugetPackages = OminousFactory::getObject("nugetPackages");
+$nugetUsers = OminousFactory::getObject("nugetUsers");
+$resourcesLoader = OminousFactory::getObject("resourcesLoader");
+$nugetQueryHandler = OminousFactory::getObject("nugetQueryHandler");
+$lastQueryBuilder = OminousFactory::getObject("lastQueryBuilder");
+$nugetResultParser = OminousFactory::getObject("nugetResultParser");
+$nugetDownloads = OminousFactory::getObject("nugetDownloads");
+
 $handler = null;
 if($action=="findpackagesbyd"){
     $handler = new \lib\rest\FindPackagesById($resourcesLoader, $properties, $nugetQueryHandler,$nugetResultParser);

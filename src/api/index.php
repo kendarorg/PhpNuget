@@ -1,11 +1,16 @@
 <?php
 
-namespace api;
+require_once(__DIR__."/vendor/autoload.php");
 
+use lib\OminousFactory;
 use lib\rest\ApiRoot;
-use lib\utils\Properties;
 
-$root = new ApiRoot();
+$properties = OminousFactory::getObject("properties");
+$nugetPackages = OminousFactory::getObject("nugetPackages");
+$nugetUsers = OminousFactory::getObject("nugetUsers");
+$nugetDownloads = OminousFactory::getObject("nugetDownloads");
+
+$root = new ApiRoot($properties,$nugetPackages,$nugetUsers,$nugetDownloads);
 $root->handle();
 
 

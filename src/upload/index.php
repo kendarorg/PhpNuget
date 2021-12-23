@@ -1,14 +1,11 @@
 <?php
+//TODO Porting
+require_once(__DIR__."/vendor/autoload.php");
+use lib\http\Request;
+use lib\utils\Properties;
 
-
-require_once(dirname(__FILE__)."/../root.php");
-require_once(__ROOT__."/settings.php");
-require_once(__ROOT__."/inc/db_users.php");
-require_once(__ROOT__."/inc/nugetreader.php");
-require_once(__ROOT__."/inc/commons/http.php");
-require_once(__ROOT__."/inc/commons/url.php");
-require_once(__ROOT__."/inc/commons/uploadutils.php");
-require_once(__ROOT__."/inc/commons/objectsearch.php");
+$request = new Request();
+$properties = new Properties();
 
 
 uplog("upload","==================================");

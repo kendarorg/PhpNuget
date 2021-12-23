@@ -13,7 +13,7 @@ class Properties
     /**
      * @param string $fileName
      */
-    public function __construct($fileName)
+    public function __construct($fileName = null)
     {
         if(self::$staticProperty!=null){
             return;
