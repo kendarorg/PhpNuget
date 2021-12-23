@@ -207,6 +207,7 @@ class ApiRootTest extends TestCase
         $nugetPackage->Id = "test";
         $nugetPackage->Version = "1.0.0";
         $nugetPackage->UserId = "132123";
+        $nugetPackage->Listed = false;
         $nugetPackages->update($nugetPackage);
 
         $nugetUsers = OminousFactory::getObject("nugetUsers");
