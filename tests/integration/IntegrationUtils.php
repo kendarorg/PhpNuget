@@ -46,6 +46,9 @@ class IntegrationUtils
     public function getRequestContent(){
         return trim($this->request->content);
     }
+    public function contentContains($data){
+        return StringUtils::indexOf(strtolower($this->request->content),strtolower($data))>=0;
+    }
     public function getRequestCode(){
         return trim($this->request->responseCode);
     }
