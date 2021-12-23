@@ -18,8 +18,9 @@ class IntegrationUtils
      */
     public  $request;
 
-    public function initializeBasic($verb){
+    public function initializeBasic($verb,$version = "v1"){
 
+        OminousFactory::setObject("resourcesLoaderVersion",$version);
         $_SERVER['REQUEST_METHOD'] = $verb;
         $path = dirname(__DIR__);
         $rootPath = PathUtils::combine($path,"data");
