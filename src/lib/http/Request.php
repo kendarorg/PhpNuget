@@ -28,8 +28,9 @@ class Request
      */
     private $data;
 
-    public function __construct()
+    public function __construct($rawContent = null,$files = array(), $extraData = array())
     {
+        $this->rawContent = null;
         $this->files = array();
         $this->extraData = array();
         $this->requestData = array();
@@ -155,10 +156,12 @@ class Request
      */
     public function initializeAsMultipart()
     {
-        $data = array();
-        new RawInputStream($data);
-        ArrayUtils::mergeLowerCase($this->files,$data['file']);
-        ArrayUtils::mergeLowerCase( $this->extraData,$data['post']);
+        if(sizeof($this->files)==0 && sizeof($this->extraData)==0) {
+            $data = array();
+            new RawInputStream($data);
+            ArrayUtils::mergeLowerCase($this->files, $data['file']);
+            ArrayUtils::mergeLowerCase($this->extraData, $data['post']);
+        }
     }
 
     /**
