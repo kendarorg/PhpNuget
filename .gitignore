@@ -170,4 +170,4 @@ pip-log.txt
 .DS_Store
 
 vendor
-tests/data/packages.json
+tests/data/*.json
