@@ -11,7 +11,7 @@ use lib\utils\StringUtils;
 use PHPUnit\Framework\TestCase;
 
 
-class ApiRootDirectFindPackage extends TestCase
+class ApiRootTest extends TestCase
 {
     private function initializeBasic($verb){
 
