@@ -9,7 +9,9 @@ use lib\db\file\MySqlDbStorage;
 use lib\db\QueryParser;
 use lib\http\Request;
 use lib\nuget\fields\mysql\NugetPackageConverter;
+use lib\nuget\NugetDownloads;
 use lib\nuget\NugetPackages;
+use lib\nuget\NugetUsers;
 use lib\rest\utils\LastQueryBuilder;
 use lib\rest\utils\NugetQueryHandler;
 use lib\rest\utils\ResourcesLoader;
@@ -79,6 +81,9 @@ class OminousFactory
         $this->generated=[];
         $this->cache["mysqli"] = function () {
             throw new \Exception("MISSINGSQLI");
+        };
+        $this->cache["nugetdownloads"] = function () {
+            return new NugetDownloads();
         };
         $this->cache["request"] = function () {
             return new Request();

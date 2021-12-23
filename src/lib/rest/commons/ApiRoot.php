@@ -108,7 +108,7 @@ class ApiRoot extends BaseHandler
     protected function httpGet($request)
     {
         $package = $this->loadPackage();
-        $file = strtolower($package->id.".".$package->version.($this->symbol?".snupkg":".nupkg"));
+        $file = strtolower($package->Id.".".$package->Version.($this->symbol?".snupkg":".nupkg"));
         $path = PathUtils::combine($this->properties->getProperty("packagesRoot"),$file);
         if(!file_exists($path)){
             throw new HandlerException("No file found", 404);

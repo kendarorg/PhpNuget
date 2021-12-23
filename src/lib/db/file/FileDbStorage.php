@@ -26,6 +26,9 @@ class FileDbStorage extends DbStorage
                 );
             }
         }
+        if($this->items == null){
+            $this->items =array();
+        }
     }
 
     /**
@@ -40,6 +43,7 @@ class FileDbStorage extends DbStorage
         $this->queryParser->parse($query, $this->dataType, $this->extraTypes);
         $this->loadData();
         $executor = $this->queryParser->setupExecutor(new FileDbExecutor());
+
         foreach ($this->items as $item) {
             if ($executor->execute($item,$this)) {
                 if ($this->queryParser->hasGroupBy() || $this->queryParser->hasOrderBy()) {

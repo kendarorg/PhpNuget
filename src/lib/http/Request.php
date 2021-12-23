@@ -9,26 +9,26 @@ class Request
     /**
      * @var array
      */
-    public $files;
+    protected $files;
     /**
      * @var string[]
      */
-    private $extraData;
+    protected $extraData;
     /**
      * @var string[]
      */
-    private $requestData;
+    protected $requestData;
 
     /**
      * @var Authorization
      */
-    public $authorization;
+    protected $authorization;
     /**
      * @var string
      */
-    private $data;
+    protected $data;
 
-    public function __construct($rawContent = null,$files = array(), $extraData = array())
+    public function __construct()
     {
         $this->rawContent = null;
         $this->files = array();
@@ -190,5 +190,26 @@ class Request
             $this->rawContent = file_get_contents("php://input");
         }
         return $this->rawContent;
+    }
+
+
+    public function header( $string)
+    {
+        header($string);
+    }
+
+    public function http_response_code( $int)
+    {
+        http_response_code($int);
+    }
+
+    public function readfile($path)
+    {
+        readfile($path);
+    }
+
+    public function show( $content)
+    {
+        echo $content;
     }
 }

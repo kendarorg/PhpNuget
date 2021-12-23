@@ -11,6 +11,10 @@ class BaseHandler
      * @var Properties
      */
     protected $properties;
+    /**
+     * @var Request
+     */
+    private $request;
 
     /**
      * @param Properties $properties
@@ -27,30 +31,30 @@ class BaseHandler
     {
         try {
 
-            $request = OminousFactory::getObject("request");
-            $this->preHandle($request);
-            if(!$this->catchAll()) {
-                if ($request->getMethod() == "put") {
-                    $this->put($request);
-                } else if ($request->getMethod() == "post") {
-                    $this->post($request);
-                } else if ($request->getMethod() == "get") {
-                    $this->httpGet($request);
-                } else if ($request->getMethod() == "delete") {
-                    $this->delete($request);
-                } else if ($request->getMethod() == "option") {
-                    $this->option($request);
+            $this->request = OminousFactory::getObject("request");
+            $this->preHandle($this->request);
+            if(!$this->catchAll($this->request)) {
+                if ($this->request->getMethod() == "put") {
+                    $this->put($this->request);
+                } else if ($this->request->getMethod() == "post") {
+                    $this->post($this->request);
+                } else if ($this->request->getMethod() == "get") {
+                    $this->httpGet($this->request);
+                } else if ($this->request->getMethod() == "delete") {
+                    $this->delete($this->request);
+                } else if ($this->request->getMethod() == "option") {
+                    $this->option($this->request);
                 }
             }
-            $this->postHandle($request);
+            $this->postHandle($this->request);
         } catch (HandlerException $ex) {
-            header('Status: ' . $ex->getCode() . ' ' . $ex->getMessage());
-            http_response_code($ex->getCode());
+            $this->request->header('Status: ' . $ex->getCode() . ' ' . $ex->getMessage());
+            $this->request->http_response_code($ex->getCode());
             if ($ex->contentType != null) {
-                header("content-type: " . $ex->contentType);
+                $this->request->header("content-type: " . $ex->contentType);
             }
-            if ($ex->content != null) {
-                echo $ex->content;
+            if ($ex->content != null || $ex->getMessage()!=null) {
+                $this->request->show( $ex->content ." ".$ex->getMessage());
             }
         }
     }
@@ -128,12 +132,12 @@ class BaseHandler
      */
     public function answerOk($content = null, $contentType = null)
     {
-        http_response_code(200);
+        $this->request->http_response_code(200);
         if ($contentType != null) {
-            header("content-type: " . $contentType);
+            $this->request->header("content-type: " . $contentType);
         }
         if ($content != null) {
-            echo $content;
+            $this->request->show($content);
         }
     }
 
@@ -144,14 +148,14 @@ class BaseHandler
      */
     public function answerFile($path, $contentType)
     {
-        http_response_code(200);
-        header('Content-Type: '.$contentType);
-        header('Content-Disposition: attachment; filename='.basename($path));
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
-        header('Content-Length: ' . filesize($path));
-        readfile($path);
+        $this->request->http_response_code(200);
+        $this->request->header('Content-Type: '.$contentType);
+        $this->request->header('Content-Disposition: attachment; filename='.basename($path));
+        $this->request->header('Expires: 0');
+        $this->request->header('Cache-Control: must-revalidate');
+        $this->request->header('Pragma: public');
+        $this->request->header('Content-Length: ' . filesize($path));
+        $this->request->readfile($path);
     }
 
     /**
@@ -161,12 +165,12 @@ class BaseHandler
      */
     public function answerString($content, $contentType)
     {
-        http_response_code(200);
-        header('Content-Type: '.$contentType);
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
-        echo $content;
+        $this->request->http_response_code(200);
+        $this->request->header('Content-Type: '.$contentType);
+        $this->request->header('Expires: 0');
+        $this->request->header('Cache-Control: must-revalidate');
+        $this->request->header('Pragma: public');
+        $this->request->show($content);
     }
 
     /**
@@ -177,13 +181,13 @@ class BaseHandler
      */
     public function answerJson($object, $prefix="",$postfix="")
     {
-        http_response_code(200);
-        header('Content-Type: application/json');
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
+        $this->request->http_response_code(200);
+        $this->request->header('Content-Type: application/json');
+        $this->request->header('Expires: 0');
+        $this->request->header('Cache-Control: must-revalidate');
+        $this->request->header('Pragma: public');
         $json = $prefix.json_encode($object).$postfix;
-        echo $json;
+        $this->request->show($json);
     }
 
     /**
