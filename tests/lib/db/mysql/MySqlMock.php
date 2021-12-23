@@ -5,6 +5,7 @@ namespace lib\db\mysql;
 class MySqlMock
 {
     private $items =array();
+    public $queries =array();
     private $index =0;
     private $itemsIndex =-1;
     public $connect_error = false;
@@ -17,6 +18,7 @@ class MySqlMock
     }
 
     public function query($query){
+        $this->queries[]=$query;
         $this->itemsIndex++;
         $this->index =0;
         $this->num_rows = sizeof($this->items[$this->itemsIndex]);
