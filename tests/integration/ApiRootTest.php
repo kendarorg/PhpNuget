@@ -6,8 +6,6 @@ use lib\nuget\models\NugetPackage;
 use lib\nuget\models\NugetUser;
 use lib\OminousFactory;
 use lib\rest\commons\ApiRoot;
-use lib\utils\PathUtils;
-use lib\utils\StringUtils;
 use PHPUnit\Framework\TestCase;
 
 
@@ -136,8 +134,8 @@ class ApiRootTest extends TestCase
         //$rawContent = null,$files = array(), $extraData = array()
         $this->utils->addRequestParams(["id"=>"test","version"=>"1.0.0","setPrerelease"=>null,"apiKey"=>"apiKey"]);
 
-        $nup = PathUtils::combine($this->utils->properties->getProperty("packagesRoot"),"test.1.0.0.snupkg");
-        file_put_contents($nup,"test");
+
+        $this->utils->addNupkgFile("test.1.0.0.snupkg");
 
 
         $nugetPackages = OminousFactory::getObject("nugetPackages");
@@ -170,8 +168,7 @@ class ApiRootTest extends TestCase
         //$rawContent = null,$files = array(), $extraData = array()
         $this->utils->addRequestParams(["id"=>"test","version"=>"1.0.0","apiKey"=>"apiKey"]);
 
-        $nup = PathUtils::combine($this->utils->properties->getProperty("packagesRoot"),"test.1.0.0.snupkg");
-        file_put_contents($nup,"test");
+        $this->utils->addNupkgFile("test.1.0.0.snupkg");
 
 
         $nugetPackages = OminousFactory::getObject("nugetPackages");
