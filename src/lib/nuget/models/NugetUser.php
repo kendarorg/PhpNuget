@@ -7,46 +7,46 @@ class NugetUser
     /**
      * @var string
      */
-    public $id;
+    public $Id;
 
     /**
      * @var bool
      */
-    public $admin;
+    public $Admin = false;
 
     /**
      * @var string
      */
-    public $userId;
+    public $UserId;
     /**
      * @var string
      */
-    public $name;
+    public $Name = "";
     /**
      * @var string
      */
-    public $company;
+    public $Company= "";
     /**
      * @var string
      */
-    public $md5Password;
+    public $Md5Password= "";
     /**
      * @var boolean
      */
-    public $enabled;
+    public $Enabled = false;
     /**
      * @var string
      */
-    public $email;
+    public $Email = "";
     /**
      * @var string
      */
-    public $gravatarUrl;
+    public $GravatarUrl = "";
     /**
      * @var string
      */
-    public $token;
+    public $Token;
 
 
-    public $packages;
+    public $Packages = "";
 }

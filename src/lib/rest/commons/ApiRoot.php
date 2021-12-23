@@ -140,11 +140,11 @@ class ApiRoot extends BaseHandler
     {
         $this->checkAuthorizations($request);
         $package = $this->loadPackage();
-        if($package->userId!=$this->user->id && !$this->user->admin){
+        if($package->UserId!=$this->user->Id && !$this->user->Admin){
             throw new HandlerException("No results found", 404);
         }
-        if(!$package->listed) {
-            $package->listed = true;
+        if(!$package->Listed) {
+            $package->Listed = true;
             $this->packages->update($package);
         }
         $this->answerOk();
@@ -159,11 +159,11 @@ class ApiRoot extends BaseHandler
     {
         $this->checkAuthorizations($request);
         $package = $this->loadPackage();
-        if($package->userId!=$this->user->id && !$this->user->admin){
+        if($package->UserId!=$this->user->Id && !$this->user->Admin){
             throw new HandlerException("No results found", 404);
         }
-        if(!$package->isPreRelease) {
-            $package->isPreRelease = $request->hasParam("setPrerelease");
+        if(!$package->IsPreRelease) {
+            $package->IsPreRelease = $request->hasParam("setPrerelease");
             $this->packages->update($package);
         }
         $this->answerOk();

@@ -8,9 +8,15 @@ class NugetPackage
      * @var boolean
      */
     public $IsSymbols = false;
+    /**
+     * @var string
+     */
     public $Id;
 
-
+    /**
+     * @var string
+     */
+    public $UserId;
 
     /**
      * @var string

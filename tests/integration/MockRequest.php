@@ -30,7 +30,7 @@ class MockRequest extends Request
         $this->content = $content;
     }
 
-    public function addExtraData(string $string, string $string1)
+    public function addExtraData( $string,  $string1)
     {
         $this->extraData[strtolower($string)] = $string1;
     }

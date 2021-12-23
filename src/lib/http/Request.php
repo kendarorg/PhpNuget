@@ -112,8 +112,8 @@ class Request
     public function hasParam($value)
     {
         $value = strtolower($value);
-        return isset($this->requestData[$value]) ||
-            isset($this->extraData[$value]);
+        return array_key_exists($value,$this->requestData) ||
+            array_key_exists($value,$this->extraData);
     }
 
     /**
