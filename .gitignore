@@ -20,6 +20,7 @@ conf/properties.json
 src/web.config
 src/ManagedFusion.Rewriter.txt
 src/data/db/*.txt
+src/data/db/*.json
 src/data/packages/*.nupkg
 src/data/packages/*.snupkg
 
