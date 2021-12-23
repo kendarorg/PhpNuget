@@ -114,7 +114,7 @@ class ApiRoot extends BaseHandler
             throw new HandlerException("No file found", 404);
         }
         $this->answerFile($path,"application/zip");
-        $this->downloads->incrementDownloads($package->id,$package->version);
+        $this->downloads->incrementDownloads($package->Id,$package->Version);
     }
 
     /**
