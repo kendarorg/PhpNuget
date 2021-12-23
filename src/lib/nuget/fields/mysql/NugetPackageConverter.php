@@ -2,11 +2,8 @@
 
 namespace lib\nuget\fields\mysql;
 
+use lib\db\mysql\BasicMysqlConverter;
 use lib\nuget\models\NugetDependency;
-use lib\nuget\models\NugetPackage;
-use lib\utils\JsonMapper;
-use ReflectionClass;
-use ReflectionProperty;
 
 class NugetPackageConverter extends BasicMysqlConverter
 {

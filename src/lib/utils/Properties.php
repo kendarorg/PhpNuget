@@ -18,7 +18,7 @@ class Properties
         if(self::$staticProperty!=null){
             return;
         }
-        if($fileName!=null) {
+        if($fileName!=null && file_exists($fileName)) {
             $content = file_get_contents($fileName);
             $properties = json_decode($content, true);
             ArrayUtils::mergeLowerCase($this->properties, $properties);
