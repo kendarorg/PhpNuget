@@ -7,6 +7,7 @@ namespace lib;
 use lib\db\file\FileDbStorage;
 use lib\db\file\MySqlDbStorage;
 use lib\db\QueryParser;
+use lib\http\Request;
 use lib\nuget\NugetPackages;
 use lib\rest\utils\LastQueryBuilder;
 use lib\rest\utils\NugetQueryHandler;
@@ -20,6 +21,8 @@ class OminousFactory
     {
         $this->cache["mysqli"] = function (){
             throw new \Exception("MISSINGSQLI");};
+        $this->cache["request"] = function (){
+            return new Request();};
         $this->cache["properties"] = function (){
             return new Properties();};
         $this->cache["nugetusers"] = function (){

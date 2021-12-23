@@ -2,6 +2,7 @@
 
 namespace lib\http;
 
+use lib\OminousFactory;
 use lib\utils\Properties;
 
 class BaseHandler
@@ -25,7 +26,8 @@ class BaseHandler
     public function handle()
     {
         try {
-            $request = new Request();
+
+            $request = OminousFactory::getObject("request");
             $this->preHandle($request);
             if(!$this->catchAll()) {
                 if ($request->getMethod() == "put") {

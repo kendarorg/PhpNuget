@@ -4,8 +4,8 @@ require_once(__DIR__."/vendor/autoload.php");
 use lib\http\Request;
 use lib\utils\Properties;
 
-$request = new Request();
-$properties = new Properties();
+$request = \lib\OminousFactory::getObject("request");
+$properties = \lib\OminousFactory::getObject("properties");
 
 require_once(dirname(__FILE__)."/root.php");
 require_once(__ROOT__."/settings.php");

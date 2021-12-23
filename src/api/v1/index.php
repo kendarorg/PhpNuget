@@ -5,7 +5,7 @@ use lib\http\Request;
 use lib\OminousFactory;
 
 $version = "v1";
-$request = new Request();
+$request = OminousFactory::getObject("request");
 $action = trim(strtolower($request->getParam("action","")));
 
 OminousFactory::setObject("resourcesLoaderVersion",$version);
