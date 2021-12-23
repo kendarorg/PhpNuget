@@ -4,6 +4,7 @@ namespace lib\utils;
 
 class Properties
 {
+    private static $staticProperty = null;
     /**
      * @var array
      */
@@ -14,11 +15,20 @@ class Properties
      */
     public function __construct($fileName)
     {
+        if(self::$staticProperty!=null){
+            return;
+        }
         if($fileName!=null) {
             $content = file_get_contents($fileName);
             $properties = json_decode($content, true);
             ArrayUtils::mergeLowerCase($this->properties, $properties);
         }
+    }
+
+    public static function initialize(string $path)
+    {
+        self::$staticProperty = new Properties($path);
+        return self::$staticProperty;
     }
 
     /**
@@ -27,9 +37,13 @@ class Properties
      * @return string|null
      */
     public function getProperty($key,$default = null){
+        $th = $this;
+        if(self::$staticProperty!=null){
+            $th=self::$staticProperty;
+        }
         $key = strtolower($key);
-        if(isset($this->properties[$key])){
-            return $this->properties[$key];
+        if(isset($th->properties[$key])){
+            return $th->properties[$key];
         }
         return $default;
     }
@@ -40,8 +54,12 @@ class Properties
      * @return void
      */
     public function setProperty($key,$value){
+        $th = $this;
+        if(self::$staticProperty!=null){
+            $th=self::$staticProperty;
+        }
         $key = strtolower($key);
-        $this->properties[$key] = $value;
+        $th->properties[$key] = $value;
     }
 
     /**
@@ -50,7 +68,11 @@ class Properties
      */
     public function hasProperty($key)
     {
+        $th = $this;
+        if(self::$staticProperty!=null){
+            $th=self::$staticProperty;
+        }
         $key = strtolower($key);
-        return isset($this->properties[$key]);
+        return isset($th->properties[$key]);
     }
 }

@@ -1,12 +1,11 @@
 <?php
-require_once(dirname(__FILE__)."/../root.php");
-require_once(__ROOT__."/settings.php");
-require_once(__ROOT__."/inc/api_users.php");
-require_once(__ROOT__."/inc/commons/url.php");
-require_once(__ROOT__."/inc/commons/http.php");
-require_once(__ROOT__."/inc/api_nuget.php");
+require_once(__DIR__."/vendor/autoload.php");
+use lib\utils\HttpUtils;
+use lib\http\Request;
 
-$q = UrlUtils::GetRequestParamOrDefault("q",null);
+$request = new Request();
+
+$q = $request->getParam("q");
 
 ?>
 <html><body>
