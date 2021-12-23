@@ -166,7 +166,7 @@ class Request
      */
     public function getJson($objectInstance){
         if($this->data == null){
-            $data = file_get_contents("php://input");
+            $data = $this->getRawContent();
             if($data==false){
                 $data = "{}";
             }
@@ -179,5 +179,13 @@ class Request
             json_decode($this->data),
             $objectInstance
         );
+    }
+
+    private $rawContent =null;
+    public function getRawContent(){
+        if($this->rawContent==null){
+            $this->rawContent = file_get_contents("php://input");
+        }
+        return $this->rawContent;
     }
 }

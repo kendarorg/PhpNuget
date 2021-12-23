@@ -129,7 +129,7 @@ class Packages extends BaseHandler
             $url = str_replace("@ID",$id,$url);
             $url = str_replace("@VERSION",$version,$url);
 
-            $nupackage = HttpUtils::getSslPage($url);
+            $nupackage = HttpUtils::download($url);
             $tempFile = PathUtils::writeTemporaryFile($nupackage);
 
             $udb = new UserDb();
