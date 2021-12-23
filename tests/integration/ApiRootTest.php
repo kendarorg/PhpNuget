@@ -13,48 +13,35 @@ use PHPUnit\Framework\TestCase;
 
 class ApiRootTest extends TestCase
 {
-    private function initializeBasic($verb){
-
-        $_SERVER['REQUEST_METHOD'] = $verb;
-        $path = dirname(__DIR__);
-        $rootPath = PathUtils::combine($path,"data");
-        foreach (glob(PathUtils::combine($rootPath,"*.json")) as $dir) {
-            unlink($dir);
-        }
-        $nupRoot = PathUtils::combine($path,"packages");
-        foreach (glob(PathUtils::combine($nupRoot,"*.*nupkg")) as $dir) {
-            unlink($dir);
-        }
-        $this->properties = OminousFactory::getObject("properties");
-        $this->properties->setProperty("databaseRoot",$rootPath);
-        $this->properties->setProperty("packagesRoot",$nupRoot);
-        $this->request = new MockRequest();
-        OminousFactory::setObject("request",$this->request);
+    public function __construct(?string $name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        $this->utils = new IntegrationUtils();
     }
 
+    private $utils;
+    
+
     public function testApiRootNotFound(){
-        $this->initializeBasic("get");
+        $this->utils->initializeBasic("get");
         //$rawContent = null,$files = array(), $extraData = array()
-        $this->request->addExtraData("id","test");
-        $this->request->addExtraData("version","1.0.0");
+        $this->utils->addRequestParams(["id"=>"test","version"=>"1.0.0"]);
 
 
         $nugetPackages = OminousFactory::getObject("nugetPackages");
         $nugetUsers = OminousFactory::getObject("nugetUsers");
         $nugetDownloads = OminousFactory::getObject("nugetDownloads");
 
-        $root = new ApiRoot($this->properties,$nugetPackages,$nugetUsers,$nugetDownloads);
+        $root = new ApiRoot($this->utils->properties,$nugetPackages,$nugetUsers,$nugetDownloads);
         $root->handle();
-        $this->assertEquals("No results found",trim($this->request->content));
-        $this->assertEquals(404,trim($this->request->responseCode));
+        $this->assertEquals("No results found",$this->utils->getRequestContent());
+        $this->assertEquals(404,$this->utils->getRequestCode());
     }
 
 
     public function testApiRootFoundPackageNoFile(){
-        $this->initializeBasic("get");
-        //$rawContent = null,$files = array(), $extraData = array()
-        $this->request->addExtraData("id","test");
-        $this->request->addExtraData("version","1.0.0");
+        $this->utils->initializeBasic("get");
+        $this->utils->addRequestParams(["id"=>"test","version"=>"1.0.0"]);
 
 
         $nugetPackages = OminousFactory::getObject("nugetPackages");
@@ -66,22 +53,19 @@ class ApiRootTest extends TestCase
         $nugetUsers = OminousFactory::getObject("nugetUsers");
         $nugetDownloads = OminousFactory::getObject("nugetDownloads");
 
-        $root = new ApiRoot($this->properties,$nugetPackages,$nugetUsers,$nugetDownloads);
+        $root = new ApiRoot($this->utils->properties,$nugetPackages,$nugetUsers,$nugetDownloads);
         $root->handle();
-        $this->assertEquals("No file found",trim($this->request->content));
-        $this->assertEquals(404,trim($this->request->responseCode));
+        $this->assertEquals("No file found",$this->utils->getRequestContent());
+        $this->assertEquals(404,$this->utils->getRequestCode());
     }
 
 
 
     public function testApiRootFoundPackageFile(){
-        $this->initializeBasic("get");
-        //$rawContent = null,$files = array(), $extraData = array()
-        $this->request->addExtraData("id","test");
-        $this->request->addExtraData("version","1.0.0");
+        $this->utils->initializeBasic("get");
+        $this->utils->addRequestParams(["id"=>"test","version"=>"1.0.0"]);
 
-        $nup = PathUtils::combine($this->properties->getProperty("packagesRoot"),"test.1.0.0.nupkg");
-        file_put_contents($nup,"test");
+        $this->utils->addNupkgFile("test.1.0.0.nupkg");
 
 
         $nugetPackages = OminousFactory::getObject("nugetPackages");
@@ -93,22 +77,18 @@ class ApiRootTest extends TestCase
         $nugetUsers = OminousFactory::getObject("nugetUsers");
         $nugetDownloads = OminousFactory::getObject("nugetDownloads");
 
-        $root = new ApiRoot($this->properties,$nugetPackages,$nugetUsers,$nugetDownloads);
+        $root = new ApiRoot($this->utils->properties,$nugetPackages,$nugetUsers,$nugetDownloads);
         $root->handle();
-        $this->assertEquals("",trim($this->request->content));
-        $this->assertEquals(200,trim($this->request->responseCode));
-        $this->assertTrue(StringUtils::endsWith($this->request->readFile,"test.1.0.0.nupkg"));
+        $this->assertEquals("",$this->utils->getRequestContent());
+        $this->assertEquals(200,$this->utils->getRequestCode());
+        $this->assertTrue($this->utils->requestFileContains("test.1.0.0.nupkg"));
     }
 
     public function testApiRootFoundPackageFileSymbol(){
-        $this->initializeBasic("get");
-        //$rawContent = null,$files = array(), $extraData = array()
-        $this->request->addExtraData("id","test");
-        $this->request->addExtraData("version","1.0.0");
-        $this->request->addExtraData("symbol","true");
+        $this->utils->initializeBasic("get");
+        $this->utils->addRequestParams(["id"=>"test","version"=>"1.0.0","symbol"=>"true"]);
 
-        $nup = PathUtils::combine($this->properties->getProperty("packagesRoot"),"test.1.0.0.snupkg");
-        file_put_contents($nup,"test");
+        $this->utils->addNupkgFile("test.1.0.0.snupkg");
 
 
         $nugetPackages = OminousFactory::getObject("nugetPackages");
@@ -120,22 +100,19 @@ class ApiRootTest extends TestCase
         $nugetUsers = OminousFactory::getObject("nugetUsers");
         $nugetDownloads = OminousFactory::getObject("nugetDownloads");
 
-        $root = new ApiRoot($this->properties,$nugetPackages,$nugetUsers,$nugetDownloads);
+        $root = new ApiRoot($this->utils->properties,$nugetPackages,$nugetUsers,$nugetDownloads);
         $root->handle();
-        $this->assertEquals("",trim($this->request->content));
-        $this->assertEquals(200,trim($this->request->responseCode));
-        $this->assertTrue(StringUtils::endsWith($this->request->readFile,"test.1.0.0.snupkg"));
+        $this->assertEquals("",$this->utils->getRequestContent());
+        $this->assertEquals(200,$this->utils->getRequestCode());
+        $this->assertTrue($this->utils->requestFileContains("test.1.0.0.snupkg"));
     }
 
     public function testApiRootFoundPackageDeleteNoUser(){
-        $this->initializeBasic("delete");
+        $this->utils->initializeBasic("delete");
         //$rawContent = null,$files = array(), $extraData = array()
-        $this->request->addExtraData("id","test");
-        $this->request->addExtraData("version","1.0.0");
-        $this->request->addExtraData("apiKey","apiKey");
+        $this->utils->addRequestParams(["id"=>"test","version"=>"1.0.0","apiKey"=>"apiKey"]);
 
-        $nup = PathUtils::combine($this->properties->getProperty("packagesRoot"),"test.1.0.0.snupkg");
-        file_put_contents($nup,"test");
+        $this->utils->addNupkgFile("test.1.0.0.snupkg");
 
 
         $nugetPackages = OminousFactory::getObject("nugetPackages");
@@ -147,22 +124,19 @@ class ApiRootTest extends TestCase
         $nugetUsers = OminousFactory::getObject("nugetUsers");
         $nugetDownloads = OminousFactory::getObject("nugetDownloads");
 
-        $root = new ApiRoot($this->properties,$nugetPackages,$nugetUsers,$nugetDownloads);
+        $root = new ApiRoot($this->utils->properties,$nugetPackages,$nugetUsers,$nugetDownloads);
         $root->handle();
-        $this->assertEquals("No results found",trim($this->request->content));
-        $this->assertEquals(404,trim($this->request->responseCode));
+        $this->assertEquals("No results found",$this->utils->getRequestContent());
+        $this->assertEquals(404,$this->utils->getRequestCode());
     }
 
 
     public function testApiRootFoundPackageDelete(){
-        $this->initializeBasic("delete");
+        $this->utils->initializeBasic("delete");
         //$rawContent = null,$files = array(), $extraData = array()
-        $this->request->addExtraData("id","test");
-        $this->request->addExtraData("version","1.0.0");
-        $this->request->addExtraData("apiKey","apiKey");
-        $this->request->addExtraData("setPrerelease",null);
+        $this->utils->addRequestParams(["id"=>"test","version"=>"1.0.0","setPrerelease"=>null,"apiKey"=>"apiKey"]);
 
-        $nup = PathUtils::combine($this->properties->getProperty("packagesRoot"),"test.1.0.0.snupkg");
+        $nup = PathUtils::combine($this->utils->properties->getProperty("packagesRoot"),"test.1.0.0.snupkg");
         file_put_contents($nup,"test");
 
 
@@ -182,23 +156,21 @@ class ApiRootTest extends TestCase
 
         $nugetDownloads = OminousFactory::getObject("nugetDownloads");
 
-        $root = new ApiRoot($this->properties,$nugetPackages,$nugetUsers,$nugetDownloads);
+        $root = new ApiRoot($this->utils->properties,$nugetPackages,$nugetUsers,$nugetDownloads);
         $root->handle();
-        $this->assertEquals("",trim($this->request->content));
-        $this->assertEquals(200,trim($this->request->responseCode));
+        $this->assertEquals("",$this->utils->getRequestContent());
+        $this->assertEquals(200,$this->utils->getRequestCode());
 
         $pack  = $nugetPackages->getByKey("test","1.0.0");
         $this->assertTrue($pack->IsPreRelease);
     }
 
     public function testApiRootFoundPackageList(){
-        $this->initializeBasic("post");
+        $this->utils->initializeBasic("post");
         //$rawContent = null,$files = array(), $extraData = array()
-        $this->request->addExtraData("id","test");
-        $this->request->addExtraData("version","1.0.0");
-        $this->request->addExtraData("apiKey","apiKey");
+        $this->utils->addRequestParams(["id"=>"test","version"=>"1.0.0","apiKey"=>"apiKey"]);
 
-        $nup = PathUtils::combine($this->properties->getProperty("packagesRoot"),"test.1.0.0.snupkg");
+        $nup = PathUtils::combine($this->utils->properties->getProperty("packagesRoot"),"test.1.0.0.snupkg");
         file_put_contents($nup,"test");
 
 
@@ -219,10 +191,10 @@ class ApiRootTest extends TestCase
 
         $nugetDownloads = OminousFactory::getObject("nugetDownloads");
 
-        $root = new ApiRoot($this->properties,$nugetPackages,$nugetUsers,$nugetDownloads);
+        $root = new ApiRoot($this->utils->properties,$nugetPackages,$nugetUsers,$nugetDownloads);
         $root->handle();
-        $this->assertEquals("",trim($this->request->content));
-        $this->assertEquals(200,trim($this->request->responseCode));
+        $this->assertEquals("",$this->utils->getRequestContent());
+        $this->assertEquals(200,$this->utils->getRequestCode());
 
         $pack  = $nugetPackages->getByKey("test","1.0.0");
         $this->assertTrue($pack->Listed);
