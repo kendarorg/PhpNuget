@@ -40,7 +40,7 @@ class FileDbStorageCRUDTest extends TestCase
         $this->resetDb();
 
         $storage = new FileDbStorage($this->properties, $this->queryParser);
-        $target = new NugetPackages($storage);
+        $target = new NugetPackages($storage,new Properties(null));
 
         $package = new NugetPackage();
         $package->Id="Pack";
@@ -52,7 +52,7 @@ class FileDbStorageCRUDTest extends TestCase
         $this->assertTrue(filesize($this->path)>10);
 
         $storage = new FileDbStorage($this->properties, $this->queryParser);
-        $target = new NugetPackages($storage);
+        $target = new NugetPackages($storage,new Properties(null));
 
         $result = $target->getByKey("Pack","1.0.0");
         $this->assertNotNull($result);
@@ -62,7 +62,7 @@ class FileDbStorageCRUDTest extends TestCase
         $this->resetDb();
 
         $storage = new FileDbStorage($this->properties, $this->queryParser);
-        $target = new NugetPackages($storage);
+        $target = new NugetPackages($storage,new Properties(null));
 
         $package = new NugetPackage();
         $package->Id="Pack";
@@ -76,12 +76,12 @@ class FileDbStorageCRUDTest extends TestCase
 
 
         $storage = new FileDbStorage($this->properties, $this->queryParser);
-        $target = new NugetPackages($storage);
+        $target = new NugetPackages($storage,new Properties(null));
 
         $target->delete("Pack","1.0.0");
 
         $storage = new FileDbStorage($this->properties, $this->queryParser);
-        $target = new NugetPackages($storage);
+        $target = new NugetPackages($storage,new Properties(null));
 
         $result = $target->getByKey("Pack","1.0.0");
         $this->assertNull($result);
@@ -91,7 +91,7 @@ class FileDbStorageCRUDTest extends TestCase
         $this->resetDb();
 
         $storage = new FileDbStorage($this->properties, $this->queryParser);
-        $target = new NugetPackages($storage);
+        $target = new NugetPackages($storage,new Properties(null));
 
         $package = new NugetPackage();
         $package->Id="Pack";
@@ -106,7 +106,7 @@ class FileDbStorageCRUDTest extends TestCase
 
 
         $storage = new FileDbStorage($this->properties, $this->queryParser);
-        $target = new NugetPackages($storage);
+        $target = new NugetPackages($storage,new Properties(null));
 
         $package = new NugetPackage();
         $package->Id="Pack";
@@ -115,7 +115,7 @@ class FileDbStorageCRUDTest extends TestCase
         $target->update($package);
 
         $storage = new FileDbStorage($this->properties, $this->queryParser);
-        $target = new NugetPackages($storage);
+        $target = new NugetPackages($storage,new Properties(null));
 
         $result = $target->getByKey("Pack","1.0.0");
         $this->assertNotNull($result);

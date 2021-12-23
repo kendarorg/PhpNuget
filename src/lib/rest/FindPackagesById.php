@@ -54,7 +54,7 @@ class FindPackagesById
         $nugetQuery->setupLatest = true;
         $nugetQuery->count = $request->getBoolean("count",false);
         $nugetQuery->lineCount = strtolower($request->getParam("\$inlinecount", "none"))=="allpages";
-        $nugetQuery->baseUrl = HttpUtils::currentUrl($this->properties->getProperty("siteRoot"),$this->properties);
+        $nugetQuery->baseUrl = HttpUtils::currentUrl("",$this->properties);
         $nugetQuery->xmlAction = "FindPackagesById";
         $result = $this->nugetQueryHandler->query($query);
         $xml = $this->nugetResultParser->parse($result,$request);

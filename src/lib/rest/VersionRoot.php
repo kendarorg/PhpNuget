@@ -30,7 +30,7 @@ class VersionRoot extends BaseHandler
      */
     public function catchAll($request){
         $replacements = array();
-        $replacements["@Base@"] = trim(UrlUtils::CurrentUrl(Settings::$SiteRoot,$this->properties),"/");
+        $replacements["@Base@"] = trim(UrlUtils::CurrentUrl("",$this->properties),"/");
         $root = $this->resourcesLoader->getResource($replacements,"root.xml");
     }
 }

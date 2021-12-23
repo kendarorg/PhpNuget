@@ -43,10 +43,11 @@ class HttpUtils
 
         $pageURL .= "://";
         if($requestUri==""){
-            $requestUri = $_SERVER["REQUEST_URI"];
-            if($properties->hasProperty("siteRoot")){
-                $requestUri = $properties->getProperty("siteRoot");
-            }
+            $requestUri = $properties->getProperty("siteRoot",$_SERVER["REQUEST_URI"]);
+        }else{
+            $rootUri = rtrim($properties->getProperty("siteRoot",$_SERVER["REQUEST_URI"]),"\\/");
+            $requestUri = $rootUri."/".ltrim($requestUri,"\\/");
+
         }
         $requestUri = trim($requestUri,"\\/");
         if ($_SERVER["SERVER_PORT"] != "80" && !$isHttps ) {

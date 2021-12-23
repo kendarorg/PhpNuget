@@ -5,12 +5,20 @@ namespace lib\nuget;
 use lib\nuget\models\NugetDependency;
 use lib\nuget\models\NugetDependencyGroup;
 use lib\nuget\models\NugetPackage;
+use lib\utils\HttpUtils;
 use lib\utils\StringUtils;
 use lib\utils\XmlUtils;
 use lib\utils\ZipManager;
 
 class NugetFileParser
 {
+    private $properties;
+
+    public function __construct($properties)
+    {
+        $this->properties = $properties;
+    }
+
     public function loadNupkg($nupkgFile){
         $zipmanager = new ZipManager($nupkgFile);
         $files = $zipmanager->GenerateInfos();
@@ -88,7 +96,7 @@ class NugetFileParser
         if(array_key_exists("licenseurl",$m))$e->LicenseUrl = $m["licenseurl"];
         if(array_key_exists("releasenotes",$m))$e->ReleaseNotes = $m["releasenotes"];
         if(array_key_exists("iconurl",$m))$e->IconUrl = $m["iconurl"];
-        else $e->IconUrl = UrlUtils::CurrentUrl(Settings::$SiteRoot."content/packagedefaulticon-50x50.png");
+        else $e->IconUrl = HttpUtils::currentUrl("content/packagedefaulticon-50x50.png",$this->properties);
         if(array_key_exists("projecturl",$m))$e->ProjectUrl = $m["projecturl"];
         if(array_key_exists("requirelicenseacceptance",$m))$e->RequireLicenseAcceptance = $m["requirelicenseacceptance"];
         if(array_key_exists("description",$m))$e->Description = $m["description"];

@@ -51,7 +51,7 @@ class Search extends BaseHandler
         $nugetQuery->xmlAction = "Search";
         $nugetQuery->count = $request->getBoolean("count",false);
         $nugetQuery->lineCount = strtolower($request->getParam("\$inlinecount", "none"))=="allpages";
-        $nugetQuery->baseUrl = HttpUtils::currentUrl($this->properties->getProperty("siteRoot"),$this->properties);
+        $nugetQuery->baseUrl = HttpUtils::currentUrl("",$this->properties);
 
         $nugetQuery->searchTerm = $request->getParam("searchTerm", null);
         $nugetQuery->targetFramework = $request->getParam("targetFramework", null);

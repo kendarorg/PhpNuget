@@ -8,19 +8,23 @@ use lib\nuget\fields\file\FileArraysCompositeField;
 use lib\nuget\fields\file\FileDependencyCompositeField;
 use lib\nuget\fields\file\FileNugetVersionType;
 use lib\nuget\models\NugetPackage;
+use lib\utils\HttpUtils;
 use lib\utils\StringUtils;
 
 class NugetPackages extends BaseDb
 {
+    private $properties;
+
     /**
      * @param DbStorage $dbStorage
      */
-    public function __construct($dbStorage)
+    public function __construct($dbStorage,$properties)
     {
         $keys = ["Id", "Version"];
         $extraTypes = [new FileNugetVersionType(), new FileArraysCompositeField(), new FileDependencyCompositeField()];
         $object = new NugetPackage();
         parent::__construct($dbStorage, "packages", $keys, $extraTypes, $object);
+        $this->properties = $properties;
     }
 
     /**
@@ -68,7 +72,7 @@ class NugetPackages extends BaseDb
     private function postQuery(&$row)
     {
         if (StringUtils::endsWith(strtolower($row->IconUrl), strtolower("packagedefaulticon-50x50.png"))) {
-            $row->IconUrl = UrlUtils::CurrentUrl(Settings::$SiteRoot . "content/packagedefaulticon-50x50.png");
+            $row->IconUrl = HttpUtils::currentUrl("content/packagedefaulticon-50x50.png",$this->properties);
         }
     }
 }

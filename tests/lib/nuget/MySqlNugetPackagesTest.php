@@ -19,7 +19,7 @@ class MySqlNugetPackagesTest extends TestCase
         $this->converter = new NugetPackageConverter();
         $this->mysqlDbStorage = new MySqlDbStorage($this->properties, $this->queryParser,
             null, $this->mysqli, $this->converter);
-        $this->target = new NugetPackages($this->mysqlDbStorage);
+        $this->target = new NugetPackages($this->mysqlDbStorage,$this->properties);
     }
 
     public function testEmptyResult()
