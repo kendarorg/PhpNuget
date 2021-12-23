@@ -7,5 +7,5 @@
   "db.port": 3275,
   "db.user": "phpnuget",
   "db.password": "phpnuget",
-  "dbtype": "file" /* MYSQL */
+  "dbtype": "file" /* mysql */
 }

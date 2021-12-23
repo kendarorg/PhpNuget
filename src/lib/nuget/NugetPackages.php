@@ -7,6 +7,7 @@ use lib\db\DbStorage;
 use lib\nuget\fields\file\FileArraysCompositeField;
 use lib\nuget\fields\file\FileDependencyCompositeField;
 use lib\nuget\fields\file\FileNugetVersionType;
+use lib\nuget\fields\file\MySqlNugetVersionType;
 use lib\nuget\models\NugetPackage;
 use lib\utils\HttpUtils;
 use lib\utils\StringUtils;
@@ -21,7 +22,12 @@ class NugetPackages extends BaseDb
     public function __construct($dbStorage,$properties)
     {
         $keys = ["Id", "Version"];
+        $dbType = $properties->getProperty("dbType","file");
         $extraTypes = [new FileNugetVersionType(), new FileArraysCompositeField(), new FileDependencyCompositeField()];
+        if($dbType=="mysql"){
+            $extraTypes = [new MySqlNugetVersionType()];
+        }
+
         $object = new NugetPackage();
         parent::__construct($dbStorage, "packages", $keys, $extraTypes, $object);
         $this->properties = $properties;

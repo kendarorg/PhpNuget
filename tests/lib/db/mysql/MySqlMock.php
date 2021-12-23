@@ -18,7 +18,7 @@ class MySqlMock
     }
 
     public function query($query){
-        $this->queries[]=$query;
+        $this->queries[]=trim($query);
         $this->itemsIndex++;
         $this->index =0;
         $this->num_rows = sizeof($this->items[$this->itemsIndex]);

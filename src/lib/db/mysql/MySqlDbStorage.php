@@ -133,7 +133,7 @@ class MySqlDbStorage extends DbStorage
             $keys = array();
             foreach ($assocItem as $key=>$value){
                 if(array_key_exists($key,$keys))continue;
-                if($value==null) continue;
+                if($value===null) continue;
                 if(is_string($value)){
                     $cols[] = $key."='".$value."'";
                 }else if(is_bool($value)){
@@ -156,7 +156,7 @@ class MySqlDbStorage extends DbStorage
         }else{
             $vals = array();
             foreach ($assocItem as $key=>$value){
-                if($value==null) continue;
+                if($value===null) continue;
                 $vals[] = $key;
                 if(is_string($value)){
                     $cols[] = "'".$value."'";

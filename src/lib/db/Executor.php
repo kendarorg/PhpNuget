@@ -85,7 +85,7 @@ class Executor
         }else if($this->isExternalType($v)>=0){
             return $parseTreeItem;
         }else{
-            throw new ParserException("Token '".$t."' not supported excuting (2)");
+            throw new \Exception("Token '".$t."' not supported excuting (2)");
         }
         return $result;
     }

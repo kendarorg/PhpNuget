@@ -10,26 +10,7 @@ class NugetPackage
     public $IsSymbols = false;
     public $Id;
 
-    /**
-     * @var integer
-     */
-    public $Version0 = 0;
-    /**
-     * @var integer
-     */
-    public $Version1 = 0;
-    /**
-     * @var integer
-     */
-    public $Version2 = 0;
-    /**
-     * @var integer
-     */
-    public $Version3 = 0;
-    /**
-     * @var string
-     */
-    public $VersionBeta = "";
+
 
     /**
      * @var string

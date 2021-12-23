@@ -20,20 +20,33 @@ class BasicMysqlConverter
 
     public function fromAssoc($data,$result)
     {
-        $reflect = new ReflectionClass($data);
+        $reflect = new ReflectionClass($result);
         $vars = $reflect->getProperties(ReflectionProperty::IS_PRIVATE ||ReflectionProperty::IS_PUBLIC || ReflectionProperty::IS_PROTECTED);
         $mapper = new JsonMapper();
 
         foreach ($vars as $privateVar) {
             $key = $privateVar->getName();
+            if(!isset($data[$key]))continue;
             $value = $data[$key];
             if (in_array($key, $this->arrays)) {
                 $result->$key = json_decode($value);
             } else if (isset( $this->objects[$key])) {
-                $result->$key = $mapper->map(
-                    json_decode($value),
-                    $this->objects[$key]
-                );
+                $data = json_decode($value);
+                if(is_array($data)){
+                    $partial = [];
+                    foreach ($data as $dt){
+                        $partial[]= $mapper->map(
+                            $dt,
+                            $this->objects[$key]
+                        );
+                    }
+                    $result->$key = $partial;
+                }else {
+                    $result->$key = $mapper->map(
+                        $data,
+                        $this->objects[$key]
+                    );
+                }
             } else {
                 $result->$key = $value;
             }
