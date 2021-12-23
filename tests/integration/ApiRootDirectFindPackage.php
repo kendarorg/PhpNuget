@@ -61,6 +61,7 @@ class ApiRootDirectFindPackage extends TestCase
         $nugetPackage = new NugetPackage();
         $nugetPackage->Id = "test";
         $nugetPackage->Version = "1.0.0";
+        $nugetPackage->UserId = "132123";
         $nugetPackages->update($nugetPackage);
         $nugetUsers = OminousFactory::getObject("nugetUsers");
         $nugetDownloads = OminousFactory::getObject("nugetDownloads");
@@ -87,6 +88,7 @@ class ApiRootDirectFindPackage extends TestCase
         $nugetPackage = new NugetPackage();
         $nugetPackage->Id = "test";
         $nugetPackage->Version = "1.0.0";
+        $nugetPackage->UserId = "132123";
         $nugetPackages->update($nugetPackage);
         $nugetUsers = OminousFactory::getObject("nugetUsers");
         $nugetDownloads = OminousFactory::getObject("nugetDownloads");
@@ -113,6 +115,7 @@ class ApiRootDirectFindPackage extends TestCase
         $nugetPackage = new NugetPackage();
         $nugetPackage->Id = "test";
         $nugetPackage->Version = "1.0.0";
+        $nugetPackage->UserId = "132123";
         $nugetPackages->update($nugetPackage);
         $nugetUsers = OminousFactory::getObject("nugetUsers");
         $nugetDownloads = OminousFactory::getObject("nugetDownloads");
@@ -139,6 +142,7 @@ class ApiRootDirectFindPackage extends TestCase
         $nugetPackage = new NugetPackage();
         $nugetPackage->Id = "test";
         $nugetPackage->Version = "1.0.0";
+        $nugetPackage->UserId = "132123";
         $nugetPackages->update($nugetPackage);
         $nugetUsers = OminousFactory::getObject("nugetUsers");
         $nugetDownloads = OminousFactory::getObject("nugetDownloads");

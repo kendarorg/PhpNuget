@@ -45,6 +45,7 @@ class FileDbStorageCRUDTest extends TestCase
         $package = new NugetPackage();
         $package->Id="Pack";
         $package->Version = "1.0.0";
+        $package->UserId = "132123";
 
         $target->update($package);
 
@@ -67,11 +68,13 @@ class FileDbStorageCRUDTest extends TestCase
         $package = new NugetPackage();
         $package->Id="Pack";
         $package->Version = "1.0.0";
+        $package->UserId = "132123";
         $target->update($package);
 
         $package = new NugetPackage();
         $package->Id="Pack2";
         $package->Version = "1.0.0";
+        $package->UserId = "132123";
         $target->update($package);
 
 
@@ -97,11 +100,13 @@ class FileDbStorageCRUDTest extends TestCase
         $package->Id="Pack";
         $package->Version = "1.0.0";
         $package->Description = "description";
+        $package->UserId = "132123";
         $target->update($package);
 
         $package = new NugetPackage();
         $package->Id="Pack2";
         $package->Version = "1.0.0";
+        $package->UserId = "132123";
         $target->update($package);
 
 
@@ -111,6 +116,7 @@ class FileDbStorageCRUDTest extends TestCase
         $package = new NugetPackage();
         $package->Id="Pack";
         $package->Version = "1.0.0";
+        $package->UserId = "132123";
         $package->Description = "changed";
         $target->update($package);
 
