@@ -16,6 +16,7 @@ use lib\rest\utils\LastQueryBuilder;
 use lib\rest\utils\NugetQueryHandler;
 use lib\rest\utils\ResourcesLoader;
 use lib\utils\Properties;
+use lib\rest\utils\NugetResultParser;
 
 class OminousFactory
 {
@@ -28,6 +29,7 @@ class OminousFactory
     public $cache = array();
     public $generated = array();
     public static function getObject($name){
+        $name = strtolower($name);
         if(self::$instance==null){
             self::$instance = new OminousFactory();
         }
@@ -51,6 +53,7 @@ class OminousFactory
 
     public static function setObject( $name, $value)
     {
+        $name = strtolower($name);
         if(self::$instance==null){
             self::$instance = new OminousFactory();
         }
@@ -72,6 +75,10 @@ class OminousFactory
     }
 
 
+    private function addCache($name,$func){
+        $name =strtolower($name);
+        $this->cache[$name] = $func;
+    }
     /**
      * @return void
      */
@@ -79,22 +86,22 @@ class OminousFactory
     {
         $this->cache=[];
         $this->generated=[];
-        $this->cache["mysqli"] = function () {
+        $this->addCache("mysqli", function () {
             throw new \Exception("MISSINGSQLI");
-        };
-        $this->cache["nugetdownloads"] = function () {
+        });
+        $this->addCache("nugetdownloads", function () {
             return new NugetDownloads();
-        };
-        $this->cache["request"] = function () {
+        });
+        $this->addCache("request",function () {
             return new Request();
-        };
-        $this->cache["properties"] = function () {
+        });
+        $this->addCache("properties", function () {
             return new Properties();
-        };
-        $this->cache["nugetusers"] = function () {
+        });
+        $this->addCache("nugetusers",function () {
             return new NugetUsers(self::getObject("nugetusersstorage"));
-        };
-        $this->cache["nugetusersstorage"] = function () {
+        });
+        $this->addCache("nugetusersstorage",function () {
             $properties = self::getObject("properties");
             $dbType = $properties->getProperty("dbtype", "file");
             if ($dbType == "mysql") {
@@ -102,11 +109,11 @@ class OminousFactory
             } else {
                 return new FileDbStorage($properties, new QueryParser());
             }
-        };
-        $this->cache["nugetpackages"] = function () {
+        });
+        $this->addCache("nugetpackages", function () {
             return new NugetPackages(self::getObject("nugetpackagesstorage"), self::getObject("properties"));
-        };
-        $this->cache["nugetpackagesstorage"] = function () {
+        });
+        $this->addCache("nugetpackagesstorage", function () {
             $properties = self::getObject("properties");
             $dbType = $properties->getProperty("dbtype", "file");
             if ($dbType == "mysql") {
@@ -114,18 +121,18 @@ class OminousFactory
             } else {
                 return new FileDbStorage($properties, new QueryParser());
             }
-        };
-        $this->cache["resourcesloader"] = function () {
+        });
+        $this->addCache("resourcesloader", function () {
             return new ResourcesLoader(self::getObject('resourcesLoaderVersion'));
-        };
-        $this->cache["nugetqueryhandler"] = function () {
+        });
+        $this->addCache("nugetqueryhandler", function () {
             return new NugetQueryHandler(self::getObject("nugetpackages"));
-        };
-        $this->cache["lastquerybuilder"] = function () {
+        });
+        $this->addCache("lastquerybuilder", function () {
             return new LastQueryBuilder();
-        };
-        $this->cache["nugetresultparser"] = function () {
+        });
+        $this->addCache("nugetresultparser", function () {
             return new NugetResultParser(self::getObject("resourcesloader"), self::getObject("lastquerybuilder"));
-        };
+        });
     }
 }
