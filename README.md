@@ -319,9 +319,13 @@ Or when settings the address
 		--publish 443:443 \
 		--publish 9003:9003 \
 		--restart unless-stopped \
-		--volume src:/htdocs \
+		--volume $(pwd)/src:/htdocs \
 		--env ROOT_PWD="root" \
 		phpnuget:latest
+
+Or for windows:
+	
+	docker run --detach  --name phpnuget  --hostname phpnuget.local  --env HTTP_SERVER_NAME="www.phpnuget.xyz"  --env HTTPS_SERVER_NAME="www.phpnuget.xyz"  --env SERVER_ADMIN="admin@phpnuget.xyz"  --env TZ="Europe/Paris"  --env PHP_MEMORY_LIMIT="512M"  --publish 80:80  --publish 443:443  --publish 9003:9003  --restart unless-stopped  --volume %cd%/src:/htdocs  --env ROOT_PWD="root"  phpnuget:latest
 
 Then you can go on the following address and start nugetting!
 
