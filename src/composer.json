@@ -1,14 +1,12 @@
 {
-	"repositories": [
-	{
-		"packagist": false
-	},
-	{
-		"type": "composer",
-		"url": "https://packagist.org/"
-	}
-	],
-    "require": {
-		"forxer/Gravatar": "~2.0"
-	}
+  "require": {
+    "phpunit/phpunit": "9.*"
+  },
+  "autoload": {
+    "classmap": [
+      "../src/",
+      "../tests/"
+    ],
+    "files": ["../src/settings.php"]
+  }
 }

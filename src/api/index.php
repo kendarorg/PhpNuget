@@ -1,4 +1,21 @@
 <?php
+
+require_once(dirname(__DIR__)."/vendor/autoload.php");
+
+use lib\OminousFactory;
+use lib\rest\commons\ApiRoot;
+
+$properties = OminousFactory::getObject("properties");
+$nugetPackages = OminousFactory::getObject("nugetPackages");
+$nugetUsers = OminousFactory::getObject("nugetUsers");
+$nugetDownloads = OminousFactory::getObject("nugetDownloads");
+
+$root = new ApiRoot($properties,$nugetPackages,$nugetUsers,$nugetDownloads);
+$root->handle();
+
+
+/*
+
 require_once(dirname(__FILE__)."/../root.php");
 require_once(__ROOT__."/settings.php");
 require_once(__ROOT__."/inc/api_users.php");
@@ -94,3 +111,4 @@ header('Cache-Control: must-revalidate');
 header('Pragma: public');
 header('Content-Length: ' . filesize($path));
 readfile($path);
+*/

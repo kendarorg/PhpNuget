@@ -1,4 +1,5 @@
 <?php
+require_once(dirname(__DIR__,2)."/vendor/autoload.php");
 
 $destination = "http://localhost:8020/phpnuget/api/v2/\$batch";
  

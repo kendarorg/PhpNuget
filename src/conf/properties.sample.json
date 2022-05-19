@@ -1,0 +1,11 @@
+{
+  "packagesRoot": "/var/phpNuget/data/packages",
+  "databaseRoot": "/var/phpNuget/data/db",
+  "siteRoot": "/phpnuget/",
+  "db.name": "phpnuget",
+  "db.host": "localhost",
+  "db.port": 3275,
+  "db.user": "phpnuget",
+  "db.password": "phpnuget",
+  "dbtype": "file" /* mysql */
+}

@@ -1,5 +1,14 @@
 <?php
+require_once(dirname(__DIR__,2)."/vendor/autoload.php");
 
+use lib\OminousFactory;
+
+$properties = OminousFactory::getObject("properties");
+
+$batch = new \lib\rest\v2\Batch($properties);
+$batch->handle();
+
+/*
 require_once(dirname(__FILE__)."/../../root.php");
 require_once(__ROOT__."/settings.php");
 require_once(__ROOT__."/inc/api_users.php");
@@ -178,9 +187,9 @@ class Batcher
 		// read incoming data
 		$input = file_get_contents('php://input');
 		
-		/*var_dump($input);
-		flush();
-		die();*/
+		//var_dump($input);
+		//flush();
+		//die();
 		
 
 		// grab multipart boundary from content type header
@@ -265,5 +274,5 @@ $result[1]->ResultStatus=500;
 $elab = $b->Elaborate($result);
 var_dump($elab);
 }
-
+*/
 ?>

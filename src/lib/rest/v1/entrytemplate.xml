@@ -1,0 +1,52 @@
+
+<entry>
+        <id>${BASEURL}/api/?id=${NUSPEC.ID}_${NUSPEC.VERSION}</id>
+        <category term="NuGetGallery.V1FeedPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+        <link rel="edit" title="V1FeedPackage" href="Packages(Id='${NUSPEC.ID}',Version='${NUSPEC.VERSION}')" />
+        <title type="text">${NUSPEC.ID}</title>
+        <summary type="text">${NUSPEC.ID}</summary>
+        <updated>${DB.UPDATED}</updated>
+        <author>
+            ${NUSPEC.AUTHOR}
+        </author>
+        <link rel="edit-media" title="V1FeedPackage" href="Packages(Id='${NUSPEC.ID}',Version='${NUSPEC.VERSION}')/$value" />
+        <content type="application/zip" src="${BASEURL}/api/v1/package/${NUSPEC.ID}/${NUSPEC.VERSION}" />
+        <m:properties>
+            <d:Version>${NUSPEC.VERSION}</d:Version>
+            <d:Title>${NUSPEC.TITLE}</d:Title>
+      <d:Dependencies>${NUSPEC.DEPENDENCIES}</d:Dependencies>
+      <d:LicenseUrl>${NUSPEC.LICENSEURL}</d:LicenseUrl>
+      <d:Copyright m:null="true">${DB.COPYRIGHT}</d:Copyright>
+            <d:DownloadCount m:type="Edm.Int32">${DB.DOWNLOADCOUNT}</d:DownloadCount>
+      <d:ProjectUrl>${NUSPEC.PROJECTURL}</d:ProjectUrl>
+            <d:RequireLicenseAcceptance m:type="Edm.Boolean">${NUSPEC.REQUIRELICENSEACCEPTANCE}</d:RequireLicenseAcceptance>
+      <d:Description>${NUSPEC.DESCRIPTION}</d:Description>
+      <d:ReleaseNotes m:null="true"></d:ReleaseNotes>
+      <d:PackageHash>${DB.PACKAGEHASH}</d:PackageHash>
+      <d:PackageHashAlgorithm>${DB.PACKAGEHASHALGORITHM}</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">${DB.PACKAGESIZE}</d:PackageSize>
+      <d:Published m:type="Edm.DateTime">${DB.PUBLISHED}</d:Published>
+      <d:Tags xml:space="preserve"> ${NUSPEC.TAGS} </d:Tags>
+      <d:IsLatestVersion m:type="Edm.Boolean">${DB.ISLATESTVERSION}</d:IsLatestVersion>
+      <d:VersionDownloadCount m:type="Edm.Int32">${DB.VERSIONDOWNLOADCOUNT}</d:VersionDownloadCount>
+      <d:Summary m:null="true"></d:Summary>
+            <d:ExternalPackageUrl m:null="true" />
+            <d:GalleryDetailsUrl>${BASEURL}/?specialType=singlePackage&amp;id=${NUSPEC.ID}&amp;version=${NUSPEC.VERSION}</d:GalleryDetailsUrl>
+            <d:IconUrl m:null="true"></d:IconUrl>
+            <d:Language m:null="true" />
+            <d:LastUpdated m:type="Edm.DateTime">2014-08-27T02:04:10.813</d:LastUpdated>
+            <d:ReportAbuseUrl></d:ReportAbuseUrl>
+            <d:RatingsCount m:type="Edm.Int32">0</d:RatingsCount>
+            <d:VersionRatingsCount m:type="Edm.Int32">0</d:VersionRatingsCount>
+            <d:Rating m:type="Edm.Double">0</d:Rating>
+            <d:VersionRating m:type="Edm.Double">0</d:VersionRating>
+            <d:Categories></d:Categories>
+			<d:Prerelease m:type="Edm.Boolean">${DB.ISPRERELEASE}</d:Prerelease>
+            <d:PackageType>Package</d:PackageType>
+            <d:Price m:type="Edm.Decimal">0</d:Price>
+            <d:Prerelease m:type="Edm.Boolean">false</d:Prerelease>
+            <d:Id>${NUSPEC.ID}</d:Id>
+            <d:Created m:type="Edm.DateTime">2014-07-31T19:23:01.403</d:Created>
+<d:Authors>${NUSPEC.AUTHORS}</d:Authors>
+        </m:properties>
+    </entry>

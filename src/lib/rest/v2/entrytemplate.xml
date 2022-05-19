@@ -1,0 +1,41 @@
+  <entry>
+    <id>${BASEURL}/api/v2/Packages(Id='${NUSPEC.ID}',Version='${NUSPEC.VERSION}')</id>
+    <category term="NuGetGallery.V2FeedPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <link rel="edit" title="V2FeedPackage" href="Packages(Id='${NUSPEC.ID}',Version='${NUSPEC.VERSION}')" />
+    <title type="text">${NUSPEC.ID}</title>
+    <summary type="text">${NUSPEC.ID}</summary>
+    <updated>${DB.UPDATED}</updated>
+    <author>
+      ${NUSPEC.AUTHOR}
+    </author>
+    <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='${NUSPEC.ID}',Version='${NUSPEC.VERSION}')/$value" />
+    <content type="application/zip" src="${BASEURL}/api/v2/package/${NUSPEC.ID}/${NUSPEC.VERSION}" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>${NUSPEC.VERSION}</d:Version>
+      <d:Title>${NUSPEC.TITLE}</d:Title>
+      <d:Dependencies>${NUSPEC.DEPENDENCIES}</d:Dependencies>
+      <d:LicenseUrl>${NUSPEC.LICENSEURL}</d:LicenseUrl>
+      <d:Language m:null="true" />
+    <d:LastEdited m:type="Edm.DateTime" m:null="true" />
+    <d:LicenseNames m:null="true" />
+    <d:LicenseReportUrl m:null="true" />
+      <d:Copyright>${DB.COPYRIGHT}</d:Copyright>
+      <d:DownloadCount m:type="Edm.Int32">${DB.DOWNLOADCOUNT}</d:DownloadCount>
+      <d:ProjectUrl>${NUSPEC.PROJECTURL}</d:ProjectUrl>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">${NUSPEC.REQUIRELICENSEACCEPTANCE}</d:RequireLicenseAcceptance>
+	  <d:GalleryDetailsUrl>${BASEURL}/?specialType=singlePackage&amp;id=${NUSPEC.ID}&amp;version=${NUSPEC.VERSION}</d:GalleryDetailsUrl>
+      <d:Description>${NUSPEC.DESCRIPTION}</d:Description>
+      <d:ReleaseNotes>${NUSPEC.RELEASENOTES}</d:ReleaseNotes>
+      <d:PackageHash>${DB.PACKAGEHASH}</d:PackageHash>
+      <d:IsPrerelease m:type="Edm.Boolean">${DB.ISPRERELEASE}</d:IsPrerelease>
+      <d:PackageHashAlgorithm>${DB.PACKAGEHASHALGORITHM}</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">${DB.PACKAGESIZE}</d:PackageSize>
+      <d:Published m:type="Edm.DateTime">${DB.PUBLISHED}</d:Published>
+      <d:Tags xml:space="preserve"> ${NUSPEC.TAGS} </d:Tags>
+      <d:IsLatestVersion m:type="Edm.Boolean">${DB.ISLATESTVERSION}</d:IsLatestVersion>
+      <d:VersionDownloadCount m:type="Edm.Int32">${DB.VERSIONDOWNLOADCOUNT}</d:VersionDownloadCount>
+      <d:Summary>${NUSPEC.SUMMARY}</d:Summary>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">${DB.ISABSOLUTELATESTVERSION}</d:IsAbsoluteLatestVersion>
+      <d:IconUrl></d:IconUrl>
+    </m:properties>
+  </entry>

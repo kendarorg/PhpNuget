@@ -1,0 +1,160 @@
+<?php
+
+namespace lib\db;
+
+use lib\utils\Properties;
+
+class BaseDb
+{
+    /**
+     * @var DbStorage
+     */
+    protected $storage;
+    /**
+     * @var string
+     */
+    protected $table;
+
+    /**
+     * @var string[]
+     */
+    protected $keys;
+    protected $extraTypes;
+
+    /**
+     * @var mixed
+     */
+    protected $dataType;
+
+    /**
+     * @param DbStorage $storage
+     * @param string $table
+     * @param string[] $keys
+     */
+    public function __construct($storage, $table, $keys, $extraTypes, $dataType)
+    {
+        $storage->initialize($keys, $extraTypes, $dataType,$table);
+        $this->storage = $storage;
+        $this->table = $table;
+        $this->keys = $keys;
+        $this->extraTypes = $extraTypes;
+        $this->dataType = $dataType;
+    }
+
+    /**
+     * @param string $query
+     * @param integer $limit
+     * @param integer $skip
+     * @return array
+     */
+    public function query($query, $limit = -1, $skip = 0)
+    {
+        return $this->storage->query($query, $limit, $skip);
+    }
+
+    /**
+     * @param string $query
+     * @param integer $limit
+     * @param integer $skip
+     * @return array
+     */
+    public function count($query)
+    {
+        return $this->storage->count($query);
+    }
+
+    /**
+     * @param string $query
+     * @param integer $count
+     * @param integer $limit
+     * @param integer $skip
+     * @return array
+     */
+    public function queryAndCount($query, &$count, $limit = -1, $skip = 0)
+    {
+        return $this->storage->queryAndCount($query, $count, $limit, $skip);
+    }
+
+    /**
+     * @param mixed $item
+     * @return void
+     */
+    public function update($item)
+    {
+        $byKey = array();
+        $args = array();
+        foreach ($this->keys as $key) {
+            $byKey[$key] = $item->$key;
+            $args[] = $byKey[$key];
+        }
+
+        $query = $this->buildByKeyQuery($args);
+        $this->storage->save($byKey, $query,$item);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function buildByKeyQuery()
+    {
+        $args = func_get_args();
+        if (sizeof($args) == 0) return null;
+        $keyValues = array();
+        if (is_array($args[0])) {
+            $keyValues = $args[0];
+        } else {
+            $keyValues = $args;
+        }
+        $byKey = array();
+        for ($i = 0; $i < sizeof($this->keys); $i++) {
+            $key = $this->keys[$i];
+            $value = $keyValues[$i];
+            if (is_string($value)) {
+                $byKey[] = "(" . $key . " eq '" . $value . "'" . ")";
+            } else if (is_bool($value)) {
+                $byKey[] = "(" . $key . " eq " . ($value ? "true" : "false") . ")";
+            } else {
+                $byKey[] = "(" . $key . " eq " . $value . ")";
+            }
+        }
+        return join(" AND ", $byKey);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getByKey()
+    {
+        $args = $this->cleanArgs(func_get_args());
+        $query = $this->buildByKeyQuery($args);
+        $foundedUsers = $this->query($query, 1);
+        if (sizeof($foundedUsers) == 0) {
+            return null;
+        }
+        return $foundedUsers[0];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function delete()
+    {
+        $byKey = array();
+        $args = $this->cleanArgs(func_get_args());
+        for ($i=0;$i<sizeof($this->keys);$i++) {
+            $key = $this->keys[$i];
+            $byKey[$key] = $args[$i];
+        }
+
+        $query = $this->buildByKeyQuery(func_get_args());
+        $this->storage->delete($byKey,$query);
+    }
+
+    private function cleanArgs($args)
+    {
+        if(is_array($args[0])){
+            return $args[0];
+        }
+        return $args;
+    }
+}

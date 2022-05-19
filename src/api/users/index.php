@@ -1,4 +1,5 @@
 <?php
+require_once(dirname(__DIR__)."/vendor/autoload.php");
 require_once(dirname(__FILE__)."/../../root.php");
 require_once(__ROOT__."/settings.php");
 require_once(__ROOT__."/inc/api_users.php");

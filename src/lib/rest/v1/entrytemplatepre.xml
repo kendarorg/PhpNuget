@@ -1,0 +1,8 @@
+<feed xml:base="@BASEURL@/api/v1/"
+    xmlns="http://www.w3.org/2005/Atom"
+    xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+    <id>@BASEURL@/api/v1/Packages</id>
+    <title type="text">Packages</title>
+    <updated>2014-08-27T11:33:16Z</updated>
+    <link rel="self" title="Packages" href="Packages" />

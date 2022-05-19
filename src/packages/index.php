@@ -1,16 +1,15 @@
 <?php
-require_once(dirname(__FILE__)."/../root.php");
-require_once(__ROOT__."/settings.php");
-require_once(__ROOT__."/inc/api_users.php");
-require_once(__ROOT__."/inc/commons/url.php");
-require_once(__ROOT__."/inc/commons/http.php");
-require_once(__ROOT__."/inc/api_nuget.php");
+require_once(__DIR__."/vendor/autoload.php");
+use lib\http\Request;
+use lib\utils\Properties;
 
-$q = UrlUtils::GetRequestParamOrDefault("q",null);
+$request = \lib\OminousFactory::getObject("request");
+$properties = \lib\OminousFactory::getObject("properties");
+$q = $request->getParam("q");
 
 ?>
 <html><body>
-<form style="visibility: hidden" method="POST" name='frm' action="<?php echo Settings::$SiteRoot;?>?specialType=packages"
+<form style="visibility: hidden" method="POST" name='frm' action="<?php echo $properties->getProperty("siteRoot");?>?specialType=packages"
 	enctype="multipart/form-data">
 
 	<input type="text" id="q" name="q" value="<?php echo $q;?>"/>
