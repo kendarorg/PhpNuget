@@ -16,6 +16,10 @@ Verified on:
 * PHP 7.0.14-Apache 2.4 (Windows 10 Home)
 * PHP 7.3.5-Apache 2.4 (Windows 7 Pro)
 
+## If you like it Buy me a coffe :)
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/paypalme/kendarorg/1)
+
 ## Installation
 
 ### Notes for everybody
