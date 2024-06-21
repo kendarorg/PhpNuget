@@ -30,7 +30,7 @@ if(UrlUtils::RequestMethod()=="put"){
 		<script src="assets/route.js"></script>
 		<script src="assets/views/users/module.js"></script>
 		<script src="assets/views/profile/module.js"></script>
-		<script src="scripts/jquery/jquery-3.2.1.min.js"></script>
+		<script src="scripts/jquery/jquery-3.5.1.min.js"></script>
 		<script src="scripts/bootstrap/bootstrap.min.js"></script>
 	</head>
 	<body>
