@@ -26,6 +26,7 @@ class LoginController
 			$this->Admin = $_SESSION["Admin"];
 			$this->Packages = $_SESSION["Packages"];
 			$this->Email = $_SESSION["Email"];
+			$this->Name = $_SESSION["Name"];
 		}else if("true"==$doLogin){
 			$this->_login();
 			$location = UrlUtils::CurrentUrl(Settings::$SiteRoot);
@@ -72,12 +73,13 @@ class LoginController
 	public $Admin;
 	public $Packages;
 	public $Email;
+	public $Name;
 
 	function _login()
 	{
 		$doLogin = UrlUtils::GetRequestParamOrDefault("DoLogin","false","all");
 		
-		if("false"==$doLogin) {
+		if("false"==$doLogin || Settings::$EnterpriseAuthEnv!=false) {
 			session_unset();
 			session_destroy(); 
 			return;
@@ -116,10 +118,68 @@ class LoginController
 		$this->Admin = $user->Admin;
 		$this->Packages = $user->Packages;
 		$this->Email = $user->Email;
+		$this->Name = $user->Name;
 		$_SESSION["UserId"] = $this->UserId;
 		$_SESSION["Admin"] = $this->Admin;
 		$_SESSION["Packages"] = $this->Packages;
 		$_SESSION["Email"] = $this->Email;
+		$_SESSION["Name"] = $this->Name;
+	}
+	
+	function _enterprise_login()
+	{
+	    if(Settings::$EnterpriseAuthEnv == false || !isset($_SERVER[Settings::$EnterpriseAuthEnv])) {
+	        session_unset();
+	        session_destroy();
+	        return;
+	    }
+	    
+	    $uid = $_SERVER[Settings::$EnterpriseAuthEnv];
+	    
+	    $udb = new UserDb();
+	    $user = null;
+	    
+	    $ar = $udb->Query("(UserId eq '".$uid."' or Email eq '".$uid."')");
+	    $errorCode = 0;
+	    
+	    if(sizeof($ar)==1){
+	        $user = $ar[0];
+	    } else {
+	        $errorCode = -1;
+	    }
+	    
+	    //echo "Loggedin ".$doLogin;
+	    if($errorCode != 0){
+	        session_unset();
+	        session_destroy();
+	        $this->RedirectIfNotLoggedIn($errorCode);
+	        return;
+	    }
+	    $this->IsLoggedIn = true;
+	    $this->UserId = $user->UserId;
+	    $this->Admin = $user->Admin;
+	    $this->Packages = $user->Packages;
+	    $this->Email = $user->Email;
+	    $this->Name = $user->Name;
+	    $_SESSION["UserId"] = $this->UserId;
+	    $_SESSION["Admin"] = $this->Admin;
+	    $_SESSION["Packages"] = $this->Packages;
+	    $_SESSION["Email"] = $this->Email;
+	    $_SESSION["Name"] = $this->Name;
+	}
+	
+	function displayUser()
+	{
+	    switch(strtolower(Settings::$DisplayUser)){
+	        case 'name':
+	            return $this->Name;
+	            break;;
+	        case 'email':
+	            return $this->Email;
+	            break;;
+	        default:
+	            return $this->UserId;
+	    }
 	}
 }
 

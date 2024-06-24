@@ -47,6 +47,7 @@
 
 				<div class="col-md-6" >
 					<h3>Sign in</h3>
+					<?php if(!Settings::$EnterpriseAuthEnv) {?>
 					<form class="form-horizontal" method="POST" action="<?php echo Settings::$SiteRoot;?>?specialType=logon" >
 						<input type="hidden" id="DoLogin" name="DoLogin" value="true"/>
 						<div class="form-group">
@@ -66,6 +67,8 @@
 								<input type="submit" value="Sign In" class="btn btn-default"></input>
 							</div>
 						</div>
+					</form>
+					<?php } ?>
 						<?php if(isset($_GET["result"]) && strlen($_GET["result"]) > 0) {?>
 						<div class="form-group">
 							<div class="col-md-offset-2 col-md-10">
@@ -76,7 +79,6 @@
 							</div>
 						</div>
 						<?php } ?>
-					</form>
 				</div><!-- col ends -->
 				<?php
 				}

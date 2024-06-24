@@ -2,6 +2,10 @@
 $searchQuery = UrlUtils::GetRequestParamOrDefault("searchQuery","");
 # implement gravatar.
 use forxer\Gravatar\Gravatar;
+$specialType = strtolower(UrlUtils::GetRequestParamOrDefault("specialType",null));
+if($specialType == "enterpriselogon"){
+    $loginController->_enterprise_login();
+}
 ?>
 <nav class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation" id="headerBar">
 	<div class="container-fluid">
@@ -49,11 +53,13 @@ use forxer\Gravatar\Gravatar;
 									<?php if(defined('__ALLOWGRAVATAR__') && __ALLOWGRAVATAR__) { ?>
 										<img class="img-circle" src="<?php echo Gravatar::image($loginController->Email,20,'mm'); ?>" />
 									<?php } ?>								
-									<?php echo $loginController->UserId; ?>
+									<?php echo $loginController->displayUser(); ?>
 								</a></li>
 								<li><a href="<?php echo Settings::$SiteRoot;?>?specialType=logon&DoLogin=false">Sign out</a></li>
 						<?php
-							}else{ ?>
+							}elseif(Settings::$EnterpriseAuthEnv){ ?>
+								<li><a href="<?php echo Settings::$SiteRoot."enterprise/";?>?specialType=enterpriselogon">Enterpise Sign in</a></li><?php
+							}else{?>
 								<li><a href="<?php echo Settings::$SiteRoot;?>?specialType=logon">Register/Sign in</a></li><?php
 							}
 						?>

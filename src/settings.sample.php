@@ -34,6 +34,14 @@ define('__HTTPPROXY__', '');
 @define('__MYSQL_DB__',"phpnuget");
 @define('__DB_TYPE__',DBMYSQL);
 
+// Set this to the server environemental variable username to let the web server
+// handle authentication.
+// examples: REMOTE_USER, PHP_AUTH_USER, SSL_CLIENT_S_DN_CN, SSL_CLIENT_SAN_OTHER_msUPN_0, REMOTE_ADDR
+@define('__ENTERPRISE_AUTH_ENV__', false);
+
+// Username displayed, this can be: UserID, Name or Email 
+@define('__DISPLAY_USER__', 'UserID');
+
 //If true users are allowed to add a package only if the firstly added it
 //or if theyr user id is inside the "owners" field of the package
 define('__LIMITUSERSPACKAGES__',true);
