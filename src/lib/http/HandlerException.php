@@ -1,6 +1,5 @@
 <?php
 
-namespace lib\http;
 
 
 class HandlerException extends \Exception

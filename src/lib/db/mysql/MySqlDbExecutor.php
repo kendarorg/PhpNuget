@@ -1,9 +1,6 @@
 <?php
 
-namespace lib\db\mysql;
 
-use lib\db\Executor;
-use lib\db\parser\InternalTypeBuilder;
 
 class MySqlDbExecutor extends Executor
 {

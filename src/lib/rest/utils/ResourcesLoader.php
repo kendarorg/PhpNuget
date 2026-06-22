@@ -1,8 +1,6 @@
 <?php
 
-namespace lib\rest\utils;
 
-use lib\utils\PathUtils;
 
 class ResourcesLoader
 {

@@ -11,10 +11,6 @@
  * Capitalized framework classes, so this helper is included explicitly, not eagerly.
  */
 
-require_once __DIR__ . '/../../vendor/autoload.php';
-
-use lib\OminousFactory;
-
 /**
  * Wire PhpNuget's Properties + a shared mysqli from uifw's MySQL registry values,
  * so OminousFactory builds its MySqlDbStorage against the same database. Idempotent.
@@ -34,7 +30,7 @@ function nugetBridgeBootstrap()
     $user    = GlobalRegistry::get('DB_USER');
     $pass    = GlobalRegistry::get('DB_PASS');
 
-    $props = OminousFactory::getObject('properties');
+    $props = GlobalRegistry::get('properties');
     $props->setProperty('dbtype', 'mysql');
     $props->setProperty('db.host', $host);
     $props->setProperty('db.port', $port);
@@ -43,7 +39,7 @@ function nugetBridgeBootstrap()
     $props->setProperty('db.password', $pass);
 
     $mysqli = new mysqli($host, $user, $pass, $name, $port);
-    OminousFactory::setObject('mysqli', $mysqli);
+    GlobalRegistry::setInstance('mysqli', $mysqli);
     return $mysqli;
 }
 
@@ -53,7 +49,7 @@ function nugetBridgeBootstrap()
 function nugetPackages()
 {
     nugetBridgeBootstrap();
-    return OminousFactory::getObject('nugetpackages');
+    return GlobalRegistry::get('nugetpackages');
 }
 
 /**
@@ -76,7 +72,7 @@ function nugetUserByApiKey($apiKey)
 function nugetPackagesRoot()
 {
     nugetBridgeBootstrap();
-    return OminousFactory::getObject('properties')->getProperty('packagesRoot');
+    return GlobalRegistry::get('properties')->getProperty('packagesRoot');
 }
 
 /**
@@ -85,7 +81,7 @@ function nugetPackagesRoot()
 function nugetSiteRoot()
 {
     nugetBridgeBootstrap();
-    return OminousFactory::getObject('properties')->getProperty('siteRoot');
+    return GlobalRegistry::get('properties')->getProperty('siteRoot');
 }
 
 /**

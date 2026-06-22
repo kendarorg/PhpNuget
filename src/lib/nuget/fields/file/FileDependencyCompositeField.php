@@ -1,8 +1,6 @@
 <?php
 
-namespace lib\nuget\fields\file;
 
-use lib\db\utils\SpecialFieldType;
 
 class FileDependencyCompositeField extends SpecialFieldType
 {

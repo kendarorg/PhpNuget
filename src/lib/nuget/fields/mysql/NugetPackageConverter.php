@@ -1,10 +1,6 @@
 <?php
 
-namespace lib\nuget\fields\mysql;
 
-use lib\db\mysql\BasicMysqlConverter;
-use lib\nuget\models\NugetDependency;
-use lib\nuget\NugetUtils;
 
 class NugetPackageConverter extends BasicMysqlConverter
 {

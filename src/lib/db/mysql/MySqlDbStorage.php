@@ -1,11 +1,6 @@
 <?php
 
-namespace lib\db\file;
 
-use lib\db\DbStorage;
-use lib\db\mysql\MySqlDbExecutor;
-use lib\db\QueryParser;
-use lib\utils\Properties;
 
 class MySqlDbStorage extends DbStorage
 {

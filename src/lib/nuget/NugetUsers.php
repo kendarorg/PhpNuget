@@ -1,10 +1,6 @@
 <?php
 
-namespace lib\nuget;
 
-use lib\db\BaseDb;
-use lib\db\DbStorage;
-use lib\nuget\models\NugetUser;
 
 class NugetUsers extends BaseDb
 {

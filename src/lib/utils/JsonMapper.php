@@ -1,9 +1,6 @@
 <?php
 
-namespace lib\utils;
 
-use ReflectionClass;
-use ReflectionProperty;
 
 /**
  * Part of JsonMapper

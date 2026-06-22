@@ -1,11 +1,7 @@
 <?php
 
-namespace lib\http;
 
 
-use lib\utils\raw\Array;
-use lib\utils\raw\input;
-use lib\utils\raw\stream;
 
 /**
  * stream - Handle raw input stream

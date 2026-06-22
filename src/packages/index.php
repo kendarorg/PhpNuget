@@ -1,10 +1,8 @@
 <?php
-require_once(__DIR__."/vendor/autoload.php");
-use lib\http\Request;
-use lib\utils\Properties;
+require_once(dirname(__DIR__)."/config.inc");
 
-$request = \lib\OminousFactory::getObject("request");
-$properties = \lib\OminousFactory::getObject("properties");
+$request = GlobalRegistry::get("request");
+$properties = GlobalRegistry::get("properties");
 $q = $request->getParam("q");
 
 ?>

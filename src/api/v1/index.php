@@ -1,35 +1,33 @@
 <?php
-require_once(dirname(__DIR__)."/vendor/autoload.php");
-require_once(dirname(__DIR__,2)."/settings.php");   // initialize Properties from conf/properties.json (mysql backend)
+require_once(dirname(__DIR__,2)."/config.inc");
 
-use lib\OminousFactory;
 
 $version = "v1";
-$request = OminousFactory::getObject("request");
+$request = GlobalRegistry::get("request");
 $action = trim(strtolower($request->getParam("action","")));
 
-OminousFactory::setObject("resourcesLoaderVersion",$version);
+GlobalRegistry::setInstance("resourcesLoaderVersion",$version);
 
-$properties = OminousFactory::getObject("properties");
-$nugetPackages = OminousFactory::getObject("nugetPackages");
-$nugetUsers = OminousFactory::getObject("nugetUsers");
-$resourcesLoader = OminousFactory::getObject("resourcesLoader");
-$nugetQueryHandler = OminousFactory::getObject("nugetQueryHandler");
-$lastQueryBuilder = OminousFactory::getObject("lastQueryBuilder");
-$nugetResultParser = OminousFactory::getObject("nugetResultParser");
-$nugetDownloads = OminousFactory::getObject("nugetDownloads");
+$properties = GlobalRegistry::get("properties");
+$nugetPackages = GlobalRegistry::get("nugetPackages");
+$nugetUsers = GlobalRegistry::get("nugetUsers");
+$resourcesLoader = GlobalRegistry::get("resourcesLoader");
+$nugetQueryHandler = GlobalRegistry::get("nugetQueryHandler");
+$lastQueryBuilder = GlobalRegistry::get("lastQueryBuilder");
+$nugetResultParser = GlobalRegistry::get("nugetResultParser");
+$nugetDownloads = GlobalRegistry::get("nugetDownloads");
 
 $handler = null;
 if($action=="findpackagesbyd"){
-    $handler = new \lib\rest\commons\FindPackagesById($resourcesLoader, $properties, $nugetQueryHandler,$nugetResultParser);
+    $handler = new FindPackagesById($resourcesLoader, $properties, $nugetQueryHandler,$nugetResultParser);
 } else if($action=="single"){
-    $handler = new \lib\rest\commons\FindSingle($resourcesLoader, $properties, $nugetQueryHandler,$nugetResultParser);
+    $handler = new FindSingle($resourcesLoader, $properties, $nugetQueryHandler,$nugetResultParser);
 } else if($action=="metadata"){
-    $handler = new \lib\rest\commons\Metadata($version);
+    $handler = new Metadata($version);
 } else if($action=="search"){
-    $handler = new \lib\rest\commons\Search($resourcesLoader, $properties, $nugetQueryHandler,$nugetResultParser);
+    $handler = new Search($resourcesLoader, $properties, $nugetQueryHandler,$nugetResultParser);
 } else{
-    $handler = new \lib\rest\commons\ApiRoot($properties,$nugetPackages,$nugetUsers,$nugetDownloads);
+    $handler = new ApiRoot($properties,$nugetPackages,$nugetUsers,$nugetDownloads);
 }
 
 $handler->handle();

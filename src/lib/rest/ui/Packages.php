@@ -1,14 +1,6 @@
 <?php
 
-namespace lib\rest\ui;
 
-use lib\http\BaseHandler;
-use lib\http\HandlerException;
-use lib\http\Request;
-use lib\nuget\NugetPackages;
-use lib\nuget\NugetUsers;
-use lib\rest\Result;
-use lib\utils\Properties;
 
 class Packages extends BaseHandler
 {

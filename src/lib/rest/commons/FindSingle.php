@@ -1,16 +1,6 @@
 <?php
 
-namespace lib\rest\commons;
 
-use lib\http\BaseHandler;
-use lib\http\Request;
-use lib\rest\utils\NugetQuery;
-use lib\rest\utils\NugetQueryHandler;
-use lib\rest\utils\NugetResultParser;
-use lib\rest\utils\Pagination;
-use lib\rest\utils\ResourcesLoader;
-use lib\utils\HttpUtils;
-use lib\utils\Properties;
 
 class FindSingle extends BaseHandler
 {

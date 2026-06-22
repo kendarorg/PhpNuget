@@ -1,10 +1,6 @@
 <?php
 
-namespace lib\rest\v2;
 
-use lib\http\BaseHandler;
-use lib\http\Request;
-use lib\utils\HttpUtils;
 
 class Batch extends BaseHandler
 {

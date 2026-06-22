@@ -1,6 +1,5 @@
 <?php
 
-namespace lib\rest\ui;
 
 class NugetResult
 {

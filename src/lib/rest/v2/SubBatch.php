@@ -1,6 +1,5 @@
 <?php
 
-namespace lib\rest\v2;
 
 class SubBatch
 {

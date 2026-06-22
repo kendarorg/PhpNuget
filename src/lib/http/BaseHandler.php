@@ -1,9 +1,6 @@
 <?php
 
-namespace lib\http;
 
-use lib\OminousFactory;
-use lib\utils\Properties;
 
 class BaseHandler
 {
@@ -31,7 +28,7 @@ class BaseHandler
     {
         try {
 
-            $this->request = OminousFactory::getObject("request");
+            $this->request = GlobalRegistry::get("request");
             $this->preHandle($this->request);
             if(!$this->catchAll($this->request)) {
                 if ($this->request->getMethod() == "put") {

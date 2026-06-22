@@ -1,15 +1,12 @@
 <?php
 
-require_once(dirname(__DIR__)."/vendor/autoload.php");
-require_once(dirname(__DIR__)."/settings.php");   // initialize Properties from conf/properties.json (mysql backend)
+require_once(dirname(__DIR__)."/config.inc");
 
-use lib\OminousFactory;
-use lib\rest\commons\ApiRoot;
 
-$properties = OminousFactory::getObject("properties");
-$nugetPackages = OminousFactory::getObject("nugetPackages");
-$nugetUsers = OminousFactory::getObject("nugetUsers");
-$nugetDownloads = OminousFactory::getObject("nugetDownloads");
+$properties = GlobalRegistry::get("properties");
+$nugetPackages = GlobalRegistry::get("nugetPackages");
+$nugetUsers = GlobalRegistry::get("nugetUsers");
+$nugetDownloads = GlobalRegistry::get("nugetDownloads");
 
 $root = new ApiRoot($properties,$nugetPackages,$nugetUsers,$nugetDownloads);
 $root->handle();
@@ -18,7 +15,6 @@ $root->handle();
 /*
 
 require_once(dirname(__FILE__)."/../root.php");
-require_once(__ROOT__."/settings.php");
 require_once(__ROOT__."/inc/api_users.php");
 require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/http.php");

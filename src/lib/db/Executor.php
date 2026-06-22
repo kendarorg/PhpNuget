@@ -1,8 +1,6 @@
 <?php
 
-namespace lib\db;
 
-use lib\db\parser\Operator;
 
 class Executor
 {

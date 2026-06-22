@@ -1,16 +1,14 @@
 <?php
-require_once(dirname(__DIR__,2)."/vendor/autoload.php");
+require_once(dirname(__DIR__,2)."/config.inc");
 
-use lib\OminousFactory;
 
-$properties = OminousFactory::getObject("properties");
+$properties = GlobalRegistry::get("properties");
 
-$batch = new \lib\rest\v2\Batch($properties);
+$batch = new Batch($properties);
 $batch->handle();
 
 /*
 require_once(dirname(__FILE__)."/../../root.php");
-require_once(__ROOT__."/settings.php");
 require_once(__ROOT__."/inc/api_users.php");
 require_once(__ROOT__."/inc/commons/url.php");
 require_once(__ROOT__."/inc/commons/http.php");

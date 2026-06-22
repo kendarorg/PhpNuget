@@ -1,6 +1,6 @@
 <?php /** @noinspection PhpUndefinedConstantInspection */
 
-GlobalRegistry::registerValue('HOST_PATH', 'http://localhost:63343/PhpNuget/src/app');
+GlobalRegistry::registerValue('HOST_PATH', 'http://localhost:63343/PhpNuget/src');
 GlobalRegistry::registerValue('COMPANY_LOGO', HOST_PATH . '/public/images/logo2.png');
 GlobalRegistry::registerValue('COMPANY_NAME', 'PhpNuget');
 GlobalRegistry::registerValue('COMPANY_VAT', '1234567890');

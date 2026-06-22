@@ -1,6 +1,5 @@
 <?php
 
-namespace lib\utils;
 
 //http://www.innovativephp.com/analyze-zip-file-contents-using-php/
 //http://php.net/manual/en/function.zip-open.php

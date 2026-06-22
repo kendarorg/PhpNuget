@@ -1,6 +1,5 @@
 <?php
 
-namespace lib\nuget\models;
 
 class NugetDependency
 {

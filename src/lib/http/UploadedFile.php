@@ -1,10 +1,6 @@
 <?php
 
-namespace lib\http;
 
-use lib\utils\ArrayUtils;
-use lib\utils\Guid;
-use lib\utils\PathUtils;
 
 class UploadedFile
 {

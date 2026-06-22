@@ -1,11 +1,6 @@
 <?php
 
-namespace lib\db\mysql;
 
-use lib\nuget\models\NugetPackage;
-use lib\utils\JsonMapper;
-use ReflectionClass;
-use ReflectionProperty;
 
 class BasicMysqlConverter
 {

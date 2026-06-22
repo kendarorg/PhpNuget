@@ -1,16 +1,6 @@
 <?php
 
-namespace lib\rest\commons;
 
-use lib\http\BaseHandler;
-use lib\http\HandlerException;
-use lib\http\Request;
-use lib\nuget\NugetPackages;
-use lib\nuget\NugetUsers;
-use lib\rest\NugetDownloads;
-use lib\utils\PathUtils;
-use lib\utils\Properties;
-use lib\utils\StringUtils;
 
 class ApiRoot extends BaseHandler
 {
@@ -27,11 +17,11 @@ class ApiRoot extends BaseHandler
      */
     private $users;
     /**
-     * @var \lib\nuget\NugetPackage
+     * @var NugetPackage
      */
     private $package;
     /**
-     * @var \lib\nuget\models\NugetUser
+     * @var NugetUser
      */
     private $user;
     /**
@@ -121,7 +111,7 @@ class ApiRoot extends BaseHandler
     }
 
     /**
-     * @return \lib\nuget\NugetPackage
+     * @return NugetPackage
      * @throws HandlerException
      */
     protected function loadPackage()

@@ -1,6 +1,5 @@
 <?php
 
-namespace lib\utils;
 
 class PathUtils
 {

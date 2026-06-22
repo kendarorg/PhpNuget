@@ -1,12 +1,9 @@
 <?php
 
-namespace lib\nuget\fields\file;
 
-use lib\db\parser\InternalTypeBuilder;
-use lib\db\utils;
 use function contains;
 
-class FileArraysCompositeField extends utils\SpecialFieldType
+class FileArraysCompositeField extends SpecialFieldType
 {
     public function isComposite(){
         $args = func_get_args();

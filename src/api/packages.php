@@ -2,13 +2,10 @@
 require_once("../config.inc");
 require_once(__DIR__ . "/../lib/nugetbridge.php");
 
-use lib\nuget\NugetFileParser;
-use lib\utils\HttpUtils;
-use lib\OminousFactory;
 
 /**
  * UI-facing packages API. Reads/writes the nuget package store (PhpNuget's
- * lib\nuget, MySQL backend) through the bridge and returns it in the uifw grid
+ * nuget, MySQL backend) through the bridge and returns it in the uifw grid
  * envelope {items, labels, permissions}. The nuget OData protocol stays in src/api/**.
  */
 class PackagesApi extends BaseApis
@@ -143,7 +140,7 @@ class PackagesApi extends BaseApis
         }
 
         $url = str_replace(['@ID', '@VERSION'], [$id, $version], $url);
-        $properties = OminousFactory::getObject('properties');
+        $properties = GlobalRegistry::get('properties');
         $content = HttpUtils::download($url);
         $tmp = tempnam(sys_get_temp_dir(), 'pull');
         file_put_contents($tmp, $content);
@@ -166,7 +163,7 @@ class PackagesApi extends BaseApis
     public function apiCallPostRefresh()
     {
         $this->permissions->canCreateThrow();
-        $properties = OminousFactory::getObject('properties');
+        $properties = GlobalRegistry::get('properties');
         $parser = new NugetFileParser($properties);
         $root   = rtrim(nugetPackagesRoot(), '/');
         $count  = 0;
@@ -213,7 +210,7 @@ class PackagesApi extends BaseApis
         return $this->toGridRows($rows);
     }
 
-    /** @param \lib\nuget\models\NugetPackage[] $rows */
+    /** @param NugetPackage[] $rows */
     private function toGridRows($rows)
     {
         $items = [];

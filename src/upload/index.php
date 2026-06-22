@@ -2,19 +2,15 @@
 /**
  * Nuget package upload endpoint (`/upload`). Receives a .nupkg/.snupkg via
  * `dotnet nuget push` (multipart field "package", header X-NuGet-ApiKey) or the
- * uifw Upload page (same contract), parses it with lib\nuget\NugetFileParser and
- * persists the row through lib\nuget\NugetPackages. The uploading user is resolved
+ * uifw Upload page (same contract), parses it with NugetFileParser and
+ * persists the row through NugetPackages. The uploading user is resolved
  * by API key against the merged uifw `users` table.
  */
-require_once(dirname(__DIR__) . "/vendor/autoload.php");
-require_once(dirname(__DIR__) . "/settings.php");   // populates Properties from conf/properties.json
+require_once(dirname(__DIR__) . "/config.inc");
 
-use lib\http\UploadManager;
-use lib\nuget\NugetFileParser;
-use lib\OminousFactory;
 
-$request    = OminousFactory::getObject("request");
-$properties = OminousFactory::getObject("properties");
+$request    = GlobalRegistry::get("request");
+$properties = GlobalRegistry::get("properties");
 
 function uploadError($code, $message)
 {
@@ -95,7 +91,7 @@ try {
     // --- Persist. Symbol packages do not create a package row. ---
     if (!$isSymbol) {
         // upload runs outside the uifw GlobalRegistry; talk to OminousFactory directly.
-        OminousFactory::getObject('nugetpackages')->save($package);
+        GlobalRegistry::get('nugetpackages')->save($package);
 
         // promote this version to "latest" and demote the others of this Id.
         $clear = $mysqli->prepare('UPDATE `packages` SET `IsLatestVersion` = 0, `IsAbsoluteLatestVersion` = 0 WHERE `Id` = ?');

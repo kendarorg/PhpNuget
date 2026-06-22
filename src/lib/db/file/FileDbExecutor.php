@@ -1,10 +1,6 @@
 <?php
 
-namespace lib\db\file;
 
-use lib\db\Executor;
-use lib\db\parser\InternalTypeBuilder;
-use lib\db\parser\Operator;
 
 class FileDbExecutor extends Executor
 {

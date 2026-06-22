@@ -1,10 +1,6 @@
 <?php
 
-namespace lib\rest\commons;
 
-use lib\http\BaseHandler;
-use lib\http\Request;
-use lib\utils\PathUtils;
 
 /**
  * https://stackoverflow.com/questions/51789617/php-get-url-of-current-file-directory

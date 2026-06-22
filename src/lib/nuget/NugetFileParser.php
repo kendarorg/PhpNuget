@@ -1,14 +1,6 @@
 <?php
 
-namespace lib\nuget;
 
-use lib\nuget\models\NugetDependency;
-use lib\nuget\models\NugetDependencyGroup;
-use lib\nuget\models\NugetPackage;
-use lib\utils\HttpUtils;
-use lib\utils\StringUtils;
-use lib\utils\XmlUtils;
-use lib\utils\ZipManager;
 
 class NugetFileParser
 {

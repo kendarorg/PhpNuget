@@ -1,7 +1,7 @@
 {
     "packagesRoot": "/var/phpNuget/data/packages",
     "databaseRoot": "/var/phpNuget/data/db",
-    "siteRoot": "http://localhost:63343/PhpNuget/src/app/",
+    "siteRoot": "http://localhost:63343/PhpNuget/src/",
     "db.name": "phpnuget",
     "db.host": "localhost",
     "db.port": 3306,

@@ -1,8 +1,6 @@
 <?php
 
-namespace lib\nuget;
 
-use lib\OminousFactory;
 
 class NugetDownloads
 {
@@ -16,13 +14,13 @@ class NugetDownloads
      */
     public function incrementDownloads($id, $version)
     {
-        $properties = OminousFactory::getObject("properties");
+        $properties = GlobalRegistry::get("properties");
         if ($properties->getProperty("dbtype", "file") != "mysql") {
             return;
         }
 
         /** @var \mysqli $mysqli */
-        $mysqli = OminousFactory::getObject("mysqli");
+        $mysqli = GlobalRegistry::get("mysqli");
 
         $stmt = $mysqli->prepare(
             "UPDATE `packages` SET `VersionDownloadCount` = `VersionDownloadCount` + 1 WHERE `Id` = ? AND `Version` = ?"

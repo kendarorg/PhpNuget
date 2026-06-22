@@ -1,12 +1,5 @@
 {
   "require": {
     "phpunit/phpunit": "9.*"
-  },
-  "autoload": {
-    "classmap": [
-      "../src/",
-      "../tests/"
-    ],
-    "files": ["../src/settings.php"]
   }
 }

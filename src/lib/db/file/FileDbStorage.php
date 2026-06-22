@@ -1,12 +1,6 @@
 <?php
 
-namespace lib\db\file;
 
-use lib\db\DbStorage;
-use lib\db\QueryParser;
-use lib\utils\JsonMapper;
-use lib\utils\PathUtils;
-use lib\utils\Properties;
 
 class FileDbStorage extends DbStorage
 {

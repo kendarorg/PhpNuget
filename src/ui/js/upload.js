@@ -1,5 +1,5 @@
-// Nuget upload endpoint, relative to src/app/ui/  ->  src/upload/
-const UPLOAD_URL = '../../upload/';
+// Nuget upload endpoint, relative to src/ui/  ->  src/upload/
+const UPLOAD_URL = '../upload/';
 
 export function initPage(registry) {
     const perms = registry.get('permissions') || {};
