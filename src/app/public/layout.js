@@ -26,7 +26,7 @@ function populateHeader(registry) {
     if (logoutBtn) {
         logoutBtn.textContent = translate('LOGOUT');
         logoutBtn.onclick = () => {
-            new Fetcher({ url: translate('API_URL') + '/login', method: 'POST' })
+            new Fetcher({ url: translate('API_URL') + '/login.php', method: 'POST' })
                 .withQuery('action', 'logout')
                 .onSuccess(() => { window.location.href = 'login.html'; })
                 .fetch();

@@ -60,7 +60,7 @@ class MySqlDbStorage extends DbStorage
             $what = join(",",$fields);
         }
 
-        $sqlQuery = "SELECT * FROM (SELECT ".$what." FROM ".$this->table." ".$sqlQuery.") ";
+        $sqlQuery = "SELECT * FROM (SELECT ".$what." FROM ".$this->table." ".$sqlQuery.") AS sub ";
 
         $orderBy = $executor->doSort($toSort);
         $groupBy = $executor->doGroupBy($toSort);
@@ -100,7 +100,7 @@ class MySqlDbStorage extends DbStorage
         $groupBy = $executor->doGroupBy($toSort);
         $query = $sqlQuery." ".$groupBy." ".$orderBy;
 
-        $sqlQuery = "SELECT count(*) as countResult FROM (SELECT ".$what." FROM ".$this->table." ".$query.") ";
+        $sqlQuery = "SELECT count(*) as countResult FROM (SELECT ".$what." FROM ".$this->table." ".$query.") AS sub ";
 
         $result = $this->mysqli->query($sqlQuery);
         $row = $result->fetch_assoc();

@@ -3515,7 +3515,7 @@ class RolesSelect extends SelectField{
     }
     async loadRoles( exact) {
         var fetcher = new Fetcher({
-            url: translate('API_URL')+'/roles',
+            url: translate('API_URL')+'/roles.php',
             withWaitingWheel:false
         })
             .withMethod("GET")
@@ -3578,7 +3578,7 @@ class UsersAutoComplete extends AutocompleteField {
     async loadUsers(query, exact) {
         if (query == null) query = '';
         var fetcher = new Fetcher({
-            url: translate('API_URL') + '/users',
+            url: translate('API_URL') + '/users.php',
             withWaitingWheel: false
         }).withQuery('action', 'combo')
             .withMethod('GET')

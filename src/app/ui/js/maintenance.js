@@ -67,34 +67,7 @@ export function initPage(registry) {
             )),
         ),
 
-        new Collapsible({title: 'Sincronizza lavoratori'},
-            new Row(new Column({span: 12},
-                new Container({tag: 'p', html: 'Sincronizza i lavoratori con i jobs basandosi sui time tracking.'}),
-            )),
-            new Row(
-                new Column({span: 3}, new TextButton({label: 'Sincronizza', onClick: () => syncJobsWorkers()})),
-                new Column({span: 9}, new CheckboxField({name: 'simulate_jobs_workers', label: 'Simulated', defaultValue: true})),
-            ),
-            new Row(new Container({id: 'jobs-workers-results', style: 'margin-top: 20px;'})),
-        ),
 
-        new Collapsible({title: 'Possibili errori'},
-            new Row(new Column({span: 12},
-                new Container({tag: 'p', html: 'Mostra possibili errori'}),
-                new TextButton({label: 'Mostra Errori', onClick: () => showPossibleErrors()}),
-            )),
-            new Row(new Container({id: 'possible-errors-results', style: 'margin-top: 20px;'})),
-        ),
-
-        new Collapsible({title: 'Conferma ore'},
-            new Row(new Column({span: 12},
-                new Container({tag: 'p', html: 'Conferma le ore sino alla data'}),
-            )),
-            new Row(
-                new Column({span: 4}, new TextButton({label: 'Conferma', onClick: () => confirmTimeSheets()})),
-                new Column({span: 4}, new DateField({name: 'confirm_time_sheets_up_to', label: 'Sino a data', defaultValue: daysAgo(40)})),
-            ),
-        ),
     );
 
     const logsForm = new Form(

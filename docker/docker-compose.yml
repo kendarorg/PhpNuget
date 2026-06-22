@@ -1,0 +1,9 @@
+services:
+  db:
+    image: mysql:latest
+    container_name: phpnuget_db
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=phpnuget
+      - MYSQL_DATABASE=phpnuget

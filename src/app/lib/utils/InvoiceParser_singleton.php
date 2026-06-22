@@ -13,7 +13,6 @@ class InvoiceParser {
         $this->globalErrors = GlobalRegistry::get("GlobalErrors");
         $this->translator = GlobalRegistry::get("Translator");
         $this->converter = GlobalRegistry::get("Converter");
-        $this->contacts = GlobalRegistry::get("ContactsModel");
     }
 
     function parse(&$xmlString, $isP7M)  //parseeinvoice

@@ -18,7 +18,7 @@ class GlobalRegistry {
         if (permissionsModule)  params.set('permissions',  permissionsModule);
         if (permissions2Module) params.set('permissions2', permissions2Module);
 
-        const url = '/api/globalRegistry' + (params.size > 0 ? '?' + params.toString() : '');
+        const url = translate('API_URL') + '/globalRegistry.php' + (params.size > 0 ? '?' + params.toString() : '');
         const result = await fetch(url).then(r => r.json());
 
         this.data = {
