@@ -87,7 +87,16 @@ class OminousFactory
         $this->cache=[];
         $this->generated=[];
         $this->addCache("mysqli", function () {
-            throw new \Exception("MISSINGSQLI");
+            // Build a shared mysqli from the nuget Properties (conf/properties.json).
+            // The uifw bridge may instead setObject('mysqli') with its own connection;
+            // either way the whole app shares ONE mysql connection.
+            $properties = self::getObject("properties");
+            $host = $properties->getProperty("db.host", "localhost");
+            $port = intval($properties->getProperty("db.port", 3306));
+            $user = $properties->getProperty("db.user");
+            $pass = $properties->getProperty("db.password");
+            $name = $properties->getProperty("db.name");
+            return new \mysqli($host, $user, $pass, $name, $port);
         });
         $this->addCache("nugetdownloads", function () {
             return new NugetDownloads();

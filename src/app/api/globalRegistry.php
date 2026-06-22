@@ -51,6 +51,8 @@ function buildMenu($auth) {
     $items = [
         ['key' => 'dashboard',       'perm' => 'dashboard',       'page' => 'dashboard.html',       'class' => 'btn-dashboard', 'always' => true],
         ['key' => 'packages',        'perm' => 'packages',        'page' => 'packages.html',        'class' => 'btn-documents'],
+        ['key' => 'upload',          'perm' => 'packages',        'page' => 'upload.html',          'class' => 'btn-upload', 'onCreate' => true],
+        ['key' => 'profile',         'perm' => 'dashboard',       'page' => 'profile.html',         'class' => 'btn-user', 'always' => true],
         ['key' => 'users',           'perm' => 'users',           'page' => 'users.html',           'class' => 'btn-users'],
         ['key' => 'roles',           'perm' => 'roles',           'page' => 'roles.html',           'class' => 'btn-roles'],
         ['key' => 'functionalities', 'perm' => 'functionalities', 'page' => 'functionalities.html', 'class' => 'btn-multichoice'],
@@ -64,8 +66,12 @@ function buildMenu($auth) {
             continue;
         }
         $p = $auth->loadPermissions($item['perm']);
-        // read-centric modules (the gallery) show on read; managed modules on create.
-        $canSee = $p->canRead() || (method_exists($p, 'canCreateOwn') && $p->canCreateOwn());
+        // create-gated modules (upload) show only with write; read-centric ones on read.
+        if (!empty($item['onCreate'])) {
+            $canSee = $p->canCreate();
+        } else {
+            $canSee = $p->canRead() || (method_exists($p, 'canCreateOwn') && $p->canCreateOwn());
+        }
         if ($canSee) {
             $visible[] = ['key' => $item['key'], 'page' => $item['page'], 'class' => $item['class']];
         }

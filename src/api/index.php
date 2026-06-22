@@ -1,6 +1,7 @@
 <?php
 
 require_once(dirname(__DIR__)."/vendor/autoload.php");
+require_once(dirname(__DIR__)."/settings.php");   // initialize Properties from conf/properties.json (mysql backend)
 
 use lib\OminousFactory;
 use lib\rest\commons\ApiRoot;

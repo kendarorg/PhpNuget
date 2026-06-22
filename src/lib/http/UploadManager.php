@@ -20,7 +20,7 @@ class UploadManager
     {
         $this->files = array();
         $this->request = $request;
-        foreach($request->files as $fileId => $fileData){
+        foreach($request->getFiles() as $fileId => $fileData){
             $this->files[$fileId] = new UploadedFile($fileData);
         }
     }

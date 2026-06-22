@@ -76,7 +76,10 @@ class MySqlDbStorage extends DbStorage
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                $toSort[] = $this->converter->fromAssoc($row,$this->dataType);
+                // clone the prototype per row: fromAssoc mutates and returns the
+                // object it is given, so reusing $this->dataType would make every
+                // result entry point at the same (last) row.
+                $toSort[] = $this->converter->fromAssoc($row, clone $this->dataType);
             }
         }
 
@@ -135,20 +138,20 @@ class MySqlDbStorage extends DbStorage
                 if(array_key_exists($key,$keys))continue;
                 if($value===null) continue;
                 if(is_string($value)){
-                    $cols[] = $key."='".$value."'";
+                    $cols[] = "`".$key."`='".$value."'";
                 }else if(is_bool($value)){
-                    $cols[] = $key."=".($value?"true":"false");
+                    $cols[] = "`".$key."`=".($value?"true":"false");
                 }else{
-                    $cols[] = $key."=".$value;
+                    $cols[] = "`".$key."`=".$value;
                 }
             }
             foreach ($byKey as $key=>$value){
                 if(is_string($value)){
-                    $keys[] = $key."='".$value."'";
+                    $keys[] = "`".$key."`='".$value."'";
                 }else if(is_bool($value)){
-                    $keys[] = $key."=".($value?"true":"false");
+                    $keys[] = "`".$key."`=".($value?"true":"false");
                 }else{
-                    $keys[] = $key."=".$value;
+                    $keys[] = "`".$key."`=".$value;
                 }
             }
             $query = "UPDATE ".$this->table." SET ".join(",",$cols)." WHERE ".join(" AND ",$keys);
@@ -157,7 +160,7 @@ class MySqlDbStorage extends DbStorage
             $vals = array();
             foreach ($assocItem as $key=>$value){
                 if($value===null) continue;
-                $vals[] = $key;
+                $vals[] = "`".$key."`";
                 if(is_string($value)){
                     $cols[] = "'".$value."'";
                 }else if(is_bool($value)){
@@ -166,7 +169,7 @@ class MySqlDbStorage extends DbStorage
                     $cols[] = $value;
                 }
             }
-            $query = "INSERT INTO ".$this->table." (".join(",",$cols).") VALUES (".join(",",$vals).")";
+            $query = "INSERT INTO ".$this->table." (".join(",",$vals).") VALUES (".join(",",$cols).")";
             $this->mysqli->query($query);
         }
     }

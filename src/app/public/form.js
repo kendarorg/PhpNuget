@@ -1386,6 +1386,7 @@ class CheckboxField extends Field {
         }
     }
     bindValueToUi(load=false){
+        if(!this.mainElement)return;
         if(this.value===this.checkedValue){
             this.mainElement.checked=true;
         }else{

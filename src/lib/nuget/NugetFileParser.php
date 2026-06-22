@@ -28,7 +28,7 @@ class NugetFileParser
         {
             $pinfo = pathinfo($fileName);
             if($pinfo["basename"]==$fileName && $nupckgName==""){
-                if(ends_with($fileName,".nuspec")){
+                if(str_ends_with($fileName,".nuspec")){
                     $nupckgName = $fileName;
                 }
             }
@@ -60,9 +60,10 @@ class NugetFileParser
         }
         $e->TargetFramework = str_replace("||","|",$e->TargetFramework);
 
-        //$e->PackageHash = base64_encode(hash(strtolower(Settings::$PackageHash), file_get_contents($nupkgFile),true)); //true means raw, fals means in hex
-        $e->PackageHash = base64_encode(hash_file(strtolower(Settings::$PackageHash), $nupkgFile,true)); //true means raw, fals mean s in hex
-        $e->PackageHashAlgorithm = strtoupper(Settings::$PackageHash);
+        // Hash algorithm is configurable (properties.json: packageHashAlgorithm), default SHA512.
+        $hashAlgo = $this->properties->getProperty("packageHashAlgorithm", "sha512");
+        $e->PackageHash = base64_encode(hash_file(strtolower($hashAlgo), $nupkgFile, true)); //true means raw, false means in hex
+        $e->PackageHashAlgorithm = strtoupper($hashAlgo);
         $e->PackageSize = filesize($nupkgFile);
         $e->Listed = true;
         return $e;
@@ -76,7 +77,7 @@ class NugetFileParser
      */
     public function loadXml($nuspecContent)
     {
-        $xml = XML2Array($nuspecContent);
+        $xml = XmlUtils::xml2Array($nuspecContent);
         $e = new NugetPackage();
         $m=$xml["metadata"];
         $m = StringUtils::specialChars($m);
@@ -98,13 +99,13 @@ class NugetFileParser
         if(array_key_exists("iconurl",$m))$e->IconUrl = $m["iconurl"];
         else $e->IconUrl = HttpUtils::currentUrl("content/packagedefaulticon-50x50.png",$this->properties);
         if(array_key_exists("projecturl",$m))$e->ProjectUrl = $m["projecturl"];
-        if(array_key_exists("requirelicenseacceptance",$m))$e->RequireLicenseAcceptance = $m["requirelicenseacceptance"];
+        if(array_key_exists("requirelicenseacceptance",$m))$e->RequireLicenseAcceptance = filter_var($m["requirelicenseacceptance"], FILTER_VALIDATE_BOOLEAN);
         if(array_key_exists("description",$m))$e->Description = $m["description"];
         if(array_key_exists("tags",$m))$e->Tags = $m["tags"];
         if(array_key_exists("author",$m))$e->Author = explode(";",$m["author"]);
         if(array_key_exists("authors",$m))$e->Author = explode(";",$m["authors"]);
         if(array_key_exists("summary",$m))$e->Summary = $m["summary"];
-        $e->Published = StringUtils::timeToIso8601Date();
+        $e->Created = StringUtils::timeToIso8601Date();
         if(array_key_exists("copyright",$m))$e->Copyright = $m["copyright"];
         else if(array_key_exists("owners",$m))$e->Copyright = $m["owners"];
         if(array_key_exists("owners",$m))$e->Owners = $m["owners"];

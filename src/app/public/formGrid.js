@@ -598,7 +598,7 @@ class Grid extends Column {
             const regex = /<style\s*'([^']*)'>([\s\S]*?)<\/style>/i;
             let match = null;
             try {
-                match = input.match(regex);
+                match = (input+"").match(regex);
             }catch (e){
                 element.textContent = input;
                 return;

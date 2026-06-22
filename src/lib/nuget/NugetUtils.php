@@ -30,7 +30,7 @@ class NugetUtils
     public function translateNetVersion($tf)
     {
         $tf = strtolower($tf);
-        $checkFw = verifyNetFw("netframework","net",$tf,"");
+        $checkFw = $this->verifyNetFw("netframework","net",$tf,"");
         if($checkFw!=null) return $checkFw;
 
         return trim($tf,".");
@@ -43,7 +43,7 @@ class NugetUtils
         $number = explode(".",$blocks[0]);
 
         while(sizeof($number)<4){
-            array_insert($number,"0",0);
+            array_unshift($number,"0");
         }
 
         $newData = array();
@@ -58,7 +58,7 @@ class NugetUtils
     public static function isPreRelease($version)
     {
         $version = strtolower($version);
-        $tmp = indexOf($version,"-");
-        return $tmp>0;
+        $tmp = strpos($version,"-");
+        return $tmp !== false && $tmp>0;
     }
 }

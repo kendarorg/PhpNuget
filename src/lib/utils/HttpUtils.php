@@ -65,7 +65,7 @@ class HttpUtils
      * @param Properties $properties
      * @return string
      */
-    public static function currentUrl($requestUri = "",$properties) {
+    public static function currentUrl($requestUri = "",$properties = null) {
         $pageURL = 'http';
         $isHttps = false;
         if ((array_key_exists("HTTPS",$_SERVER) && $_SERVER["HTTPS"] == "on") ||

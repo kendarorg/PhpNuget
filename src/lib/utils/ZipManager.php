@@ -23,52 +23,42 @@ class ZipManager
 
     public function LoadFile($path)
     {
-
-        $zip = zip_open($this->zipFile);
-        if ($zip) {
-            while ($zip_entry = zip_read($zip)) {
-                $zip_entry_name = zip_entry_name($zip_entry);
-                if (!is_dir($zip_entry_name) && $path == $zip_entry_name) {
-                    zip_entry_open($zip, $zip_entry, "r");
-                    $entry_content = zip_entry_read($zip_entry, zip_entry_filesize($zip_entry));
-                    zip_entry_close( $zip_entry);
-                    zip_close($zip);
-                    return $entry_content;
-                }
-            }
+        $zip = new \ZipArchive();
+        if ($zip->open($this->zipFile) !== true) {
+            return null;
         }
-        return null;
+        $content = $zip->getFromName($path);
+        $zip->close();
+        return $content === false ? null : $content;
     }
 
     function GenerateInfos() {
-        $zip = zip_open($this->zipFile);
+        $zip = new \ZipArchive();
         $folder_count   = 0;
         $file_count     = 0;
         $unzipped_size  = 0;
-        $ext_array      = array ();
         $ext_count      = array ();
-        //$entries_list      = array ();
-        $entries_name      = array ();
-        if ($zip) {
-            while ($zip_entry = zip_read($zip)) {
-                $zip_entry_name = zip_entry_name($zip_entry);
+        $entries_name   = array ();
+        if ($zip->open($this->zipFile) === true) {
+            for ($i = 0; $i < $zip->numFiles; $i++) {
+                $stat = $zip->statIndex($i);
+                $zip_entry_name = $stat['name'];
 
-
-                if (is_dir($zip_entry_name)) {
+                if (substr($zip_entry_name, -1) === '/') {
                     $folder_count++;
-                }else {
-                    //$entries_list[]=$zip_entry;
-                    $entries_name[]=$zip_entry_name;
+                } else {
+                    $entries_name[] = $zip_entry_name;
                     $file_count++;
                 }
-                $path_parts = pathinfo(zip_entry_name($zip_entry));
+                $path_parts = pathinfo($zip_entry_name);
                 $ext = strtolower(trim(isset ($path_parts['extension']) ? $path_parts['extension'] : ''));
                 if($ext != '') {
                     $ext_count[$ext]['count'] = isset ( $ext_count[$ext]['count']) ?  $ext_count[$ext]['count'] : 0;
                     $ext_count[$ext]['count']++;
                 }
-                $unzipped_size = $unzipped_size + zip_entry_filesize($zip_entry);
+                $unzipped_size = $unzipped_size + $stat['size'];
             }
+            $zip->close();
         }
         $zipped_size = $this->getFileSizeUnit(filesize($this->zipFile));
         $unzipped_size = $this->getFileSizeUnit($unzipped_size);
@@ -80,7 +70,6 @@ class ZipManager
             //"entries_list"=>$entries_list,
             "entries_name"=>$entries_name
         );
-        zip_close($zip);
         return $zip_info ;
     }
     private function getFileSizeUnit($file_size){

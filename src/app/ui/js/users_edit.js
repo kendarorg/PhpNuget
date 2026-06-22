@@ -17,6 +17,14 @@ export function initPage(registry) {
         )),
     ];
 
+    // nuget upload token: admins can view and regenerate it (never free-typed).
+    const apiKeyRows = (!creating && perms.can_read) ? [
+        new Row(
+            new Column({span: 8}, new TextField({name: 'apiKey', readonly: true, label: translate('api_key')})),
+            new Column({span: 4}, new TextButton({label: translate('regenerate'), readonly: viewing, onClick: () => regenerateApiKey(form)})),
+        ),
+    ] : [];
+
     const financialRows = canSeeFinancial ? [
         new Row(
             new Column({span: 6}, new TextField({name: 'tariffaOraria', type: 'number', required: true, label: translate('HOURLY_COST'), readonly: viewing})),
@@ -65,6 +73,7 @@ export function initPage(registry) {
             new Column({span: 4}, new TextField({name: 'telefono', label: translate('phone'), readonly: viewing})),
             new Column({span: 4}, new TextField({name: 'fax', label: translate('fax'), readonly: viewing})),
         ),
+        ...apiKeyRows,
         ...financialRows,
         new Row(new IconButtonColumn({span: 1},
             new IconButton({buttonClasses: ['btn', 'back-btn'], title: translate('BACK'), onClick: () => { window.location.href = 'users.html'; }}),
@@ -92,6 +101,17 @@ export function initPage(registry) {
                 .onError(() => showError(translate('ERROR')))
                 .fetch();
         }
+    }
+
+    function regenerateApiKey(form) {
+        const uid = form.getByName('id').value;
+        if (!uid) return;
+        if (!confirm(translate('regenerate_confirm'))) return;
+        new Fetcher({url: translate('API_URL') + '/users.php'})
+            .withMethod('POST').withQuery('action', 'regenerateApiKey').withQuery('id', uid)
+            .onSuccess((d) => { form.getByName('apiKey').setValue(d.apiKey || ''); showInfo(translate('SUCCESS')); })
+            .onError(() => showError(translate('ERROR')))
+            .fetch();
     }
 
     function changePassword(form) {

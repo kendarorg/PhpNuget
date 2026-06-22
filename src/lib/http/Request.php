@@ -43,6 +43,14 @@ class Request
     }
 
     /**
+     * @return array the uploaded files, keyed by (lowercased) field name
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    /**
      * @param string|string[] $value
      * @param string $default
      * @return string|null

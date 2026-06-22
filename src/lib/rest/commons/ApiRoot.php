@@ -114,7 +114,10 @@ class ApiRoot extends BaseHandler
             throw new HandlerException("No file found", 404);
         }
         $this->answerFile($path,"application/zip");
-        $this->downloads->incrementDownloads($package->Id,$package->Version);
+        // Only real package (.nupkg) fetches count as downloads; symbol (.snupkg) fetches do not.
+        if(!$this->symbol){
+            $this->downloads->incrementDownloads($package->Id,$package->Version);
+        }
     }
 
     /**

@@ -2,6 +2,7 @@
 
 
 require_once("../config.inc");
+require_once(__DIR__ . "/../lib/nugetbridge.php");
 
 class UsersApi extends BaseApis
 {
@@ -74,12 +75,25 @@ class UsersApi extends BaseApis
             $this->purgeItem($data,"permissions","tariffaOraria","role","livello","notes","locked");
         }
         $this->purgeItem($data,"password");
+        if($this->permissions->canRead() && is_array($data)){
+            // nuget upload token: visible to admins managing the user.
+            $data['apiKey'] = nugetUserApiKey($id);
+        }
         $result = [
             'item'=>$data,
             'labels'=>$this->labels,
             'permissions'=>$this->permissions->value(),
         ];
         $this->sender->sendSuccessResponse($result);
+    }
+
+    /** POST /api/users.php?action=regenerateApiKey&id= — admin regenerates a user's upload token. */
+    public function apiCallPostRegenerateApiKey(){
+        $this->permissions->canCreateThrow();
+        $id = $this->getParamOrDefault("id");
+        $key = nugetUserApiKeyRegenerate($id);
+        $this->audit->audit("REGENERATE_APIKEY", "USER", ['user' => $id]);
+        $this->sender->sendSuccessResponse(['apiKey' => $key]);
     }
 
     function apiCallPostSearch(){

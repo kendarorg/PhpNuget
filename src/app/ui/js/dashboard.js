@@ -10,6 +10,10 @@ export function initPage(registry) {
     h.textContent = translate('welcome') + (user.display_name ? ', ' + user.display_name : '');
     wrap.appendChild(h);
 
+    const intro = document.createElement('p');
+    intro.textContent = translate('what_is_nuget');
+    wrap.appendChild(intro);
+
     const link = document.createElement('a');
     link.href = 'packages.html';
     link.className = 'btn';

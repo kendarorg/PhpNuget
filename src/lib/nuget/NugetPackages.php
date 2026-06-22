@@ -65,6 +65,18 @@ class NugetPackages extends BaseDb
     }
 
     /**
+     * Upsert a package row (insert when Id+Version is new, update otherwise).
+     * Inherited BaseDb::update already keys on Id+Version and picks INSERT/UPDATE.
+     *
+     * @param NugetPackage $package
+     * @return void
+     */
+    public function save($package)
+    {
+        parent::update($package);
+    }
+
+    /**
      * @return mixed
      */
     public function getByKey()
