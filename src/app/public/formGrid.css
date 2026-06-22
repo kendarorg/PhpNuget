@@ -1,0 +1,141 @@
+
+/* 2. The Viewport (The Window) */
+.table-viewport {
+
+}
+
+/* ── EditableGrid ────────────────────────────────────── */
+
+/* Highlight the row currently being edited */
+tr.editing-row > td {
+    background-color: #fffbe6;
+}
+
+/* Default plain-text input injected by EditableGrid */
+.edit-grid-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.edit-grid-input:focus {
+    outline: none;
+    border-color: #ffc107;
+    box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.3);
+}
+
+/* Dialog-based cell: value text + pick button side by side */
+.edit-grid-dialog-cell {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.edit-grid-dialog-value {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table-separator {
+    height: 8px;                 /* thickness of the line */
+    background: linear-gradient(
+            to right,
+            #ffeea7 0%,        /* color of the line */
+            #ffeea7 80%,       /* solid part */
+            transparent 100% /* fading end for rounded effect */
+    );
+    border-radius: 0 8px 8px 0;  /* rounded on right side */
+}
+
+@media (min-width: 501px) {
+    table {
+        display: table;
+        width: 100%;
+        border-collapse: collapse;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 500px) {
+    /*table {
+        display: table;
+        width: 400px;
+        border-collapse: collapse;
+        padding: 10px;
+    }*/
+    table {
+        display: block;       /* Required to allow clipping */
+        width: 400px;         /* Your fixed width */
+        max-width: 100%;      /* This forces the 'clip' at the viewport edge */
+        overflow: hidden;     /* Clips any content wider than the container */
+        border-collapse: collapse;
+        padding: 10px;
+        table-layout: fixed;  /* Optional: keeps column widths predictable */
+        overflow-x: auto;
+    }
+}
+
+
+@media (max-width: 400px) {
+    /*table {
+        display: table;
+        width: 400px;
+        border-collapse: collapse;
+        padding: 10px;
+    }*/
+    table {
+        display: block;       /* Required to allow clipping */
+        width: 300px;         /* Your fixed width */
+        max-width: 100%;      /* This forces the 'clip' at the viewport edge */
+        overflow: hidden;     /* Clips any content wider than the container */
+        border-collapse: collapse;
+        padding: 10px;
+        table-layout: fixed;  /* Optional: keeps column widths predictable */
+        overflow-x: auto;
+    }
+}
+
+
+th {
+    background-color: #ffeea7;
+    position: sticky;
+    top: 0;
+    white-space: nowrap;
+
+}
+
+table th, table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.navigation-select{
+    padding: 4px; border: 1px solid rgb(221, 221, 221);
+    border-radius: 4px; box-sizing: border-box;
+    padding: 5px 5px 5px 5px;
+    padding-top:8px;
+    padding-bottom: 2px;
+}
+
+table.bordergrid {
+    border-collapse: collapse;
+}
+
+table.bordergrid td,
+table.bordergrid th {
+    border: 1px solid black;
+}

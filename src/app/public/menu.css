@@ -1,0 +1,214 @@
+
+.header {
+    background-color: #333;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info span {
+    margin-right: 15px;
+}
+
+.logout-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    min-height: calc(100vh - 60px);
+}
+
+
+
+
+.menuitemLarge {
+    display: block;
+}
+.menuitemSmall {
+    display: none;
+}
+
+@media (min-width: 501px) {
+
+    .sidebar {
+        width: 125px;
+        background-color: #2c3e50;
+        color: white;
+        padding: 20px 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .sidebar {
+        width: 50px;
+        background-color: #2c3e50;
+        color: white;
+        padding: 5px 0;
+    }
+    .btn-users {
+        background: url("../public/icons/person-fill.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn-contacts {
+        background: url("../public/icons/person-vcard-fill.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn-protocols {
+        background: url("../public/icons/journal-text.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn-jobs {
+        background: url("../public/icons/briefcase-fill.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn-jobs-see {
+        background: url("../public/icons/list-task.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn-time-table {
+        background: url("../public/icons/table.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn-user-time-reports {
+        background: url("../public/icons/people-fill.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn-maintenance {
+        background: url("../public/icons/tools.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn-documents {
+        background: url("../public/icons/folder-fill.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn-multichoice {
+        background: url("../public/icons/list-check.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn-reports {
+        background: url("../public/icons/bar-chart-fill.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn-roles {
+        background: url("../public/icons/person-badge-fill.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn-timesheet {
+        background: url("../public/icons/clock-fill.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn-personal-report {
+        background: url("../public/icons/clock-history.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn-invoices {
+        background: url("../public/icons/receipt.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn-dashboard {
+        background: url("../public/icons/speedometer2.svg") no-repeat scroll 0 0 transparent;
+        background-color: white;
+        background-size: auto 70%;
+        background-position: center;
+    }
+    .btn {
+        color: white;
+        border: none;
+        padding: 5px 5px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 3px;
+        width:40px;
+        height: 40px;
+    }
+    .menuitemLarge {
+        display: none;
+        visibility: hidden;
+    }
+    .menuitemSmall {
+        display: block;
+    }
+}
+
+
+.position_relative {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+/** MENU_UTILS SECTION **/
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    padding: 0;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    transition: background-color 0.3s;
+}
+
+.sidebar a:hover, .sidebar a.active {
+    background-color: #34495e;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}

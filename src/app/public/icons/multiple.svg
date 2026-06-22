@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+    <!-- Sfondo bianco -->
+    <rect x="0" y="0" width="64" height="64" fill="#ffffff"/>
+
+    <!-- Contenitore -->
+    <rect x="10" y="10" width="44" height="44" rx="4" ry="4"
+          fill="none" stroke="#000000" stroke-width="3"/>
+
+    <!-- Checkbox 1 (selezionato) -->
+    <rect x="16" y="18" width="8" height="8"
+          fill="none" stroke="#000000" stroke-width="2"/>
+    <polyline points="17,22 19,24 23,20"
+              fill="none" stroke="#000000" stroke-width="2"/>
+
+    <!-- Testo riga 1 -->
+    <line x1="28" y1="22" x2="46" y2="22"
+          stroke="#000000" stroke-width="3"/>
+
+    <!-- Checkbox 2 -->
+    <rect x="16" y="30" width="8" height="8"
+          fill="none" stroke="#000000" stroke-width="2"/>
+
+    <!-- Testo riga 2 -->
+    <line x1="28" y1="34" x2="46" y2="34"
+          stroke="#000000" stroke-width="3"/>
+
+    <!-- Checkbox 3 -->
+    <rect x="16" y="42" width="8" height="8"
+          fill="none" stroke="#000000" stroke-width="2"/>
+
+    <!-- Testo riga 3 -->
+    <line x1="28" y1="46" x2="46" y2="46"
+          stroke="#000000" stroke-width="3"/>
+</svg>

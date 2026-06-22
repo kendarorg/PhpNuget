@@ -1,6 +1,7 @@
 <?php
-//TODO Porting
-require_once(__DIR__."/vendor/autoload.php");
+//TODO Porting (package parsing/persistence still on legacy classes)
+require_once(dirname(__DIR__)."/vendor/autoload.php");
+require_once(dirname(__DIR__)."/settings.php");   // populates Properties from conf/properties.json
 use lib\http\Request;
 use lib\utils\Properties;
 
@@ -24,17 +25,27 @@ try{
 	}
 	
 	$token = strtoupper(trim(trim($_SERVER['HTTP_X_NUGET_APIKEY'],"{"),"}"));
-	$db = new UserDb();
-	$users = $db->Query("Token eq '{".$token."}'",1,0);
+	// User identity is merged into the uifw `users` table; resolve the uploader by API key.
+	$mysqli = new mysqli(
+		$properties->getProperty("db.host"),
+		$properties->getProperty("db.user"),
+		$properties->getProperty("db.password"),
+		$properties->getProperty("db.name"),
+		intval($properties->getProperty("db.port", 3306))
+	);
+	$stmt = $mysqli->prepare("SELECT id, locked FROM users WHERE apiKey = ? LIMIT 1");
+	$stmt->bind_param("s", $token);
+	$stmt->execute();
+	$userRow = $stmt->get_result()->fetch_assoc();
 
-	if(sizeof($users)!=1){
+	if(!$userRow || intval($userRow['locked']) === 1){
 		HttpUtils::ApiError('403', 'Invalid API key');
 		uplog("upload","Wrong api key!");
 		die();
 	}
-	
+
 	uplog("upload","Validation done!");
-	$user = $users[0];
+	$user = (object)["Id" => $userRow['id']];
 	$uploader = new UploadUtils(Settings::$PackagesRoot,array("nupkg","snupkg"),Settings::$MaxUploadBytes,true);
 	$uploader->allowAll = true;
 	uplog("upload","Upload utils initialized!");

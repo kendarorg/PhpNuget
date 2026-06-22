@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+    <!-- Sfondo bianco -->
+    <rect width="64" height="64" fill="#ffffff"/>
+
+    <!-- Orologio -->
+    <circle cx="28" cy="32" r="16"
+            fill="none" stroke="#000000" stroke-width="3"/>
+
+    <!-- Lancette -->
+    <line x1="28" y1="32" x2="28" y2="22"
+          stroke="#000000" stroke-width="3"/>
+    <line x1="28" y1="32" x2="36" y2="32"
+          stroke="#000000" stroke-width="3"/>
+
+    <!-- Centro -->
+    <circle cx="28" cy="32" r="2" fill="#000000"/>
+
+    <!-- Simbolo somma -->
+    <path d="M48 20h13l-8 12 8 12H48"
+          fill="none" stroke="#000000" stroke-width="3"
+          stroke-linejoin="round"/>
+</svg>

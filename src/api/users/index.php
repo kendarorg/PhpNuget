@@ -1,18 +1,6 @@
 <?php
-require_once(dirname(__DIR__)."/vendor/autoload.php");
-require_once(dirname(__FILE__)."/../../root.php");
-require_once(__ROOT__."/settings.php");
-require_once(__ROOT__."/inc/api_users.php");
-require_once(__ROOT__."/inc/commons/url.php");
-require_once(__ROOT__."/inc/logincontroller.php");
-
-if(!$loginController->Admin){
-	$uid = UrlUtils::GetRequestParam("UserId");
-	if($uid!=$loginController->UserId){
-		HttpUtils::ApiError(500,"Unauthorized");
-	}
-}
-$api = new UsersApi();
-$id = UrlUtils::GetRequestParamOrDefault("UserId","get");
-$api->Execute();
-?>
+// Legacy users API — superseded by the uifw users API at /app/api/users.php
+// (auth, roles and per-user management now live in the uifw UI layer).
+http_response_code(410);
+header('Content-Type: application/json');
+echo json_encode(['status' => 'error', 'message' => 'Gone: use /app/api/users.php']);

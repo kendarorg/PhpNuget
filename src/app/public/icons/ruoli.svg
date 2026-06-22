@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 50" width="64" height="64">
+    <!-- Sfondo bianco -->
+    <rect width="64" height="64" fill="#ffffff"/>
+
+    <!-- Utente principale -->
+    <circle cx="18" cy="20" r="6"
+            fill="none" stroke="#000000" stroke-width="3"/>
+    <path d="M06 40c0-6 24-6 24 0"
+          fill="none" stroke="#000000" stroke-width="3"/>
+
+    <!-- Utente secondario -->
+    <circle cx="34" cy="24" r="5"
+            fill="none" stroke="#000000" stroke-width="3"/>
+    <path d="M26 42c0-5 16-5 16 0"
+          fill="none" stroke="#000000" stroke-width="3"/>
+</svg>

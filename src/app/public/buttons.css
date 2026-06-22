@@ -1,0 +1,415 @@
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: #ffffff; /* gray out the icon */
+    background-color: #7d7d7d;
+}
+
+.download-btn {
+    background: url("../public/icons/floppy2-fill.svg") no-repeat scroll 0 0 transparent;
+    background-color: blue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.search-btn {
+    background: url("../public/icons/search.svg")  no-repeat scroll 0 0 transparent;
+    background-color: blue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.link-btn {
+    background: url("../public/icons/link.svg")  no-repeat scroll 0 0 transparent;
+    background-color: blue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.unlink-btn {
+    background: url("../public/icons/unlink.svg")  no-repeat scroll 0 0 transparent;
+    background-color: blue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.xls-btn{
+    background: url("../public/icons/file-earmark-excel-fill.svg")  no-repeat scroll 0 0 transparent;
+    background-color: blue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+
+.lock-btn {
+    background: url("../public/icons/lock-fill.svg")  no-repeat scroll 0 0 transparent;
+    background-color: red;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.unlock-btn {
+    background: url("../public/icons/unlock-fill.svg")  no-repeat scroll 0 0 transparent;
+    background-color: DeepSkyBlue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.submit-btn {
+    background: url("../public/icons/gear-fill.svg")  no-repeat scroll 0 0 transparent;
+    background-color: DeepSkyBlue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.save-btn {
+    background: url("../public/icons/floppy2-fill.svg")  no-repeat scroll 0 0 transparent;
+    background-color: DeepSkyBlue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.delete-btn {
+    background: url("../public/icons/trash3-fill.svg")  no-repeat scroll 0 0 transparent;
+    background-color: red;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+/* padding: 10px 15px; */
+
+.cancel-btn {
+    background: url("../public/icons/backspace-fill.svg")  no-repeat scroll 0 0 transparent;
+    background-color: grey;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+
+.eraser-btn {
+    background: url("../public/icons/eraser.svg")  no-repeat scroll 0 0 transparent;
+    background-color: blue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.edit-btn {
+    background: url("../public/icons/pen-fill.svg")  no-repeat scroll 0 0 transparent;
+    background-color: DeepSkyBlue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+
+.simulate-btn {
+    background: url("../public/icons/simulate-fill.svg")  no-repeat scroll 0 0 transparent;
+    background-color: DeepSkyBlue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.show-btn {
+    background: url("../public/icons/eye-fill.svg")  no-repeat scroll 0 0 transparent;
+    background-color: blue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.money-btn {
+    background: url("../public/icons/currency-dollar.svg")  no-repeat scroll 0 0 transparent;
+    background-color: blue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.xml-btn {
+    background: url("../public/icons/filetype-xml.svg")  no-repeat scroll 0 0 transparent;
+    background-color: blue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.zip-btn {
+    background: url("../public/icons/file-earmark-zip-fill.svg")  no-repeat scroll 0 0 transparent;
+    background-color: blue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.upload-btn {
+    background: url("../public/icons/upload.svg")  no-repeat scroll 0 0 transparent;
+    background-color: blue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.add-btn {
+    background: url("../public/icons/file-earmark-plus-fill.svg")  no-repeat scroll 0 0 transparent;
+    background-color: blue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.back-btn {
+    background: url("../public/icons/backspace-fill.svg")  no-repeat scroll 0 0 transparent;
+    background-color: coral;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.permission-btn {
+    background: url("../public/icons/key-fill.svg")  no-repeat scroll 0 0 transparent;
+    background-color: coral;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+.btn {
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    width:25px;
+    height: 25px;
+}
+
+
+.action-btn {
+    background-color: blue;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px 5px 5px;
+    padding-top:8px;
+    padding-bottom: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+}
+
+.inaction-btn {
+    background-color: darkgrey;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    background-size: auto 80%;
+    background-position: center;
+    color: white;
+    border: none;
+    padding: 5px 5px 5px 5px;
+    padding-top:8px;
+    padding-bottom: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+}
+
+
+
+
+.icon-btn {
+    position: relative; /* for tooltip positioning */
+}
+
+/* Tooltip */
+.icon-btn::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: -30px; /* adjust above the button */
+    left: 50%;
+    transform: translateX(-50%);
+    background: black;
+    color: white;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+/* Show tooltip on hover */
+.icon-btn:hover::after,
+.icon-btn:focus::after,
+.icon-btn:active::after {
+    opacity: 1;
+}

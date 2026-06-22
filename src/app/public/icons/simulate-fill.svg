@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+
+
+    <!-- User circle (head) -->
+    <circle cx="32" cy="20" r="10" fill="white"/>
+
+    <!-- User shoulders/body -->
+    <path d="M16 52c0-8.837 7.163-16 16-16s16 7.163 16 16H16z" fill="white"/>
+
+    <!-- Simulation/play arrow -->
+    <polygon points="50,22 50,42 60,32" fill="white"/>
+</svg>

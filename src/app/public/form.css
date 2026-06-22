@@ -1,0 +1,656 @@
+/* Layout */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.f-form {
+    margin-bottom: 16px;
+    width: 100%;
+    font-family: sans-serif;
+}
+
+.f-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+
+}
+
+.f-col {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+}
+
+.f-col-12 {
+    width: 100%;
+}
+
+.f-col-11 {
+    width: 91%;
+}
+
+.f-col-10 {
+    width: 83%;
+}
+
+.f-col-9 {
+    width: 75%;
+}
+
+.f-col-8 {
+    width: 66%;
+}
+
+.f-col-7 {
+    width: 58%;
+}
+
+.f-col-6 {
+    width: 50%;
+
+}
+
+.f-col-5 {
+    width: 41.5%;
+}
+
+
+.f-col-4 {
+    width: 33%;
+}
+
+.f-col-3 {
+    width: 24%;
+}
+
+.f-col-2 {
+    width: 16.6%;
+}
+
+.f-col-1 {
+    width: 8.3%;
+}
+
+.f-form-errors ul {
+    padding-inline-start: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.f-form-errors li {
+    margin: -14px 0;
+}
+
+/* Fields */
+.f-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.f-field label {
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.f-field input, .f-field select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-width: 400px;
+}
+
+.f-field textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.f-error {
+    background-color: #f39e9e;
+    font-size: 0.8rem;
+}
+
+/* Checkbox */
+.f-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Suggestions */
+.f-autocomplete, .f-combo {
+    position: relative;
+}
+
+.f-combo-multi{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    min-width: 180px;
+    font-family: system-ui, sans-serif;
+    position: relative;
+    background: #fff;
+}
+
+.f-combo-multi input {
+    flex: 1;
+    min-width: 180px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+.f-suggestions {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 4px);
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    max-height: 180px;
+    overflow-y: auto;
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+    z-index: 5000;
+}
+
+.f-suggestion {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.f-suggestion:hover {
+    background: #f0f0f0;
+}
+
+/* Tags */
+.f-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.f-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.f-tag button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+}
+
+/* Upload drop zone */
+.f-dropzone {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    min-height: 60px;
+    border: 2px dashed #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.f-dropzone:hover {
+    border-color: #007bff;
+}
+
+.f-dropzone-over {
+    border-color: #007bff;
+    background: #eaf3ff;
+}
+
+.f-dropzone-hint {
+    color: #888;
+    font-size: 13px;
+    text-align: center;
+    pointer-events: none;
+}
+
+.f-dropzone:not(.f-dropzone-empty) .f-dropzone-hint {
+    font-size: 11px;
+    text-align: left;
+}
+
+.f-dropzone-disabled {
+    cursor: default;
+    background: #f5f5f5;
+    border-color: #ddd;
+}
+
+.f-dropzone-disabled:hover {
+    border-color: #ddd;
+}
+
+.f-file-tag {
+    background: #dbe7f5;
+}
+
+/* Buttons */
+.f-btn-text {
+    padding: 8px 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.f-btn-icon {
+    padding: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+
+/**
+ * SPINNNER
+ */
+
+/* Full-page blocking overlay */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 11000;
+}
+
+/* Spinner */
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #ddd;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Hidden state */
+.hidden {
+    display: none;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/**
+ * NOTIFICATION DIALOG
+ */
+
+.notification-custom-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 12000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.notification-custom-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    max-width: 400px;
+    min-width: 300px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 12001;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: all 0.3s ease-in-out;
+    font-family: sans-serif;
+}
+
+.notification-custom-alert.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification-custom-confirm {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    max-width: 500px;
+    width: 90%;
+    padding: 0;
+}
+
+.notification-dialog-header {
+    padding: 20px 24px 10px;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    align-items: center;
+}
+
+.notification-dialog-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 14px;
+}
+
+.notification-dialog-icon.info {
+    background-color: #2196F3;
+}
+
+.notification-dialog-icon.warning {
+    background-color: #FF9800;
+}
+
+.notification-dialog-icon.error {
+    background-color: #F44336;
+}
+
+.notification-dialog-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+.notification-dialog-content {
+    padding: 16px 24px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.notification-dialog-actions {
+    padding: 16px 24px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.notification-dialog-actions-multi{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* optional spacing between buttons */
+    padding: 10px;
+}
+
+.notification-dialog-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.notification-dialog-button.primary {
+    background-color: #2196F3;
+    color: white;
+}
+
+.notification-dialog-button.primary:hover {
+    background-color: #1976D2;
+}
+
+.notification-dialog-button.secondary {
+    background-color: #f5f5f5;
+    color: #666;
+}
+
+.notification-dialog-button.secondary:hover {
+    background-color: #e0e0e0;
+}
+
+/**
+Collapsible
+ */
+
+.f-collapsible {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 1em;
+    background: #fafbfc;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+    z-index: 100;
+}
+.f-collapsible.open {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.f-collapsible-header {
+    padding: 0.8em 1.2em;
+    background: #f5f5f5;
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+}
+.f-collapsible-header:hover {
+    background: #e3eaf2;
+}
+.f-collapsible-content {
+    padding: 1em 1.2em;
+    background: #fff;
+    display: none;
+    z-index: 100;
+}
+.f-collapsible.open .f-collapsible-content {
+    display: block;
+    z-index: 100;
+}
+
+/**
+    Tabbed
+ */
+
+
+
+.f-tabs {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fafbfc;
+    margin-bottom: 1em;
+    overflow: hidden;
+    z-index: 100;
+}
+.f-tab-headers {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    background: #f5f5f5;
+}
+.f-tab-header {
+    flex: 1;
+    padding: 0.7em 1.2em;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #555;
+    transition: background 0.2s, color 0.2s;
+}
+.f-tab-header.active {
+    background: #fff;
+    color: #1976d2;
+    border-bottom: 2px solid #1976d2;
+}
+.f-tab-contents {
+    padding: 1em;
+    background: #fff;
+    z-index: 100;
+}
+
+/**
+ * DIALOG (on-the-fly modal wrapping a Form/Node)
+ */
+
+.dialog-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 4000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.dialog-overlay.dialog-open {
+    opacity: 1;
+}
+
+.dialog-overlay.dialog-open .dialog-box {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.dialog-box {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    width: 100%;
+    transform: translateY(-24px) scale(0.97);
+    opacity: 0;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    overflow: hidden;
+}
+
+/* Sizes */
+.dialog-sm  { max-width: 360px;  }
+.dialog-md  { max-width: 600px;  }
+.dialog-lg  { max-width: 860px;  }
+.dialog-xl  { max-width: 1100px; }
+
+/* Header */
+.dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid #e5e5e5;
+    flex-shrink: 0;
+}
+
+.dialog-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #222;
+    flex: 1;
+}
+
+.dialog-close-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    line-height: 1;
+    color: #888;
+    cursor: pointer;
+    padding: 0 4px;
+    transition: color 0.15s;
+    margin-left: 12px;
+}
+
+.dialog-close-btn:hover {
+    color: #333;
+}
+
+/* Body */
+.dialog-body {
+    padding: 20px 24px;
+    overflow-y: auto;
+    flex: 1 1 auto;
+}
+
+/* Footer */
+.dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 14px 20px 18px;
+    border-top: 1px solid #e5e5e5;
+    flex-shrink: 0;
+    background: #fafafa;
+}
+
+/* Text inputs, textarea, select */
+textarea:read-only,
+textarea[readonly],
+select[readonly],
+input:read-only,
+select[disabled],
+input[readonly] {
+    background-color: #f0f0f0; /* light gray background */
+    color: #555;               /* slightly darker gray text */
+    cursor: not-allowed;       /* optional: show disabled cursor */
+}
+
+
+
+input[type="checkbox"],
+input[type="radio"]
+{
+    cursor: auto;
+}
+
+input[type="checkbox"]:disabled,
+input[type="radio"]:disabled
+{
+    background-color: #ffffff;
+    cursor: not-allowed;
+}
+
+/* Disabled checkbox and radio (readonly doesn’t apply, so use disabled) */
+input[type="checkbox"]:disabled,
+input[type="radio"]:disabled {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+

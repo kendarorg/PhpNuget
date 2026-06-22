@@ -1,0 +1,88 @@
+
+
+.week-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.day-column {
+    border: 1px solid #ddd;
+    padding: 10px;
+    min-height: 150px;
+    background-color: #f9f9f9;
+}
+
+.day-header {
+    font-weight: bold;
+    text-align: left;
+    padding: 5px;
+    background: linear-gradient(
+            to right,
+            #ffeea7 0%,        /* color of the line */
+            #ffeea7 80%,       /* solid part */
+            transparent 100% /* fading end for rounded effect */
+    );
+    margin-bottom: 10px;
+
+}
+
+.time-entry {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+.time-entry-actions {
+    margin-top: 5px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.time-entry-actions a {
+    margin-left: 5px;
+    font-size: 0.8em;
+}
+
+
+.week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(200px, 1fr));
+            /*repeat(7, 1fr);*/
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    .week-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.time-entry-first{
+    font-weight: bold;
+}
+
+.week-confirmation {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.confirmation-status {
+    font-weight: bold;
+}
+
+.confirmed {
+    color: #28a745;
+}
+
+.not-confirmed {
+    color: #dc3545;
+}

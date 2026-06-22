@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><div data-include="commons/head.html"></div></head>
+<body>
+<div data-include="commons/header.html"></div>
+<div class="container">
+    <div data-include="commons/menu.html"></div>
+    <div id="content" class="content"></div>
+</div>
+<script src="../api/translations.php"></script>
+<script defer src="../public/utils.js"></script>
+<script defer src="../public/form.js"></script>
+<script defer src="../public/formGrid.js"></script>
+<script defer src="js/sap.js"></script>
+<script type="module">
+    import { bootstrap } from '../public/layout.js';
+    bootstrap({ 'PAGE-TITLE': ['DO_MANAGE', 'users'], 'LOAD-PERMISSIONS': 'users', 'LOAD-PERMISSIONS2': 'simulate', 'PAGE-MODULE': './js/users.js' });
+</script>
+</body>
+</html>
